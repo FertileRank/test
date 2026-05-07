@@ -302,53 +302,58 @@
         .trust-row span { display: inline-flex; align-items: center; gap: 6px; }
         .check { color: #2b8a3e; font-weight: 700; }
 
-        .form-card {
+        .cta-card {
             background: #fff;
             border-radius: 16px;
-            padding: 28px;
+            padding: 32px 28px;
             box-shadow: var(--shadow-md);
             border-top: 6px solid var(--color-primary);
+            position: sticky;
+            top: 88px;
         }
-        .form-card h2 {
-            font-size: 22px;
-            margin-bottom: 6px;
+        .cta-eyebrow {
+            display: inline-block;
+            background: var(--color-bg-warm);
+            color: var(--color-primary-dark);
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
         }
-        .form-card .form-sub {
-            font-size: 14px;
+        .cta-card h2 {
+            font-size: 24px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        .cta-sub {
+            font-size: 15px;
             color: var(--color-text-soft);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            line-height: 1.55;
         }
-        .field { margin-bottom: 14px; }
-        .field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
+        .cta-benefits {
+            list-style: none;
+            margin-bottom: 22px;
+            padding: 0;
+        }
+        .cta-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 15px;
+            margin-bottom: 10px;
             color: var(--color-text);
         }
-        .field input,
-        .field select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d4d4e0;
-            border-radius: 8px;
-            font-size: 15px;
-            font-family: inherit;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-        }
-        .field input:focus,
-        .field select:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.15);
-        }
-        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .form-card .btn-primary { width: 100%; padding: 16px; margin-top: 6px; }
-        .form-disclaimer {
-            font-size: 11px;
+        .cta-card .btn-primary { width: 100%; padding: 18px; font-size: 17px; }
+        .cta-disclaimer {
+            font-size: 12px;
             color: var(--color-text-soft);
             text-align: center;
-            margin-top: 12px;
+            margin-top: 14px;
             line-height: 1.4;
         }
 
@@ -636,7 +641,6 @@
             .hero-stats { grid-template-columns: 1fr 1fr; }
             .hero-stat:last-child { grid-column: 1 / 3; }
             .steps { grid-template-columns: 1fr; }
-            .field-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -648,7 +652,7 @@
     <header>
         <div class="container header-inner">
             <a href="#top" class="logo">Egg<span>Celle</span></a>
-            <a href="#apply" class="header-cta">Apply Now</a>
+            <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="header-cta js-prescreen">Apply Now</a>
         </div>
     </header>
 
@@ -674,7 +678,7 @@
                     </div>
                 </div>
 
-                <a href="#apply" class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'}); return false;">Start My Application &rarr;</a>
+                <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">Start My Application &rarr;</a>
                 <a href="#process" class="btn-secondary">How It Works</a>
 
                 <div class="trust-row">
@@ -685,63 +689,18 @@
                 </div>
             </div>
 
-            <div class="form-card" id="apply">
-                <h2>Start Your Application</h2>
-                <p class="form-sub">Takes under 2 minutes. We&rsquo;ll follow up within 24 hours.</p>
-                <form id="donor-application" onsubmit="return submitApplication(event)" novalidate>
-                    <div class="field-row">
-                        <div class="field">
-                            <label for="first_name">First name</label>
-                            <input type="text" id="first_name" name="first_name" required autocomplete="given-name">
-                        </div>
-                        <div class="field">
-                            <label for="last_name">Last name</label>
-                            <input type="text" id="last_name" name="last_name" required autocomplete="family-name">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required autocomplete="email">
-                    </div>
-                    <div class="field">
-                        <label for="phone">Mobile phone</label>
-                        <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="(___) ___-____">
-                    </div>
-                    <div class="field-row">
-                        <div class="field">
-                            <label for="age">Age</label>
-                            <select id="age" name="age" required>
-                                <option value="">Select&hellip;</option>
-                                <option>Under 21</option>
-                                <option>21</option><option>22</option><option>23</option>
-                                <option>24</option><option>25</option><option>26</option>
-                                <option>27</option><option>28</option><option>29</option>
-                                <option>30</option>
-                                <option>Over 30</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="city">Nearest NC city</label>
-                            <select id="city" name="city" required>
-                                <option value="">Select&hellip;</option>
-                                <option>Charlotte</option>
-                                <option>Raleigh</option>
-                                <option>Greensboro</option>
-                                <option>Winston-Salem</option>
-                                <option>Durham</option>
-                                <option>Asheville</option>
-                                <option>Other NC city</option>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="hidden" id="utm_campaign" name="utm_campaign">
-                    <input type="hidden" id="utm_source" name="utm_source">
-                    <input type="hidden" id="utm_medium" name="utm_medium">
-                    <input type="hidden" id="gclid" name="gclid">
-
-                    <button type="submit" class="btn-primary">Apply to Become a Donor</button>
-                    <p class="form-disclaimer">By submitting, you agree to be contacted by EggCelle about your application. We never share your information. See our <a href="/privacy">Privacy Policy</a>.</p>
-                </form>
+            <div class="cta-card" id="apply">
+                <span class="cta-eyebrow">Donor Prescreen Application</span>
+                <h2>See if you qualify in 5 minutes.</h2>
+                <p class="cta-sub">Complete EggCelle&rsquo;s secure donor prescreen application to find out if you&rsquo;re a match for our North Carolina program.</p>
+                <ul class="cta-benefits">
+                    <li><span class="check">&check;</span> Quick &mdash; about 5 minutes to complete</li>
+                    <li><span class="check">&check;</span> 100% confidential and HIPAA-secure</li>
+                    <li><span class="check">&check;</span> Get a response within 1&ndash;2 business days</li>
+                    <li><span class="check">&check;</span> No cost or obligation to apply</li>
+                </ul>
+                <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">Start Prescreen Application &rarr;</a>
+                <p class="cta-disclaimer">You&rsquo;ll be redirected to EggCelle&rsquo;s secure donor portal at <strong>eggdonorconnect.com</strong>.</p>
             </div>
         </div>
     </section>
@@ -777,7 +736,7 @@
             <div class="comp-text">
                 <h2>How Much Do Egg Donors Get Paid in North Carolina?</h2>
                 <p>EggCelle donors receive transparent, generous compensation. Every penny of your medical care, screening, medications, and travel is covered &mdash; on top of your cycle payment.</p>
-                <a href="#apply" class="btn-primary">See If I Qualify</a>
+                <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">See If I Qualify</a>
             </div>
             <div class="comp-table" aria-label="Compensation breakdown">
                 <div class="comp-row"><span>Base compensation (first cycle)</span><span class="v">$8,000</span></div>
@@ -806,7 +765,7 @@
                 <li><span class="badge">&check;</span> U.S. citizen or permanent resident</li>
             </ul>
             <div style="text-align:center; margin-top: 36px;">
-                <a href="#apply" class="btn-primary">I Meet the Requirements &mdash; Apply Now</a>
+                <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">I Meet the Requirements &mdash; Apply Now</a>
             </div>
         </div>
     </section>
@@ -915,7 +874,7 @@
         <div class="container">
             <h2>Ready to Help Build a Family in North Carolina?</h2>
             <p>Applications take less than 2 minutes. Our team will be in touch within 24 hours to walk you through next steps.</p>
-            <a href="#apply" class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'}); return false;">Apply Now &rarr;</a>
+            <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">Apply Now &rarr;</a>
         </div>
     </section>
 
@@ -931,42 +890,53 @@
     </footer>
 
     <div class="mobile-cta">
-        <a href="#apply" class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'}); return false;">Apply Now &mdash; Up to $10K</a>
+        <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">Apply Now &mdash; Up to $10K</a>
     </div>
 
     <script>
+        // Forward attribution params (GCLID + UTMs) onto outbound prescreen links and fire the Google Ads conversion before redirect.
         (function () {
-            var params = new URLSearchParams(window.location.search);
-            ['utm_campaign', 'utm_source', 'utm_medium', 'gclid'].forEach(function (key) {
-                var v = params.get(key);
+            var TRACKED_PARAMS = ['gclid', 'utm_campaign', 'utm_source', 'utm_medium', 'utm_term', 'utm_content'];
+            var incoming = new URLSearchParams(window.location.search);
+            var stored = {};
+            TRACKED_PARAMS.forEach(function (key) {
+                var v = incoming.get(key);
                 if (v) {
-                    var el = document.getElementById(key);
-                    if (el) el.value = v;
+                    stored[key] = v;
                     try { sessionStorage.setItem(key, v); } catch (e) {}
+                } else {
+                    try {
+                        var s = sessionStorage.getItem(key);
+                        if (s) stored[key] = s;
+                    } catch (e) {}
                 }
             });
+
+            function buildPrescreenUrl(href) {
+                try {
+                    var url = new URL(href, window.location.origin);
+                    Object.keys(stored).forEach(function (key) {
+                        if (!url.searchParams.has(key)) url.searchParams.set(key, stored[key]);
+                    });
+                    return url.toString();
+                } catch (e) {
+                    return href;
+                }
+            }
+
+            document.querySelectorAll('a.js-prescreen').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    var dest = buildPrescreenUrl(a.getAttribute('href'));
+                    e.preventDefault();
+                    try {
+                        reportApplicationConversion(dest);
+                    } catch (err) {
+                        window.location = dest;
+                    }
+                    setTimeout(function () { window.location = dest; }, 800);
+                });
+            });
         })();
-
-        function submitApplication(e) {
-            e.preventDefault();
-            var form = e.target;
-            if (!form.checkValidity()) { form.reportValidity(); return false; }
-
-            try { reportApplicationConversion(); } catch (err) {}
-
-            var btn = form.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.textContent = 'Submitting…';
-
-            setTimeout(function () {
-                form.innerHTML = '<div style="text-align:center; padding: 24px 0;">' +
-                    '<div style="font-size: 40px; margin-bottom: 12px;">&#10003;</div>' +
-                    '<h2 style="color:#2b8a3e; margin-bottom: 8px;">Thank you!</h2>' +
-                    '<p style="color:#4a4a68;">We&rsquo;ve received your application. A member of the EggCelle team will reach out within 24 hours.</p>' +
-                    '</div>';
-            }, 600);
-            return false;
-        }
     </script>
 </body>
 </html>
