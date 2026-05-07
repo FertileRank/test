@@ -116,17 +116,18 @@
 
     <style>
         :root {
-            --color-primary: #d6336c;
-            --color-primary-dark: #a61e4d;
-            --color-accent: #fcc419;
-            --color-text: #1a1a2e;
-            --color-text-soft: #4a4a68;
+            --color-primary: #2c3d49;
+            --color-primary-dark: #1a2730;
+            --color-accent: #ffcd3c;
+            --color-accent-dark: #e6b62b;
+            --color-text: #0b1620;
+            --color-text-soft: #475569;
             --color-bg: #ffffff;
-            --color-bg-soft: #fff5f7;
-            --color-bg-warm: #fff8e1;
-            --color-border: #f0d9e0;
-            --shadow-sm: 0 2px 8px rgba(214, 51, 108, 0.08);
-            --shadow-md: 0 8px 24px rgba(214, 51, 108, 0.12);
+            --color-bg-soft: #f5f7fa;
+            --color-bg-highlight: #f1f5f9;
+            --color-border: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(44, 61, 73, 0.08);
+            --shadow-md: 0 8px 24px rgba(44, 61, 73, 0.14);
             --radius: 12px;
             --max-width: 1140px;
         }
@@ -208,7 +209,7 @@
         }
         .hero-eyebrow {
             display: inline-block;
-            background: var(--color-bg-warm);
+            background: var(--color-accent);
             color: var(--color-primary-dark);
             padding: 6px 14px;
             border-radius: 999px;
@@ -276,7 +277,7 @@
             background: var(--color-primary-dark);
             text-decoration: none;
             transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(214, 51, 108, 0.22);
+            box-shadow: 0 12px 28px rgba(44, 61, 73, 0.25);
         }
         .btn-secondary {
             display: inline-block;
@@ -313,7 +314,7 @@
         }
         .cta-eyebrow {
             display: inline-block;
-            background: var(--color-bg-warm);
+            background: var(--color-accent);
             color: var(--color-primary-dark);
             padding: 5px 12px;
             border-radius: 999px;
@@ -423,7 +424,7 @@
             border-bottom: 1px solid var(--color-border);
             font-size: 15px;
         }
-        .comp-row:last-child { border-bottom: none; background: var(--color-bg-warm); font-weight: 700; }
+        .comp-row:last-child { border-bottom: none; background: var(--color-bg-highlight); font-weight: 700; }
         .comp-row .v { color: var(--color-primary); font-weight: 700; }
         .comp-text h2 { font-size: clamp(24px, 3vw, 32px); margin-bottom: 14px; }
         .comp-text p { color: var(--color-text-soft); margin-bottom: 18px; }
@@ -592,8 +593,8 @@
             margin-right: auto;
             opacity: 0.95;
         }
-        .final-cta .btn-primary { background: #fff; color: var(--color-primary); }
-        .final-cta .btn-primary:hover { background: var(--color-bg-warm); }
+        .final-cta .btn-primary { background: var(--color-accent); color: var(--color-primary-dark); }
+        .final-cta .btn-primary:hover { background: var(--color-accent-dark); color: var(--color-primary-dark); }
 
         footer {
             background: #fff;
