@@ -760,6 +760,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            align-items: start;
         }
 
         details.faq-item {
@@ -934,10 +935,20 @@
             .hero {
                 padding: 60px 0 80px;
                 min-height: 480px;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin: 0 auto;
             }
 
             .hero-cta-group {
                 flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-trust {
+                justify-content: center;
             }
 
             .hero-cta-group .btn {
