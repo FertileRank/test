@@ -142,8 +142,9 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(1.75rem, 0.75rem + 2vw, 2.5rem);
             font-weight: 600;
+            line-height: 1.2;
         }
 
         h2 {
@@ -296,6 +297,8 @@
         }
 
         .hero-content h1 {
+            font-size: clamp(1.875rem, 1rem + 1.6vw, 2.5rem);
+            line-height: 1.15;
             margin-bottom: 24px;
             color: var(--color-navy);
         }
@@ -588,25 +591,29 @@
         .scf-reviews {
             background-color: var(--color-cream);
             padding: 80px 20px;
+            overflow-x: hidden;
         }
 
         .scf-container {
-            max-width: var(--max-width);
+            max-width: 960px;
             margin: 0 auto;
             padding: 0 20px;
             width: 100%;
         }
 
         .scf-reviews__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-            align-items: start;
+            display: block;
+            min-width: 0;
+        }
+
+        .scf-reviews__intro {
+            text-align: center;
+            margin-bottom: 32px;
         }
 
         .scf-reviews__intro h2 {
-            font-size: 2rem;
-            margin-bottom: 16px;
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            margin-bottom: 12px;
         }
 
         .scf-eyebrow {
@@ -621,8 +628,10 @@
         }
 
         .lc_reviews_widget {
-            width: 100%;
-            min-height: 320px;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            min-height: 380px;
             border: 0;
             display: block;
         }
@@ -1263,7 +1272,7 @@
                 </div>
 
                 <script type="text/javascript" src="https://reputationhub.site/reputation/assets/review-widget.js"></script>
-                <iframe class="lc_reviews_widget" src="https://reputationhub.site/reputation/widgets/review_widget/zUPT8ZfnFluVzhz2tuxh?widgetId=69fe53ab00e9444b33f761ad" frameborder="0" scrolling="no" style="min-width: 80% !important; max-width: 100vw;" title="SpringCreek Fertility Patient Reviews"></iframe>
+                <iframe class="lc_reviews_widget" src="https://reputationhub.site/reputation/widgets/review_widget/zUPT8ZfnFluVzhz2tuxh?widgetId=69fe53ab00e9444b33f761ad" frameborder="0" scrolling="no" title="SpringCreek Fertility Patient Reviews"></iframe>
             </div>
         </section>
 
