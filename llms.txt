@@ -1,0 +1,38 @@
+# Medtech Website Fixed
+
+## Pages
+
+- [Home](https://dev.medtechforsolutions.com)
+  Sections: Hero, Services Overview, Why Choose MedTech, Testimonials, Call to Action
+- [Services](https://dev.medtechforsolutions.com/services)
+  Sections: Hero, Laboratory Solutions, Management Services, Call to Action
+- [Laboratory Solutions](https://dev.medtechforsolutions.com/lab-solutions)
+  Sections: Hero, Core Services, Impact Metrics, Call to Action
+- [Real-Time Monitoring](https://dev.medtechforsolutions.com/lab-solutions/real-time-monitoring)
+  Sections: Hero, Features, Benefits, Process, Call to Action
+- [Regulatory Compliance](https://dev.medtechforsolutions.com/lab-solutions/regulatory-compliance)
+  Sections: Hero, Compliance Standards, Services, Process, Call to Action
+- [Staffing Solutions](https://dev.medtechforsolutions.com/lab-solutions/staffing-solutions)
+  Sections: Hero, Staffing Services, Available Positions, Process, Call to Action
+- [GPO Purchasing](https://dev.medtechforsolutions.com/lab-solutions/gpo-purchasing)
+  Sections: Hero, GPO Benefits, Vendor Partners, Process, Call to Action
+- [Practice Development](https://dev.medtechforsolutions.com/lab-solutions/practice-development)
+  Sections: Hero, Development Services, Process, Call to Action
+- [Management Services](https://dev.medtechforsolutions.com/management-services)
+  Sections: Hero, Management Services Overview, Call to Action
+- [Marketing](https://dev.medtechforsolutions.com/management-services/marketing)
+  Sections: Hero, Marketing Services, Call to Action
+- [Call Center](https://dev.medtechforsolutions.com/management-services/call-center)
+  Sections: Hero, Call Center Services, Call to Action
+- [Accounting & Finance](https://dev.medtechforsolutions.com/management-services/accounting-finance)
+  Sections: Hero, Accounting Services, Call to Action
+- [Human Resources](https://dev.medtechforsolutions.com/management-services/human-resources)
+  Sections: Hero, HR Services, Call to Action
+- [Insurance & Risk Management](https://dev.medtechforsolutions.com/management-services/insurance-risk-management)
+  Sections: Hero, Insurance Services, Call to Action
+- [About](https://dev.medtechforsolutions.com/about)
+  Sections: Hero, Company Story, Team, Call to Action
+- [Contact](https://dev.medtechforsolutions.com/contact)
+  Sections: Hero, Contact Form, Contact Information
+- [Privacy Policy](https://dev.medtechforsolutions.com/privacy-policy)
+- [Terms of Service](https://dev.medtechforsolutions.com/terms-of-service)
