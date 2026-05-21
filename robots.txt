@@ -1,0 +1,12 @@
+# robots.txt for medtech4solutions.com
+# Updated: 2026-05-07
+
+User-agent: *
+Allow: /
+
+# Internal client-review materials — keep out of search indexes
+Disallow: /_internal/
+Disallow: /_docs/
+
+# XML sitemap
+Sitemap: https://medtech4solutions.com/sitemap.xml

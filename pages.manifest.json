@@ -1,0 +1,537 @@
+{
+  "site": {
+    "name": "Medtech Website Fixed",
+    "domain": "https://dev.medtechforsolutions.com",
+    "language": "en",
+    "projectAnalysis": {
+      "routingMechanism": "multi_file_html",
+      "styling": "vanilla_css",
+      "pageConvention": "html_files_at_root",
+      "style_layers": {
+        "css_variables": [],
+        "tailwind_config": "tailwind.config.ts",
+        "ts_tokens": [],
+        "css_modules_present": false,
+        "component_local_css": [
+          "src/components/blog/blog-prose.css"
+        ],
+        "css_in_js": null,
+        "inline_tailwind_observed": false,
+        "fonts": {
+          "index_html_link": true,
+          "css_import": false,
+          "next_font": false
+        },
+        "summary": "Tailwind tokens in `tailwind.config.ts`"
+      }
+    },
+    "intent": {
+      "business_type": "healthcare",
+      "business_type_title": "Healthcare Consulting & Laboratory Management",
+      "tone": "professional",
+      "primary_goal": "schedule consultation for ART laboratory management services",
+      "target_audience": [
+        "fertility clinic operators",
+        "IVF laboratory directors",
+        "reproductive medicine practice managers"
+      ],
+      "key_features": [
+        "Real-time laboratory monitoring with OvaTools platform",
+        "Regulatory compliance solutions (FDA, CLIA, CAP, AABB)",
+        "Staffing and recruitment of certified ART professionals",
+        "Group purchasing organization with 1,800+ vendor contracts",
+        "Practice development and laboratory design services"
+      ],
+      "unique_selling_points": [
+        "30+ years of ART industry experience with 300+ practices served",
+        "End-to-end hands-on implementation and management support",
+        "Specialized exclusively in assisted reproductive technology sector"
+      ],
+      "value_proposition": "Comprehensive laboratory management and practice development solutions designed exclusively for fertility clinics and IVF laboratories to improve compliance, efficiency, and profitability.",
+      "is_landing_page": false
+    }
+  },
+  "pages": [
+    {
+      "id": "home",
+      "name": "Home",
+      "slug": "",
+      "isHome": true,
+      "filePath": "index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Services Overview",
+        "Why Choose MedTech",
+        "Testimonials",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "slug": "services",
+      "isHome": false,
+      "filePath": "services/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Laboratory Solutions",
+        "Management Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions",
+      "name": "Laboratory Solutions",
+      "slug": "lab-solutions",
+      "isHome": false,
+      "filePath": "lab-solutions/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Core Services",
+        "Impact Metrics",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions/real_time_monitoring",
+      "name": "Real-Time Monitoring",
+      "slug": "lab-solutions/real-time-monitoring",
+      "isHome": false,
+      "filePath": "lab-solutions/real-time-monitoring/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Features",
+        "Benefits",
+        "Process",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions/regulatory_compliance",
+      "name": "Regulatory Compliance",
+      "slug": "lab-solutions/regulatory-compliance",
+      "isHome": false,
+      "filePath": "lab-solutions/regulatory-compliance/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Compliance Standards",
+        "Services",
+        "Process",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions/staffing_solutions",
+      "name": "Staffing Solutions",
+      "slug": "lab-solutions/staffing-solutions",
+      "isHome": false,
+      "filePath": "lab-solutions/staffing-solutions/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Staffing Services",
+        "Available Positions",
+        "Process",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions/gpo_purchasing",
+      "name": "GPO Purchasing",
+      "slug": "lab-solutions/gpo-purchasing",
+      "isHome": false,
+      "filePath": "lab-solutions/gpo-purchasing/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "GPO Benefits",
+        "Vendor Partners",
+        "Process",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "lab_solutions/practice_development",
+      "name": "Practice Development",
+      "slug": "lab-solutions/practice-development",
+      "isHome": false,
+      "filePath": "lab-solutions/practice-development/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Development Services",
+        "Process",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services",
+      "name": "Management Services",
+      "slug": "management-services",
+      "isHome": false,
+      "filePath": "management-services/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Management Services Overview",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services/marketing",
+      "name": "Marketing",
+      "slug": "management-services/marketing",
+      "isHome": false,
+      "filePath": "management-services/marketing/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Marketing Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services/call_center",
+      "name": "Call Center",
+      "slug": "management-services/call-center",
+      "isHome": false,
+      "filePath": "management-services/call-center/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Call Center Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services/accounting_finance",
+      "name": "Accounting & Finance",
+      "slug": "management-services/accounting-finance",
+      "isHome": false,
+      "filePath": "management-services/accounting-finance/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Accounting Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services/human_resources",
+      "name": "Human Resources",
+      "slug": "management-services/human-resources",
+      "isHome": false,
+      "filePath": "management-services/human-resources/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "HR Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "management_services/insurance_risk_management",
+      "name": "Insurance & Risk Management",
+      "slug": "management-services/insurance-risk-management",
+      "isHome": false,
+      "filePath": "management-services/insurance-risk-management/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Insurance Services",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "about",
+      "name": "About",
+      "slug": "about",
+      "isHome": false,
+      "filePath": "about/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Company Story",
+        "Team",
+        "Call to Action"
+      ]
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "slug": "contact",
+      "isHome": false,
+      "filePath": "contact/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Contact Form",
+        "Contact Information"
+      ]
+    },
+    {
+      "id": "privacy_policy",
+      "name": "Privacy Policy",
+      "slug": "privacy-policy",
+      "isHome": false,
+      "filePath": "privacy-policy/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": []
+    },
+    {
+      "id": "terms_of_service",
+      "name": "Terms of Service",
+      "slug": "terms-of-service",
+      "isHome": false,
+      "filePath": "terms-of-service/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": []
+    }
+  ],
+  "navigation": {
+    "header": [
+      "home",
+      "services",
+      "lab_solutions",
+      "lab_solutions/real_time_monitoring",
+      "lab_solutions/regulatory_compliance",
+      "lab_solutions/staffing_solutions",
+      "lab_solutions/gpo_purchasing",
+      "lab_solutions/practice_development",
+      "management_services",
+      "management_services/marketing",
+      "management_services/call_center",
+      "management_services/accounting_finance",
+      "management_services/human_resources",
+      "management_services/insurance_risk_management",
+      "about",
+      "contact",
+      "privacy_policy",
+      "terms_of_service"
+    ],
+    "footer": [
+      "home",
+      "services",
+      "lab_solutions",
+      "lab_solutions/real_time_monitoring",
+      "lab_solutions/regulatory_compliance",
+      "lab_solutions/staffing_solutions",
+      "lab_solutions/gpo_purchasing",
+      "lab_solutions/practice_development",
+      "management_services",
+      "management_services/marketing",
+      "management_services/call_center",
+      "management_services/accounting_finance",
+      "management_services/human_resources",
+      "management_services/insurance_risk_management",
+      "about",
+      "contact",
+      "privacy_policy",
+      "terms_of_service"
+    ]
+  },
+  "sections": {}
+}

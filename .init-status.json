@@ -1,0 +1,9 @@
+{
+  "status": "success",
+  "message": "Container initialized successfully",
+  "timestamp": "2026-05-20T19:16:37.895474",
+  "details": {
+    "duration_seconds": 4.652529239654541,
+    "npm_ready": true
+  }
+}
