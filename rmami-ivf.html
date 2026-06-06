@@ -111,8 +111,8 @@ body{margin:0;background:var(--rma-white);font-family:var(--rma-font-body)}
    ───────────────────────────────────────────────────────────── */
 .ivf-hero{
   position:relative;isolation:isolate;
-  --ivf-header-offset:150px; /* clears announcement bar + nav on desktop */
-  min-height:clamp(440px,62vh,620px);
+  --ivf-header-offset:110px; /* clears nav on desktop — tighter for service subpage */
+  min-height:clamp(320px,42vh,460px);
   display:flex;align-items:center;
   padding-top:var(--ivf-header-offset);
   padding-bottom:var(--ivf-header-offset); /* vertical centering */
@@ -147,7 +147,7 @@ body{margin:0;background:var(--rma-white);font-family:var(--rma-font-body)}
 .ivf-hero-meta .ivf-m-num{font-family:var(--rma-font-display);font-size:32px;line-height:1;color:var(--rma-white);display:block;margin-bottom:6px}
 .ivf-hero-meta .ivf-m-lbl{font-size:13px;color:var(--rma-text-on-dark-60);letter-spacing:.3px}
 @media(max-width:880px){
-  .ivf-hero{min-height:auto;--ivf-header-offset:190px;padding-bottom:48px}
+  .ivf-hero{min-height:auto;--ivf-header-offset:140px;padding-bottom:36px}
   .ivf-hero-img{object-position:72% center}
   .ivf-hero::before{background:linear-gradient(180deg,rgba(26,26,46,.82) 0%,rgba(18,56,131,.74) 45%,rgba(18,56,131,.82) 100%)}
   .ivf-hero-content{max-width:none}
