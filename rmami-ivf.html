@@ -1,0 +1,734 @@
+<!-- ============================================================================
+     RMA OF MICHIGAN — IVF (In Vitro Fertilization)
+     URL: https://www.rmami.com/treatments-female-ivf-troy-michigan.html
+     Divi Code Module · Namespace: ivf-  ·  Consumes --rma-* tokens
+     Optimized for LCP/INP · Hero pattern matches Egg Donor page
+     ----------------------------------------------------------------------------
+     PREVIEW SHELL BELOW (lines marked PREVIEW-ONLY) — DELETE before pasting
+     into the Divi Code Module. The shell only supplies fonts + tokens that the
+     Global CSS already provides in production, plus a placeholder hero image.
+     Keep everything inside <div class="ivf-root"> … </div>.
+     JSON-LD schema deploys SEPARATELY (see commented block at end).
+     ============================================================================ -->
+
+
+<!-- ─── HERO IMAGE PRELOAD ─── (place outside .ivf-root; works from any position) -->
+<link rel="preload" as="image" href="https://www.rmami.com/wp-content/uploads/2026/06/ivf-hero.jpg" fetchpriority="high">
+
+
+<!-- PREVIEW-ONLY START — remove this entire block before Divi paste -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rma-blue:#123883;--rma-navy:#1a1a2e;--rma-white:#fff;--rma-offwhite:#f7f9fa;
+  --rma-blue-hover:#0e2d6b;--rma-blue-light:#1a4499;--rma-blue-bright:#2c6fce;
+  --rma-blue-muted:rgba(18,56,131,.08);--rma-blue-tint:rgba(18,56,131,.04);
+  --rma-border:rgba(18,56,131,.12);--rma-border-light:rgba(18,56,131,.06);
+  --rma-text-primary:#1a1a2e;--rma-text-body:#3a3a4a;--rma-text-secondary:#5a5a6e;--rma-text-muted:#8a8a9a;
+  --rma-text-on-dark:#fff;--rma-text-on-dark-75:rgba(255,255,255,.75);--rma-text-on-dark-60:rgba(255,255,255,.6);
+  --rma-font-display:'DM Serif Display',Georgia,serif;--rma-font-body:'DM Sans',-apple-system,sans-serif;
+  --rma-space-xs:8px;--rma-space-sm:16px;--rma-space-md:24px;--rma-space-lg:40px;--rma-space-xl:64px;--rma-space-2xl:96px;
+  --rma-radius-sm:6px;--rma-radius-md:10px;--rma-radius-lg:16px;--rma-radius-pill:100px;
+  --rma-shadow-sm:0 1px 3px rgba(18,56,131,.06);--rma-shadow-md:0 4px 16px rgba(18,56,131,.08);
+  --rma-shadow-lg:0 8px 32px rgba(18,56,131,.10);--rma-shadow-hover:0 8px 24px rgba(18,56,131,.12);
+  --rma-ease:cubic-bezier(.25,.46,.45,.94);--rma-duration:.3s;
+}
+body{margin:0;background:var(--rma-white);font-family:var(--rma-font-body)}
+.rma-section-label{display:inline-block;font-family:var(--rma-font-body);font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--rma-blue);margin-bottom:8px}
+</style>
+<style>
+/* PREVIEW-ONLY hero swap: hide the production <img> and paint a base64 placeholder
+   directly on the hero so the layout previews without fetching the WP asset.
+   In production, deleting this block makes the real <img> the LCP element. */
+.ivf-hero-img{display:none!important}
+.ivf-hero{
+  background-image:url("data:image/jpeg;base64,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") !important;
+  background-size:cover;background-position:75% center;background-repeat:no-repeat;
+}
+</style>
+<!-- PREVIEW-ONLY END -->
+
+
+<div class="ivf-root">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   §0  DIVI PARENT BREAKOUT  (fixes narrow-column clipping)
+   ───────────────────────────────────────────────────────────── */
+.ivf-root{width:100%;max-width:100%}
+.et_pb_module.et_pb_code:has(.ivf-root),
+.et_pb_code:has(.ivf-root){width:100%!important;max-width:100%!important;padding:0!important;margin:0!important}
+.et_pb_column:has(.ivf-root){width:100%!important;max-width:100%!important;padding:0!important;margin:0!important}
+.et_pb_row:has(.ivf-root),
+.et_pb_row.ivf-fullwidth{width:100%!important;max-width:100%!important;padding:0!important;margin:0 auto!important}
+.et_pb_row:has(.ivf-root) .et_pb_column,
+.et_pb_row.ivf-fullwidth .et_pb_column{margin:0!important}
+.et_pb_section:has(.ivf-root){padding-left:0!important;padding-right:0!important;width:100%!important;max-width:100%!important}
+.et_pb_row:has(.ivf-root){gap:0!important}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §A  PAGE-SPECIFIC LAYOUT
+   ───────────────────────────────────────────────────────────── */
+.ivf-wrap{max-width:1400px;margin:0 auto;padding:0 clamp(20px,4vw,64px)}
+.ivf-section{padding:var(--rma-space-2xl) 0}
+.ivf-section--tight{padding:var(--rma-space-xl) 0}
+
+/* Below-the-fold content-visibility utility — skips layout/paint until in viewport */
+.ivf-cv{content-visibility:auto;contain-intrinsic-size:1px 720px}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §B  BUTTONS
+   ───────────────────────────────────────────────────────────── */
+.ivf-root a.ivf-btn{
+  display:inline-flex;align-items:center;gap:9px;box-sizing:border-box;
+  font-family:var(--rma-font-body);font-size:15px;font-weight:600;letter-spacing:.02em;
+  padding:14px 30px;border-radius:var(--rma-radius-sm);text-decoration:none;
+  border:2px solid var(--rma-blue);background:var(--rma-blue);color:var(--rma-white)!important;
+  cursor:pointer;
+  transition:background var(--rma-duration) var(--rma-ease),border-color var(--rma-duration) var(--rma-ease),
+    transform var(--rma-duration) var(--rma-ease),box-shadow var(--rma-duration) var(--rma-ease);
+}
+.ivf-root a.ivf-btn:hover{background:var(--rma-blue-hover);border-color:var(--rma-blue-hover);
+  color:var(--rma-white)!important;transform:translateY(-1px);box-shadow:var(--rma-shadow-hover)}
+.ivf-root a.ivf-btn .ivf-arrow{transition:transform var(--rma-duration) var(--rma-ease);color:inherit!important}
+.ivf-root a.ivf-btn:hover .ivf-arrow{transform:translateX(4px)}
+.ivf-root a.ivf-btn--outline{background:transparent;color:var(--rma-blue)!important}
+.ivf-root a.ivf-btn--outline:hover{background:var(--rma-blue);color:var(--rma-white)!important}
+.ivf-root a.ivf-btn--white{background:var(--rma-white);border-color:var(--rma-white);color:var(--rma-blue)!important}
+.ivf-root a.ivf-btn--white:hover{background:var(--rma-offwhite);border-color:var(--rma-offwhite);color:var(--rma-blue-hover)!important}
+.ivf-root a.ivf-btn--ghost{background:transparent;border-color:rgba(255,255,255,.55);color:var(--rma-white)!important}
+.ivf-root a.ivf-btn--ghost:hover{background:rgba(255,255,255,.12);border-color:var(--rma-white);color:var(--rma-white)!important}
+.ivf-root a.ivf-btn--full{display:flex;width:100%;max-width:100%;box-sizing:border-box;justify-content:center;margin-top:24px}
+.ivf-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §C  HERO  —  <img> pattern (matches Egg Donor)
+   - Real <img> = LCP-optimal: preloadable, fetchpriority, explicit w/h.
+   - Equal top/bottom padding = true vertical centering.
+   - Single ::before consolidates the two overlay layers.
+   ───────────────────────────────────────────────────────────── */
+.ivf-hero{
+  position:relative;isolation:isolate;
+  --ivf-header-offset:150px; /* clears announcement bar + nav on desktop */
+  min-height:clamp(440px,62vh,620px);
+  display:flex;align-items:center;
+  padding-top:var(--ivf-header-offset);
+  padding-bottom:var(--ivf-header-offset); /* vertical centering */
+  overflow:hidden;
+  background:var(--rma-navy,#1a1a2e);
+}
+.ivf-hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:75% center;z-index:-2;
+}
+.ivf-hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(90deg,
+      rgba(26,26,46,.94) 0%,
+      rgba(18,56,131,.82) 34%,
+      rgba(18,56,131,.42) 58%,
+      rgba(18,56,131,.10) 78%,
+      rgba(18,56,131,0) 100%),
+    linear-gradient(180deg,transparent 55%,rgba(26,26,46,.45) 100%);
+}
+.ivf-hero-inner{
+  position:relative;z-index:1;width:100%;max-width:1280px;margin:0 auto;
+  padding:clamp(32px,4vw,56px) clamp(20px,4vw,64px) clamp(48px,6vw,72px);
+}
+.ivf-hero-content{max-width:600px}
+.ivf-hero .rma-section-label{color:var(--rma-text-on-dark-60)}
+.ivf-hero h1{color:var(--rma-text-on-dark)!important;font-size:clamp(34px,4.8vw,58px)!important;line-height:1.08!important;max-width:16ch!important;margin:0 0 20px!important;font-family:var(--rma-font-display)!important;font-weight:400!important}
+.ivf-hero-lede{color:var(--rma-text-on-dark-75);font-size:clamp(17px,1.9vw,20px);line-height:1.6;max-width:50ch;margin:0 0 36px}
+.ivf-hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.ivf-hero-meta{display:flex;gap:32px;flex-wrap:wrap;margin-top:44px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18)}
+.ivf-hero-meta .ivf-m-num{font-family:var(--rma-font-display);font-size:32px;line-height:1;color:var(--rma-white);display:block;margin-bottom:6px}
+.ivf-hero-meta .ivf-m-lbl{font-size:13px;color:var(--rma-text-on-dark-60);letter-spacing:.3px}
+@media(max-width:880px){
+  .ivf-hero{min-height:auto;--ivf-header-offset:190px;padding-bottom:48px}
+  .ivf-hero-img{object-position:72% center}
+  .ivf-hero::before{background:linear-gradient(180deg,rgba(26,26,46,.82) 0%,rgba(18,56,131,.74) 45%,rgba(18,56,131,.82) 100%)}
+  .ivf-hero-content,.ivf-hero h1,.ivf-hero-lede{max-width:none}
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §D  QUICK ANSWER (AIO speakable)
+   ───────────────────────────────────────────────────────────── */
+.ivf-quick{
+  background:var(--rma-blue-muted);border:1px solid var(--rma-border);
+  border-left:4px solid var(--rma-blue);border-radius:0 var(--rma-radius-md) var(--rma-radius-md) 0;
+  padding:26px 30px;
+}
+.ivf-quick p{font-size:17px;line-height:1.7;color:var(--rma-navy);margin:0}
+.ivf-quick strong{color:var(--rma-navy)}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §E  INTRO / OVERVIEW
+   ───────────────────────────────────────────────────────────── */
+.ivf-intro h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:18px}
+.ivf-intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
+.ivf-intro-side{background:var(--rma-blue-muted);border:1px solid var(--rma-border);border-radius:var(--rma-radius-lg);padding:32px;contain:layout style}
+.ivf-intro-side h3{font-size:20px;margin-bottom:14px}
+.ivf-intro-side ul{list-style:none;padding:0;margin:0}
+.ivf-intro-side li{
+  position:relative;padding:0 0 14px 30px;font-size:15px;line-height:1.6;color:var(--rma-text-body);
+  margin-bottom:14px;border-bottom:1px solid var(--rma-border-light);
+}
+.ivf-intro-side li:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.ivf-intro-side li::before{
+  content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:50%;background:var(--rma-blue);
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/></svg>") center/10px no-repeat;
+          mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/></svg>") center/10px no-repeat;
+}
+@media(max-width:880px){.ivf-intro-grid{grid-template-columns:1fr;gap:32px}}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §F  PROCESS STEPS (5-up)
+   ───────────────────────────────────────────────────────────── */
+.ivf-steps-head{max-width:62ch;margin-bottom:48px}
+.ivf-steps-head h2{font-size:clamp(28px,3.6vw,40px)}
+.ivf-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.ivf-step{position:relative;padding:0 18px 0 0}
+.ivf-step:not(:last-child)::after{
+  content:"";position:absolute;top:24px;left:48px;right:0;height:2px;
+  background:linear-gradient(90deg,var(--rma-border),var(--rma-border-light));
+}
+.ivf-step-num{
+  width:48px;height:48px;border-radius:50%;background:var(--rma-blue);color:var(--rma-white);
+  font-family:var(--rma-font-display);font-size:20px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;position:relative;z-index:1;
+}
+.ivf-step h3{font-size:17px;margin-bottom:8px}
+.ivf-step p{font-size:13.5px;line-height:1.65;color:var(--rma-text-secondary)}
+@media(max-width:1024px){.ivf-steps{grid-template-columns:1fr 1fr;gap:32px 24px}.ivf-step:not(:last-child)::after{display:none}}
+@media(max-width:880px){
+  .ivf-steps{grid-template-columns:1fr;gap:28px}
+  .ivf-step{padding:0 0 0 70px}
+  .ivf-step-num{position:absolute;left:0;top:0;margin-bottom:0}
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §G  MEDICATION CARDS
+   ───────────────────────────────────────────────────────────── */
+.ivf-meds{background:var(--rma-offwhite)}
+.ivf-meds-head{max-width:62ch;margin-bottom:44px}
+.ivf-meds-head h2{font-size:clamp(28px,3.6vw,40px)}
+.ivf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ivf-card{
+  background:var(--rma-white);border:1px solid var(--rma-border);border-radius:var(--rma-radius-lg);padding:26px 26px;
+  contain:layout style;
+  transition:transform var(--rma-duration) var(--rma-ease),box-shadow var(--rma-duration) var(--rma-ease),border-color var(--rma-duration) var(--rma-ease);
+}
+.ivf-card:hover{transform:translateY(-3px);box-shadow:var(--rma-shadow-lg);border-color:rgba(18,56,131,.18)}
+.ivf-card .ivf-tag{display:inline-block;font-family:var(--rma-font-body);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--rma-blue);background:var(--rma-blue-muted);padding:3px 10px;border-radius:var(--rma-radius-pill);margin-bottom:12px}
+.ivf-card h3{font-size:18px;margin-bottom:8px}
+.ivf-card p{font-size:14px;line-height:1.7;color:var(--rma-text-secondary)}
+.ivf-note{background:var(--rma-blue-tint);border:1px solid var(--rma-border-light);border-radius:var(--rma-radius-md);padding:18px 22px;margin-top:24px;font-size:15px;line-height:1.7;color:var(--rma-text-secondary)}
+.ivf-note strong{color:var(--rma-navy)}
+@media(max-width:880px){.ivf-grid{grid-template-columns:1fr}}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §H  TIMELINE (vertical)
+   ───────────────────────────────────────────────────────────── */
+.ivf-timeline-head{max-width:62ch;margin-bottom:44px}
+.ivf-timeline-head h2{font-size:clamp(28px,3.6vw,40px)}
+.ivf-timeline{position:relative;padding-left:34px;max-width:760px}
+.ivf-timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--rma-border)}
+.ivf-tl-item{position:relative;padding-bottom:26px}
+.ivf-tl-item:last-child{padding-bottom:0}
+.ivf-tl-item::before{content:"";position:absolute;left:-34px;top:5px;width:18px;height:18px;border-radius:50%;background:var(--rma-white);border:3px solid var(--rma-blue)}
+.ivf-tl-phase{display:inline-block;font-family:var(--rma-font-body);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--rma-blue);margin-bottom:4px}
+.ivf-tl-item h3{font-size:18px;margin-bottom:5px}
+.ivf-tl-item p{font-size:14.5px;line-height:1.7;color:var(--rma-text-secondary);margin:0}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §I  ICSI / SUPPORT STRIP (navy)
+   ───────────────────────────────────────────────────────────── */
+.ivf-support{
+  background:var(--rma-navy);color:var(--rma-text-on-dark);border-radius:var(--rma-radius-lg);
+  padding:clamp(40px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+.ivf-support .rma-section-label{color:var(--rma-text-on-dark-60)}
+.ivf-support h2{color:var(--rma-text-on-dark);font-size:clamp(26px,3.2vw,36px)}
+.ivf-support p{color:var(--rma-text-on-dark-75)}
+.ivf-support-list{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.ivf-support-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:1.6;color:var(--rma-text-on-dark-75)}
+.ivf-support-list .ivf-dot{width:8px;height:8px;border-radius:50%;background:var(--rma-blue-bright);margin-top:8px;flex-shrink:0}
+@media(max-width:880px){.ivf-support{grid-template-columns:1fr;gap:28px}}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §J  FAQ ACCORDION
+   ───────────────────────────────────────────────────────────── */
+.ivf-faq-head{text-align:center;margin-bottom:44px}
+.ivf-faq-head h2{font-size:clamp(28px,3.6vw,40px)}
+.ivf-faq{max-width:820px;margin:0 auto}
+.ivf-acc{border:1px solid var(--rma-border);border-radius:var(--rma-radius-md);margin-bottom:12px;overflow:hidden;background:var(--rma-white);contain:layout style;transition:border-color var(--rma-duration) var(--rma-ease)}
+.ivf-acc[open]{border-color:rgba(18,56,131,.22)}
+.ivf-acc summary{list-style:none;cursor:pointer;padding:20px 24px;font-family:var(--rma-font-display);font-size:18px;color:var(--rma-navy);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ivf-acc summary::-webkit-details-marker{display:none}
+.ivf-acc[open] summary{color:var(--rma-blue)}
+.ivf-acc-plus{flex-shrink:0;width:20px;height:20px;position:relative;transition:transform var(--rma-duration) var(--rma-ease)}
+.ivf-acc-plus::before,.ivf-acc-plus::after{content:"";position:absolute;background:var(--rma-blue);border-radius:2px}
+.ivf-acc-plus::before{top:9px;left:0;width:20px;height:2px}
+.ivf-acc-plus::after{top:0;left:9px;width:2px;height:20px;transition:transform var(--rma-duration) var(--rma-ease)}
+.ivf-acc[open] .ivf-acc-plus::after{transform:scaleY(0)}
+.ivf-acc-body{padding:0 24px 22px;font-size:15px;line-height:1.75;color:var(--rma-text-body)}
+.ivf-acc-body p{font-size:15px}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §K  RELATED TREATMENTS & RESOURCES (internal links)
+   ───────────────────────────────────────────────────────────── */
+.ivf-related-head{max-width:62ch;margin-bottom:44px}
+.ivf-related-head h2{font-size:clamp(28px,3.6vw,40px)}
+.ivf-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ivf-root a.ivf-related-card{
+  display:block;text-decoration:none;
+  background:var(--rma-white);border:1px solid var(--rma-border);border-radius:var(--rma-radius-lg);
+  padding:26px 26px;contain:layout style;
+  transition:transform var(--rma-duration) var(--rma-ease),box-shadow var(--rma-duration) var(--rma-ease),border-color var(--rma-duration) var(--rma-ease);
+}
+.ivf-root a.ivf-related-card:hover{transform:translateY(-3px);box-shadow:var(--rma-shadow-lg);border-color:rgba(18,56,131,.18)}
+.ivf-related-kicker{display:inline-block;font-family:var(--rma-font-body);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--rma-blue);background:var(--rma-blue-muted);padding:3px 10px;border-radius:var(--rma-radius-pill);margin-bottom:12px}
+.ivf-root a.ivf-related-card h3{font-family:var(--rma-font-display);font-size:18px;color:var(--rma-navy);font-weight:400;margin:0 0 8px;display:flex;align-items:center;gap:8px;justify-content:space-between}
+.ivf-root a.ivf-related-card h3 .ivf-arrow{color:var(--rma-blue);transition:transform var(--rma-duration) var(--rma-ease);flex-shrink:0}
+.ivf-root a.ivf-related-card:hover h3{color:var(--rma-blue)}
+.ivf-root a.ivf-related-card:hover h3 .ivf-arrow{transform:translateX(4px)}
+.ivf-root a.ivf-related-card p{font-size:14px;line-height:1.7;color:var(--rma-text-secondary);margin:0}
+@media(max-width:980px){.ivf-related-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.ivf-related-grid{grid-template-columns:1fr}}
+
+
+/* ─────────────────────────────────────────────────────────────
+   §L  ACCESSIBILITY · MOTION PREFERENCE
+   ───────────────────────────────────────────────────────────── */
+.ivf-acc summary:focus-visible{outline:2px solid var(--rma-blue);outline-offset:2px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){
+  .ivf-card,.ivf-acc,.ivf-acc-plus,.ivf-acc-plus::after,
+  .ivf-root a.ivf-btn,.ivf-root a.ivf-btn .ivf-arrow,
+  .ivf-root a.ivf-related-card,.ivf-root a.ivf-related-card h3 .ivf-arrow{transition:none!important}
+  .ivf-card:hover,.ivf-root a.ivf-btn:hover,.ivf-root a.ivf-related-card:hover{transform:none!important}
+}
+</style>
+
+
+
+<!-- ═══ HERO ═══ -->
+<!-- PRODUCTION: replace the <img src> below with the WordPress media-library /
+     CDN URL for the hero image. Also update the <link rel="preload"> href at the
+     top of this file to match, so the browser can fetch it before the markup
+     is parsed. -->
+<section class="ivf-hero" aria-label="In Vitro Fertilization — Hero">
+  <img class="ivf-hero-img"
+       src="https://www.rmami.com/wp-content/uploads/2026/06/ivf-hero.jpg"
+       alt="" width="1920" height="1080"
+       loading="eager" fetchpriority="high" decoding="async" aria-hidden="true">
+  <div class="ivf-hero-inner">
+    <div class="ivf-hero-content">
+      <span class="rma-section-label">In Vitro Fertilization · Troy, Michigan</span>
+      <h1>IVF care, built around you.</h1>
+      <p class="ivf-hero-lede">In vitro fertilization (IVF) is one of the most established paths to building a family. At RMA of Michigan, we pair evidence-informed protocols with compassionate support, guiding every patient through care that's personalized to their body and their goals.</p>
+      <div class="ivf-hero-cta">
+        <a class="ivf-btn ivf-btn--white" href="https://www.rmami.com/appointments-reproductive-medicine-troy-michigan.html">Schedule a consultation <span class="ivf-arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="ivf-btn ivf-btn--ghost" href="#ivf-process">See how it works</a>
+      </div>
+      <div class="ivf-hero-meta">
+        <div><span class="ivf-m-num">8–11</span><span class="ivf-m-lbl">Typical days of stimulation</span></div>
+        <div><span class="ivf-m-num">Personalized</span><span class="ivf-m-lbl">Plan for every patient</span></div>
+        <div><span class="ivf-m-num">Inclusive</span><span class="ivf-m-lbl">Care for all families</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ QUICK ANSWER ═══ -->
+<section class="ivf-section--tight">
+  <div class="ivf-wrap">
+    <div class="ivf-quick" data-speakable="true">
+      <span class="rma-section-label">Quick Answer</span>
+      <p><strong>What is IVF?</strong> In vitro fertilization is a fertility treatment in which eggs are retrieved from the ovaries and combined with sperm in a laboratory. Resulting embryos develop for several days, and one is transferred to the uterus with the goal of pregnancy. At RMA of Michigan in Troy, IVF is offered to individuals and families of all structures, with each treatment plan tailored to the patient.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ INTRO / OVERVIEW ═══ -->
+<section class="ivf-section ivf-intro">
+  <div class="ivf-wrap">
+    <div class="ivf-intro-grid">
+      <div>
+        <span class="rma-section-label">Overview</span>
+        <h2>Understanding IVF</h2>
+        <p>IVF brings together the egg and sperm outside the body, in a controlled laboratory setting, so that fertilization and early embryo development can be supported and monitored closely. It's a widely used option for many causes of infertility, as well as for individuals and families building their families in different ways.</p>
+        <p>Because every person responds differently, your care team designs a plan around your medical history, diagnostic results, and personal goals. Throughout the cycle, you'll have clear explanations at each decision point and a team available to answer questions along the way.</p>
+        <p>IVF can also be combined with other approaches — including <a href="https://www.rmami.com/treatments-female-pgt-a.html">genetic testing (PGT-A)</a>, <a href="https://www.rmami.com/treatment-options/recipient-process/">donor eggs</a>, or a <a href="https://www.rmami.com/treatments-female-gestational-carrier-troy-michigan.html">gestational carrier</a> — depending on what fits your situation.</p>
+      </div>
+      <aside class="ivf-intro-side" aria-label="What patients can expect">
+        <h3>What patients can expect</h3>
+        <ul>
+          <li>A treatment plan personalized to your body and goals</li>
+          <li>Clear explanations at every decision point</li>
+          <li>Frequent monitoring to fine-tune your care</li>
+          <li>Inclusive support for individuals and families of all structures</li>
+          <li>A team available for your questions throughout</li>
+        </ul>
+        <a class="ivf-btn ivf-btn--full" href="https://www.rmami.com/appointments-reproductive-medicine-troy-michigan.html">Schedule a consultation <span class="ivf-arrow" aria-hidden="true">&rarr;</span></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROCESS ═══ -->
+<section class="ivf-section" id="ivf-process">
+  <div class="ivf-wrap">
+    <div class="ivf-steps-head">
+      <span class="rma-section-label">How It Works</span>
+      <h2>The IVF process, step by step</h2>
+      <p>A typical IVF cycle moves through five main phases. Your specific medications, timing, and number of visits are individualized.</p>
+    </div>
+    <div class="ivf-steps">
+
+      <div class="ivf-step">
+        <div class="ivf-step-num">1</div>
+        <h3>Preparation</h3>
+        <p>Medication may be used to gently quiet the natural cycle, giving your team control over timing so stimulation can start at the right moment for you.</p>
+      </div>
+
+      <div class="ivf-step">
+        <div class="ivf-step-num">2</div>
+        <h3>Stimulation</h3>
+        <p>Injectable hormones encourage the ovaries to mature several follicles in one cycle, typically over roughly 8–11 days, with frequent monitoring.</p>
+      </div>
+
+      <div class="ivf-step">
+        <div class="ivf-step-num">3</div>
+        <h3>Egg Retrieval</h3>
+        <p>A trigger injection prompts final egg maturation. About 36 hours later, eggs are collected during a short procedure under sedation and ultrasound guidance.</p>
+      </div>
+
+      <div class="ivf-step">
+        <div class="ivf-step-num">4</div>
+        <h3>Fertilization</h3>
+        <p>In the laboratory, eggs are combined with sperm and monitored as embryos develop. Progesterone support typically begins the day after retrieval.</p>
+      </div>
+
+      <div class="ivf-step">
+        <div class="ivf-step-num">5</div>
+        <h3>Embryo Transfer</h3>
+        <p>An embryo is transferred to the uterus, usually on day 3 or 5. About two weeks later, a blood test confirms whether pregnancy has been achieved.</p>
+      </div>
+
+    </div>
+    <div class="ivf-actions">
+      <a class="ivf-btn" href="https://www.rmami.com/appointments-reproductive-medicine-troy-michigan.html">Schedule a consultation <span class="ivf-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="ivf-btn ivf-btn--outline" href="https://www.rmami.com/about-reproductive-medicine-of-michigan.html">Where do I start?</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ MEDICATIONS ═══ -->
+<section class="ivf-section ivf-meds ivf-cv">
+  <div class="ivf-wrap">
+    <div class="ivf-meds-head">
+      <span class="rma-section-label">Medications</span>
+      <h2>Medications used in IVF</h2>
+      <p>The exact medications, doses, and timing vary from patient to patient and are based on individual needs. These are the categories most often used during an IVF cycle.</p>
+    </div>
+    <div class="ivf-grid">
+
+      <div class="ivf-card">
+        <span class="ivf-tag">GnRH Agonist</span>
+        <h3>Lupron</h3>
+        <p>Given by injection beneath the skin, it temporarily reduces the pituitary gland's hormone signals so stimulation can be even and balanced, and helps prevent an early hormonal surge.</p>
+      </div>
+
+      <div class="ivf-card">
+        <span class="ivf-tag">GnRH Antagonist</span>
+        <h3>Ganirelix / Cetrotide</h3>
+        <p>A daily injection used for a few days before the trigger. It works quickly to prevent a premature hormonal surge during stimulation.</p>
+      </div>
+
+      <div class="ivf-card">
+        <span class="ivf-tag">Gonadotropins</span>
+        <h3>Gonal-F / Follistim</h3>
+        <p>Recombinant forms of follicle-stimulating hormone (FSH), given by subcutaneous injection to support the growth and development of multiple follicles.</p>
+      </div>
+
+      <div class="ivf-card">
+        <span class="ivf-tag">Gonadotropins</span>
+        <h3>Menopur</h3>
+        <p>A purified combination of FSH and luteinizing hormone (LH) given by injection. For some patients it can support a slightly quicker response, though results vary.</p>
+      </div>
+
+      <div class="ivf-card">
+        <span class="ivf-tag">Trigger</span>
+        <h3>Ovidrel / hCG</h3>
+        <p>Substitutes for the mid-cycle LH surge to prompt final egg maturation before retrieval. It can cause a positive home test for several days afterward, so rely on your clinic's blood test.</p>
+      </div>
+
+      <div class="ivf-card">
+        <span class="ivf-tag">Luteal Support</span>
+        <h3>Progesterone</h3>
+        <p>Typically started the day after retrieval to support the uterine lining, and continued as directed if pregnancy is achieved.</p>
+      </div>
+
+    </div>
+    <div class="ivf-note"><strong>A note on monitoring:</strong> Throughout stimulation you'll come in for periodic morning bloodwork and ultrasounds — often every one to two days near the end — so your team can fine-tune medication and timing based on how your body is responding. Learn more about <a href="https://www.rmami.com/morning-monitoring/">morning monitoring</a>.</div>
+  </div>
+</section>
+
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="ivf-section ivf-cv">
+  <div class="ivf-wrap">
+    <div class="ivf-timeline-head">
+      <span class="rma-section-label">What to Expect</span>
+      <h2>A typical IVF timeline</h2>
+      <p>Timing varies between patients and even between cycles. This is a general sequence to help you picture the journey.</p>
+    </div>
+    <div class="ivf-timeline">
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">Pre-Cycle</span>
+        <h3>Baseline &amp; Preparation</h3>
+        <p>You'll call at the start of your period so the team can finalize scheduling, then come in for baseline bloodwork and begin any preparation medication as directed.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">Cycle Days 1–3</span>
+        <h3>Stimulation Begins</h3>
+        <p>With your period marking cycle day 1, an early-morning ultrasound and bloodwork confirm you're ready, and stimulation injections begin — usually between days 2 and 4.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">Days 6 Onward</span>
+        <h3>Monitoring</h3>
+        <p>Frequent morning visits track follicle growth. A nurse contacts you each day with next steps and any dose adjustments.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">Trigger</span>
+        <h3>Final Maturation</h3>
+        <p>Once follicles reach maturity, you'll take the trigger injection at a precise time and stop the other stimulation medications.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">~36 Hours Later</span>
+        <h3>Egg Retrieval</h3>
+        <p>Eggs are collected under sedation and ultrasound guidance. Plan to arrive ahead of time, avoid eating after midnight beforehand, and arrange a ride home.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">3–5 Days After</span>
+        <h3>Embryo Transfer</h3>
+        <p>An embryo is placed in the uterus in a brief, ultrasound-guided procedure. You can return home shortly afterward.</p>
+      </div>
+
+      <div class="ivf-tl-item">
+        <span class="ivf-tl-phase">~2 Weeks After</span>
+        <h3>Pregnancy Test</h3>
+        <p>A morning blood test confirms your pregnancy status. Your team reviews results with you and outlines next steps regardless of outcome.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ICSI / SUPPORT STRIP ═══ -->
+<section class="ivf-section--tight ivf-cv">
+  <div class="ivf-wrap">
+    <div class="ivf-support">
+      <div>
+        <span class="rma-section-label">Related Technique</span>
+        <h2>Intracytoplasmic sperm injection (ICSI)</h2>
+        <p>ICSI is a laboratory technique sometimes used alongside IVF, particularly when sperm-related factors make fertilization less likely. From the patient's perspective, a cycle that includes ICSI looks much like a standard cycle — the difference happens in the lab, where an embryologist places a single sperm directly into an egg under carefully controlled conditions.</p>
+      </div>
+      <ul class="ivf-support-list">
+        <li><span class="ivf-dot" aria-hidden="true"></span><span>ICSI isn't needed in every case — your physician will review your situation and explain whether it's a helpful option for you.</span></li>
+        <li><span class="ivf-dot" aria-hidden="true"></span><span>It may be considered with a low sperm count, reduced motility, a low percentage of typical sperm shape, or prior low fertilization during IVF.</span></li>
+        <li><span class="ivf-dot" aria-hidden="true"></span><span>Because samples can vary day to day, the decision is sometimes finalized on the day of retrieval.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ═══ -->
+<section class="ivf-section ivf-meds ivf-cv">
+  <div class="ivf-wrap">
+    <div class="ivf-faq-head">
+      <span class="rma-section-label">Common Questions</span>
+      <h2>IVF questions, answered</h2>
+    </div>
+    <div class="ivf-faq">
+
+      <details class="ivf-acc">
+        <summary>How long does one IVF cycle take?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>A single cycle generally spans several weeks from the start of preparation through the pregnancy test. Stimulation alone is often around 8–11 days, followed by retrieval, fertilization, and transfer. Your team will give you a personalized calendar once your plan is set.</p></div>
+      </details>
+
+      <details class="ivf-acc">
+        <summary>Is IVF an option for LGBTQ+ individuals and families?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>Yes. RMA of Michigan provides inclusive care for individuals and families of all structures. Family-building paths involving donor sperm, donor eggs, or a gestational carrier can be combined with IVF, and your team will help map the approach that fits your goals. Learn more on our <a href="https://www.rmami.com/lgbtq-fertility-clinic-michigan-ivf-for-lesbian-gay-couples.html">LGBTQ+ family building</a> page.</p></div>
+      </details>
+
+      <details class="ivf-acc">
+        <summary>How many embryos are transferred?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>The number and timing of transfer depend on factors such as embryo quality and your individual circumstances. Your physician will discuss the recommended approach with you, with the aim of supporting a healthy pregnancy.</p></div>
+      </details>
+
+      <details class="ivf-acc">
+        <summary>What happens if a cycle isn't successful?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>Not every cycle results in pregnancy. If a cycle is unsuccessful, your team will schedule a follow-up to review what happened and talk through options. Many patients use that conversation to refine the plan for a future cycle. You can <a href="https://www.rmami.com/appointments-reproductive-medicine-troy-michigan.html">schedule a follow-up</a> at any time.</p></div>
+      </details>
+
+      <details class="ivf-acc">
+        <summary>Will I need to take time off work?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>Monitoring visits are usually scheduled early in the morning to limit disruption. Egg retrieval involves sedation, so you'll want that day off and a ride home. The transfer is brief, and most people resume normal activity soon after. Your team can help you plan around your schedule.</p></div>
+      </details>
+
+      <details class="ivf-acc">
+        <summary>How is my treatment plan personalized?<span class="ivf-acc-plus" aria-hidden="true"></span></summary>
+        <div class="ivf-acc-body"><p>Your medications, dosing, monitoring frequency, and transfer timing are all based on your medical history, diagnostic testing, and how your body responds during the cycle. Plans are adjusted along the way rather than following a fixed template.</p></div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ RELATED TREATMENTS & RESOURCES (internal links) ═══ -->
+<section class="ivf-section ivf-cv">
+  <div class="ivf-wrap">
+    <div class="ivf-related-head">
+      <span class="rma-section-label">Explore More</span>
+      <h2>Related treatments &amp; resources</h2>
+      <p>IVF often connects to other parts of your care. These pages can help you understand the options and support available at RMA of Michigan.</p>
+    </div>
+
+    <div class="ivf-related-grid">
+      <a class="ivf-related-card" href="https://www.rmami.com/treatments-female-pgt-a.html">
+        <span class="ivf-related-kicker">Add-On</span>
+        <h3>Genetic Testing (PGT-A) <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Screen embryos for chromosomal differences before transfer, often paired with an IVF cycle.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/treatments-female-iui-troy-michigan.html">
+        <span class="ivf-related-kicker">Alternative</span>
+        <h3>Intrauterine Insemination (IUI) <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>A less involved option some patients explore before or alongside considering IVF.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/treatments-female-fertility-preservation-egg-freezing.html">
+        <span class="ivf-related-kicker">Preservation</span>
+        <h3>Egg Freezing &amp; Preservation <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Preserve eggs now for future family-building, using the same stimulation and retrieval steps as IVF.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/treatment-options/recipient-process/">
+        <span class="ivf-related-kicker">Third-Party</span>
+        <h3>Donor Egg Recipient <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Build your family with donor eggs combined with an IVF cycle and embryo transfer.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/treatments-female-gestational-carrier-troy-michigan.html">
+        <span class="ivf-related-kicker">Third-Party</span>
+        <h3>Gestational Carrier <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>An option in which embryos created through IVF are carried by a gestational carrier.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/lgbtq-fertility-clinic-michigan-ivf-for-lesbian-gay-couples.html">
+        <span class="ivf-related-kicker">Inclusive Care</span>
+        <h3>LGBTQ+ Family Building <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Inclusive, patient-centered pathways for LGBTQ+ individuals and couples, often involving IVF.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/treatments-female-endometrial-receptivity-analysis-era.html">
+        <span class="ivf-related-kicker">Testing</span>
+        <h3>ERA Testing <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Endometrial receptivity analysis can help personalize the timing of an embryo transfer.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/patient-resources-insurance-financing-rma-michigan.html">
+        <span class="ivf-related-kicker">Financial</span>
+        <h3>Insurance &amp; Financing <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Understand coverage, payment options, grants, and savings programs that may apply to treatment.</p>
+      </a>
+
+      <a class="ivf-related-card" href="https://www.rmami.com/about-physicians-reproductive-medicine-of-michigan.html">
+        <span class="ivf-related-kicker">Your Team</span>
+        <h3>Meet Our Physicians <span class="ivf-arrow" aria-hidden="true">&rarr;</span></h3>
+        <p>Learn about the reproductive endocrinologists who will guide your care from start to finish.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     JSON-LD SCHEMA — DEPLOY SEPARATELY (not inside this Code Module).
+     Add via RankMath custom schema or head/footer script injection.
+     References the canonical #organization backbone.
+     ════════════════════════════════════════════════════════════════
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#webpage",
+      "url": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html",
+      "name": "IVF in Troy, MI: Personalized Fertility Care | RMA of Michigan",
+      "isPartOf": { "@id": "https://www.rmami.com/#website" },
+      "about": { "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#procedure" },
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".ivf-quick"] },
+      "breadcrumb": { "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rmami.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Treatments & Procedures", "item": "https://www.rmami.com/treatments-and-procedures.html" },
+        { "@type": "ListItem", "position": 3, "name": "IVF (In Vitro Fertilization)", "item": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html" }
+      ]
+    },
+    {
+      "@type": "MedicalProcedure",
+      "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#procedure",
+      "name": "In Vitro Fertilization (IVF)",
+      "procedureType": "https://schema.org/TherapeuticProcedure",
+      "description": "IVF treatment in Troy, MI, serving individuals and families across Oakland County, metro Detroit, and northwest Ohio. Eggs are retrieved from the ovaries, combined with sperm in the laboratory, and a resulting embryo is transferred to the uterus.",
+      "provider": { "@id": "https://www.rmami.com/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.rmami.com/treatments-female-ivf-troy-michigan.html#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "How long does one IVF cycle take?", "acceptedAnswer": { "@type": "Answer", "text": "A single cycle generally spans several weeks from preparation through the pregnancy test. Stimulation alone is often around 8 to 11 days, followed by retrieval, fertilization, and transfer." } },
+        { "@type": "Question", "name": "Is IVF an option for LGBTQ+ individuals and families?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. RMA of Michigan provides inclusive care for individuals and families of all structures. Paths involving donor sperm, donor eggs, or a gestational carrier can be combined with IVF." } },
+        { "@type": "Question", "name": "How many embryos are transferred?", "acceptedAnswer": { "@type": "Answer", "text": "The number and timing of transfer depend on factors such as embryo quality and individual circumstances, discussed with your physician with the aim of supporting a healthy pregnancy." } },
+        { "@type": "Question", "name": "What happens if a cycle isn't successful?", "acceptedAnswer": { "@type": "Answer", "text": "Not every cycle results in pregnancy. If a cycle is unsuccessful, your team schedules a follow-up to review what happened and discuss options for a future cycle." } }
+      ]
+    }
+  ]
+}
+</script>
+
+     ════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════ END — ivf-root ════════════════════ -->
