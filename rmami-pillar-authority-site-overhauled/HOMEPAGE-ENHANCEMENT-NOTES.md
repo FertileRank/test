@@ -63,4 +63,18 @@ Both reuse the existing design system and the upgraded, entity-consistent `Medic
 ### Intentionally left as-is
 - **Physician bios** (`/doctors/*`) and `/our-doctors/` already had tailored content + `Physician`/`ProfilePage` schema and real headshots — rewriting risked losing real data. (Optional future step: enrich each bio's schema with the verified credentials in this doc — e.g., Dr. Wolf's Medical College of Ohio ART program, Dr. George's Harvard/Brigham fellowship, Dr. Lee's Castle Connolly recognition.)
 - **Pure-utility pages** (`/appointments/`, `/forms/`, `/patient-portal/`, `/billpay/`, `/careers/`, `/blog/`, `/business-office/`, `/patient-education-videos/`) are appropriately functional and were left on the template.
-- **Not yet done (optional next batch):** team pages (`/clinical-team/`, `/lab-team/`, `/advanced-practice-providers/`, `/patient-services/`), `/morning-monitoring/`, `/resources/`, `/egg-donor-compensation/`. Say the word to cover these too.
+## Team, monitoring, resources & donor-compensation enhanced
+7 more pages rebuilt to standard (answer-first, cards/steps, depth, FAQ, full JSON-LD; screened clean): `/clinical-team/`, `/lab-team/`, `/advanced-practice-providers/`, `/patient-services/`, `/morning-monitoring/`, `/resources/`, `/egg-donor-compensation/` (696–751 words each). The lab page describes embryology/andrology without claiming an on-site lab or in-house PGT (per blocked terms); the donor-compensation page recognizes time/commitment without promising amounts.
+
+## Physician bios — schema enriched (content preserved)
+The 5 `/doctors/*` bios were **not** rewritten (their tailored copy + real headshots were kept intact). Instead, each `Physician` JSON-LD node was enriched with **verified** credentials:
+- **Dr. Brad T. Miller** — clinical volumes (35,000+ ultrasounds, 2,000 retrievals, 4,000 transfers, 6,000 stimulations); `memberOf` ASRM/SART
+- **Dr. Lynda J. Wolf** — co-founder; Medical College of Ohio ART program; NW Ohio's first donor egg program; `memberOf` ASRM/SART
+- **Dr. Jenny S. George** — `alumniOf` Harvard Medical School / Brigham and Women's Hospital; RPL, fertility preservation, PGT
+- **Dr. Annette Lee** — 27+ years; `award` Castle Connolly Top Doctor
+- **Dr. Molly Moravek** — oncofertility & fertility preservation; helps lead Livonia *(VERIFY credential suffix)*
+
+## Final tally
+**37 pages fully enhanced + 5 physician bios schema-enriched = 42 of 51 pages.** Whole-site validation: 51 pages, **0** blocked terms, **0** invalid JSON-LD, **0** broken internal links.
+
+**Intentionally left on the template (pure-utility, appropriately functional):** `/appointments/`, `/forms/`, `/patient-portal/`, `/billpay/`, `/careers/`, `/blog/`, `/business-office/`, `/patient-education-videos/`, and `/our-doctors/` (already had strong tailored content + schema).
