@@ -1,0 +1,765 @@
+[
+  {
+    "url": "https://www.rmami.com/",
+    "slug": "/",
+    "primaryKeyword": "RMA of Michigan",
+    "cluster": "home",
+    "related": [
+      "https://www.rmami.com/treatments/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/appointments/",
+      "https://www.rmami.com/troy-fertility-clinic/",
+      "https://www.rmami.com/fertility-guide/"
+    ],
+    "oldUrls": [
+      "/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/about/",
+    "slug": "/about/",
+    "primaryKeyword": "about RMA of Michigan",
+    "cluster": "about",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/treatments/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-reproductive-medicine-of-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/our-doctors/",
+    "slug": "/our-doctors/",
+    "primaryKeyword": "Michigan fertility doctors",
+    "cluster": "collection",
+    "related": [
+      "https://www.rmami.com/doctors/brad-miller/",
+      "https://www.rmami.com/doctors/lynda-wolf/",
+      "https://www.rmami.com/doctors/jenny-george/",
+      "https://www.rmami.com/doctors/annette-lee/",
+      "https://www.rmami.com/doctors/molly-moravek/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-physicians-reproductive-medicine-of-michigan.html",
+      "/doctors/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/doctors/brad-miller/",
+    "slug": "/doctors/brad-miller/",
+    "primaryKeyword": "Dr. Brad Miller fertility doctor",
+    "cluster": "provider",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/dr-brad-miller.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/doctors/lynda-wolf/",
+    "slug": "/doctors/lynda-wolf/",
+    "primaryKeyword": "Dr. Lynda Wolf fertility",
+    "cluster": "provider",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/dr-lynda-wolf.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/doctors/jenny-george/",
+    "slug": "/doctors/jenny-george/",
+    "primaryKeyword": "Dr. Jenny George fertility doctor",
+    "cluster": "provider",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/dr-jenny-george.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/doctors/annette-lee/",
+    "slug": "/doctors/annette-lee/",
+    "primaryKeyword": "Dr. Annette Lee fertility",
+    "cluster": "provider",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/dr-annette-lee.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/doctors/molly-moravek/",
+    "slug": "/doctors/molly-moravek/",
+    "primaryKeyword": "Dr. Molly Moravek fertility",
+    "cluster": "provider",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/doctors/dr-molly-moravek/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/treatments/",
+    "slug": "/treatments/",
+    "primaryKeyword": "fertility treatments Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/egg-freezing/",
+      "https://www.rmami.com/pgt-a/",
+      "https://www.rmami.com/donor-egg-ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-and-procedures.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/ivf/",
+    "slug": "/ivf/",
+    "primaryKeyword": "IVF Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/pgt-a/",
+      "https://www.rmami.com/male-infertility/",
+      "https://www.rmami.com/ivf-medication-savings/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-ivf-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/iui/",
+    "slug": "/iui/",
+    "primaryKeyword": "IUI treatment Troy",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/ovulation-induction/",
+      "https://www.rmami.com/lgbtq-fertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-iui-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/egg-freezing/",
+    "slug": "/egg-freezing/",
+    "primaryKeyword": "egg freezing Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/lgbtq-fertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-fertility-preservation-egg-freezing.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/pgt-a/",
+    "slug": "/pgt-a/",
+    "primaryKeyword": "PGT Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-pgt-a.html",
+      "/preimplantation-genetic-testing/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/ovulation-induction/",
+    "slug": "/ovulation-induction/",
+    "primaryKeyword": "ovulation induction Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/pcos-and-fertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-ovulation-induction-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/era-testing/",
+    "slug": "/era-testing/",
+    "primaryKeyword": "ERA testing Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/pgt-a/",
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-endometrial-receptivity-analysis-era.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/fertility-surgery/",
+    "slug": "/fertility-surgery/",
+    "primaryKeyword": "fertility surgery Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-surgery-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/gestational-carrier/",
+    "slug": "/gestational-carrier/",
+    "primaryKeyword": "gestational carrier Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/lgbtq-fertility/",
+      "https://www.rmami.com/donor-egg-ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-gestational-carrier-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/lgbtq-fertility/",
+    "slug": "/lgbtq-fertility/",
+    "primaryKeyword": "LGBTQ fertility Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/egg-freezing/",
+      "https://www.rmami.com/gestational-carrier/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/lgbtq-fertilty-clinic-michigan-ivf-for-lesbian-gay-couples.html",
+      "/lgbtq-fertilty-clinic-michigan-IVF-for-lesbian-gay-couples.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/donor-egg-ivf/",
+    "slug": "/donor-egg-ivf/",
+    "primaryKeyword": "donor egg IVF Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/egg-donation/",
+      "https://www.rmami.com/gestational-carrier/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatment-options/recipient-process/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/egg-donation/",
+    "slug": "/egg-donation/",
+    "primaryKeyword": "egg donation Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/egg-donor-compensation/",
+      "https://www.rmami.com/donor-egg-ivf/",
+      "https://www.rmami.com/lgbtq-fertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/treatments-female-interested-donor.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/egg-donor-compensation/",
+    "slug": "/egg-donor-compensation/",
+    "primaryKeyword": "egg donor compensation Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/egg-donation/",
+      "https://www.rmami.com/donor-egg-ivf/",
+      "https://www.rmami.com/faq/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/how-much-money-can-you-earn-as-an-egg-donor/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/fertility-testing/",
+    "slug": "/fertility-testing/",
+    "primaryKeyword": "fertility testing Troy MI",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/male-infertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/male-infertility/",
+    "slug": "/male-infertility/",
+    "primaryKeyword": "male infertility clinic Michigan",
+    "cluster": "service",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/troy-fertility-clinic/",
+    "slug": "/troy-fertility-clinic/",
+    "primaryKeyword": "fertility clinic Troy MI",
+    "cluster": "location",
+    "related": [
+      "https://www.rmami.com/appointments/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/egg-freezing/",
+      "https://www.rmami.com/resources/"
+    ],
+    "oldUrls": [
+      "/fertility-clinic-near-me/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/livonia-fertility-clinic/",
+    "slug": "/livonia-fertility-clinic/",
+    "primaryKeyword": "fertility clinic Livonia MI",
+    "cluster": "location",
+    "related": [
+      "https://www.rmami.com/appointments/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/egg-freezing/",
+      "https://www.rmami.com/resources/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/appointments/",
+    "slug": "/appointments/",
+    "primaryKeyword": "schedule fertility consultation Troy MI",
+    "cluster": "contact",
+    "related": [
+      "https://www.rmami.com/troy-fertility-clinic/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/"
+    ],
+    "oldUrls": [
+      "/appointments-reproductive-medicine-troy-michigan.html",
+      "/appointment-form-reproductive-medicine-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/resources/",
+    "slug": "/resources/",
+    "primaryKeyword": "RMA patient resources",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/patient-portal/",
+      "https://www.rmami.com/forms/",
+      "https://www.rmami.com/morning-monitoring/",
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-resources.html",
+      "/patient-resources-reproductive-medicine-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/patient-portal/",
+    "slug": "/patient-portal/",
+    "primaryKeyword": "RMA patient portal",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/forms/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-resources/patient-portal/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/forms/",
+    "slug": "/forms/",
+    "primaryKeyword": "RMA patient forms",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/patient-portal/",
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-resources-forms-reproductive-medicine-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/morning-monitoring/",
+    "slug": "/morning-monitoring/",
+    "primaryKeyword": "morning monitoring fertility clinic",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/ovulation-induction/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/morning-monitoring/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/patient-education-videos/",
+    "slug": "/patient-education-videos/",
+    "primaryKeyword": "fertility education videos",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/fertility-guide/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-education-videos-rma-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/out-of-town-patients/",
+    "slug": "/out-of-town-patients/",
+    "primaryKeyword": "IVF Ohio",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/troy-fertility-clinic/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-resources-out-of-town-patients.html",
+      "/ivf-ohio/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/ivf-ohio/",
+    "slug": "/ivf-ohio/",
+    "primaryKeyword": "IVF Ohio",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/out-of-town-patients/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/insurance/",
+    "slug": "/insurance/",
+    "primaryKeyword": "fertility insurance Michigan",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/financial-assistance/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/patient-resources-insurance-financing-rma-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/financing/",
+    "slug": "/financing/",
+    "primaryKeyword": "fertility payment plans",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/financial-assistance/",
+      "https://www.rmami.com/ivf-medication-savings/",
+      "https://www.rmami.com/grants/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/financing.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/financial-assistance/",
+    "slug": "/financial-assistance/",
+    "primaryKeyword": "IVF grants Michigan",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/grants/",
+      "https://www.rmami.com/ivf-medication-savings/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/grants.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/grants/",
+    "slug": "/grants/",
+    "primaryKeyword": "IVF grants Michigan",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/financial-assistance/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/grants.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/ivf-medication-savings/",
+    "slug": "/ivf-medication-savings/",
+    "primaryKeyword": "IVF medication savings",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/ivf-medication-savings/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/billpay/",
+    "slug": "/billpay/",
+    "primaryKeyword": "RMA bill pay",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/billpay.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/faq/",
+    "slug": "/faq/",
+    "primaryKeyword": "fertility clinic FAQ",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/financing/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/blog/",
+    "slug": "/blog/",
+    "primaryKeyword": "fertility blog Michigan",
+    "cluster": "bloghub",
+    "related": [
+      "https://www.rmami.com/fertility-guide/",
+      "https://www.rmami.com/fertility-diet-and-nutrition/",
+      "https://www.rmami.com/pcos-and-fertility/",
+      "https://www.rmami.com/single-parent-fertility/",
+      "https://www.rmami.com/ivf-ohio/"
+    ],
+    "oldUrls": [
+      "/blog/",
+      "/reproductive-medicine-blog/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/fertility-guide/",
+    "slug": "/fertility-guide/",
+    "primaryKeyword": "fertility guide",
+    "cluster": "article",
+    "related": [
+      "https://www.rmami.com/fertility-testing/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/insurance/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": []
+  },
+  {
+    "url": "https://www.rmami.com/fertility-diet-and-nutrition/",
+    "slug": "/fertility-diet-and-nutrition/",
+    "primaryKeyword": "fertility diet and nutrition",
+    "cluster": "article",
+    "related": [
+      "https://www.rmami.com/fertility-guide/",
+      "https://www.rmami.com/pcos-and-fertility/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/fertility-diet-and-nutrition/",
+      "/enhance-your-fertility-through-nutrition-a-guide-to-conception-success/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/pcos-and-fertility/",
+    "slug": "/pcos-and-fertility/",
+    "primaryKeyword": "PCOS and fertility",
+    "cluster": "article",
+    "related": [
+      "https://www.rmami.com/ovulation-induction/",
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/pcos-and-fertility/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/single-parent-fertility/",
+    "slug": "/single-parent-fertility/",
+    "primaryKeyword": "single parent fertility options",
+    "cluster": "article",
+    "related": [
+      "https://www.rmami.com/iui/",
+      "https://www.rmami.com/ivf/",
+      "https://www.rmami.com/egg-freezing/",
+      "https://www.rmami.com/donor-egg-ivf/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/fertility-treatment-options-for-a-single-parent-by-choice/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/careers/",
+    "slug": "/careers/",
+    "primaryKeyword": "assisted reproductive technology jobs",
+    "cluster": "resource",
+    "related": [
+      "https://www.rmami.com/about/",
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/reproductive-medicine-of-michigan-careers/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/advanced-practice-providers/",
+    "slug": "/advanced-practice-providers/",
+    "primaryKeyword": "RMA advanced practice providers",
+    "cluster": "team",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/our-team/advanced-practice-providers/"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/clinical-team/",
+    "slug": "/clinical-team/",
+    "primaryKeyword": "RMA clinical team",
+    "cluster": "team",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-staff-reproductive-medicine-of-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/lab-team/",
+    "slug": "/lab-team/",
+    "primaryKeyword": "RMA lab team",
+    "cluster": "team",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-lab-team-reproductive-medicine-of-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/patient-services/",
+    "slug": "/patient-services/",
+    "primaryKeyword": "RMA patient services",
+    "cluster": "team",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-patient-services-team-rma-troy-michigan.html"
+    ]
+  },
+  {
+    "url": "https://www.rmami.com/business-office/",
+    "slug": "/business-office/",
+    "primaryKeyword": "RMA business office",
+    "cluster": "team",
+    "related": [
+      "https://www.rmami.com/our-doctors/",
+      "https://www.rmami.com/resources/",
+      "https://www.rmami.com/appointments/"
+    ],
+    "oldUrls": [
+      "/about-business-office-team.html"
+    ]
+  }
+]
