@@ -36,4 +36,10 @@ One valid `@graph` (15 nodes) in the page `<head>`: `MedicalClinic` + `MedicalOr
 - **AggregateRating/Review:** an HTML-commented *template* ships in the `<head>`. Do **not** enable until populated with **real** review data (FTC + Google policy). No fabricated ratings were published.
 - Add a real logo at `/wp-content/uploads/2026/06/rma-michigan-logo.png` (referenced by `logo`) or update the path.
 
-Other pages in this package were left as-is; this enhancement targets the homepage.
+## Service pages also enhanced
+Two top commercial pages were rebuilt to the same standard (richer content, real "how it works" steps, expanded FAQ, cleaner schema, Michigan keywords; screened clean against blocked terms):
+
+- **`/ivf/`** — 1,397-word body, 6 CTAs, 8-item FAQ; `MedicalProcedure` renamed to "In Vitro Fertilization (IVF)" with `howPerformed`; added candidacy, individualized-planning, and cost sections.
+- **`/egg-freezing/`** — 1,328-word body, 6 CTAs, 7-item FAQ; `MedicalProcedure` "Egg Freezing (Oocyte Cryopreservation)" with `howPerformed`; added process, candidacy (incl. oncofertility & gender-affirming), and cost sections. The "does freezing ensure a baby" FAQ is answered honestly (no guarantees).
+
+Both reuse the existing design system and the upgraded, entity-consistent `MedicalClinic`/`WebSite` schema nodes. Remaining pages in this package were left as-is.
