@@ -234,7 +234,16 @@ Keep the **current flat URLs** (`/ivf/`, `/about/`). They're already indexed and
 
 ---
 
-### Change vs. the current menu (what improved and why)
+### ✅ Implementation status — LIVE across all 51 pages
+This IA is **implemented**, not just specced:
+- **Utility bar:** phone · Patient Portal · Become an Egg Donor · Locations.
+- **5-section mega-menu** (Treatments · Getting Started · Costs & Financial · About & Team · Learn) + persistent **Schedule** CTA — same JS hooks, so the existing accordion/keyboard behavior is preserved.
+- **Fat footer** rebuilt to 4 link columns + brand + newsletter, plus a sub-bar with the **For Egg Donors** track, a Sitemap link, and copyright.
+- **Mobile sticky action bar** (`Call` · `Schedule`) on every page below 1180px.
+- Depth-aware relative paths (root / one-level / `doctors/*` two-level) all resolve; validation: **0 broken links, 0 invalid JSON-LD, 0 structure gaps** across 51 pages.
+- *(Privacy / Accessibility / Terms / Contact / HTML-Sitemap pages are stubbed as a footer TODO — they don't exist yet, so they're intentionally not linked to avoid creating new dead ends.)*
+
+### Change vs. the previous menu (what improved and why)
 - **Was:** "Become an Egg Donor" sat inside *Care Options → Family Building* (patient menu) → **Now:** its own audience track (utility + footer). *Fixes the clearest miscategorization.*
 - **Was:** Conditions (Male Infertility, PCOS) and Fertility Testing lived under *Learn* → **Now:** under *Getting Started → Testing & Conditions*, where patients expect diagnosis content.
 - **Was:** Costs buried inside *Patient Resources* → **Now:** promoted to a top-level *Costs & Financial* menu (surfaces the top drop-off concern; pulls in `billpay` + `business-office`, previously not in nav).
