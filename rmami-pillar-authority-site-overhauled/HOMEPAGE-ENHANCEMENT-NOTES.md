@@ -51,4 +51,16 @@ Both reuse the existing design system and the upgraded, entity-consistent `Medic
 
 **Totals:** 18 pages enhanced (homepage + IVF + egg freezing + the 15 above), each 800–1,900 words. Whole-site validation passed: 51 pages, **0** blocked terms, **0** invalid JSON-LD, **0** broken internal links. Schema entity types per page: `MedicalProcedure` (treatments/tests), `Service` (LGBTQ+, single-parent, egg-donor program), or `MedicalWebPage`-only (the two education pages), each with `FAQPage` + `BreadcrumbList` and the shared `MedicalClinic`/`WebSite` nodes.
 
-Remaining pages (functional/location/team: appointments, forms, portal, billing, careers, financing, insurance, grants, location pages, doctor bios, etc.) were intentionally left as-is — they are not "service" content. Tell me if you'd like those covered too.
+## Trust, hub, financial & location pages enhanced
+12 more high-value informational pages were rebuilt to the same standard (answer-first block, cards, depth, expanded FAQ, full JSON-LD `MedicalWebPage` + `FAQPage` + `BreadcrumbList` + shared `MedicalClinic`/`WebSite`; screened clean):
+
+- **Trust / hubs:** `/about/`, `/treatments/`, `/faq/`
+- **Financial cluster:** `/insurance/`, `/financing/`, `/financial-assistance/`, `/grants/` (Christen Goff IVF Grant), `/ivf-medication-savings/`
+- **Location cluster:** `/troy-fertility-clinic/`, `/livonia-fertility-clinic/` (opening-soon, flagged), `/ivf-ohio/` (Toledo/NW Ohio), `/out-of-town-patients/`
+
+**Running total: 30 pages enhanced.** Whole-site validation: 51 pages, **0** blocked terms, **0** invalid JSON-LD, **0** broken internal links.
+
+### Intentionally left as-is
+- **Physician bios** (`/doctors/*`) and `/our-doctors/` already had tailored content + `Physician`/`ProfilePage` schema and real headshots — rewriting risked losing real data. (Optional future step: enrich each bio's schema with the verified credentials in this doc — e.g., Dr. Wolf's Medical College of Ohio ART program, Dr. George's Harvard/Brigham fellowship, Dr. Lee's Castle Connolly recognition.)
+- **Pure-utility pages** (`/appointments/`, `/forms/`, `/patient-portal/`, `/billpay/`, `/careers/`, `/blog/`, `/business-office/`, `/patient-education-videos/`) are appropriately functional and were left on the template.
+- **Not yet done (optional next batch):** team pages (`/clinical-team/`, `/lab-team/`, `/advanced-practice-providers/`, `/patient-services/`), `/morning-monitoring/`, `/resources/`, `/egg-donor-compensation/`. Say the word to cover these too.
