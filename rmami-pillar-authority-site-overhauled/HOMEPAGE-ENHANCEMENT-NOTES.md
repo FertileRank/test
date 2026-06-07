@@ -42,4 +42,13 @@ Two top commercial pages were rebuilt to the same standard (richer content, real
 - **`/ivf/`** — 1,397-word body, 6 CTAs, 8-item FAQ; `MedicalProcedure` renamed to "In Vitro Fertilization (IVF)" with `howPerformed`; added candidacy, individualized-planning, and cost sections.
 - **`/egg-freezing/`** — 1,328-word body, 6 CTAs, 7-item FAQ; `MedicalProcedure` "Egg Freezing (Oocyte Cryopreservation)" with `howPerformed`; added process, candidacy (incl. oncofertility & gender-affirming), and cost sections. The "does freezing ensure a baby" FAQ is answered honestly (no guarantees).
 
-Both reuse the existing design system and the upgraded, entity-consistent `MedicalClinic`/`WebSite` schema nodes. Remaining pages in this package were left as-is.
+Both reuse the existing design system and the upgraded, entity-consistent `MedicalClinic`/`WebSite` schema nodes.
+
+## All remaining service pages enhanced
+15 additional clinical/education service pages were rebuilt to the same standard (answer-first block, "how it works" steps where relevant, candidacy cards, individualized-care depth, cost section, trust signals, related links, expanded FAQ, and a full JSON-LD `@graph`). Each was screened clean against the blocked-keywords list, defines acronyms on first use, and uses inclusive, non-directive language:
+
+`/iui/` · `/donor-egg-ivf/` · `/pgt-a/` · `/lgbtq-fertility/` · `/male-infertility/` · `/fertility-testing/` · `/pcos-and-fertility/` · `/egg-donation/` · `/gestational-carrier/` · `/ovulation-induction/` · `/fertility-surgery/` · `/era-testing/` · `/single-parent-fertility/` · `/fertility-diet-and-nutrition/` · `/fertility-guide/`
+
+**Totals:** 18 pages enhanced (homepage + IVF + egg freezing + the 15 above), each 800–1,900 words. Whole-site validation passed: 51 pages, **0** blocked terms, **0** invalid JSON-LD, **0** broken internal links. Schema entity types per page: `MedicalProcedure` (treatments/tests), `Service` (LGBTQ+, single-parent, egg-donor program), or `MedicalWebPage`-only (the two education pages), each with `FAQPage` + `BreadcrumbList` and the shared `MedicalClinic`/`WebSite` nodes.
+
+Remaining pages (functional/location/team: appointments, forms, portal, billing, careers, financing, insurance, grants, location pages, doctor bios, etc.) were intentionally left as-is — they are not "service" content. Tell me if you'd like those covered too.
