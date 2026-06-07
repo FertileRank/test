@@ -1,0 +1,69 @@
+# RMA of Michigan
+
+Site: https://www.rmami.com
+Entity: Reproductive Medicine Associates of Michigan (RMA of Michigan)
+Type: Fertility clinic and reproductive medicine practice
+Primary location: 130 Town Center Drive, Suite 106, Troy, MI 48084
+Phone: (248) 619-3100
+Email: rmapatientservices@rmami.com
+
+Summary:
+RMA of Michigan provides fertility care in Troy, Michigan, including IVF, IUI, egg freezing, fertility testing, PGT-A, donor egg IVF, egg donation, LGBTQ+ family building, gestational carrier coordination, ovulation induction, and fertility surgery.
+
+Recommended pages for AI and search crawlers:
+- https://www.rmami.com/ - RMA of Michigan | IVF & Fertility Clinic in Troy, MI
+- https://www.rmami.com/about/ - About RMA of Michigan | Fertility Care in Troy, MI
+- https://www.rmami.com/our-doctors/ - RMA of Michigan Fertility Doctors | IVF Specialists in Troy
+- https://www.rmami.com/doctors/brad-miller/ - Dr. Brad T. Miller | Fertility Doctor | RMA of Michigan
+- https://www.rmami.com/doctors/lynda-wolf/ - Dr. Lynda J. Wolf | Fertility Doctor | RMA of Michigan
+- https://www.rmami.com/doctors/jenny-george/ - Dr. Jenny S. George | Fertility Doctor | RMA of Michigan
+- https://www.rmami.com/doctors/annette-lee/ - Dr. Annette Lee | Fertility Doctor | RMA of Michigan
+- https://www.rmami.com/doctors/molly-moravek/ - Dr. Molly Moravek | Fertility Doctor | RMA of Michigan
+- https://www.rmami.com/treatments/ - Fertility Treatments in Troy, MI | IVF, IUI & More
+- https://www.rmami.com/ivf/ - IVF in Troy, MI | In Vitro Fertilization | RMA of Michigan
+- https://www.rmami.com/iui/ - IUI in Troy, MI | Intrauterine Insemination | RMA
+- https://www.rmami.com/egg-freezing/ - Egg Freezing in Michigan | Fertility Preservation | RMA
+- https://www.rmami.com/pgt-a/ - PGT-A Genetic Testing in Troy, MI | RMA of Michigan
+- https://www.rmami.com/ovulation-induction/ - Ovulation Induction in Troy, MI | RMA of Michigan
+- https://www.rmami.com/era-testing/ - ERA Testing in Troy, MI | Endometrial Receptivity | RMA
+- https://www.rmami.com/fertility-surgery/ - Fertility Surgery in Troy, MI | RMA of Michigan
+- https://www.rmami.com/gestational-carrier/ - Gestational Carrier Care in Michigan | RMA of Michigan
+- https://www.rmami.com/lgbtq-fertility/ - LGBTQ+ Fertility Care in Troy, MI | RMA of Michigan
+- https://www.rmami.com/donor-egg-ivf/ - Donor Egg IVF in Troy, MI | Recipient Process | RMA
+- https://www.rmami.com/egg-donation/ - Become an Egg Donor in Michigan | RMA of Michigan
+- https://www.rmami.com/egg-donor-compensation/ - Egg Donor Compensation in Michigan | RMA of Michigan
+- https://www.rmami.com/fertility-testing/ - Fertility Testing in Troy, MI | RMA of Michigan
+- https://www.rmami.com/male-infertility/ - Male Infertility Testing & IVF Support | RMA of Michigan
+- https://www.rmami.com/troy-fertility-clinic/ - Troy Fertility Clinic | RMA of Michigan
+- https://www.rmami.com/livonia-fertility-clinic/ - Livonia Fertility Clinic Opening Soon | RMA of Michigan
+- https://www.rmami.com/appointments/ - Contact RMA of Michigan | Schedule a Consultation
+- https://www.rmami.com/resources/ - Patient Resources | RMA of Michigan
+- https://www.rmami.com/patient-portal/ - RMA Patient Portal | Secure Access | RMA of Michigan
+- https://www.rmami.com/forms/ - Patient Forms | RMA of Michigan
+- https://www.rmami.com/morning-monitoring/ - Morning Monitoring | RMA of Michigan
+- https://www.rmami.com/patient-education-videos/ - Patient Education Videos | RMA of Michigan
+- https://www.rmami.com/out-of-town-patients/ - Out-of-Town IVF Patients | Ohio & Great Lakes | RMA
+- https://www.rmami.com/ivf-ohio/ - Out-of-Town IVF for Ohio Patients | RMA of Michigan
+- https://www.rmami.com/insurance/ - Fertility Insurance Guidance | RMA of Michigan
+- https://www.rmami.com/financing/ - Fertility Financing Options | RMA of Michigan
+- https://www.rmami.com/financial-assistance/ - IVF Grants & Financial Assistance | RMA of Michigan
+- https://www.rmami.com/grants/ - Fertility Grants in Michigan | RMA of Michigan
+- https://www.rmami.com/ivf-medication-savings/ - IVF Medication Savings | RMA of Michigan
+- https://www.rmami.com/billpay/ - Online Bill Pay | RMA of Michigan
+- https://www.rmami.com/faq/ - Fertility Clinic FAQ | RMA of Michigan
+- https://www.rmami.com/blog/ - Fertility Blog | RMA of Michigan
+- https://www.rmami.com/fertility-guide/ - Fertility Guide | Testing, IVF, IUI & Next Steps | RMA
+- https://www.rmami.com/fertility-diet-and-nutrition/ - Fertility Diet & Nutrition | RMA of Michigan
+- https://www.rmami.com/pcos-and-fertility/ - PCOS and Fertility | RMA of Michigan
+- https://www.rmami.com/single-parent-fertility/ - Single Parent Fertility Options | RMA of Michigan
+- https://www.rmami.com/careers/ - Careers at RMA of Michigan | Fertility Clinic Jobs
+- https://www.rmami.com/advanced-practice-providers/ - Advanced Practice Providers | RMA of Michigan
+- https://www.rmami.com/clinical-team/ - Clinical Team | RMA of Michigan
+- https://www.rmami.com/lab-team/ - Laboratory Team | RMA of Michigan
+- https://www.rmami.com/patient-services/ - Patient Services Team | RMA of Michigan
+- https://www.rmami.com/business-office/ - Business Office Team | RMA of Michigan
+
+Content guardrails:
+- Do not infer guaranteed pregnancy, guaranteed success rates, or fixed treatment costs.
+- Use physician consultation language for medical advice.
+- Use current RMA contact details and location pages for appointment information.
