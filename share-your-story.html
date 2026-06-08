@@ -1,0 +1,189 @@
+<!--
+  ============================================================
+  "Share Your Story" — Elementor HTML Widget Module
+  ============================================================
+  HOW TO USE
+  1. In Elementor, drag an "HTML" widget onto the page.
+  2. Paste this ENTIRE snippet into the widget's "HTML Code" box.
+  3. Replace EVERY instance of  YOUR_JOTFORM_ID  with your real
+     Jotform form ID — the digits in your form's URL. Example:
+       https://form.jotform.com/240123456789012
+                                ^^^^^^^^^^^^^^^ this part
+     It appears 3 times in the Jotform Embed block below.
+  4. Confirm the privacy contact in the consent box
+     (email + phone) matches your practice, then have your
+     legal / HIPAA compliance team approve the release language.
+
+  NOTES
+  - Styling reuses the site's global design tokens (pink brand
+    color, rounded buttons, cards). Fallback values are defined
+    locally so the module also renders correctly on its own.
+  - Everything is scoped under ".share-story" so it will not
+    affect other elements on the page.
+  - The <h1> below is the page's main headline. If your template
+    already outputs a page-title H1, change it to <h2> to avoid
+    two H1s.
+  ============================================================
+-->
+<section class="share-story">
+  <style>
+    .share-story{
+      --ss-primary:#d6336c;
+      --ss-primary-dark:#a61e4d;
+      --ss-accent:#fcc419;
+      --ss-text:#1a1a2e;
+      --ss-text-soft:#4a4a68;
+      --ss-bg-soft:#fff5f7;
+      --ss-bg-warm:#fff8e1;
+      --ss-border:#f0d9e0;
+      --ss-radius:14px;
+      --ss-shadow:0 8px 24px rgba(214,51,108,.12);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      color:var(--ss-text);
+      line-height:1.6;
+    }
+    .share-story *{box-sizing:border-box;}
+    .ss-container{max-width:900px;margin:0 auto;padding:0 20px;}
+
+    /* Headline / hero */
+    .ss-hero{
+      text-align:center;
+      background:linear-gradient(135deg,var(--ss-bg-soft) 0%,#fff 70%);
+      padding:56px 20px 8px;
+      border-radius:var(--ss-radius);
+    }
+    .ss-eyebrow{
+      display:inline-block;background:var(--ss-bg-warm);color:var(--ss-primary-dark);
+      padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px;
+      text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;
+    }
+    .ss-hero h1{
+      font-size:clamp(32px,5vw,46px);line-height:1.12;font-weight:800;
+      letter-spacing:-1px;margin:0 0 16px;
+    }
+    .ss-hero h1 strong{color:var(--ss-primary);}
+    .ss-lead{font-size:18px;color:var(--ss-text-soft);max-width:620px;margin:0 auto;}
+
+    /* What you can share */
+    .ss-section{padding:32px 0;}
+    .ss-share-list{
+      list-style:none;margin:0;padding:0;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+    }
+    .ss-share-list li{
+      background:#fff;border:1px solid var(--ss-border);border-radius:var(--ss-radius);
+      padding:22px 18px;text-align:center;font-weight:600;font-size:15px;
+      color:var(--ss-text);
+    }
+    .ss-share-list .ss-ico{font-size:26px;display:block;margin-bottom:10px;}
+
+    /* HIPAA consent / media release */
+    .ss-consent{
+      background:var(--ss-bg-soft);
+      border:1px solid var(--ss-border);
+      border-left:6px solid var(--ss-primary);
+      border-radius:var(--ss-radius);
+      padding:28px 30px;
+      margin:0 0 32px;
+    }
+    .ss-consent h2{font-size:21px;margin:0 0 14px;letter-spacing:-.2px;}
+    .ss-consent p{color:var(--ss-text-soft);font-size:15px;margin:0 0 12px;}
+    .ss-consent ul{margin:0 0 12px;padding-left:20px;color:var(--ss-text-soft);font-size:15px;}
+    .ss-consent li{margin-bottom:7px;}
+    .ss-consent strong{color:var(--ss-text);}
+    .ss-affirm{
+      background:#fff;border:1px dashed var(--ss-primary);border-radius:10px;
+      padding:14px 16px;font-size:14.5px;color:var(--ss-text);margin-top:6px;
+    }
+
+    /* Form */
+    .ss-form-card{
+      background:#fff;border:1px solid var(--ss-border);border-radius:var(--ss-radius);
+      box-shadow:var(--ss-shadow);padding:14px;overflow:hidden;
+    }
+    .ss-form-card iframe{display:block;border-radius:8px;}
+    .ss-note{
+      text-align:center;font-size:13px;color:var(--ss-text-soft);
+      margin:18px auto 8px;max-width:640px;line-height:1.5;
+    }
+
+    @media (max-width:680px){
+      .ss-hero{padding:40px 16px 4px;}
+      .ss-share-list{grid-template-columns:1fr;}
+      .ss-consent{padding:22px 20px;}
+    }
+  </style>
+
+  <div class="ss-container">
+
+    <!-- Headline -->
+    <div class="ss-hero">
+      <span class="ss-eyebrow">Your Voice Matters</span>
+      <h1>Share Your <strong>Story</strong></h1>
+      <p class="ss-lead">Your experience can bring hope to someone just beginning their journey. Share your story, photos, or a short video and help inspire our community.</p>
+    </div>
+
+    <!-- What you can share -->
+    <div class="ss-section">
+      <ul class="ss-share-list">
+        <li><span class="ss-ico">&#9997;&#65039;</span>Your experience &amp; words</li>
+        <li><span class="ss-ico">&#128247;</span>Photos from your journey</li>
+        <li><span class="ss-ico">&#127909;</span>A short video message</li>
+      </ul>
+    </div>
+
+    <!-- HIPAA Consent / Media Release -->
+    <div class="ss-consent">
+      <h2>Consent &amp; Media Release &mdash; Please Read Before Submitting</h2>
+      <p>By submitting your story through the form below, you voluntarily authorize <strong>EggCelle</strong> to use and publicly share the materials you provide &mdash; including your <strong>name, photograph(s), video(s), likeness, voice, and the personal story and statements</strong> you submit &mdash; for marketing, advertising, promotional, educational, and community-sharing purposes.</p>
+      <p>You understand and agree this content may be published and displayed on:</p>
+      <ul>
+        <li>our website and donor/patient resources;</li>
+        <li>our social media channels (such as Instagram and Facebook);</li>
+        <li>email, print, and other marketing or promotional materials.</li>
+      </ul>
+      <p>Because what you share may include protected health information (PHI), this serves as your written <strong>HIPAA authorization</strong> to use and disclose that information for the purposes described above.</p>
+      <ul>
+        <li>Participation is <strong>completely voluntary</strong>. It is not required for any treatment or service, and declining will not affect your care, treatment, or eligibility in any way.</li>
+        <li>You will not be paid for the use of your story or media unless separately agreed in writing.</li>
+        <li>We may edit submissions for length, clarity, or privacy before publishing.</li>
+        <li>You may <strong>revoke</strong> this authorization at any time, in writing, at <strong>privacy@eggcelle.com</strong> or <strong>(704)&nbsp;247-2209</strong>. Revocation stops future use but does not apply to content already published, shared, or relied upon before we receive your request.</li>
+      </ul>
+      <div class="ss-affirm">
+        By checking the consent box and submitting the form, you confirm that you are <strong>at least 18 years old</strong>, that the story and media you provide are your own (or that you have permission to share any other person who appears in them), and that you have read, understood, and agree to this authorization and media release.
+      </div>
+    </div>
+
+    <!--
+      ===== Jotform Embed =====
+      Replace YOUR_JOTFORM_ID below (appears 3 times: iframe id, src, and handler).
+
+      STRONGLY RECOMMENDED for HIPAA: inside your Jotform, add a REQUIRED
+      consent checkbox AND an e-signature field that mirror the release
+      above, so the signed authorization is captured with every submission
+      (the on-page text alone is notice, not a recorded signature).
+      Use a HIPAA-enabled Jotform plan when collecting PHI.
+    -->
+    <div class="ss-form-card">
+      <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+      <iframe
+        id="JotFormIFrame-YOUR_JOTFORM_ID"
+        title="Share Your Story"
+        onload="window.parent.scrollTo(0,0)"
+        allowtransparency="true"
+        allow="geolocation; microphone; camera; fullscreen"
+        src="https://form.jotform.com/YOUR_JOTFORM_ID"
+        frameborder="0"
+        style="min-width:100%;max-width:100%;height:820px;border:none;"
+        scrolling="no">
+      </iframe>
+      <script>
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-YOUR_JOTFORM_ID']","https://form.jotform.com");
+      </script>
+    </div>
+    <!-- ===== End Jotform Embed ===== -->
+
+    <p class="ss-note">Your submission is sent securely through Jotform. For your privacy, please share only what you are comfortable making public. Questions? Call (704)&nbsp;247-2209.</p>
+
+  </div>
+</section>
