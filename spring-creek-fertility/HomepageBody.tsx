@@ -160,7 +160,7 @@ const services: Service[] = [
     icon: FlaskConical,
     name: "IVF & ICSI",
     body: "In vitro fertilization retrieves eggs and fertilizes them with sperm in our lab; the embryo can then be transferred or frozen for the future. ICSI can support fertilization when sperm factors make it appropriate.",
-    href: "/contact" /* PLACEHOLDER: link to /ivf service page */,
+    href: "/ivf" /* dedicated IVF/ICSI page (IvfIcsiPage.tsx) */,
   },
   {
     icon: Syringe,

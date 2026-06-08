@@ -14,6 +14,8 @@ Brand Vault data (Search Atlas MCP).
 | `HomepageBody.tsx` | **Primary** — React + TypeScript + Tailwind component, `lucide-react` icons | React / Next.js / headless builds |
 | `tailwind.config.js` | Maps Tailwind utilities (`bg-scf-teal`, `font-display`, …) onto the `springcreekglobal.css` tokens | Required by the `.tsx` |
 | `homepage-body.elementor.html` | **Secondary** — self-contained semantic HTML + scoped `<style>` + full JSON-LD | WordPress + Elementor code module / any CMS block |
+| `IvfIcsiPage.tsx` | **IVF/ICSI service page** (audit's #1 gap) — React + TS + Tailwind, `lucide-react` | React / Next.js |
+| `ivf-icsi.elementor.html` | IVF/ICSI page — self-contained HTML + scoped `<style>` + JSON-LD (`MedicalWebPage`, `MedicalProcedure` IVF+ICSI, `FAQPage`) | Elementor / CMS |
 
 ## Sections (in order)
 

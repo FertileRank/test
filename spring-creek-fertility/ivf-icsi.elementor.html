@@ -1,0 +1,449 @@
+<!-- ==========================================================================
+     Spring Creek Fertility — IVF & ICSI page (Elementor Code-Module version)
+     ==========================================================================
+     Self-contained: semantic HTML + scoped <style> (.scf-ivf) + JSON-LD.
+     Matches homepage-body.elementor.html conventions and springcreekglobal.css.
+     Icons: lucide via CDN (decorative, aria-hidden). FAQ: native <details>.
+
+     INTERNAL LINKING (per SEO audit): link to /ivf from the homepage and all
+     three location pages; this page links back to locations + related services.
+
+     DATA GROUNDING: Brand Vault (Search Atlas) d7b8aea4-… — IVF steps, lab
+     specs, ICSI candidacy, Dr. Groll credentials. JSON-LD has no comments, so
+     items to confirm are listed here:
+       VERIFY: lab accreditation (CAP/CLIA)
+       VERIFY: any specific IVF success-rate figure (omit until SART/CDC-sourced)
+       VERIFY: medical-reviewer review date
+       VERIFY: per-location phone numbers
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  .scf-ivf {
+    --teal: var(--scf-teal, #007f8b); --teal-dark: var(--scf-teal-dark, #00616b);
+    --teal-light: var(--scf-teal-light, #e8f6f7); --blue: var(--scf-blue, #60b9e5);
+    --blue-soft: var(--scf-blue-soft, #a7d8f1); --navy: var(--scf-navy, #2d3436);
+    --cream: var(--scf-cream, #fcf9f0); --cream-soft: var(--scf-cream-soft, #fdfbf7);
+    --muted: var(--scf-gray-500, #5b6566); --line: var(--scf-gray-300, #d8dee0);
+    --radius: var(--scf-radius, 12px); --radius-lg: var(--scf-radius-lg, 20px);
+    --shadow-sm: var(--scf-shadow-sm, 0 2px 8px rgba(0,97,107,.08));
+    --shadow: var(--scf-shadow, 0 10px 30px rgba(0,97,107,.12));
+    --font-display: var(--scf-font-display, "Playfair Display", Georgia, serif);
+    --font-body: var(--scf-font-body, "Open Sans", system-ui, sans-serif);
+    --font-ui: var(--scf-font-ui, "Poppins", "Open Sans", system-ui, sans-serif);
+    font-family: var(--font-body); color: var(--navy); line-height: 1.7; background: var(--cream-soft);
+  }
+  .scf-ivf *, .scf-ivf *::before, .scf-ivf *::after { box-sizing: border-box; }
+  .scf-ivf h1, .scf-ivf h2, .scf-ivf h3 { font-family: var(--font-display); color: var(--teal-dark); line-height: 1.15; letter-spacing: -0.01em; margin: 0; }
+  .scf-ivf p { margin: 0; }
+  .scf-ivf ul, .scf-ivf ol { margin: 0; }
+
+  .scf-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .scf-narrow { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  .scf-section { padding: 64px 20px; }
+  @media (min-width: 768px) { .scf-section { padding: 88px 20px; } }
+  .scf-tint { background: color-mix(in srgb, var(--teal-light) 45%, transparent); }
+
+  .scf-head { max-width: 42rem; margin: 0 auto 44px; text-align: center; }
+  .scf-eyebrow { font-family: var(--font-ui); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin: 0 0 8px; }
+  .scf-head h2 { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 700; }
+  .scf-head p { margin-top: 14px; color: var(--muted); }
+
+  /* Header */
+  .scf-page-header { background: linear-gradient(135deg, var(--cream) 0%, color-mix(in srgb, var(--teal-light) 70%, transparent) 100%); padding: 56px 20px; }
+  @media (min-width: 768px) { .scf-page-header { padding: 80px 20px; } }
+  .scf-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-family: var(--font-ui); font-size: 0.875rem; color: var(--muted); list-style: none; padding: 0; }
+  .scf-crumb a { color: var(--muted); text-decoration: none; }
+  .scf-crumb a:hover { color: var(--teal-dark); }
+  .scf-crumb svg { width: 16px; height: 16px; }
+  .scf-crumb [aria-current] { color: var(--teal-dark); font-weight: 600; }
+  .scf-page-header h1 { margin-top: 20px; font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem); font-weight: 800; max-width: 46rem; }
+  .scf-page-header .lede { margin-top: 16px; max-width: 40rem; font-size: 1.125rem; color: var(--muted); }
+  .scf-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 16px; }
+
+  /* Buttons */
+  .scf-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-ui); font-weight: 600; text-decoration: none; cursor: pointer; border-radius: 999px; padding: 13px 26px; border: 2px solid var(--teal); background: var(--teal); color: #fff; box-shadow: var(--shadow-sm); transition: transform .2s, background .2s, box-shadow .2s; }
+  .scf-btn:hover { background: var(--teal-dark); border-color: var(--teal-dark); transform: translateY(-2px); box-shadow: var(--shadow); color: #fff; }
+  .scf-btn svg { width: 20px; height: 20px; }
+  .scf-btn--outline { background: transparent; color: var(--teal-dark); }
+  .scf-btn--outline:hover { background: var(--teal-light); color: var(--teal-dark); border-color: var(--teal); }
+  .scf-btn--white { background: #fff; color: var(--teal-dark); border-color: #fff; }
+  .scf-btn--white:hover { background: var(--cream); border-color: var(--cream); color: var(--teal-dark); }
+  .scf-btn--ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
+  .scf-btn--ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+  /* Cards & grids */
+  .scf-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .scf-grid-2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 640px) { .scf-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 992px) { .scf-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .scf-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-sm); height: 100%; display: flex; flex-direction: column; }
+  .scf-card h3 { font-size: 1.2rem; font-weight: 700; }
+  .scf-card p { color: var(--muted); margin-top: 8px; }
+  .scf-card.hoverable { transition: transform .25s, box-shadow .25s; }
+  .scf-card.hoverable:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .scf-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: var(--radius); background: var(--teal-light); color: var(--teal); margin-bottom: 18px; }
+  .scf-icon svg { width: 24px; height: 24px; }
+  .scf-icon--sm { width: 44px; height: 44px; margin-bottom: 0; }
+  .scf-icon--sm svg { width: 20px; height: 20px; }
+  .scf-learn { margin-top: 16px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-ui); font-weight: 600; font-size: 0.9rem; color: var(--teal); text-decoration: none; }
+  .scf-learn:hover { color: var(--teal-dark); gap: 10px; }
+  .scf-learn svg { width: 16px; height: 16px; }
+  .scf-cardbody { flex: 1; }
+
+  /* Definition two-up */
+  .scf-deftwo { display: grid; gap: 24px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .scf-deftwo { grid-template-columns: repeat(2, 1fr); } }
+  .scf-deftwo .scf-card h2 { font-size: 1.5rem; }
+  .scf-deftwo .scf-card p { margin-top: 12px; }
+
+  /* Steps */
+  .scf-step .scf-stephead { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .scf-stepnum { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--blue); }
+  .scf-step h3 { font-size: 1.05rem; }
+  .scf-step p { font-size: 0.9rem; }
+
+  /* Lists */
+  .scf-checks { list-style: none; padding: 0; margin: 16px 0 0; }
+  .scf-checks li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .scf-checks svg { width: 20px; height: 20px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+
+  /* Split (cost) */
+  .scf-split { display: grid; gap: 40px; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 992px) { .scf-split { grid-template-columns: repeat(2, 1fr); } }
+  .scf-split h2 { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 700; }
+  .scf-split p { color: var(--muted); margin-top: 14px; }
+  .scf-panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow); }
+  .scf-panel svg.lead { width: 40px; height: 40px; color: var(--teal); }
+  .scf-panel h3 { font-size: 1.2rem; margin-top: 16px; }
+
+  /* FAQ */
+  .scf-faq { max-width: 48rem; margin: 0 auto; }
+  .scf-faq details { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+  .scf-faq summary { list-style: none; cursor: pointer; padding: 16px 20px; font-family: var(--font-ui); font-weight: 600; color: var(--teal-dark); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .scf-faq summary::-webkit-details-marker { display: none; }
+  .scf-faq summary::after { content: ""; width: 12px; height: 12px; flex-shrink: 0; border-right: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(45deg); transition: transform .2s; margin-top: -4px; }
+  .scf-faq details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+  .scf-faq summary:hover { background: color-mix(in srgb, var(--teal-light) 40%, transparent); }
+  .scf-faq .scf-answer { padding: 0 20px 20px; color: var(--muted); }
+
+  /* CTA */
+  .scf-cta { background: var(--teal-dark); color: #fff; text-align: center; }
+  .scf-cta h2 { color: #fff; font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 700; }
+  .scf-cta p { color: rgba(255,255,255,.9); margin-top: 14px; font-size: 1.125rem; }
+  .scf-cta-lead { width: 48px; height: 48px; color: var(--blue-soft); margin: 0 auto; }
+  .scf-cta-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .scf-locctas { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .scf-ctabox { max-width: 40rem; margin: 0 auto; }
+
+  /* Review bar */
+  .scf-review { background: color-mix(in srgb, var(--teal-light) 60%, transparent); border-bottom: 1px solid var(--line); font-family: var(--font-ui); font-size: 0.875rem; color: var(--teal-dark); }
+  .scf-review .scf-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding-top: 10px; padding-bottom: 10px; text-align: center; }
+  .scf-review svg { width: 16px; height: 16px; }
+
+  .scf-ivf :where(a, button, summary):focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 2px; border-radius: 6px; }
+  .scf-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: reduce) { .scf-ivf * { transition-duration: 0.01ms !important; } }
+</style>
+
+<div class="scf-ivf">
+  <div class="scf-review">
+    <div class="scf-container">
+      <i data-lucide="shield-check" aria-hidden="true"></i>
+      <span>Medically reviewed by <strong>Jeremy Groll, MD</strong> — double board-certified in Reproductive Endocrinology &amp; Infertility and OB/GYN</span>
+      <!-- VERIFY: append review date -->
+    </div>
+  </div>
+
+  <!-- ===== Page header ===== -->
+  <header class="scf-page-header">
+    <div class="scf-narrow">
+      <nav aria-label="Breadcrumb">
+        <ol class="scf-crumb">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true"><i data-lucide="chevron-right"></i></li>
+          <li><a href="/contact"><!-- PLACEHOLDER: /#services -->Fertility Services</a></li>
+          <li aria-hidden="true"><i data-lucide="chevron-right"></i></li>
+          <li aria-current="page">IVF &amp; ICSI</li>
+        </ol>
+      </nav>
+      <h1>IVF &amp; ICSI in Ohio</h1>
+      <p class="lede">In vitro fertilization (IVF) is one of the most effective fertility treatments available — and at Spring Creek Fertility, your embryos are cared for in our advanced on-site lab in Ohio. Here's how IVF and ICSI work, who they help, and what to expect.</p>
+      <div class="scf-actions">
+        <a class="scf-btn" href="/contact">Schedule a Consultation <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+        <!-- PLACEHOLDER: confirm number -->
+        <a class="scf-btn scf-btn--outline" href="tel:+19374585084"><i data-lucide="phone" aria-hidden="true"></i> Call (937) 458-5084</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== What is IVF / ICSI ===== -->
+  <section class="scf-section" aria-labelledby="what-heading">
+    <div class="scf-narrow scf-deftwo">
+      <div class="scf-card">
+        <h2 id="what-heading">What is IVF?</h2>
+        <p><strong style="color:var(--navy)">IVF (in vitro fertilization)</strong> is a fertility treatment in which eggs are retrieved from the ovaries and fertilized with sperm in a laboratory. The resulting embryo is then transferred to the uterus or frozen for a future cycle. IVF can help with many causes of infertility and is the foundation for treatments like genetic testing and donor or gestational-carrier care.</p>
+      </div>
+      <div class="scf-card">
+        <h2>What is ICSI?</h2>
+        <p><strong style="color:var(--navy)">ICSI (intracytoplasmic sperm injection)</strong> is a lab technique used during some IVF cycles in which a single sperm is injected directly into an egg to support fertilization. Your care team may recommend ICSI when sperm factors or prior results make it the best path to fertilization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IVF process ===== -->
+  <section class="scf-section scf-tint" aria-labelledby="process-heading">
+    <div class="scf-container">
+      <div class="scf-head">
+        <p class="scf-eyebrow">Step by Step</p>
+        <h2 id="process-heading">The IVF process, explained</h2>
+        <p>Every plan is personalized, but most IVF journeys move through these stages.</p>
+      </div>
+      <ol class="scf-grid scf-grid-4" style="list-style:none;padding:0;">
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="pill" aria-hidden="true"></i></span><span class="scf-stepnum">1</span></div><h3>Ovarian Stimulation</h3><p>Fertility medications gently prompt your ovaries to mature multiple eggs in one cycle, rather than the single egg your body usually releases.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="activity" aria-hidden="true"></i></span><span class="scf-stepnum">2</span></div><h3>Monitoring</h3><p>Short, regular visits for bloodwork and ultrasound let your team track how your follicles are developing and fine-tune medications.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="stethoscope" aria-hidden="true"></i></span><span class="scf-stepnum">3</span></div><h3>Egg Retrieval</h3><p>A minor outpatient procedure under light sedation, using ultrasound guidance to collect mature eggs — most people are home the same day.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="flask-conical" aria-hidden="true"></i></span><span class="scf-stepnum">4</span></div><h3>Fertilization (with ICSI if needed)</h3><p>In our lab, eggs and sperm are combined to fertilize. When sperm factors call for it, ICSI injects a single sperm directly into each egg.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="microscope" aria-hidden="true"></i></span><span class="scf-stepnum">5</span></div><h3>Embryo Development</h3><p>Fertilized eggs grow in our embryology lab for 2–5 days, where embryologists watch for healthy development to the blastocyst stage.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="heart-handshake" aria-hidden="true"></i></span><span class="scf-stepnum">6</span></div><h3>Embryo Transfer</h3><p>A healthy embryo is placed into the uterus in a quick, gentle procedure similar to a Pap smear — typically no sedation needed.</p></li>
+        <li class="scf-card scf-step"><div class="scf-stephead"><span class="scf-icon scf-icon--sm"><i data-lucide="snowflake" aria-hidden="true"></i></span><span class="scf-stepnum">7</span></div><h3>Frozen Embryo Transfer</h3><p>Any additional healthy embryos can be frozen for future use — another transfer, or growing your family later on.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Candidacy ===== -->
+  <section class="scf-section" aria-labelledby="candidacy-heading">
+    <div class="scf-narrow">
+      <div class="scf-head">
+        <p class="scf-eyebrow">Is It Right for You?</p>
+        <h2 id="candidacy-heading">Who IVF and ICSI can help</h2>
+        <p>A consultation is the best way to know your options — but here's who these treatments often help.</p>
+      </div>
+      <div class="scf-grid scf-grid-2">
+        <div class="scf-card">
+          <h3>IVF may be considered for</h3>
+          <ul class="scf-checks">
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Tubal-factor infertility or blocked fallopian tubes</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Male-factor infertility</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Ovulation disorders, including PCOS</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Endometriosis</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Unexplained infertility</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>When genetic testing of embryos (PGT) is planned</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Donor egg or donor embryo treatment</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>LGBTQIA+ family building and reciprocal IVF</span></li>
+          </ul>
+        </div>
+        <div class="scf-card">
+          <h3>ICSI may be recommended for</h3>
+          <ul class="scf-checks">
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Very low sperm count</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Sperm quality concerns (motility or morphology)</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Prior IVF with failed or low fertilization</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Surgically retrieved sperm (e.g., after a vasectomy)</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Frozen sperm of suboptimal quality</span></li>
+            <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>When embryos will undergo genetic testing</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Why Spring Creek (lab) ===== -->
+  <section class="scf-section scf-tint" aria-labelledby="why-heading">
+    <div class="scf-container">
+      <div class="scf-head">
+        <p class="scf-eyebrow">Why Spring Creek</p>
+        <h2 id="why-heading">An IVF lab built for healthy embryos</h2>
+        <p>Embryos are sensitive to their environment. Ours is engineered to protect them.</p>
+      </div>
+      <ul class="scf-grid scf-grid-4" style="list-style:none;padding:0;">
+        <li class="scf-card"><span class="scf-icon"><i data-lucide="flask-conical" aria-hidden="true"></i></span><h3>Built for embryos</h3><p>Our lab was purpose-designed for assisted reproduction to mimic the physiologic conditions inside the body — the environment embryos need to thrive.</p></li>
+        <li class="scf-card"><span class="scf-icon"><i data-lucide="thermometer" aria-hidden="true"></i></span><h3>Optimized incubators</h3><p>Specialized low-oxygen incubators create ideal conditions for culturing embryos to the blastocyst stage.</p></li>
+        <li class="scf-card"><span class="scf-icon"><i data-lucide="wind" aria-hidden="true"></i></span><h3>Medical-grade air quality</h3><p>A dedicated HVAC system holds temperature and humidity steady, with HEPA and chemical filtration that removes 99.9%+ of particles and VOCs.</p></li>
+        <li class="scf-card"><span class="scf-icon"><i data-lucide="shield-check" aria-hidden="true"></i></span><h3>Protected &amp; isolated</h3><p>Tightly sealed, positively pressurized lab construction keeps outside contaminants away from your developing embryos.</p></li>
+      </ul>
+      <!-- VERIFY: lab accreditation (CAP/CLIA) and any approved success-rate statement -->
+    </div>
+  </section>
+
+  <!-- ===== Cost & insurance ===== -->
+  <section class="scf-section" aria-labelledby="cost-heading">
+    <div class="scf-narrow scf-split">
+      <div>
+        <p class="scf-eyebrow">Cost &amp; Insurance</p>
+        <h2 id="cost-heading">How much does IVF cost in Ohio?</h2>
+        <p>There's no single price for IVF. Your cost depends on your treatment plan, medications, lab and genetic services, and whether you use donor or freezing services — and your insurance coverage changes what you actually pay. The best number is a personalized estimate, not an online average.</p>
+        <p>Our financial team reviews your benefits and walks through financing, discount, and refund program options, so you can plan with clarity before treatment begins.</p>
+        <a class="scf-btn scf-btn--outline" style="margin-top:24px;" href="/contact"><!-- PLACEHOLDER: /financing-options -->Review financing &amp; insurance guidance <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="scf-panel">
+        <i data-lucide="hand-coins" class="lead" aria-hidden="true"></i>
+        <h3>What can affect your IVF cost</h3>
+        <ul class="scf-checks">
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Medications and monitoring</span></li>
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Lab services and ICSI</span></li>
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Genetic testing (PGT)</span></li>
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Embryo freezing and storage</span></li>
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Donor or gestational-carrier services</span></li>
+          <li><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Your insurance coverage</span></li>
+        </ul>
+        <!-- VERIFY: approved IVF price ranges / bundles only if Brand Vault + finance approve -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Related ===== -->
+  <section class="scf-section scf-tint" aria-labelledby="related-heading">
+    <div class="scf-container">
+      <div class="scf-head">
+        <p class="scf-eyebrow">Related Care</p>
+        <h2 id="related-heading">Treatments that often work with IVF</h2>
+      </div>
+      <ul class="scf-grid scf-grid-4" style="list-style:none;padding:0;">
+        <li class="scf-card hoverable"><span class="scf-icon scf-icon--sm" style="margin-bottom:16px;"><i data-lucide="syringe" aria-hidden="true"></i></span><h3>IUI</h3><p class="scf-cardbody">A lower-intervention option that may come before IVF for some patients.</p><a class="scf-learn" href="/contact"><!-- PLACEHOLDER: /iui -->Learn more <i data-lucide="arrow-right" aria-hidden="true"></i></a></li>
+        <li class="scf-card hoverable"><span class="scf-icon scf-icon--sm" style="margin-bottom:16px;"><i data-lucide="dna" aria-hidden="true"></i></span><h3>Genetic Testing (PGT)</h3><p class="scf-cardbody">Screen embryos for chromosomal or inherited conditions before transfer.</p><a class="scf-learn" href="/contact"><!-- PLACEHOLDER: /pgt -->Learn more <i data-lucide="arrow-right" aria-hidden="true"></i></a></li>
+        <li class="scf-card hoverable"><span class="scf-icon scf-icon--sm" style="margin-bottom:16px;"><i data-lucide="snowflake" aria-hidden="true"></i></span><h3>Egg &amp; Embryo Freezing</h3><p class="scf-cardbody">Preserve eggs or embryos for future cycles or family planning.</p><a class="scf-learn" href="/contact"><!-- PLACEHOLDER: /fertility-preservation -->Learn more <i data-lucide="arrow-right" aria-hidden="true"></i></a></li>
+        <li class="scf-card hoverable"><span class="scf-icon scf-icon--sm" style="margin-bottom:16px;"><i data-lucide="users" aria-hidden="true"></i></span><h3>Donor &amp; Third-Party</h3><p class="scf-cardbody">Donor egg, donor sperm or embryo, and gestational-carrier pathways.</p><a class="scf-learn" href="/contact"><!-- PLACEHOLDER: /donor-services -->Learn more <i data-lucide="arrow-right" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="scf-section" aria-labelledby="faq-heading">
+    <div class="scf-container">
+      <div class="scf-head">
+        <p class="scf-eyebrow">Questions &amp; Answers</p>
+        <h2 id="faq-heading">IVF &amp; ICSI questions, answered</h2>
+      </div>
+      <div class="scf-faq">
+        <details open><summary>How much does IVF cost in Ohio?</summary><div class="scf-answer">The cost of an IVF cycle in Ohio depends on your treatment plan, medications, lab services, genetic testing (PGT), and whether you use donor or freezing services — and your insurance coverage affects what you actually pay. Instead of a general online estimate, our financial team provides a personalized estimate and reviews financing, discount, and refund program options before you begin.</div></details>
+        <details><summary>What is the success rate of IVF?</summary><div class="scf-answer">IVF success depends heavily on personal factors such as age, diagnosis, egg and sperm quality, and embryo health, so the most meaningful figures are the ones we review for your specific situation. We're committed to transparent, accurate outcome reporting and will discuss how our results compare with national benchmarks during your consultation.</div></details>
+        <details><summary>How long does one IVF cycle take?</summary><div class="scf-answer">From the start of ovarian stimulation to egg retrieval is typically about two weeks, followed by fertilization and several days of embryo development. A fresh embryo transfer may happen days later, or embryos can be frozen for a future transfer. Your care team will give you a personalized timeline.</div></details>
+        <details><summary>Is the egg retrieval procedure painful?</summary><div class="scf-answer">Egg retrieval is a minor outpatient procedure performed under light sedation, so you shouldn't feel pain during it. Most people rest at home the same day and have mild, short-lived cramping or bloating afterward.</div></details>
+        <details><summary>What is ICSI, and do I need it?</summary><div class="scf-answer">ICSI (intracytoplasmic sperm injection) is a lab technique where a single sperm is injected directly into an egg to support fertilization. It's often recommended for low sperm count, sperm quality concerns, prior fertilization failure, surgically retrieved or suboptimal frozen sperm, or when embryos will undergo genetic testing. Your physician will advise whether ICSI is right for your cycle.</div></details>
+        <details><summary>What is the difference between IVF and IUI?</summary><div class="scf-answer">IUI places prepared sperm directly into the uterus around ovulation and is a lower-intervention first step for some patients. IVF retrieves eggs, fertilizes them in the lab, and transfers an embryo to the uterus or freezes embryos for later. The right choice depends on your diagnosis, age, and goals.</div></details>
+        <details><summary>How many embryos are transferred?</summary><div class="scf-answer">The number of embryos transferred is an individualized decision based on your age, embryo quality, and medical history. To reduce the chance of a multiple pregnancy, single embryo transfer is often recommended. Your physician will discuss what's safest and most effective for you.</div></details>
+        <details><summary>Does insurance cover IVF in Ohio?</summary><div class="scf-answer">Coverage for IVF varies by plan and employer — some cover diagnostics but not treatment, and others cover certain services after prior authorization. Our financial team helps you understand your benefits and explore financing options so cost is clearer before you start.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Final CTA + location CTAs ===== -->
+  <section class="scf-section scf-cta" aria-labelledby="cta-heading">
+    <div class="scf-ctabox">
+      <i data-lucide="calendar-check" class="scf-cta-lead" aria-hidden="true"></i>
+      <h2 id="cta-heading">Ready to talk about IVF?</h2>
+      <p>Start with a consultation at the Ohio center most convenient for you. We'll answer your questions and help you understand your options — no pressure, just clarity.</p>
+      <div class="scf-cta-actions">
+        <a class="scf-btn scf-btn--white" href="/contact">Schedule Your Consultation <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="scf-locctas">
+        <!-- PLACEHOLDER: repoint to /dayton-fertility-center/ etc. -->
+        <a class="scf-btn scf-btn--ghost" href="/contact"><i data-lucide="map-pin" aria-hidden="true"></i> Dayton</a>
+        <a class="scf-btn scf-btn--ghost" href="/contact"><i data-lucide="map-pin" aria-hidden="true"></i> Columbus / Dublin</a>
+        <a class="scf-btn scf-btn--ghost" href="/contact"><i data-lucide="map-pin" aria-hidden="true"></i> Cincinnati / Mason</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==========================================================================
+     Schema.org JSON-LD — MedicalWebPage + IVF/ICSI MedicalProcedure + FAQ
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://www.springcreekfertility.com/ivf/#webpage",
+      "url": "https://www.springcreekfertility.com/ivf/",
+      "name": "IVF & ICSI in Ohio | Spring Creek Fertility",
+      "description": "In vitro fertilization (IVF) and ICSI in Ohio at Spring Creek Fertility — how IVF works, the step-by-step process, who it helps, cost and insurance, and an advanced on-site embryology lab.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://www.springcreekfertility.com/#website" },
+      "about": [
+        { "@id": "https://www.springcreekfertility.com/ivf/#ivf" },
+        { "@id": "https://www.springcreekfertility.com/ivf/#icsi" }
+      ],
+      "lastReviewed": "VERIFY_YYYY-MM-DD",
+      "reviewedBy": {
+        "@type": "Physician",
+        "name": "Jeremy Groll, MD",
+        "url": "https://www.springcreekfertility.com/doctor-jeremy-groll/",
+        "medicalSpecialty": ["Reproductive Endocrinology", "Infertility"]
+      },
+      "breadcrumb": { "@id": "https://www.springcreekfertility.com/ivf/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.springcreekfertility.com/ivf/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.springcreekfertility.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Fertility Services", "item": "https://www.springcreekfertility.com/#services" },
+        { "@type": "ListItem", "position": 3, "name": "IVF & ICSI", "item": "https://www.springcreekfertility.com/ivf/" }
+      ]
+    },
+    {
+      "@type": "MedicalProcedure",
+      "@id": "https://www.springcreekfertility.com/ivf/#ivf",
+      "name": "In Vitro Fertilization (IVF)",
+      "alternateName": "IVF",
+      "procedureType": "https://schema.org/TherapeuticProcedure",
+      "bodyLocation": "Reproductive system",
+      "howPerformed": "Ovarian stimulation matures multiple eggs, which are collected during an ultrasound-guided egg retrieval under light sedation. Eggs are fertilized with sperm in the laboratory (with ICSI when indicated), embryos develop for 2–5 days, and a healthy embryo is transferred to the uterus or frozen for a future cycle.",
+      "followup": "Embryo transfer or frozen embryo transfer; pregnancy testing per care plan.",
+      "recognizingAuthority": { "@id": "https://www.springcreekfertility.com/#organization" }
+    },
+    {
+      "@type": "MedicalProcedure",
+      "@id": "https://www.springcreekfertility.com/ivf/#icsi",
+      "name": "Intracytoplasmic Sperm Injection (ICSI)",
+      "alternateName": "ICSI",
+      "procedureType": "https://schema.org/TherapeuticProcedure",
+      "bodyLocation": "Oocyte (egg)",
+      "howPerformed": "During an IVF cycle, a single sperm is injected directly into an egg to support fertilization. Often used for low sperm count, sperm quality concerns, prior fertilization failure, surgically retrieved sperm, suboptimal frozen sperm, or when embryos will undergo genetic testing.",
+      "recognizingAuthority": { "@id": "https://www.springcreekfertility.com/#organization" }
+    },
+    {
+      "@type": ["MedicalClinic", "MedicalOrganization"],
+      "@id": "https://www.springcreekfertility.com/#organization",
+      "name": "Spring Creek Fertility",
+      "url": "https://www.springcreekfertility.com/",
+      "medicalSpecialty": ["Reproductive Endocrinology", "Infertility"],
+      "telephone": "+1-937-458-5084",
+      "areaServed": [
+        { "@type": "City", "name": "Dayton, Ohio" },
+        { "@type": "City", "name": "Columbus, Ohio" },
+        { "@type": "City", "name": "Cincinnati, Ohio" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.springcreekfertility.com/ivf/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does IVF cost in Ohio?", "acceptedAnswer": { "@type": "Answer", "text": "The cost of an IVF cycle in Ohio depends on your treatment plan, medications, lab services, genetic testing (PGT), and whether you use donor or freezing services — and your insurance coverage affects what you actually pay. Instead of a general online estimate, our financial team provides a personalized estimate and reviews financing, discount, and refund program options before you begin." } },
+        { "@type": "Question", "name": "What is the success rate of IVF?", "acceptedAnswer": { "@type": "Answer", "text": "IVF success depends heavily on personal factors such as age, diagnosis, egg and sperm quality, and embryo health, so the most meaningful figures are the ones we review for your specific situation. We're committed to transparent, accurate outcome reporting and will discuss how our results compare with national benchmarks during your consultation." } },
+        { "@type": "Question", "name": "How long does one IVF cycle take?", "acceptedAnswer": { "@type": "Answer", "text": "From the start of ovarian stimulation to egg retrieval is typically about two weeks, followed by fertilization and several days of embryo development. A fresh embryo transfer may happen days later, or embryos can be frozen for a future transfer. Your care team will give you a personalized timeline." } },
+        { "@type": "Question", "name": "Is the egg retrieval procedure painful?", "acceptedAnswer": { "@type": "Answer", "text": "Egg retrieval is a minor outpatient procedure performed under light sedation, so you shouldn't feel pain during it. Most people rest at home the same day and have mild, short-lived cramping or bloating afterward." } },
+        { "@type": "Question", "name": "What is ICSI, and do I need it?", "acceptedAnswer": { "@type": "Answer", "text": "ICSI (intracytoplasmic sperm injection) is a lab technique where a single sperm is injected directly into an egg to support fertilization. It's often recommended for low sperm count, sperm quality concerns, prior fertilization failure, surgically retrieved or suboptimal frozen sperm, or when embryos will undergo genetic testing. Your physician will advise whether ICSI is right for your cycle." } },
+        { "@type": "Question", "name": "What is the difference between IVF and IUI?", "acceptedAnswer": { "@type": "Answer", "text": "IUI places prepared sperm directly into the uterus around ovulation and is a lower-intervention first step for some patients. IVF retrieves eggs, fertilizes them in the lab, and transfers an embryo to the uterus or freezes embryos for later. The right choice depends on your diagnosis, age, and goals." } },
+        { "@type": "Question", "name": "How many embryos are transferred?", "acceptedAnswer": { "@type": "Answer", "text": "The number of embryos transferred is an individualized decision based on your age, embryo quality, and medical history. To reduce the chance of a multiple pregnancy, single embryo transfer is often recommended. Your physician will discuss what's safest and most effective for you." } },
+        { "@type": "Question", "name": "Does insurance cover IVF in Ohio?", "acceptedAnswer": { "@type": "Answer", "text": "Coverage for IVF varies by plan and employer — some cover diagnostics but not treatment, and others cover certain services after prior authorization. Our financial team helps you understand your benefits and explore financing options so cost is clearer before you start." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  (function () {
+    function init() { if (window.lucide && window.lucide.createIcons) window.lucide.createIcons(); }
+    if (document.readyState !== "loading") init();
+    else document.addEventListener("DOMContentLoaded", init);
+  })();
+</script>
