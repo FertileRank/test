@@ -1,0 +1,70 @@
+Jason & Sherry reel [4:3] | 69 cuts | 57.47s | 1440x1080 | 30fps
+00 GR   photo03 blur mot=push_slow start=  0.00 dur=1.96
+01 GR   photo02 fill mot=push_slow start=  1.96 dur=1.50
+02 GR   photo03 fill mot=drift_up  start=  3.46 dur=1.50
+03 GR   photo02 fill mot=push      start=  4.96 dur=1.50
+04 GR   photo03 fill mot=push_slow start=  6.47 dur=1.00
+05 GR   photo03 blur mot=push_slow start=  7.47 dur=1.00
+06 GR   photo02 fill mot=push_slow start=  8.47 dur=1.00
+07 CER  photo02 fill mot=push      start=  9.47 dur=1.00  *FLASH
+08 CER  photo02 blur mot=drift_r   start= 10.48 dur=1.00
+09 CER  photo02 fill mot=push      start= 11.48 dur=1.00
+10 CER  photo03 fill mot=push      start= 12.48 dur=1.00
+11 CER  photo02 fill mot=drift_l   start= 13.49 dur=0.50
+12 CER  photo02 fill mot=push      start= 13.99 dur=0.50
+13 CER  photo03 fill mot=push      start= 14.49 dur=1.00
+14 CER  photo02 fill mot=push      start= 15.49 dur=1.00
+15 CER  photo02 blur mot=drift_r   start= 16.49 dur=1.00
+16 CER  photo02 fill mot=push      start= 17.50 dur=1.00
+17 CER  photo03 fill mot=push      start= 18.50 dur=0.50
+18 CER  photo02 fill mot=drift_l   start= 19.00 dur=0.50
+19 CER  photo02 fill mot=push      start= 19.50 dur=1.00
+20 CER  photo03 fill mot=push      start= 20.50 dur=1.00
+21 CER  photo02 fill mot=push      start= 21.51 dur=1.00
+22 CER  photo02 blur mot=drift_r   start= 22.51 dur=1.00
+23 CER  photo02 fill mot=push      start= 23.51 dur=0.50
+24 CER  photo03 fill mot=push      start= 24.01 dur=0.50
+25 CER  photo02 fill mot=drift_l   start= 24.52 dur=0.50
+26 KISS photo05 fill mot=push_fast start= 25.02 dur=0.50  *FLASH
+27 KISS photo05 fill mot=kiss_slow start= 25.52 dur=1.50
+28 DAN  photo05 fill mot=hot       start= 27.02 dur=1.00  *FLASH
+29 DAN  photo05 fill mot=hot2      start= 28.02 dur=0.50
+30 DAN  photo01 fill mot=hot       start= 28.53 dur=0.50
+31 DAN  photo05 blur mot=push_fast start= 29.03 dur=1.00
+32 DAN  photo05 fill mot=hot2      start= 30.03 dur=0.50
+33 DAN  photo01 fill mot=hot2      start= 30.53 dur=0.50
+34 DAN  photo01 blur mot=push_fast start= 31.03 dur=1.00
+35 DAN  photo05 fill mot=hot       start= 32.03 dur=0.50
+36 DAN  photo05 fill mot=hot2      start= 32.54 dur=0.50
+37 DAN  photo01 fill mot=hot       start= 33.04 dur=1.00
+38 DAN  photo05 blur mot=push_fast start= 34.04 dur=0.50
+39 DAN  photo05 fill mot=hot2      start= 34.54 dur=0.50
+40 DAN  photo01 fill mot=hot2      start= 35.04 dur=1.00
+41 DAN  photo01 blur mot=push_fast start= 36.05 dur=0.50
+42 DAN  photo05 fill mot=hot       start= 36.55 dur=0.50
+43 DAN  photo05 fill mot=hot2      start= 37.05 dur=1.00
+44 DAN  photo01 fill mot=hot       start= 38.05 dur=0.50
+45 DAN  photo05 blur mot=push_fast start= 38.55 dur=0.50
+46 DAN  photo05 fill mot=hot2      start= 39.05 dur=1.00
+47 DAN  photo01 fill mot=hot2      start= 40.06 dur=0.50
+48 DAN  photo01 blur mot=push_fast start= 40.56 dur=0.50
+49 DAN  photo05 fill mot=hot       start= 41.06 dur=1.00
+50 CEL  photo01 fill mot=push_fast start= 42.06 dur=1.00  *FLASH
+51 CEL  photo04 fill mot=push      start= 43.06 dur=0.50
+52 CEL  photo01 fill mot=hot2      start= 43.57 dur=0.50
+53 CEL  photo04 fill mot=hot       start= 44.07 dur=0.50
+54 CEL  photo01 fill mot=hot2      start= 44.57 dur=1.00
+55 CEL  photo04 blur mot=push_fast start= 45.57 dur=0.50
+56 CEL  photo01 blur mot=push_fast start= 46.07 dur=0.50
+57 CEL  photo05 fill mot=push      start= 46.57 dur=0.50
+58 CEL  photo01 fill mot=push_fast start= 47.08 dur=1.00
+59 CEL  photo04 fill mot=push      start= 48.08 dur=0.50
+60 CEL  photo01 fill mot=hot2      start= 48.58 dur=0.50
+61 CEL  photo04 fill mot=hot       start= 49.08 dur=0.50
+62 CEL  photo01 fill mot=hot2      start= 49.58 dur=1.00
+63 CEL  photo04 blur mot=push_fast start= 50.59 dur=0.50
+64 CEL  photo01 blur mot=push_fast start= 51.09 dur=0.50
+65 CEL  photo05 fill mot=push      start= 51.59 dur=0.50
+66 CEL  photo01 fill mot=push_fast start= 52.09 dur=1.00
+67 CEL  photo04 fill mot=push      start= 53.09 dur=0.50
+68 FRZ  photo02 fill mot=freeze    start= 53.59 dur=4.01  *FLASH
