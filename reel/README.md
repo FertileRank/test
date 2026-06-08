@@ -3,11 +3,13 @@
 A 9:16 beat-synced cinematic wedding recap reel built from 5 stills + a
 celebration-mix track, rendered entirely with `ffmpeg`.
 
-**Deliverable:** `Jason_and_Sherry_Wedding_Reel.mp4`
+**Deliverables (two cuts, same edit):**
+- `Jason_and_Sherry_Wedding_Reel.mp4` — **9:16 vertical**, 1080 × 1920 (Reels/TikTok/Shorts)
+- `Jason_and_Sherry_Wedding_Reel_4x3.mp4` — **4:3 horizontal**, 1440 × 1080
 
 | Spec | Delivered |
 |---|---|
-| Aspect ratio | 9:16 vertical — **1080 × 1920** |
+| Aspect ratio | 9:16 (1080 × 1920) **and** 4:3 (1440 × 1080) |
 | Duration | **57.5 s** (within the 45–59 s target) |
 | Frame rate | 30 fps |
 | Audio | beat-synced to the supplied mix (**119.7 BPM**, cuts on detected beats) |
@@ -43,11 +45,15 @@ celebration-mix track, rendered entirely with `ffmpeg`.
 ## Rebuild
 
 ```bash
-python3 analyze_audio.py   # -> audio_analysis.json (tempo + beat grid + energy)
-python3 build_reel.py      # renders 69 segments, concats, grades, adds text + audio
-# or, to re-iterate only the grade/text/audio pass over an existing seg_all.mp4:
-python3 finalize.py
+python3 analyze_audio.py            # -> audio_analysis.json (tempo + beat grid + energy)
+python3 build_reel.py               # 9:16 vertical (default)
+REEL_ASPECT=4:3 python3 build_reel.py   # 4:3 horizontal
+# re-iterate only the grade/text/audio pass over an existing seg_all*.mp4:
+REEL_ASPECT=4:3 python3 finalize.py
 ```
+
+Geometry, color grade, and text typography live in `reel_lib.py` (aspect-aware),
+shared by both `build_reel.py` and `finalize.py`.
 
 `cutsheet.txt` lists every cut (section, photo, crop, motion, start, duration).
 

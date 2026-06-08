@@ -1,31 +1,22 @@
 #!/usr/bin/env python3
-"""Build a 9:16 beat-synced wedding recap reel for Jason & Sherry (05.29.2026)
-from 5 stills + the supplied celebration-mix track."""
-import json, os, subprocess, math
+"""Build a beat-synced wedding recap reel for Jason & Sherry (05.29.2026) from
+5 stills + the supplied celebration-mix track. Aspect via REEL_ASPECT env
+(9:16 default, or 4:3). Geometry/grade/text live in reel_lib.py."""
+import json, os, subprocess
 from concurrent.futures import ThreadPoolExecutor
+import reel_lib as L
 
-ROOT = "/home/user/test/reel"
-A    = f"{ROOT}/assets"
-SEG  = f"{ROOT}/segments"
-WAV  = "/root/.claude/uploads/b76df3bb-439f-50b8-91f0-5a2b69caed69/b04cb369-All_In_Toast_Wedding_Recap_Celebration_Mix.wav"
-PF   = f"{ROOT}/fonts/PlayfairDisplay.ttf"
-MO   = f"{ROOT}/fonts/Montserrat.ttf"
-DJ   = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-FINAL= f"{ROOT}/Jason_and_Sherry_Wedding_Reel.mp4"
-SS   = (1620, 2880)        # supersample canvas (9:16) fed to zoompan
-FPS  = 30
+cfg   = L.config()
+OUT, SS, RATIO = cfg['OUT'], cfg['SS'], cfg['ratio']
+ROOT  = L.ROOT
+A     = f"{ROOT}/assets"
+SEG   = cfg['segdir']
+FPS   = 30
 os.makedirs(SEG, exist_ok=True)
+print(f"ASPECT={cfg['aspect']}  OUT={OUT[0]}x{OUT[1]}")
 
 beats = json.load(open(f"{ROOT}/audio_analysis.json"))["beat_times"]
-def beat_at(t):
-    return min(range(len(beats)), key=lambda i: abs(beats[i]-t))
-
-# ---------- crop: 9:16 window from 1250x833 centered at (cx,cy), height frac ----------
-def crop9(cx, cy, hf, W=1250, H=833):
-    h9 = round(hf*H); w9 = round(h9*9/16)
-    x0 = min(max(round(cx*W - w9/2), 0), W-w9)
-    y0 = min(max(round(cy*H - h9/2), 0), H-h9)
-    return f"crop={w9}:{h9}:{x0}:{y0}"
+def beat_at(t): return min(range(len(beats)), key=lambda i: abs(beats[i]-t))
 
 # ---------- zoompan expression builders ----------
 def zexpr(z0, z1, ease, N):
@@ -45,16 +36,11 @@ def yexpr(dy, sh, N):
 
 # motion presets: (z0,z1,ease,dx,dy,shake)
 M = {
- "push_slow": (1.00,1.06,"out",0,0,0),
- "push":      (1.00,1.10,"lin",0,0,0),
- "push_fast": (1.03,1.20,"in",0,0,7),
- "drift_up":  (1.10,1.13,"lin",0,-120,0),
- "drift_l":   (1.10,1.12,"lin",-130,0,0),
- "drift_r":   (1.10,1.12,"lin",130,0,0),
- "hot":       (1.05,1.17,"in",0,0,15),
- "hot2":      (1.06,1.18,"in",60,0,13),
- "kiss_slow": (1.00,1.055,"out",0,0,0),
- "freeze":    (1.00,1.015,"out",0,0,0),
+ "push_slow": (1.00,1.06,"out",0,0,0),  "push": (1.00,1.10,"lin",0,0,0),
+ "push_fast": (1.03,1.20,"in",0,0,7),   "drift_up": (1.10,1.13,"lin",0,-120,0),
+ "drift_l":   (1.10,1.12,"lin",-130,0,0),"drift_r": (1.10,1.12,"lin",130,0,0),
+ "hot":       (1.05,1.17,"in",0,0,15),  "hot2": (1.06,1.18,"in",60,0,13),
+ "kiss_slow": (1.00,1.055,"out",0,0,0), "freeze": (1.00,1.015,"out",0,0,0),
 }
 
 # shot = (photo, mode, cx, cy, hfrac, motion)
@@ -70,68 +56,64 @@ CER= [("photo02","fill",0.46,0.42,0.58,"push"),
       ("photo02","fill",0.30,0.45,0.52,"drift_l"),
       ("photo02","fill",0.46,0.62,0.46,"push"),
       ("photo03","fill",0.85,0.45,0.55,"push")]
-KISS=[("photo05","fill",0.50,0.40,0.52,"push_fast"),     # sharp impact on the flash
-      ("photo05","fill",0.50,0.42,0.60,"kiss_slow")]     # slow-mo hold
-DAN= [("photo05","fill",0.50,0.40,0.50,"hot"),    # the kiss, tight
-      ("photo05","fill",0.30,0.45,0.60,"hot2"),   # saxophonist
-      ("photo01","fill",0.50,0.40,0.60,"hot"),    # fun guest face
-      ("photo05","blur",0,0,0,"push_fast"),       # whole dance floor
-      ("photo05","fill",0.50,0.43,0.58,"hot2"),   # kiss, slightly wider
-      ("photo01","fill",0.40,0.46,0.66,"hot2"),   # guest + beer
-      ("photo01","blur",0,0,0,"push_fast")]       # party room
-CEL= [("photo01","fill",0.50,0.45,0.72,"push_fast"), # cheers w/ both drinks
-      ("photo04","fill",0.50,0.40,0.60,"push"),      # father toast, profile
-      ("photo01","fill",0.40,0.45,0.60,"hot2"),      # guest + beer up
-      ("photo04","fill",0.60,0.55,0.55,"hot"),       # toast, raised hand
-      ("photo01","fill",0.60,0.42,0.62,"hot2"),      # guest + OJ up
-      ("photo04","blur",0,0,0,"push_fast"),          # toast, wide room
-      ("photo01","blur",0,0,0,"push_fast"),          # party, wide
-      ("photo05","fill",0.50,0.42,0.55,"push")]      # kiss callback
+KISS=[("photo05","fill",0.50,0.40,0.52,"push_fast"),
+      ("photo05","fill",0.50,0.42,0.60,"kiss_slow")]
+DAN= [("photo05","fill",0.50,0.40,0.50,"hot"),
+      ("photo05","fill",0.30,0.45,0.60,"hot2"),
+      ("photo01","fill",0.50,0.40,0.60,"hot"),
+      ("photo05","blur",0,0,0,"push_fast"),
+      ("photo05","fill",0.50,0.43,0.58,"hot2"),
+      ("photo01","fill",0.40,0.46,0.66,"hot2"),
+      ("photo01","blur",0,0,0,"push_fast")]
+CEL= [("photo01","fill",0.50,0.45,0.72,"push_fast"),
+      ("photo04","fill",0.50,0.40,0.60,"push"),
+      ("photo01","fill",0.40,0.45,0.60,"hot2"),
+      ("photo04","fill",0.60,0.55,0.55,"hot"),
+      ("photo01","fill",0.60,0.42,0.62,"hot2"),
+      ("photo04","blur",0,0,0,"push_fast"),
+      ("photo01","blur",0,0,0,"push_fast"),
+      ("photo05","fill",0.50,0.42,0.55,"push")]
 FRZ= [("photo02","fill",0.44,0.43,0.56,"freeze")]
 
 # section = (tag, end_time, step_pattern_beats, flash_first, pool)
 SECTIONS = [
- ("GR",    9.48, [3,3,3,3,2,2,2],   False, GR),
- ("CER",  25.00, [2,2,2,2,1,1],     True,  CER),
- ("KISS", 27.10, [1,3],             True,  KISS),
- ("DAN",  42.00, [2,1,1],           True,  DAN),
- ("CEL",  53.40, [2,1,1,1],         True,  CEL),
- ("FRZ",  57.60, [999],             True,  FRZ),
+ ("GR",    9.48, [3,3,3,3,2,2,2], False, GR),
+ ("CER",  25.00, [2,2,2,2,1,1],   True,  CER),
+ ("KISS", 27.10, [1,3],           True,  KISS),
+ ("DAN",  42.00, [2,1,1],         True,  DAN),
+ ("CEL",  53.40, [2,1,1,1],       True,  CEL),
+ ("FRZ",  57.60, [999],           True,  FRZ),
 ]
 
-# ---------- build the segment timeline (cuts snapped to detected beats) ----------
+# ---------- timeline (cuts snapped to detected beats) ----------
 segments = []
 cur_idx, cur_t = 0, 0.0
 for tag, end_t, steps, flash_first, pool in SECTIONS:
     end_idx = beat_at(end_t); si = 0; first = True
     while cur_idx < end_idx:
         nxt = min(cur_idx + steps[si % len(steps)], end_idx)
-        start_t, stop_t = cur_t, beats[nxt]
         segments.append(dict(tag=tag, shot=pool[si % len(pool)],
-                             start=start_t, dur=stop_t-start_t,
+                             start=cur_t, dur=beats[nxt]-cur_t,
                              flash=(first and flash_first)))
-        cur_idx, cur_t = nxt, stop_t; si += 1; first = False
-T = cur_t   # total video duration
+        cur_idx, cur_t = nxt, beats[nxt]; si += 1; first = False
 
 # ---------- render one segment ----------
 def render(i, s):
     photo, mode, cx, cy, hf, mname = s["shot"]
     N = max(2, round(s["dur"]*FPS))
     z0,z1,ease,dx,dy,sh = M[mname]
-    z,x,y = zexpr(z0,z1,ease,N), xexpr(dx,sh,N), yexpr(dy,sh,N)
-    zp = f"zoompan=z='{z}':x='{x}':y='{y}':s={SS[0]}x{SS[1]}:d={N}:fps={FPS}"
+    zp = (f"zoompan=z='{zexpr(z0,z1,ease,N)}':x='{xexpr(dx,sh,N)}':y='{yexpr(dy,sh,N)}':"
+          f"s={SS[0]}x{SS[1]}:d={N}:fps={FPS}")
     if mode == "fill":
-        chain = f"{crop9(cx,cy,hf)},scale={SS[0]}:{SS[1]}:flags=lanczos,setsar=1,{zp}"
-        fc = f"[0:v]{chain}"
-    else:  # blur composite
+        fc = f"[0:v]{L.crop_ar(cx,cy,hf,RATIO)},scale={SS[0]}:{SS[1]}:flags=lanczos,setsar=1,{zp}"
+    else:
         fc = ("[0:v]split=2[bg][fg];"
               f"[bg]scale={SS[0]}:{SS[1]}:force_original_aspect_ratio=increase,"
               f"crop={SS[0]}:{SS[1]},boxblur=26:2,eq=brightness=-0.06:saturation=0.95[bgb];"
               f"[fg]scale={SS[0]}:-1:flags=lanczos[fgs];"
               f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1,{zp}")
-    fc += ",scale=1080:1920"
-    if s["flash"]:
-        fc += ",fade=t=in:st=0:d=0.12:color=white"
+    fc += f",scale={OUT[0]}:{OUT[1]}"
+    if s["flash"]: fc += ",fade=t=in:st=0:d=0.12:color=white"
     fc += ",format=yuv420p[v]"
     out = f"{SEG}/seg_{i:03d}.mp4"
     cmd = ["ffmpeg","-y","-loop","1","-i",f"{A}/{photo}.jpg","-filter_complex",fc,
@@ -140,72 +122,40 @@ def render(i, s):
            "-x264-params","keyint=15:min-keyint=15:scenecut=0",out]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode: print(f"SEG {i} ERR\n", r.stderr[-1200:])
-    return out
 
-print(f"{len(segments)} segments | total video {T:.2f}s")
+print(f"{len(segments)} segments | total video {cur_t:.2f}s")
 with ThreadPoolExecutor(max_workers=4) as ex:
     list(ex.map(lambda p: render(*p), list(enumerate(segments))))
 
 # ---------- concat ----------
 listfile = f"{SEG}/list.txt"
-with open(listfile,"w") as f:
-    for i in range(len(segments)): f.write(f"file 'seg_{i:03d}.mp4'\n")
-allmp4 = f"{ROOT}/seg_all.mp4"
+open(listfile,"w").write("".join(f"file 'seg_{i:03d}.mp4'\n" for i in range(len(segments))))
+allmp4 = cfg['segall']
 r = subprocess.run(["ffmpeg","-y","-f","concat","-safe","0","-i",listfile,"-c","copy",allmp4],
                    capture_output=True, text=True)
-if r.returncode:  # fallback: re-encode concat
+if r.returncode:
     subprocess.run(["ffmpeg","-y","-f","concat","-safe","0","-i",listfile,
                     "-c:v","libx264","-crf","18","-pix_fmt","yuv420p",allmp4],
                    capture_output=True, text=True)
 T = float(subprocess.run(["ffprobe","-v","0","-show_entries","format=duration",
         "-of","default=noprint_wrappers=1:nokey=1",allmp4],capture_output=True,text=True).stdout.strip())
-print(f"concat done, measured T={T:.2f}s")
+print(f"concat done, T={T:.2f}s")
 
 # ---------- grade + text + audio ----------
-GRADE = ("colortemperature=temperature=4900:mix=0.85,"
-         "eq=contrast=1.10:saturation=1.07:gamma=0.98:brightness=0.01,"
-         "curves=master='0/0.02 0.25/0.21 0.5/0.5 0.8/0.83 1/0.97',"
-         "unsharp=5:5:0.5:5:5:0.0,vignette=PI/4.5,fade=t=in:st=0:d=0.5")
-
-def alpha(t0,t1,fd):
-    return (f"if(lt(t,{t0}),0,if(lt(t,{t0+fd}),(t-{t0})/{fd},"
-            f"if(lt(t,{t1-fd}),1,if(lt(t,{t1}),({t1}-t)/{fd},0))))")
-def dt(text, font, size, x, y, t0, t1, fd, color="white", box=False, slide=0):
-    yexp = f"{y}" if not slide else f"({y})+({slide})*(1-clip((t-{t0})/{fd},0,1))"
-    s = (f"drawtext=fontfile={font}:text='{text}':fontcolor={color}:fontsize={size}:"
-         f"x='{x}':y='{yexp}':alpha='{alpha(t0,t1,fd)}':"
-         f"shadowcolor=black@0.55:shadowx=4:shadowy=5:enable='between(t,{t0},{t1})'")
-    if box: s += ":box=1:boxcolor=black@0.30:boxborderw=22"
-    return s
-
-C = "(w-text_w)/2"
-ff = T - 3.7   # final line start
-texts = [
- dt("One Perfect Day", PF, 96, C, "(h-text_h)/2-30", 0.6, 3.8, 0.45, slide=-22),
- dt("· T H E   W E D D I N G   O F ·", MO, 30, C, "h*0.40", 4.8, 8.8, 0.5, box=True),
- dt("Jason & Sherry", PF, 118, C, "(h-text_h)/2-20", 5.1, 8.8, 0.5, slide=18),
- dt("0 5 . 2 9 . 2 0 2 6", MO, 44, C, "h*0.575", 5.5, 8.8, 0.5, box=True),
- dt("One Incredible", PF, 84, C, "(h/2)-100", 15.5, 19.8, 0.5),
- dt("Celebration",    PF, 84, C, "(h/2)+18",  15.5, 19.8, 0.5),
- dt("Forever Starts Here", PF, 90, C, "(h-text_h)/2-40", ff, T, 0.55, slide=-18),
- dt("♥", DJ, 64, C, "h/2+95", ff+0.25, T, 0.55, color="0xE0566A"),
-]
-vf = "[0:v]" + GRADE + "," + ",".join(texts) + ",format=yuv420p[v]"
-af = (f"[1:a]atrim=0:{T:.3f},asetpts=PTS-STARTPTS,"
-      f"afade=t=in:st=0:d=0.3,afade=t=out:st={T-1.4:.3f}:d=1.4[a]")
-cmd = ["ffmpeg","-y","-i",allmp4,"-i",WAV,"-filter_complex",vf+";"+af,
+vf = "[0:v]" + L.GRADE + "," + L.text_chain(cfg, T) + ",format=yuv420p[v]"
+af = L.audio_chain(T)
+cmd = ["ffmpeg","-y","-i",allmp4,"-i",L.WAV,"-filter_complex",vf+";"+af,
        "-map","[v]","-map","[a]","-t",f"{T:.3f}","-r",str(FPS),
        "-c:v","libx264","-preset","medium","-crf","19","-pix_fmt","yuv420p",
-       "-c:a","aac","-b:a","256k","-movflags","+faststart",FINAL]
+       "-c:a","aac","-b:a","256k","-movflags","+faststart",cfg['final']]
 r = subprocess.run(cmd, capture_output=True, text=True)
-if r.returncode: print("FINAL ERR\n", r.stderr[-2500:])
-else: print("FINAL OK ->", FINAL)
+print("FINAL OK -> "+cfg['final'] if r.returncode==0 else "FINAL ERR\n"+r.stderr[-2500:])
 
 # ---------- cut sheet ----------
-with open(f"{ROOT}/cutsheet.txt","w") as f:
-    f.write(f"Jason & Sherry reel  |  {len(segments)} cuts  |  {T:.2f}s  |  9:16  |  {FPS}fps\n")
+with open(cfg['cutsheet'],"w") as f:
+    f.write(f"Jason & Sherry reel [{cfg['aspect']}] | {len(segments)} cuts | {T:.2f}s | {OUT[0]}x{OUT[1]} | {FPS}fps\n")
     for i,s in enumerate(segments):
         p,m,cx,cy,hf,mn = s["shot"]
         f.write(f"{i:02d} {s['tag']:4} {p} {m:4} mot={mn:9} "
                 f"start={s['start']:6.2f} dur={s['dur']:4.2f}{'  *FLASH' if s['flash'] else ''}\n")
-print(open(f"{ROOT}/cutsheet.txt").read())
+print(open(cfg['cutsheet']).read()[:400])

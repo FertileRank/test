@@ -1,6 +1,6 @@
 # heavy intermediates / QC artifacts — not part of the deliverable
-segments/
-seg_all.mp4
-thumbs/
+segments*/
+seg_all*.mp4
+thumbs*/
 _tests/
 __pycache__/
