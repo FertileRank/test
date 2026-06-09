@@ -129,11 +129,12 @@
             --shadow-md: 0 8px 24px rgba(214, 51, 108, 0.12);
             --radius: 12px;
             --max-width: 1140px;
+            --header-h: 68px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 14px); }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -195,6 +196,46 @@
             transition: transform 0.15s ease, background 0.15s ease;
         }
         .header-cta:hover { background: var(--color-primary-dark); text-decoration: none; transform: translateY(-1px); }
+
+        .primary-nav {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+        .primary-nav > a:not(.header-cta) {
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .primary-nav > a:not(.header-cta):hover {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+        }
+        .nav-toggle-bar {
+            display: block;
+            width: 26px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--color-text);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+        .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
         .hero {
             background: linear-gradient(135deg, var(--color-bg-soft) 0%, #fff 60%);
@@ -309,7 +350,7 @@
             box-shadow: var(--shadow-md);
             border-top: 6px solid var(--color-primary);
             position: sticky;
-            top: 88px;
+            top: calc(var(--header-h) + 20px);
         }
         .cta-eyebrow {
             display: inline-block;
@@ -630,7 +671,35 @@
             .comp-grid { grid-template-columns: 1fr; gap: 24px; }
             .checklist { grid-template-columns: 1fr; }
             .steps { grid-template-columns: repeat(2, 1fr); }
-            .header-cta { display: none; }
+
+            /* Swap the inline menu for a hamburger-toggled panel instead of hiding it. */
+            .nav-toggle { display: flex; }
+            .primary-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                background: #fff;
+                border-bottom: 1px solid var(--color-border);
+                box-shadow: var(--shadow-md);
+                padding: 8px 20px 18px;
+            }
+            .primary-nav.is-open { display: flex; }
+            .primary-nav > a:not(.header-cta) {
+                padding: 14px 4px;
+                border-bottom: 1px solid var(--color-border);
+                font-size: 16px;
+            }
+            .header-cta {
+                display: block;
+                text-align: center;
+                margin-top: 14px;
+            }
+
             .mobile-cta { display: block; }
             body { padding-bottom: 80px; }
             section.block { padding: 48px 0; }
@@ -652,7 +721,20 @@
     <header>
         <div class="container header-inner">
             <a href="#top" class="logo">Egg<span>Celle</span></a>
-            <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="header-cta js-prescreen">Apply Now</a>
+
+            <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+
+            <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+                <a href="#compensation">Compensation</a>
+                <a href="#eligibility">Who Qualifies</a>
+                <a href="#process">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="header-cta js-prescreen">Apply Now</a>
+            </nav>
         </div>
     </header>
 
@@ -935,6 +1017,34 @@
                     }
                     setTimeout(function () { window.location = dest; }, 800);
                 });
+            });
+        })();
+    </script>
+
+    <script>
+        // Mobile navigation toggle (hamburger menu).
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var nav = document.getElementById('primary-nav');
+            if (!toggle || !nav) return;
+
+            function setOpen(open) {
+                nav.classList.toggle('is-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function () {
+                setOpen(!nav.classList.contains('is-open'));
+            });
+
+            // Close the panel once a destination is chosen.
+            nav.addEventListener('click', function (e) {
+                if (e.target.closest('a')) setOpen(false);
+            });
+
+            // Close on Escape for keyboard users.
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
             });
         })();
     </script>
