@@ -18,7 +18,7 @@ Prepared for executive review and deployment to the development server.
 
 1. **Schema:** Copy the entire `<script type="application/ld+json">` block from `index.html` into the page `<head>` (via your SEO plugin's header insert, or an Elementor "Custom Code" entry scoped to the homepage). Resolve the `// VERIFY` items first (see checklist).
 2. **Styles + markup:** Paste everything inside `<div class="scf-home"> … </div>` (including the preceding `<style>` block) into a single Elementor **HTML widget** on the homepage. All CSS is namespaced under `.scf-home`, so it will not collide with the theme or other widgets.
-3. **Brand tokens:** Colors are declared as CSS custom properties on `.scf-home` and already match the SpringCreek palette. To re-theme, edit the tokens at the top of the `<style>` block only.
+3. **Brand tokens:** The scoped CSS **bridges to the live SpringCreek Elementor kit** — every color and font references an `--e-global-*` variable from `.elementor-kit-7` (e.g. `--e-global-color-primary` navy `#183356`, `--e-global-color-accent` green `#90C962`) with a hardcoded fallback. Inside an Elementor page the section inherits the kit automatically and re-themes itself; as a standalone file it uses the fallbacks. Headings render in **Lora**, body in **Work Sans** (loaded via the `<link>` in `<head>`; Elementor already enqueues both, so that link is optional in production). To re-theme, edit the token block at the top of `<style>` only.
 4. **Images:** Replace icon glyphs and add the recommended visual assets (see `visual-asset-recommendations.md`). Add an `og:image` once produced.
 5. **Meta:** Apply the scrubbed `<title>` and `<meta name="description">` via your SEO plugin (values are in `index.html`).
 
