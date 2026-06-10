@@ -1,0 +1,629 @@
+<!-- ============================================================================
+     RMA OF MICHIGAN — REQUEST AN APPOINTMENT
+     Divi 5 HTML Module · Production-Ready · Uses RMA Global CSS Tokens
+     Conversion endpoint · Local SEO · WCAG-friendly form
+     ============================================================================ -->
+
+<!-- ─── SCHEMA: ContactPage · MedicalOrganization reference ─── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://www.rmami.com/request-appointment/#contactpage",
+      "url": "https://www.rmami.com/request-appointment/",
+      "name": "Request a Fertility Consultation — RMA of Michigan",
+      "description": "Request an appointment with a board-certified reproductive endocrinologist at RMA of Michigan in Troy. Most new patients are seen within 1–2 weeks.",
+      "inLanguage": "en-US",
+      "isPartOf": {"@id": "https://www.rmami.com/#website"},
+      "about": {"@id": "https://www.rmami.com/#organization"},
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rmami.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Request Appointment", "item": "https://www.rmami.com/request-appointment/"}
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How quickly will I get a response?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Our patient navigator responds within one business day. Most new patients are scheduled for a first consultation within 1–2 weeks of submitting this form."}
+        },
+        {
+          "@type": "Question",
+          "name": "What should I bring to my first appointment?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Bring your insurance card, a photo ID, a list of current medications, and any prior fertility records, imaging, or labs. We'll send a secure portal link in advance so you can upload records ahead of time."}
+        },
+        {
+          "@type": "Question",
+          "name": "Will my insurance be verified first?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Our financial counselors verify your benefits before your first visit and walk you through exactly what's covered, what isn't, and what your out-of-pocket estimate will be."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ─── PAGE-SCOPED COMPONENT CSS ─── -->
+<style>
+.rma-ap { font-family: var(--rma-font-body); color: var(--rma-text-body); }
+
+/* ── BREADCRUMB ── */
+.rma-ap__crumb {
+  max-width: 1180px; margin: 0 auto; padding: 24px 24px 0;
+  font-size: 13px; color: var(--rma-text-muted); letter-spacing: 0.02em;
+}
+.rma-ap__crumb a { color: var(--rma-text-muted); text-decoration: none; }
+.rma-ap__crumb a:hover { color: var(--rma-blue); }
+.rma-ap__crumb span { margin: 0 8px; color: rgba(18,56,131,0.25); }
+
+/* ── PAGE HEADER ── */
+.rma-ap__head {
+  max-width: 1180px; margin: 0 auto; padding: 40px 24px 48px;
+  text-align: center;
+}
+.rma-ap__label {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--rma-blue); margin-bottom: 12px;
+}
+.rma-ap__title {
+  font-family: var(--rma-font-display); font-weight: 400;
+  font-size: clamp(32px, 4.4vw, 52px); line-height: 1.12;
+  color: var(--rma-navy); margin: 0 0 16px; letter-spacing: -0.015em;
+}
+.rma-ap__lede {
+  font-size: 17px; line-height: 1.7; color: var(--rma-text-secondary);
+  max-width: 700px; margin: 0 auto;
+}
+
+/* ── MAIN LAYOUT (form + sidebar) ── */
+.rma-ap__wrap {
+  max-width: 1180px; margin: 0 auto; padding: 0 24px 80px;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px;
+  align-items: start;
+}
+
+/* ── FORM CARD ── */
+.rma-ap__form-card {
+  background: var(--rma-white);
+  border: 1px solid var(--rma-border);
+  border-radius: var(--rma-radius-lg);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: var(--rma-shadow-md);
+}
+.rma-ap__form-card h2 {
+  font-family: var(--rma-font-display); font-size: 26px;
+  color: var(--rma-navy); margin: 0 0 8px;
+}
+.rma-ap__form-card > p {
+  font-size: 15px; color: var(--rma-text-secondary); margin: 0 0 32px;
+}
+.rma-ap__progress {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 28px;
+  font-size: 12px; color: var(--rma-text-muted); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.rma-ap__progress-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--rma-border);
+}
+.rma-ap__progress-dot.is-active { background: var(--rma-blue); box-shadow: 0 0 0 4px var(--rma-blue-muted); }
+
+/* ── FORM FIELDS ── */
+.rma-ap__row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px;
+}
+.rma-ap__row--single { grid-template-columns: 1fr; }
+.rma-ap__field { display: flex; flex-direction: column; gap: 8px; }
+.rma-ap__field label {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+  color: var(--rma-text-secondary);
+}
+.rma-ap__field label .req { color: var(--rma-blue); margin-left: 2px; }
+.rma-ap__field input,
+.rma-ap__field select,
+.rma-ap__field textarea {
+  font-family: var(--rma-font-body); font-size: 15px; color: var(--rma-text-primary);
+  background: var(--rma-offwhite);
+  border: 1.5px solid var(--rma-border); border-radius: var(--rma-radius-sm);
+  padding: 13px 16px; width: 100%;
+  transition: border-color var(--rma-duration) var(--rma-ease),
+              box-shadow var(--rma-duration) var(--rma-ease),
+              background-color var(--rma-duration) var(--rma-ease);
+}
+.rma-ap__field input::placeholder,
+.rma-ap__field textarea::placeholder { color: var(--rma-text-muted); }
+.rma-ap__field input:focus,
+.rma-ap__field select:focus,
+.rma-ap__field textarea:focus {
+  outline: none; border-color: var(--rma-blue);
+  box-shadow: 0 0 0 3px rgba(18, 56, 131, 0.1);
+  background: var(--rma-white);
+}
+.rma-ap__field textarea { min-height: 120px; resize: vertical; }
+.rma-ap__field select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23123883' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+  padding-right: 44px;
+}
+
+/* ── CHECKBOX GRID (reason for visit) ── */
+.rma-ap__check-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+}
+.rma-ap__check {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: var(--rma-radius-sm);
+  border: 1.5px solid var(--rma-border); background: var(--rma-offwhite);
+  cursor: pointer; transition: all var(--rma-duration) var(--rma-ease);
+  font-size: 14px; color: var(--rma-text-body);
+}
+.rma-ap__check:hover { border-color: rgba(18,56,131,0.3); background: var(--rma-white); }
+.rma-ap__check input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; border-radius: 4px;
+  border: 1.5px solid var(--rma-border); background: var(--rma-white);
+  cursor: pointer; flex-shrink: 0; position: relative;
+  transition: all var(--rma-duration) var(--rma-ease);
+}
+.rma-ap__check input[type="checkbox"]:checked {
+  background: var(--rma-blue); border-color: var(--rma-blue);
+}
+.rma-ap__check input[type="checkbox"]:checked::after {
+  content: ""; position: absolute;
+  left: 5px; top: 1.5px; width: 5px; height: 10px;
+  border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.rma-ap__check:has(input:checked) {
+  border-color: var(--rma-blue); background: var(--rma-blue-muted);
+  color: var(--rma-navy); font-weight: 500;
+}
+
+/* ── CONSENT ── */
+.rma-ap__consent {
+  font-size: 13px; line-height: 1.65; color: var(--rma-text-secondary);
+  background: var(--rma-blue-tint); border-radius: var(--rma-radius-sm);
+  padding: 14px 16px; margin-bottom: 24px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.rma-ap__consent input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; margin-top: 1px;
+  border: 1.5px solid var(--rma-border); background: var(--rma-white);
+  cursor: pointer; position: relative;
+}
+.rma-ap__consent input[type="checkbox"]:checked { background: var(--rma-blue); border-color: var(--rma-blue); }
+.rma-ap__consent input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 5px; top: 1.5px; width: 5px; height: 10px;
+  border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.rma-ap__consent a { color: var(--rma-blue); text-decoration: underline; }
+
+/* ── SUBMIT ── */
+.rma-ap__submit {
+  display: inline-flex; align-items: center; gap: 8px;
+  width: 100%; justify-content: center;
+  font-family: var(--rma-font-body); font-size: 16px; font-weight: 500;
+  padding: 16px 32px; border-radius: var(--rma-radius-sm);
+  border: 2px solid var(--rma-blue); background: var(--rma-blue);
+  color: var(--rma-white); cursor: pointer;
+  transition: background-color var(--rma-duration) var(--rma-ease),
+              border-color var(--rma-duration) var(--rma-ease),
+              transform var(--rma-duration) var(--rma-ease),
+              box-shadow var(--rma-duration) var(--rma-ease);
+}
+.rma-ap__submit:hover {
+  background: var(--rma-blue-hover); border-color: var(--rma-blue-hover);
+  transform: translateY(-1px); box-shadow: var(--rma-shadow-hover);
+}
+.rma-ap__submit svg { transition: transform var(--rma-duration) var(--rma-ease); }
+.rma-ap__submit:hover svg { transform: translateX(4px); }
+.rma-ap__sub-note {
+  text-align: center; font-size: 12.5px; color: var(--rma-text-muted);
+  margin: 14px 0 0; letter-spacing: 0.02em;
+}
+
+/* ── SIDEBAR ── */
+.rma-ap__side { display: grid; gap: 20px; }
+.rma-ap__side-card {
+  background: var(--rma-white);
+  border: 1px solid var(--rma-border);
+  border-radius: var(--rma-radius-lg);
+  padding: 28px;
+}
+.rma-ap__side-card--dark {
+  background: linear-gradient(165deg, var(--rma-navy) 0%, var(--rma-blue) 100%);
+  border-color: transparent; color: var(--rma-white);
+}
+.rma-ap__side-card h3 {
+  font-family: var(--rma-font-display); font-size: 20px;
+  color: var(--rma-navy); margin: 0 0 16px;
+}
+.rma-ap__side-card--dark h3 { color: var(--rma-white); }
+.rma-ap__phone-cta {
+  display: block; font-family: var(--rma-font-display);
+  font-size: 30px; color: var(--rma-white); text-decoration: none;
+  line-height: 1.1; margin: 8px 0 12px;
+}
+.rma-ap__phone-cta:hover { color: var(--rma-white); opacity: 0.92; }
+.rma-ap__phone-hours { font-size: 13px; color: var(--rma-text-on-dark-75); line-height: 1.6; }
+
+.rma-ap__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.rma-ap__list li {
+  display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start;
+  font-size: 14.5px; line-height: 1.6; color: var(--rma-text-body);
+}
+.rma-ap__list svg { color: var(--rma-blue); margin-top: 3px; }
+.rma-ap__list strong { color: var(--rma-navy); font-weight: 600; }
+
+.rma-ap__hours-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 10px 0; font-size: 14px; color: var(--rma-text-body);
+  border-bottom: 1px solid var(--rma-border-light);
+}
+.rma-ap__hours-row:last-child { border-bottom: 0; }
+.rma-ap__hours-row strong { color: var(--rma-navy); font-weight: 600; }
+
+/* ── TRUST STRIP (insurance) ── */
+.rma-ap__insurance {
+  background: var(--rma-offwhite);
+  border-top: 1px solid var(--rma-border-light);
+  border-bottom: 1px solid var(--rma-border-light);
+  padding: 48px 24px;
+}
+.rma-ap__insurance-inner {
+  max-width: 1180px; margin: 0 auto; text-align: center;
+}
+.rma-ap__insurance-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--rma-text-secondary);
+  margin-bottom: 18px;
+}
+.rma-ap__insurance-list {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 12px 28px; max-width: 900px; margin: 0 auto;
+}
+.rma-ap__insurance-list span {
+  font-family: var(--rma-font-display); font-size: 17px;
+  color: var(--rma-text-secondary); letter-spacing: -0.005em;
+}
+
+/* ── FAQ STRIP ── */
+.rma-ap__faq-strip {
+  max-width: 880px; margin: 0 auto; padding: 72px 24px 80px;
+}
+.rma-ap__faq-strip h2 {
+  font-family: var(--rma-font-display); font-size: clamp(26px, 3vw, 36px);
+  color: var(--rma-navy); margin: 0 0 8px; text-align: center;
+}
+.rma-ap__faq-strip > p {
+  text-align: center; color: var(--rma-text-secondary); font-size: 16px;
+  margin: 0 0 36px;
+}
+.rma-ap__faq-item {
+  background: var(--rma-white); border: 1px solid var(--rma-border);
+  border-radius: var(--rma-radius-md); margin-bottom: 12px;
+}
+.rma-ap__faq-item[open] { border-color: rgba(18,56,131,0.22); box-shadow: var(--rma-shadow-sm); }
+.rma-ap__faq-q {
+  font-family: var(--rma-font-display); font-size: 17px; color: var(--rma-navy);
+  padding: 18px 22px; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.rma-ap__faq-q::-webkit-details-marker { display: none; }
+.rma-ap__faq-icon {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--rma-blue-muted); color: var(--rma-blue);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform var(--rma-duration) var(--rma-ease), background var(--rma-duration) var(--rma-ease);
+}
+.rma-ap__faq-item[open] .rma-ap__faq-icon { transform: rotate(45deg); background: var(--rma-blue); color: var(--rma-white); }
+.rma-ap__faq-a { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.75; color: var(--rma-text-body); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .rma-ap__wrap { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .rma-ap__head { padding: 28px 18px 32px; }
+  .rma-ap__wrap { padding: 0 18px 56px; }
+  .rma-ap__row { grid-template-columns: 1fr; }
+  .rma-ap__check-grid { grid-template-columns: 1fr; }
+  .rma-ap__form-card { padding: 24px 20px; }
+  .rma-ap__crumb { padding: 16px 18px 0; }
+  .rma-ap__insurance { padding: 36px 18px; }
+  .rma-ap__faq-strip { padding: 48px 18px 56px; }
+  .rma-ap__faq-q { font-size: 16px; padding: 16px 18px; }
+  .rma-ap__faq-a { padding: 0 18px 18px; }
+}
+</style>
+
+
+<!-- ============================================================================
+     PAGE START
+     ============================================================================ -->
+<main class="rma-ap" itemscope itemtype="https://schema.org/ContactPage">
+
+  <!-- ─── BREADCRUMB ──────────────────────────────────────────────────────── -->
+  <nav class="rma-ap__crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span><span style="color: var(--rma-navy);">Request an Appointment</span>
+  </nav>
+
+  <!-- ─── PAGE HEADER ─────────────────────────────────────────────────────── -->
+  <header class="rma-ap__head">
+    <span class="rma-ap__label">Take the First Step</span>
+    <h1 class="rma-ap__title">Request your fertility consultation.</h1>
+    <p class="rma-ap__lede">
+      Tell us a little about you. A patient navigator responds within one business day, and most new patients are seen by a board-certified reproductive endocrinologist within 1–2 weeks.
+    </p>
+  </header>
+
+  <!-- ─── MAIN LAYOUT ─────────────────────────────────────────────────────── -->
+  <div class="rma-ap__wrap">
+
+    <!-- ── FORM CARD ── -->
+    <div class="rma-ap__form-card">
+      <h2>New Patient Request</h2>
+      <p>All fields with <span style="color: var(--rma-blue);">*</span> are required. Information is encrypted and HIPAA-compliant.</p>
+
+      <div class="rma-ap__progress" aria-hidden="true">
+        <span class="rma-ap__progress-dot is-active"></span>
+        <span>About You</span>
+        <span style="margin: 0 6px; opacity: 0.4;">·</span>
+        <span class="rma-ap__progress-dot"></span>
+        <span>Reason for Visit</span>
+        <span style="margin: 0 6px; opacity: 0.4;">·</span>
+        <span class="rma-ap__progress-dot"></span>
+        <span>Send</span>
+      </div>
+
+      <form action="/wp-admin/admin-post.php" method="post" novalidate>
+        <input type="hidden" name="action" value="rma_appointment_request">
+
+        <!-- About You -->
+        <div class="rma-ap__row">
+          <div class="rma-ap__field">
+            <label for="ap-first">First name <span class="req">*</span></label>
+            <input type="text" id="ap-first" name="first_name" autocomplete="given-name" required placeholder="Jane">
+          </div>
+          <div class="rma-ap__field">
+            <label for="ap-last">Last name <span class="req">*</span></label>
+            <input type="text" id="ap-last" name="last_name" autocomplete="family-name" required placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="rma-ap__row">
+          <div class="rma-ap__field">
+            <label for="ap-email">Email <span class="req">*</span></label>
+            <input type="email" id="ap-email" name="email" autocomplete="email" required placeholder="jane@example.com">
+          </div>
+          <div class="rma-ap__field">
+            <label for="ap-phone">Phone <span class="req">*</span></label>
+            <input type="tel" id="ap-phone" name="phone" autocomplete="tel" required placeholder="(248) 555-0100">
+          </div>
+        </div>
+
+        <div class="rma-ap__row">
+          <div class="rma-ap__field">
+            <label for="ap-dob">Date of birth</label>
+            <input type="date" id="ap-dob" name="dob" autocomplete="bday">
+          </div>
+          <div class="rma-ap__field">
+            <label for="ap-zip">ZIP code <span class="req">*</span></label>
+            <input type="text" id="ap-zip" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="10" required placeholder="48084">
+          </div>
+        </div>
+
+        <div class="rma-ap__row">
+          <div class="rma-ap__field">
+            <label for="ap-insurance">Primary insurance</label>
+            <select id="ap-insurance" name="insurance">
+              <option value="">Select your insurance</option>
+              <option>Blue Cross Blue Shield of Michigan</option>
+              <option>Priority Health</option>
+              <option>Aetna</option>
+              <option>Cigna</option>
+              <option>United Healthcare</option>
+              <option>HAP</option>
+              <option>Medicare</option>
+              <option>Self-pay</option>
+              <option>Other</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="rma-ap__field">
+            <label for="ap-physician">Preferred physician</label>
+            <select id="ap-physician" name="physician">
+              <option value="">No preference</option>
+              <option>Dr. Bradley Miller</option>
+              <option>Dr. Lynda Wolf</option>
+              <option>Dr. Jenny George</option>
+              <option>Dr. Annette Lee</option>
+              <option>Dr. Molly Moravek</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Reason for Visit -->
+        <div class="rma-ap__row rma-ap__row--single" style="margin-top: 28px;">
+          <div class="rma-ap__field">
+            <label>What brings you to RMA? <span class="req">*</span> <span style="font-weight: 400; color: var(--rma-text-muted); letter-spacing: 0;">(check all that apply)</span></label>
+            <div class="rma-ap__check-grid" role="group" aria-label="Reason for visit">
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="ivf"> IVF / advanced fertility</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="iui"> IUI / first-line treatment</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="egg-freezing"> Egg freezing / preservation</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="donor-egg"> Donor egg program</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="lgbtq"> LGBTQ+ family building</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="recurrent-loss"> Recurrent pregnancy loss</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="male-factor"> Male fertility evaluation</label>
+              <label class="rma-ap__check"><input type="checkbox" name="reason[]" value="second-opinion"> Second opinion</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rma-ap__row rma-ap__row--single">
+          <div class="rma-ap__field">
+            <label for="ap-notes">Anything else we should know? <span style="font-weight: 400; color: var(--rma-text-muted); letter-spacing: 0;">(optional)</span></label>
+            <textarea id="ap-notes" name="notes" placeholder="Prior treatment history, scheduling preferences, accessibility needs — whatever helps us prepare for your visit."></textarea>
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <label class="rma-ap__consent">
+          <input type="checkbox" name="consent" required>
+          <span>I consent to be contacted by RMA of Michigan about my appointment request. Submitting this form does not establish a physician-patient relationship. See our <a href="/privacy-policy/">Privacy Policy</a> and <a href="/notice-of-privacy-practices/">HIPAA Notice</a>.</span>
+        </label>
+
+        <button type="submit" class="rma-ap__submit">
+          Request My Consultation
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="rma-ap__sub-note">🔒 Encrypted submission · We respond within 1 business day</p>
+      </form>
+    </div>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="rma-ap__side" aria-label="Contact and scheduling info">
+
+      <div class="rma-ap__side-card rma-ap__side-card--dark">
+        <h3>Prefer to call?</h3>
+        <p style="font-size: 14px; color: var(--rma-text-on-dark-75); margin: 0 0 6px;">Speak with a patient navigator right now.</p>
+        <a href="tel:+12486193100" class="rma-ap__phone-cta">(248) 619-3100</a>
+        <p class="rma-ap__phone-hours">
+          Mon–Thu &nbsp;6:00 AM – 3:00 PM<br>
+          Friday &nbsp;6:00 AM – 1:00 PM<br>
+          Sat–Sun &nbsp;6:00 AM – 9:30 AM
+        </p>
+      </div>
+
+      <div class="rma-ap__side-card">
+        <h3>What happens next</h3>
+        <ul class="rma-ap__list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><strong>Within 1 business day —</strong> a patient navigator confirms receipt and answers any quick questions.</span>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><strong>Insurance verified —</strong> we run your benefits before you walk in, so finances are clear up front.</span>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><strong>First visit scheduled —</strong> typically within 1–2 weeks at our Troy clinic.</span>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><strong>Records uploaded —</strong> a secure portal link lets you send prior labs and imaging in advance.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="rma-ap__side-card">
+        <h3>Clinic hours</h3>
+        <div class="rma-ap__hours-row"><strong>Mon – Thu</strong><span>6:00 AM – 3:00 PM</span></div>
+        <div class="rma-ap__hours-row"><strong>Friday</strong><span>6:00 AM – 1:00 PM</span></div>
+        <div class="rma-ap__hours-row"><strong>Sat – Sun</strong><span>6:00 AM – 9:30 AM</span></div>
+        <p style="font-size: 13px; color: var(--rma-text-muted); margin: 14px 0 0; line-height: 1.6;">
+          Early morning monitoring designed to fit cycles around work and life.
+        </p>
+      </div>
+
+      <div class="rma-ap__side-card">
+        <h3>Visit us in Troy</h3>
+        <p style="font-size: 14.5px; color: var(--rma-text-body); margin: 0 0 14px; line-height: 1.65;">
+          130 Town Center Drive, Suite 106<br>Troy, MI 48084
+        </p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=130+Town+Center+Drive+Suite+106+Troy+MI+48084" target="_blank" rel="noopener"
+           style="display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color: var(--rma-blue); text-decoration:none;">
+          Get directions
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </aside>
+  </div>
+
+
+  <!-- ─── INSURANCE TRUST STRIP ───────────────────────────────────────────── -->
+  <section class="rma-ap__insurance" aria-label="Accepted insurance plans">
+    <div class="rma-ap__insurance-inner">
+      <p class="rma-ap__insurance-label">In-Network with Most Major Michigan Insurance</p>
+      <div class="rma-ap__insurance-list">
+        <span>Blue Cross Blue Shield</span>
+        <span>Priority Health</span>
+        <span>Aetna</span>
+        <span>Cigna</span>
+        <span>United Healthcare</span>
+        <span>HAP</span>
+      </div>
+      <p style="font-size: 13px; color: var(--rma-text-muted); margin: 18px 0 0;">
+        Don't see yours? <a href="tel:+12486193100" style="color: var(--rma-blue); font-weight: 500;">Call (248) 619-3100</a> — we verify all plans before your first visit.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ─── FAQ STRIP ───────────────────────────────────────────────────────── -->
+  <section class="rma-ap__faq-strip" aria-labelledby="rma-ap-faq-title">
+    <h2 id="rma-ap-faq-title">Common questions about your first visit</h2>
+    <p>Everything you need to know before requesting an appointment.</p>
+
+    <details class="rma-ap__faq-item" open>
+      <summary class="rma-ap__faq-q">
+        How quickly will I get a response?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">Our patient navigator responds within one business day. Most new patients are scheduled for a first consultation within 1–2 weeks of submitting this form.</div>
+    </details>
+
+    <details class="rma-ap__faq-item">
+      <summary class="rma-ap__faq-q">
+        What should I bring to my first appointment?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">Bring your insurance card, a photo ID, a list of current medications, and any prior fertility records, imaging, or labs. We'll send a secure portal link in advance so you can upload records ahead of time.</div>
+    </details>
+
+    <details class="rma-ap__faq-item">
+      <summary class="rma-ap__faq-q">
+        Will my insurance be verified first?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">Yes. Our financial counselors verify your benefits before your first visit and walk you through exactly what's covered, what isn't, and what your out-of-pocket estimate will be.</div>
+    </details>
+
+    <details class="rma-ap__faq-item">
+      <summary class="rma-ap__faq-q">
+        Do I need a referral?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">Most patients can self-refer and do not need a referral. Some HMO plans require one from your OB-GYN or primary care provider — we'll let you know when we verify your benefits.</div>
+    </details>
+
+    <details class="rma-ap__faq-item">
+      <summary class="rma-ap__faq-q">
+        Can my partner attend with me?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">Absolutely — we encourage it. Your partner is welcome at every visit, and we'll evaluate both partners as part of a comprehensive fertility workup when applicable.</div>
+    </details>
+
+    <details class="rma-ap__faq-item">
+      <summary class="rma-ap__faq-q">
+        Is this an emergency line?
+        <span class="rma-ap__faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </summary>
+      <div class="rma-ap__faq-a">No. This form is for new-patient appointment requests only. If you are an existing patient with an urgent medical concern, please call (248) 619-3100. If you are experiencing a medical emergency, call 911.</div>
+    </details>
+  </section>
+
+</main>
+<!-- ============================================================================
+     END · RMA OF MICHIGAN REQUEST APPOINTMENT
+     ============================================================================ -->
