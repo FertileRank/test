@@ -1,0 +1,99 @@
+/* =====================================================================
+   SpringCreek Fertility — site chrome  (scf-site.css)
+   STANDALONE SITE ONLY (header, nav, footer, body shell). Do NOT load this
+   into Elementor — the WordPress theme already provides header/footer.
+   Pairs with scf-components.css. No JavaScript: the mobile menu and
+   dropdowns use the CSS checkbox/:focus-within pattern.
+   ===================================================================== */
+:root {
+    --e-global-color-primary: #183356;
+    --e-global-color-secondary: #A7D8F1;
+    --e-global-color-text: #2D2D2D;
+    --e-global-color-accent: #90C962;
+    --e-global-color-bb9718b: #E7FFB9;
+    --e-global-color-bb34028: #0B1722;
+    --e-global-color-3a6416b: #E8EBED;
+    --e-global-color-f33a19d: #122333;
+    --e-global-color-b86a1f1: #E7EBED;
+    --e-global-color-dbe2b42: #FCF9F0;
+    --e-global-color-1d0b13d: #E9FFDB;
+    --e-global-color-126eaba: #60B9E5;
+    --e-global-color-7b4ed4e: #FFFFFF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: #2D2D2D; font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+.scf-skip { position: absolute; left: -999px; top: 0; background: #fff; color: #183356; padding: 10px 16px; z-index: 200; }
+.scf-skip:focus { left: 8px; top: 8px; }
+
+/* Announcement bar */
+.scf-anns { background: #0B1722; color: #fff; text-align: center; font-size: 14px; padding: 8px 16px; }
+.scf-anns a { color: #A7D8F1; font-weight: 600; }
+
+/* Header */
+.scf-header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #E7EBED; box-shadow: 0 2px 10px rgba(24,51,86,.06); }
+.scf-header__bar { max-width: 1200px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.scf-logo { font-family: "Lora", Georgia, serif; font-weight: 600; font-size: 23px; color: #183356; text-decoration: none; letter-spacing: -.3px; white-space: nowrap; }
+.scf-logo span { color: #90C962; }
+.scf-logo small { display: block; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #55606b; }
+
+/* Primary nav (desktop) */
+.scf-nav { display: flex; align-items: center; gap: 4px; }
+.scf-nav__item { position: relative; }
+.scf-nav__link { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; color: #183356; font-weight: 600; font-size: 15px; text-decoration: none; border-radius: 8px; }
+.scf-nav__link:hover { background: #E9FFDB; }
+.scf-nav__item--has > .scf-nav__link::after { content: "▾"; font-size: 11px; opacity: .7; }
+.scf-menu {
+    position: absolute; top: calc(100% + 6px); left: 0; min-width: 250px; background: #fff;
+    border: 1px solid #E7EBED; border-radius: 12px; box-shadow: 0 14px 34px rgba(24,51,86,.16);
+    padding: 8px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: .15s ease; z-index: 120;
+}
+.scf-nav__item--has:hover .scf-menu,
+.scf-nav__item--has:focus-within .scf-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.scf-menu a { display: block; padding: 9px 12px; color: #2D2D2D; font-size: 14.5px; text-decoration: none; border-radius: 8px; }
+.scf-menu a:hover { background: #F4F8FB; color: #183356; }
+.scf-menu strong { display: block; padding: 8px 12px 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: #55606b; }
+.scf-header__cta { background: #183356; color: #fff; font-weight: 600; padding: 11px 20px; border-radius: 999px; text-decoration: none; font-size: 15px; white-space: nowrap; }
+.scf-header__cta:hover { background: #122333; }
+
+/* Mobile menu toggle (checkbox hack, no JS) */
+.scf-navtoggle, .scf-navtoggle-lbl { display: none; }
+.scf-navtoggle-lbl { font-size: 26px; line-height: 1; color: #183356; cursor: pointer; padding: 4px 8px; border: 1px solid #E7EBED; border-radius: 8px; background: #fff; }
+
+@media (max-width: 1000px) {
+    .scf-navtoggle-lbl { display: inline-block; }
+    .scf-nav {
+        position: fixed; inset: 0 0 0 auto; width: min(86vw, 360px); background: #fff; flex-direction: column;
+        align-items: stretch; gap: 0; padding: 76px 16px 24px; box-shadow: -12px 0 40px rgba(11,23,34,.25);
+        transform: translateX(105%); transition: transform .2s ease; overflow-y: auto; z-index: 130;
+    }
+    .scf-navtoggle:checked ~ .scf-nav { transform: translateX(0); }
+    .scf-nav__item { width: 100%; }
+    .scf-nav__link { width: 100%; }
+    .scf-menu {
+        position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0;
+        border-left: 2px solid #E9FFDB; border-radius: 0; margin: 0 0 6px 14px; padding: 0; min-width: 0;
+    }
+    .scf-header__cta { display: none; }
+}
+
+/* Footer */
+.scf-footer { background: #0B1722; color: #cdd6df; font-size: 14.5px; }
+.scf-footer__top { max-width: 1140px; margin: 0 auto; padding: 56px 22px 36px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.scf-footer h4 { color: #fff; font-family: "Lora", Georgia, serif; font-size: 17px; margin: 0 0 14px; }
+.scf-footer a { color: #cdd6df; text-decoration: none; }
+.scf-footer a:hover { color: #A7D8F1; text-decoration: underline; }
+.scf-footer ul { list-style: none; margin: 0; padding: 0; }
+.scf-footer li { margin-bottom: 9px; }
+.scf-footer__brand .scf-logo { color: #fff; font-size: 22px; }
+.scf-footer__brand p { color: #9fb0bf; max-width: 320px; }
+.scf-footer__social a { display: inline-block; margin-right: 12px; color: #A7D8F1; font-weight: 600; }
+.scf-footer__bottom { border-top: 1px solid rgba(255,255,255,.1); }
+.scf-footer__bottom-in { max-width: 1140px; margin: 0 auto; padding: 18px 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #8395a4; font-size: 13px; }
+.scf-footer__bottom a { color: #8395a4; }
+@media (max-width: 920px) {
+    .scf-footer__top { grid-template-columns: 1fr 1fr; gap: 26px; }
+}
+@media (max-width: 560px) {
+    .scf-footer__top { grid-template-columns: 1fr; }
+}
