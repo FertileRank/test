@@ -15,8 +15,9 @@ and the practice's public clinical information.
 
 1. Edit the target page → add an **HTML** widget (Elementor Free) or a **Code/HTML** widget.
 2. Open the matching `.html` file, **copy the entire contents**, and paste into the widget.
-   Each block is fully self-contained: scoped CSS (`.scf-page` namespace) + markup + JSON-LD.
-   It will **not** collide with your theme or Elementor global styles.
+   Each block is fully self-contained: scoped CSS (`.scl` namespace) + markup + JSON-LD.
+   It will **not** collide with your theme, Elementor global styles, or the global
+   `.scf-*` utility classes.
 3. In the page's **SEO settings** (RankMath/Yoast) or **Elementor → Page Settings**, set the
    SEO Title, Meta Description, and Canonical URL listed in the comment block at the top of each
    file. (Meta tags can't live inside an HTML widget, so they must be set at the page level.)
@@ -24,6 +25,16 @@ and the practice's public clinical information.
 
 > Tip: build one page, then **save it as an Elementor Template** so the styling stays identical
 > across all four. Swap the in-page CSS for a single global CSS snippet later if you prefer.
+
+## Brand (Global CSS v2 — Navy / Blue / Green)
+
+These blocks are styled for the refreshed SpringCreek kit and **inherit your global tokens**
+(`--scf-navy`, `--scf-green`, `--scf-blue-soft`, `--scf-cream`, `--scf-font-display`,
+`--scf-fs-*`, navy-tinted shadows…) via `var(--token, fallback)`. Update a color or font once
+in Site Settings / Additional CSS and these pages follow automatically. Fonts are Playfair
+Display (headings), Open Sans (body), and Poppins (UI) — reused from the site kit, with
+system-font fallbacks if loaded standalone. Heroes use the navy ground / white type per spec;
+primary buttons are green with navy text.
 
 ## Verified NAP (source: Google Business Profiles, June 2026)
 
@@ -48,8 +59,9 @@ listings** — consistency is the single biggest local-ranking factor.
   structured data strengthen entity associations.
 - **YMYL / E-E-A-T** — Named, credentialed reproductive endocrinologists (`Physician` schema),
   physician-owned positioning, a medical disclaimer, and factual, non-promissory language.
-- **Performance (Core Web Vitals)** — No external libraries, **no web fonts** (system stack),
-  **no JavaScript** (native `<details>` accordions), lazy-loaded map iframe, lean scoped CSS.
+- **Performance (Core Web Vitals)** — No external libraries, **no JavaScript** (native
+  `<details>` accordions), **no `@import` / no extra font requests** (brand fonts are reused
+  from your site kit, with system-font fallbacks), lazy-loaded map iframe, lean scoped CSS.
 - **UX & CTR** — Sticky-clear CTAs, click-to-call `tel:` links, breadcrumbs, accessible focus
   states, `prefers-reduced-motion` support, and a fully responsive layout.
 
@@ -59,5 +71,7 @@ listings** — consistency is the single biggest local-ranking factor.
 - [ ] Confirm the physician roster per location (pages present the REI team as practice-wide).
 - [ ] Refresh `aggregateRating` values periodically to match live Google reviews.
 - [ ] Add internal links **to** these pages from your homepage, service pages, and footer.
+- [ ] Service-area city chips are easily editable — the Dayton page is framed around
+      "Greater Dayton" and lists "Fairborn"; adjust the city list to match your target areas.
 
 _Source data retrieved via Search Atlas (Google Business Profile + Local Search) on 2026-06-10._

@@ -1,173 +1,155 @@
 <!--
 ============================================================================
-  SpringCreek Fertility — DAYTON location page
+  SpringCreek Fertility — DAYTON location page  (Brand v2: Navy / Blue / Green)
   Permalink: /dayton-fertility-center/
   PASTE THIS ENTIRE BLOCK into an Elementor "HTML" widget (or Pro Code widget).
-  It is fully self-contained: scoped CSS + markup + JSON-LD structured data.
-  No external libraries, no web fonts, no JavaScript (uses native <details>).
 
-  SET THESE IN ELEMENTOR PAGE SETTINGS / RankMath / Yoast (cannot live in an HTML widget):
+  Inherits SpringCreek Global CSS v2 tokens (--scf-navy / --scf-green /
+  --scf-font-display / --scf-fs-* …) via var(--token, fallback), so it tracks
+  your site kit automatically AND still renders correctly if loaded standalone.
+  Internals are namespaced ".scl-*" so they never collide with the global
+  ".scf-*" utility classes (.scf-card/.scf-hero/.scf-btn/etc.).
+  Self-contained: scoped CSS + markup + JSON-LD. No libraries, no JS, no @import.
+
+  SET IN ELEMENTOR PAGE SETTINGS / RankMath / Yoast:
     • SEO Title:        Fertility Clinic in Dayton, Ohio | IVF & IUI | SpringCreek Fertility
     • Meta Description: Physician-owned fertility clinic in Dayton, OH. IVF, IUI, egg freezing &
                         infertility care from board-certified specialists. Call (937) 458-5084.
     • Canonical URL:    https://www.springcreekfertility.com/dayton-fertility-center/
-    • OG image:         a real photo of the Dayton clinic/team
   NOTE: aggregateRating reflects live Google reviews (June 2026). Refresh periodically.
 ============================================================================
 -->
-<div class="scf-page">
+<div class="scl">
 <style>
-.scf-page *{box-sizing:border-box}
-.scf-page{
-  --scf-primary:#1f7a6b;--scf-primary-dark:#155a4f;--scf-primary-soft:#e7f4f1;
-  --scf-accent:#d9744d;--scf-accent-soft:#fcefe7;
-  --scf-text:#21302c;--scf-text-soft:#566963;--scf-bg:#fff;--scf-bg-soft:#f4faf8;
-  --scf-border:#d9eae5;--scf-gold:#e0a32e;
-  --scf-shadow-sm:0 2px 10px rgba(21,90,79,.07);--scf-shadow-md:0 16px 40px rgba(21,90,79,.13);
-  --scf-radius:16px;--scf-maxw:1160px;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  color:var(--scf-text);line-height:1.65;background:var(--scf-bg);-webkit-font-smoothing:antialiased;
+.scl *{box-sizing:border-box}
+.scl{
+  --navy:var(--scf-navy,#183356);--navy-dark:var(--scf-navy-dark,#0f2238);
+  --blue-soft:var(--scf-blue-soft,#A7D8F1);--blue:var(--scf-blue,#60B9E5);
+  --green:var(--scf-green,#90C962);--green-dark:var(--scf-green-dark,#6fa844);
+  --green-pale:var(--scf-green-pale,#E7FFB9);--mint:var(--scf-green-mint,#E9FFDB);
+  --ink:var(--scf-ink,#2D2D2D);--cream:var(--scf-cream,#FCF9F0);--white:#fff;
+  --muted:var(--scf-gray-500,#5b6566);--border:var(--scf-gray-300,#d8dee0);
+  --f-display:var(--scf-font-display,"Playfair Display",Georgia,"Times New Roman",serif);
+  --f-body:var(--scf-font-body,"Open Sans","Poppins",system-ui,-apple-system,Segoe UI,Roboto,sans-serif);
+  --f-ui:var(--scf-font-ui,"Poppins","Open Sans",system-ui,sans-serif);
+  --radius:var(--scf-radius,12px);--radius-lg:var(--scf-radius-lg,20px);
+  --shadow-sm:var(--scf-shadow-sm,0 2px 8px rgba(24,51,86,.08));
+  --shadow:var(--scf-shadow,0 10px 30px rgba(24,51,86,.12));
+  --shadow-lg:var(--scf-shadow-lg,0 24px 60px rgba(24,51,86,.16));
+  --maxw:1160px;
+  font-family:var(--f-body);color:var(--ink);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased;
 }
-.scf-page img{max-width:100%;height:auto;display:block}
-.scf-page a{color:var(--scf-primary-dark);text-decoration:none}
-.scf-page a:hover{text-decoration:underline}
-.scf-wrap{max-width:var(--scf-maxw);margin:0 auto;padding:0 22px}
-.scf-page h1,.scf-page h2,.scf-page h3{line-height:1.18;letter-spacing:-.4px;margin:0 0 .5em;color:var(--scf-primary-dark)}
-.scf-page p{margin:0 0 1em}
-.scf-icon{width:1em;height:1em;flex:0 0 auto;display:inline-block;vertical-align:-.12em}
-/* breadcrumb */
-.scf-breadcrumb{font-size:13px;color:var(--scf-text-soft);padding:16px 0 0}
-.scf-breadcrumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.scf-breadcrumb li::after{content:"›";margin-left:6px;color:#9fb5ae}
-.scf-breadcrumb li:last-child::after{content:""}
-.scf-breadcrumb a{color:var(--scf-text-soft)}
-/* hero */
-.scf-hero{background:linear-gradient(160deg,var(--scf-primary-soft) 0%,#fff 62%);padding:8px 0 54px}
-.scf-eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--scf-border);
-  color:var(--scf-primary-dark);padding:7px 15px;border-radius:999px;font-weight:700;font-size:13px;
-  text-transform:uppercase;letter-spacing:.6px;margin:22px 0 18px;box-shadow:var(--scf-shadow-sm)}
-.scf-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--scf-accent)}
-.scf-hero h1{font-size:clamp(31px,4.6vw,50px);font-weight:800;letter-spacing:-1px;max-width:16ch}
-.scf-hero h1 em{font-style:normal;color:var(--scf-primary)}
-.scf-lead{font-size:clamp(17px,1.7vw,20px);color:var(--scf-text-soft);max-width:60ch;margin-bottom:22px}
-.scf-trust{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 26px;font-size:14.5px;color:var(--scf-text-soft);font-weight:600}
-.scf-trust .scf-i{display:inline-flex;align-items:center;gap:7px}
-.scf-stars{color:var(--scf-gold);letter-spacing:1px;font-size:15px}
-.scf-trust b{color:var(--scf-text)}
-.scf-cta-row{display:flex;flex-wrap:wrap;gap:14px}
-/* buttons */
-.scf-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font-weight:700;border-radius:999px;
-  padding:15px 28px;font-size:16px;border:2px solid transparent;cursor:pointer;text-align:center;
-  transition:transform .15s ease,box-shadow .15s ease,background .15s ease,border-color .15s ease}
-.scf-btn:hover{text-decoration:none;transform:translateY(-2px)}
-.scf-btn--primary{background:var(--scf-primary);color:#fff;box-shadow:var(--scf-shadow-md)}
-.scf-btn--primary:hover{background:var(--scf-primary-dark);color:#fff}
-.scf-btn--call{background:#fff;color:var(--scf-primary-dark);border-color:var(--scf-border)}
-.scf-btn--call:hover{border-color:var(--scf-primary)}
-.scf-btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
-.scf-btn--ghost:hover{background:rgba(255,255,255,.12);color:#fff}
-/* sections */
-.scf-section{padding:56px 0}
-.scf-section--soft{background:var(--scf-bg-soft)}
-.scf-kicker{display:block;text-transform:uppercase;letter-spacing:1.4px;font-size:12.5px;font-weight:800;color:var(--scf-accent);margin-bottom:10px}
-.scf-section h2{font-size:clamp(25px,3vw,34px);max-width:24ch}
-.scf-section .intro{font-size:17.5px;color:var(--scf-text-soft);max-width:65ch}
-/* key facts */
-.scf-keyfacts{background:#fff;border:1px solid var(--scf-border);border-left:5px solid var(--scf-primary);
-  border-radius:var(--scf-radius);padding:26px 28px;box-shadow:var(--scf-shadow-sm);margin-top:30px}
-.scf-keyfacts p{font-size:17px;color:var(--scf-text);margin-bottom:18px}
-.scf-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 28px;margin:0}
-.scf-facts div{margin:0}
-.scf-facts dt{font-size:12px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;color:var(--scf-text-soft)}
-.scf-facts dd{margin:3px 0 0;font-weight:600;color:var(--scf-text)}
-/* info grid (address / hours / map) */
-.scf-info__grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
-.scf-card{background:#fff;border:1px solid var(--scf-border);border-radius:var(--scf-radius);padding:26px;box-shadow:var(--scf-shadow-sm)}
-.scf-card h3{display:flex;align-items:center;gap:10px;font-size:19px;margin-bottom:14px}
-.scf-card h3 .scf-icon{color:var(--scf-primary);width:20px;height:20px}
-.scf-card address{font-style:normal;color:var(--scf-text);font-size:16px;line-height:1.7}
-.scf-card .scf-sub{color:var(--scf-text-soft);font-size:14.5px;margin:10px 0 16px}
-.scf-card .scf-inline-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.scf-mini{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14.5px;background:var(--scf-primary-soft);
-  color:var(--scf-primary-dark);padding:9px 16px;border-radius:999px}
-.scf-mini:hover{background:#d8efe9;text-decoration:none}
-.scf-hours{width:100%;border-collapse:collapse;font-size:15.5px}
-.scf-hours th,.scf-hours td{text-align:left;padding:7px 0;border-bottom:1px solid var(--scf-border)}
-.scf-hours td{text-align:right;font-weight:600}
-.scf-hours tr:last-child th,.scf-hours tr:last-child td{border-bottom:0}
-.scf-hours .closed{color:var(--scf-text-soft);font-weight:600}
-.scf-map{margin-top:24px;border-radius:var(--scf-radius);overflow:hidden;border:1px solid var(--scf-border);box-shadow:var(--scf-shadow-sm)}
-.scf-map iframe{width:100%;height:340px;border:0;display:block}
-/* services */
-.scf-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
-.scf-service{background:#fff;border:1px solid var(--scf-border);border-radius:var(--scf-radius);padding:24px;
-  box-shadow:var(--scf-shadow-sm);transition:transform .18s ease,box-shadow .18s ease}
-.scf-service:hover{transform:translateY(-4px);box-shadow:var(--scf-shadow-md)}
-.scf-service__ic{width:46px;height:46px;border-radius:12px;background:var(--scf-primary-soft);color:var(--scf-primary-dark);
-  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.scf-service__ic .scf-icon{width:24px;height:24px}
-.scf-service h3{font-size:18px;margin-bottom:7px}
-.scf-service p{font-size:15px;color:var(--scf-text-soft);margin:0}
-/* why / features */
-.scf-why__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 34px;margin-top:30px}
-.scf-feature{display:flex;gap:15px;align-items:flex-start}
-.scf-feature__ic{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--scf-accent-soft);color:var(--scf-accent);
-  display:flex;align-items:center;justify-content:center}
-.scf-feature__ic .scf-icon{width:21px;height:21px}
-.scf-feature h3{font-size:17.5px;margin-bottom:5px}
-.scf-feature p{font-size:15px;color:var(--scf-text-soft);margin:0}
-/* team */
-.scf-team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px}
-.scf-doc{background:#fff;border:1px solid var(--scf-border);border-radius:var(--scf-radius);padding:26px;box-shadow:var(--scf-shadow-sm)}
-.scf-doc__name{font-size:20px;margin-bottom:3px}
-.scf-doc__role{display:inline-block;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
-  color:var(--scf-primary);background:var(--scf-primary-soft);padding:5px 12px;border-radius:999px;margin-bottom:13px}
-.scf-doc p{font-size:15px;color:var(--scf-text-soft);margin:0}
-/* service area chips */
-.scf-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.scf-chip{background:#fff;border:1px solid var(--scf-border);border-radius:999px;padding:9px 17px;font-size:14.5px;
-  font-weight:600;color:var(--scf-text)}
-/* faq */
-.scf-faq{max-width:820px;margin:30px auto 0}
-.scf-faq__item{background:#fff;border:1px solid var(--scf-border);border-radius:12px;margin-bottom:14px;overflow:hidden}
-.scf-faq__item summary{cursor:pointer;list-style:none;padding:20px 22px;font-weight:700;font-size:17px;color:var(--scf-primary-dark);
-  display:flex;justify-content:space-between;align-items:center;gap:16px}
-.scf-faq__item summary::-webkit-details-marker{display:none}
-.scf-faq__item summary::after{content:"+";font-size:24px;font-weight:400;color:var(--scf-primary);transition:transform .2s ease;line-height:1}
-.scf-faq__item[open] summary::after{transform:rotate(45deg)}
-.scf-faq__a{padding:0 22px 20px;color:var(--scf-text-soft);font-size:15.5px}
-.scf-faq__a p{margin:0}
-/* cta band */
-.scf-cta{background:linear-gradient(135deg,var(--scf-primary) 0%,var(--scf-primary-dark) 100%);color:#fff;
-  border-radius:22px;padding:48px 40px;text-align:center;margin:56px auto;max-width:var(--scf-maxw);
-  box-shadow:var(--scf-shadow-md)}
-.scf-cta h2{color:#fff;font-size:clamp(24px,3vw,33px);max-width:22ch;margin:0 auto .5em}
-.scf-cta p{color:rgba(255,255,255,.92);font-size:17.5px;max-width:54ch;margin:0 auto 26px}
-.scf-cta .scf-cta-row{justify-content:center}
-.scf-cta .scf-btn--primary{background:#fff;color:var(--scf-primary-dark);box-shadow:0 12px 30px rgba(0,0,0,.18)}
-.scf-cta .scf-btn--primary:hover{background:#f1fbf8;color:var(--scf-primary-dark)}
-/* disclaimer */
-.scf-disclaimer{max-width:var(--scf-maxw);margin:0 auto;padding:0 22px 50px}
-.scf-disclaimer p{font-size:13px;color:#8aa099;border-top:1px solid var(--scf-border);padding-top:20px;margin:0}
-/* focus + motion */
-.scf-page a:focus-visible,.scf-page summary:focus-visible,.scf-btn:focus-visible{outline:3px solid var(--scf-accent);outline-offset:3px;border-radius:8px}
-@media (prefers-reduced-motion:reduce){.scf-page *{transition:none!important;scroll-behavior:auto!important}}
-/* responsive */
-@media (max-width:860px){
-  .scf-info__grid,.scf-grid-3,.scf-why__grid,.scf-team__grid{grid-template-columns:1fr}
-  .scf-section{padding:44px 0}
-  .scf-cta{padding:40px 24px;border-radius:18px}
-}
-@media (max-width:560px){
-  .scf-grid-3{grid-template-columns:1fr}
-  .scf-btn{width:100%}
-  .scf-cta-row{flex-direction:column}
-}
+.scl img{max-width:100%;height:auto;display:block}
+.scl-wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.scl h1,.scl h2,.scl h3{font-family:var(--f-display);line-height:1.18;letter-spacing:-.01em;margin:0 0 .5em;color:var(--navy);font-weight:700}
+.scl p{margin:0 0 1em}
+.scl-icon{width:1em;height:1em;flex:0 0 auto;display:inline-block;vertical-align:-.12em}
+.scl-breadcrumb{font-family:var(--f-ui);font-size:13px;color:var(--muted);padding:16px 0 0}
+.scl-breadcrumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.scl-breadcrumb li::after{content:"›";margin-left:6px;color:#9aa6a8}
+.scl-breadcrumb li:last-child::after{content:""}
+.scl-breadcrumb a{color:var(--muted);text-decoration:none}
+.scl-breadcrumb a:hover{color:var(--navy)}
+.scl-hero{background:var(--navy);color:var(--white);padding:10px 0 56px}
+.scl-hero :is(h1,h2,h3){color:var(--white)}
+.scl-eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);
+  color:#fff;padding:7px 16px;border-radius:999px;font-family:var(--f-ui);font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.08em;margin:22px 0 18px}
+.scl-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.scl-hero h1{font-size:var(--scf-fs-h1,clamp(2.25rem,1.6rem + 2.6vw,3.5rem));max-width:16ch}
+.scl-hero h1 em{font-style:normal;color:var(--blue-soft)}
+.scl-lead{font-size:clamp(1.05rem,1rem + .4vw,1.3rem);color:rgba(255,255,255,.86);max-width:60ch;margin-bottom:22px}
+.scl-lead strong{color:#fff;font-weight:700}
+.scl-trust{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 26px;font-family:var(--f-ui);font-size:14px;color:rgba(255,255,255,.85);font-weight:600}
+.scl-trust .i{display:inline-flex;align-items:center;gap:7px}
+.scl-stars{color:var(--green);letter-spacing:1px;font-size:15px}
+.scl-trust b{color:#fff}
+.scl-cta-row{display:flex;flex-wrap:wrap;gap:14px}
+.scl-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font-family:var(--f-ui);font-weight:600;
+  border-radius:999px;padding:14px 28px;font-size:16px;border:2px solid transparent;cursor:pointer;text-align:center;
+  text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,transform .2s,box-shadow .2s}
+.scl-btn:hover{text-decoration:none;transform:translateY(-2px)}
+.scl-btn--primary{background:var(--green);color:var(--navy);border-color:var(--green);box-shadow:var(--shadow-sm)}
+.scl-btn--primary:hover{background:var(--green-dark);border-color:var(--green-dark);color:#fff;box-shadow:var(--shadow)}
+.scl-btn--light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.scl-btn--light:hover{background:#fff;color:var(--navy);border-color:#fff}
+.scl-section{padding:56px 0}
+.scl-section--soft{background:var(--mint)}
+.scl-section--cream{background:var(--cream)}
+.scl-kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-ui);text-transform:uppercase;letter-spacing:.12em;
+  font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.scl-kicker::before{content:"";width:20px;height:3px;border-radius:2px;background:var(--green)}
+.scl-section h2{font-size:var(--scf-fs-h2,clamp(1.75rem,1.3rem + 1.8vw,2.5rem));max-width:24ch}
+.scl-section .intro{font-size:1.08rem;color:var(--ink);max-width:65ch}
+.scl-keyfacts{background:#fff;border-radius:var(--radius-lg);padding:26px 28px;box-shadow:var(--shadow-lg);margin-top:32px;border-top:4px solid var(--green)}
+.scl-keyfacts p{font-size:1.05rem;color:var(--ink);margin-bottom:18px}
+.scl-keyfacts p strong{color:var(--navy)}
+.scl-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 28px;margin:0}
+.scl-facts div{margin:0}
+.scl-facts dt{font-family:var(--f-ui);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted)}
+.scl-facts dd{margin:3px 0 0;font-weight:600;color:var(--navy)}
+.scl-facts dd a{color:var(--navy)}
+.scl-info__grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+.scl-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow-sm)}
+.scl-card h3{display:flex;align-items:center;gap:10px;font-size:1.3rem;margin-bottom:14px}
+.scl-card h3 .scl-icon{color:var(--green-dark);width:22px;height:22px}
+.scl-card address{font-style:normal;color:var(--ink);font-size:1rem;line-height:1.7}
+.scl-sub{color:var(--muted);font-size:.95rem;margin:10px 0 16px}
+.scl-inline-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.scl-mini{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-ui);font-weight:600;font-size:14px;background:var(--mint);
+  color:var(--navy);padding:9px 16px;border-radius:999px;text-decoration:none}
+.scl-mini:hover{background:var(--green-pale);text-decoration:none;color:var(--navy)}
+.scl-hours{width:100%;border-collapse:collapse;font-size:1rem}
+.scl-hours th,.scl-hours td{text-align:left;padding:7px 0;border-bottom:1px solid var(--border)}
+.scl-hours th{font-weight:600;color:var(--navy)}
+.scl-hours td{text-align:right;font-weight:600;color:var(--ink)}
+.scl-hours tr:last-child th,.scl-hours tr:last-child td{border-bottom:0}
+.scl-hours .closed{color:var(--muted)}
+.scl-map{margin-top:24px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.scl-map iframe{width:100%;height:340px;border:0;display:block}
+.scl-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+.scl-service{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+.scl-service:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.scl-service__ic{width:48px;height:48px;border-radius:12px;background:var(--mint);color:var(--green-dark);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.scl-service__ic .scl-icon{width:24px;height:24px}
+.scl-service h3{font-size:1.15rem;margin-bottom:7px}
+.scl-service p{font-size:.97rem;color:var(--ink);margin:0}
+.scl-why__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 34px;margin-top:30px}
+.scl-feature{display:flex;gap:15px;align-items:flex-start}
+.scl-feature__ic{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--blue-soft);color:var(--navy);display:flex;align-items:center;justify-content:center}
+.scl-feature__ic .scl-icon{width:22px;height:22px}
+.scl-feature h3{font-size:1.12rem;margin-bottom:5px}
+.scl-feature p{font-size:.97rem;color:var(--ink);margin:0}
+.scl-team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px}
+.scl-doc{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow-sm)}
+.scl-doc__name{font-family:var(--f-display);font-size:1.35rem;margin-bottom:4px;color:var(--navy)}
+.scl-doc__role{display:inline-block;font-family:var(--f-ui);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);background:var(--green-pale);padding:5px 12px;border-radius:999px;margin-bottom:13px}
+.scl-doc p{font-size:.97rem;color:var(--ink);margin:0}
+.scl-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.scl-chip{background:#fff;border:1px solid var(--border);border-radius:999px;padding:9px 17px;font-family:var(--f-ui);font-size:14px;font-weight:600;color:var(--navy)}
+.scl-faq{max-width:820px;margin:30px auto 0}
+.scl-faq__item{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.scl-faq__item summary{cursor:pointer;list-style:none;padding:20px 22px;font-family:var(--f-ui);font-weight:600;font-size:1.05rem;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.scl-faq__item summary::-webkit-details-marker{display:none}
+.scl-faq__item summary::after{content:"+";font-size:24px;font-weight:400;color:var(--green-dark);transition:transform .2s;line-height:1}
+.scl-faq__item[open] summary::after{transform:rotate(45deg)}
+.scl-faq__item summary:focus-visible{outline:3px solid var(--navy);outline-offset:-3px;border-radius:8px}
+.scl-faq__a{padding:0 22px 20px;color:var(--ink);font-size:1rem}
+.scl-faq__a p{margin:0}
+.scl-cta{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);color:#fff;border-radius:var(--radius-lg);padding:48px 40px;text-align:center;margin:56px auto;max-width:var(--maxw);box-shadow:var(--shadow)}
+.scl-cta h2{color:#fff;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.25rem);max-width:22ch;margin:0 auto .5em}
+.scl-cta p{color:rgba(255,255,255,.9);font-size:1.08rem;max-width:54ch;margin:0 auto 26px}
+.scl-cta .scl-cta-row{justify-content:center}
+.scl-disclaimer{max-width:var(--maxw);margin:0 auto;padding:0 22px 50px}
+.scl-disclaimer p{font-size:12.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px;margin:0}
+@media (prefers-reduced-motion:reduce){.scl *{transition:none!important}}
+@media (max-width:860px){.scl-info__grid,.scl-grid-3,.scl-why__grid,.scl-team__grid{grid-template-columns:1fr}.scl-section{padding:44px 0}.scl-cta{padding:40px 24px}}
+@media (max-width:560px){.scl-grid-3{grid-template-columns:1fr}.scl-btn{width:100%}.scl-cta-row{flex-direction:column}}
 </style>
 
 <!-- ============ BREADCRUMB ============ -->
-<nav class="scf-breadcrumb" aria-label="Breadcrumb">
-  <div class="scf-wrap">
+<nav class="scl-breadcrumb" aria-label="Breadcrumb">
+  <div class="scl-wrap">
     <ol>
       <li><a href="https://www.springcreekfertility.com/">Home</a></li>
       <li><a href="https://www.springcreekfertility.com/locations/">Locations</a></li>
@@ -177,30 +159,30 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<header class="scf-hero">
-  <div class="scf-wrap">
-    <span class="scf-eyebrow"><span class="dot"></span> SpringCreek Fertility · Dayton, Ohio</span>
+<header class="scl-hero">
+  <div class="scl-wrap">
+    <span class="scl-eyebrow"><span class="dot"></span> SpringCreek Fertility · Dayton, Ohio</span>
     <h1>Fertility Clinic in <em>Dayton, Ohio</em></h1>
-    <p class="scf-lead">Physician-owned, deeply personal fertility care in the heart of the Miami Valley. From your first evaluation through advanced <strong>IVF in Dayton, Ohio</strong>, our board-certified reproductive specialists walk beside you at every step of the journey to parenthood.</p>
-    <div class="scf-trust">
-      <span class="scf-i"><span class="scf-stars" aria-hidden="true">★★★★★</span> <b>4.5</b>&nbsp;· 175+ Google reviews</span>
-      <span class="scf-i">🏥 <b>Physician-owned</b></span>
-      <span class="scf-i">📍 Serving the Miami Valley since 2014</span>
+    <p class="scl-lead">Physician-owned, deeply personal fertility care in the heart of Greater Dayton. From your first evaluation through advanced <strong>IVF in Dayton, Ohio</strong>, our board-certified reproductive specialists walk beside you at every step of the journey to parenthood.</p>
+    <div class="scl-trust">
+      <span class="i"><span class="scl-stars" aria-hidden="true">★★★★★</span> <b>4.5</b>&nbsp;· 175+ Google reviews</span>
+      <span class="i">🏥 <b>Physician-owned</b></span>
+      <span class="i">📍 Serving Greater Dayton since 2014</span>
     </div>
-    <div class="scf-cta-row">
-      <a class="scf-btn scf-btn--primary" href="https://www.springcreekfertility.com/appointment/">Schedule a Consultation
-        <svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div class="scl-cta-row">
+      <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/appointment/">Schedule a Consultation
+        <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="scf-btn scf-btn--call" href="tel:+19374585084">
-        <svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a class="scl-btn scl-btn--light" href="tel:+19374585084">
+        <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         Call (937) 458-5084
       </a>
     </div>
 
     <!-- KEY FACTS (AI Overview / featured-snippet friendly) -->
-    <div class="scf-keyfacts">
-      <p><strong>SpringCreek Fertility’s Dayton center</strong> is the only physician-owned fertility clinic in the Miami Valley, located at <strong>7095 Clyo Road, Dayton, OH 45459</strong>. The clinic provides infertility evaluations, IUI, IVF, egg freezing, and embryo freezing, and is open Monday–Friday, 7:00&nbsp;AM–4:00&nbsp;PM.</p>
-      <dl class="scf-facts">
+    <div class="scl-keyfacts">
+      <p><strong>SpringCreek Fertility’s Dayton center</strong> is the only physician-owned fertility clinic in Greater Dayton, located at <strong>7095 Clyo Road, Dayton, OH 45459</strong>. The clinic provides infertility evaluations, IUI, IVF, egg freezing, and embryo freezing, and is open Monday–Friday, 7:00&nbsp;AM–4:00&nbsp;PM.</p>
+      <dl class="scl-facts">
         <div><dt>Address</dt><dd>7095 Clyo Road, Dayton, OH 45459</dd></div>
         <div><dt>Phone</dt><dd><a href="tel:+19374585084">(937) 458-5084</a></dd></div>
         <div><dt>Hours</dt><dd>Mon–Fri, 7:00 AM – 4:00 PM</dd></div>
@@ -212,86 +194,86 @@
 </header>
 
 <!-- ============ INTRO + INFO/MAP ============ -->
-<section class="scf-section">
-  <div class="scf-wrap">
-    <span class="scf-kicker">Welcome to SpringCreek Dayton</span>
+<section class="scl-section">
+  <div class="scl-wrap">
+    <span class="scl-kicker">Welcome to SpringCreek Dayton</span>
     <h2>Compassionate, doctor-led fertility care close to home</h2>
-    <p class="intro">If you’ve been searching for a trusted <strong>fertility clinic in Dayton</strong>, you don’t have to navigate the path to parenthood alone. As Dayton’s only physician-owned fertility practice, every treatment plan at SpringCreek is designed and overseen by your reproductive endocrinologist — never handed off. We pair leading-edge reproductive technology with the warmth, transparency, and continuity of care that families across the Miami Valley deserve.</p>
+    <p class="intro">If you’ve been searching for a trusted <strong>fertility clinic in Dayton</strong>, you don’t have to navigate the path to parenthood alone. As Dayton’s only physician-owned fertility practice, every treatment plan at SpringCreek is designed and overseen by your reproductive endocrinologist — never handed off. We pair leading-edge reproductive technology with the warmth, transparency, and continuity of care that families across Greater Dayton deserve.</p>
 
-    <div class="scf-info__grid">
-      <div class="scf-card">
-        <h3><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Visit the Dayton Center</h3>
+    <div class="scl-info__grid">
+      <div class="scl-card">
+        <h3><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Visit the Dayton Center</h3>
         <address>
           <strong>SpringCreek Fertility</strong><br>
           7095 Clyo Road<br>
           Dayton, OH 45459
         </address>
-        <p class="scf-sub">Conveniently located in Washington Township near Centerville &amp; Kettering, just off I-675 with free on-site parking.</p>
-        <div class="scf-inline-cta">
-          <a class="scf-mini" href="https://www.google.com/maps/dir/?api=1&destination=7095+Clyo+Road,+Dayton,+OH+45459">
-            <svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Get Directions
+        <p class="scl-sub">Conveniently located in Washington Township near Centerville &amp; Kettering, just off I-675 with free on-site parking.</p>
+        <div class="scl-inline-cta">
+          <a class="scl-mini" href="https://www.google.com/maps/dir/?api=1&destination=7095+Clyo+Road,+Dayton,+OH+45459">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Get Directions
           </a>
-          <a class="scf-mini" href="https://maps.google.com/maps?cid=18159921280155251830">
-            <svg class="scf-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg> Read Google Reviews
+          <a class="scl-mini" href="https://maps.google.com/maps?cid=18159921280155251830">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg> Read Google Reviews
           </a>
         </div>
       </div>
-      <div class="scf-card">
-        <h3><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Hours &amp; Contact</h3>
-        <table class="scf-hours">
+      <div class="scl-card">
+        <h3><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Hours &amp; Contact</h3>
+        <table class="scl-hours">
           <tr><th scope="row">Monday – Friday</th><td>7:00 AM – 4:00 PM</td></tr>
           <tr><th scope="row">Saturday</th><td class="closed">Closed</td></tr>
           <tr><th scope="row">Sunday</th><td class="closed">Closed</td></tr>
         </table>
-        <p class="scf-sub" style="margin-top:16px">New &amp; existing patients: <a href="tel:+19374585084"><strong>(937) 458-5084</strong></a><br>An appointment is required — same-week consultations are often available.</p>
-        <div class="scf-inline-cta">
-          <a class="scf-mini" href="https://www.springcreekfertility.com/appointment/">
-            <svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Online
+        <p class="scl-sub" style="margin-top:16px">New &amp; existing patients: <a href="tel:+19374585084"><strong>(937) 458-5084</strong></a><br>An appointment is required — same-week consultations are often available.</p>
+        <div class="scl-inline-cta">
+          <a class="scl-mini" href="https://www.springcreekfertility.com/appointment/">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Book Online
           </a>
         </div>
       </div>
     </div>
 
-    <div class="scf-map">
+    <div class="scl-map">
       <iframe title="Map to SpringCreek Fertility, 7095 Clyo Road, Dayton, OH 45459" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=SpringCreek%20Fertility,%207095%20Clyo%20Road,%20Dayton,%20OH%2045459&output=embed"></iframe>
     </div>
   </div>
 </section>
 
 <!-- ============ SERVICES ============ -->
-<section class="scf-section scf-section--soft">
-  <div class="scf-wrap">
-    <span class="scf-kicker">Fertility Services in Dayton</span>
+<section class="scl-section scl-section--soft">
+  <div class="scl-wrap">
+    <span class="scl-kicker">Fertility Services in Dayton</span>
     <h2>Comprehensive reproductive care, all under one roof</h2>
     <p class="intro">From your first fertility evaluation to advanced assisted reproduction, our Dayton clinic offers the full spectrum of treatment — with an on-site IVF laboratory so your care stays seamless and coordinated.</p>
-    <div class="scf-grid-3">
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+    <div class="scl-grid-3">
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
         <h3>In Vitro Fertilization (IVF)</h3>
         <p>Personalized IVF in Dayton, Ohio with an on-site embryology lab and protocols tailored to your diagnosis and goals.</p>
       </article>
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-9.33C1.2 8.5 2.8 5 6 5c2 0 3.3 1.2 4 2.3C10.7 6.2 12 5 14 5c3.2 0 4.8 3.5 3.33 6.67C19 16.65 12 21 12 21z"/></svg></div>
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-9.33C1.2 8.5 2.8 5 6 5c2 0 3.3 1.2 4 2.3C10.7 6.2 12 5 14 5c3.2 0 4.8 3.5 3.33 6.67C19 16.65 12 21 12 21z"/></svg></div>
         <h3>Intrauterine Insemination (IUI)</h3>
         <p>A gentle, lower-cost first-line treatment that places prepared sperm directly in the uterus to boost your chances.</p>
       </article>
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M5 8l7-4 7 4M5 16l7 4 7-4"/></svg></div>
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M5 8l7-4 7 4M5 16l7 4 7-4"/></svg></div>
         <h3>Fertility Evaluation &amp; Testing</h3>
         <p>Thorough diagnostic testing for both partners to uncover the “why” and build a clear, confident plan forward.</p>
       </article>
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg></div>
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg></div>
         <h3>Egg &amp; Embryo Freezing</h3>
         <p>Preserve your future options with advanced vitrification for elective, medical, or family-planning reasons.</p>
       </article>
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Genetic Testing (PGT)</h3>
         <p>Preimplantation genetic testing to support healthy pregnancies and informed, empowered family planning.</p>
       </article>
-      <article class="scf-service">
-        <div class="scf-service__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+      <article class="scl-service">
+        <div class="scl-service__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
         <h3>Donor &amp; Third-Party</h3>
         <p>Compassionate guidance through egg donation, sperm donation, and gestational surrogacy pathways.</p>
       </article>
@@ -300,25 +282,25 @@
 </section>
 
 <!-- ============ WHY DAYTON ============ -->
-<section class="scf-section">
-  <div class="scf-wrap">
-    <span class="scf-kicker">Why Families Choose SpringCreek Dayton</span>
-    <h2>The Miami Valley’s only physician-owned fertility clinic</h2>
-    <div class="scf-why__grid">
-      <div class="scf-feature">
-        <div class="scf-feature__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+<section class="scl-section">
+  <div class="scl-wrap">
+    <span class="scl-kicker">Why Families Choose SpringCreek Dayton</span>
+    <h2>Greater Dayton’s only physician-owned fertility clinic</h2>
+    <div class="scl-why__grid">
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
         <div><h3>Doctor-led from day one</h3><p>Your reproductive endocrinologist personally directs your care — you’re never passed off to a rotating cast of providers.</p></div>
       </div>
-      <div class="scf-feature">
-        <div class="scf-feature__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg></div>
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg></div>
         <div><h3>Advanced on-site IVF lab</h3><p>State-of-the-art embryology and cryopreservation keep your treatment under one roof and one expert team.</p></div>
       </div>
-      <div class="scf-feature">
-        <div class="scf-feature__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg></div>
-        <div><h3>Trusted by Dayton families</h3><p>A 4.5-star reputation built on 175+ Google reviews from real Miami Valley patients we’ve had the honor to help.</p></div>
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg></div>
+        <div><h3>Trusted by Dayton families</h3><p>A 4.5-star reputation built on 175+ Google reviews from real Dayton-area patients we’ve had the honor to help.</p></div>
       </div>
-      <div class="scf-feature">
-        <div class="scf-feature__ic"><svg class="scf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
         <div><h3>Inclusive, affirming care</h3><p>An LGBTQ+ friendly, transgender-safe practice welcoming every path to parenthood with dignity and respect.</p></div>
       </div>
     </div>
@@ -326,20 +308,20 @@
 </section>
 
 <!-- ============ TEAM (E-E-A-T) ============ -->
-<section class="scf-section scf-section--soft">
-  <div class="scf-wrap">
-    <span class="scf-kicker">Meet Your Dayton Care Team</span>
+<section class="scl-section scl-section--cream">
+  <div class="scl-wrap">
+    <span class="scl-kicker">Meet Your Dayton Care Team</span>
     <h2>Board-certified reproductive endocrinologists</h2>
     <p class="intro">Care at our Dayton clinic is led by experienced, board-certified physicians who specialize exclusively in reproductive endocrinology and infertility.</p>
-    <div class="scf-team__grid">
-      <article class="scf-doc">
-        <h3 class="scf-doc__name">Jeremy Groll, MD</h3>
-        <span class="scf-doc__role">Managing Partner · Reproductive Endocrinologist</span>
+    <div class="scl-team__grid">
+      <article class="scl-doc">
+        <h3 class="scl-doc__name">Jeremy Groll, MD</h3>
+        <span class="scl-doc__role">Managing Partner · Reproductive Endocrinologist</span>
         <p>Dr. Groll is a board-certified reproductive endocrinologist and SpringCreek’s managing partner. He previously served as Medical Director of Kettering Reproductive Medicine, as Chief of Reproductive Endocrinology &amp; Infertility at Wright-Patterson AFB, and as an Assistant Professor at the Wright State University Boonshoft School of Medicine. <a href="https://www.springcreekfertility.com/doctor-jeremy-groll/">Learn more →</a></p>
       </article>
-      <article class="scf-doc">
-        <h3 class="scf-doc__name">Kasey Marelić, MD</h3>
-        <span class="scf-doc__role">Reproductive Endocrinologist</span>
+      <article class="scl-doc">
+        <h3 class="scl-doc__name">Kasey Marelić, MD</h3>
+        <span class="scl-doc__role">Reproductive Endocrinologist</span>
         <p>Dr. Marelić is double board-certified in Obstetrics &amp; Gynecology and in Reproductive Endocrinology &amp; Infertility. Before joining SpringCreek, she served as Medical Director at Bethesda Fertility Center, bringing a warm, patient-centered approach to advanced reproductive care. <a href="https://www.springcreekfertility.com/dr-kasey-marelic/">Learn more →</a></p>
       </article>
     </div>
@@ -347,45 +329,45 @@
 </section>
 
 <!-- ============ SERVICE AREA ============ -->
-<section class="scf-section">
-  <div class="scf-wrap">
-    <span class="scf-kicker">Proudly Serving the Miami Valley</span>
+<section class="scl-section">
+  <div class="scl-wrap">
+    <span class="scl-kicker">Proudly Serving Greater Dayton</span>
     <h2>Fertility care for Dayton &amp; surrounding communities</h2>
     <p class="intro">Patients travel to our Clyo Road clinic from across southwest Ohio. We’re proud to serve hopeful parents throughout the region, including:</p>
-    <div class="scf-chips">
-      <span class="scf-chip">Dayton</span><span class="scf-chip">Centerville</span><span class="scf-chip">Kettering</span>
-      <span class="scf-chip">Beavercreek</span><span class="scf-chip">Springboro</span><span class="scf-chip">Miamisburg</span>
-      <span class="scf-chip">Oakwood</span><span class="scf-chip">Bellbrook</span><span class="scf-chip">Huber Heights</span>
-      <span class="scf-chip">Vandalia</span><span class="scf-chip">Xenia</span><span class="scf-chip">Troy</span><span class="scf-chip">Piqua</span>
+    <div class="scl-chips">
+      <span class="scl-chip">Dayton</span><span class="scl-chip">Centerville</span><span class="scl-chip">Kettering</span>
+      <span class="scl-chip">Beavercreek</span><span class="scl-chip">Springboro</span><span class="scl-chip">Fairborn</span>
+      <span class="scl-chip">Oakwood</span><span class="scl-chip">Bellbrook</span><span class="scl-chip">Huber Heights</span>
+      <span class="scl-chip">Vandalia</span><span class="scl-chip">Xenia</span><span class="scl-chip">Troy</span><span class="scl-chip">Piqua</span>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ (GEO/AIO) ============ -->
-<section class="scf-section scf-section--soft">
-  <div class="scf-wrap">
-    <span class="scf-kicker" style="text-align:center;display:block">Questions, Answered</span>
-    <h2 style="text-align:center;max-width:none">Dayton fertility clinic FAQs</h2>
-    <div class="scf-faq">
-      <details class="scf-faq__item" open>
+<section class="scl-section scl-section--soft">
+  <div class="scl-wrap">
+    <span class="scl-kicker" style="display:inline-flex">Questions, Answered</span>
+    <h2 style="max-width:none">Dayton fertility clinic FAQs</h2>
+    <div class="scl-faq">
+      <details class="scl-faq__item" open>
         <summary>Where is SpringCreek Fertility located in Dayton?</summary>
-        <div class="scf-faq__a"><p>Our Dayton fertility clinic is at <strong>7095 Clyo Road, Dayton, OH 45459</strong>, in Washington Township near Centerville and Kettering, with easy access from I-675 and free on-site parking. Call <a href="tel:+19374585084">(937) 458-5084</a> to schedule.</p></div>
+        <div class="scl-faq__a"><p>Our Dayton fertility clinic is at <strong>7095 Clyo Road, Dayton, OH 45459</strong>, in Washington Township near Centerville and Kettering, with easy access from I-675 and free on-site parking. Call <a href="tel:+19374585084">(937) 458-5084</a> to schedule.</p></div>
       </details>
-      <details class="scf-faq__item">
+      <details class="scl-faq__item">
         <summary>Do I need a referral to see a fertility specialist in Dayton?</summary>
-        <div class="scf-faq__a"><p>No referral is required — you can self-refer and book directly with us. We also gladly accept referrals from OB-GYNs and primary care providers across the Miami Valley. Many insurance plans don’t require a referral for an initial fertility consultation, but we recommend confirming your specific benefits.</p></div>
+        <div class="scl-faq__a"><p>No referral is required — you can self-refer and book directly with us. We also gladly accept referrals from OB-GYNs and primary care providers across Greater Dayton. Many insurance plans don’t require a referral for an initial fertility consultation, but we recommend confirming your specific benefits.</p></div>
       </details>
-      <details class="scf-faq__item">
+      <details class="scl-faq__item">
         <summary>What fertility treatments are available at the Dayton clinic?</summary>
-        <div class="scf-faq__a"><p>Our Dayton center offers complete fertility care, including comprehensive fertility testing, ovulation induction, intrauterine insemination (IUI), in vitro fertilization (IVF), egg and embryo freezing, preimplantation genetic testing (PGT), and donor and third-party reproduction — all supported by an on-site IVF laboratory.</p></div>
+        <div class="scl-faq__a"><p>Our Dayton center offers complete fertility care, including comprehensive fertility testing, ovulation induction, intrauterine insemination (IUI), in vitro fertilization (IVF), egg and embryo freezing, preimplantation genetic testing (PGT), and donor and third-party reproduction — all supported by an on-site IVF laboratory.</p></div>
       </details>
-      <details class="scf-faq__item">
+      <details class="scl-faq__item">
         <summary>How much does IVF cost in Dayton, Ohio?</summary>
-        <div class="scf-faq__a"><p>The cost of IVF varies based on your individual treatment plan, medications, and any added services such as genetic testing. At your consultation, our team provides clear, itemized pricing and reviews insurance coverage and financing options so you can plan with confidence. Please contact us at <a href="tel:+19374585084">(937) 458-5084</a> for a personalized estimate.</p></div>
+        <div class="scl-faq__a"><p>The cost of IVF varies based on your individual treatment plan, medications, and any added services such as genetic testing. At your consultation, our team provides clear, itemized pricing and reviews insurance coverage and financing options so you can plan with confidence. Please contact us at <a href="tel:+19374585084">(937) 458-5084</a> for a personalized estimate.</p></div>
       </details>
-      <details class="scf-faq__item">
+      <details class="scl-faq__item">
         <summary>When should I see a fertility specialist?</summary>
-        <div class="scf-faq__a"><p>Consider an evaluation if you’re under 35 and have been trying to conceive for 12 months, or 6 months if you’re 35 or older. You should also reach out sooner if you have irregular cycles, known reproductive conditions (such as PCOS or endometriosis), prior pregnancy losses, or are planning ahead with egg or embryo freezing.</p></div>
+        <div class="scl-faq__a"><p>Consider an evaluation if you’re under 35 and have been trying to conceive for 12 months, or 6 months if you’re 35 or older. You should also reach out sooner if you have irregular cycles, known reproductive conditions (such as PCOS or endometriosis), prior pregnancy losses, or are planning ahead with egg or embryo freezing.</p></div>
       </details>
     </div>
   </div>
@@ -393,17 +375,17 @@
 
 <!-- ============ CTA ============ -->
 <section aria-label="Schedule a consultation">
-  <div class="scf-cta">
+  <div class="scl-cta">
     <h2>Your journey to parenthood can start in Dayton today</h2>
     <p>Take the first hopeful step with a team that treats you like family. Schedule your consultation at our Dayton fertility clinic and let’s build your plan together.</p>
-    <div class="scf-cta-row">
-      <a class="scf-btn scf-btn--primary" href="https://www.springcreekfertility.com/appointment/">Schedule a Consultation</a>
-      <a class="scf-btn scf-btn--ghost" href="tel:+19374585084">Call (937) 458-5084</a>
+    <div class="scl-cta-row">
+      <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/appointment/">Schedule a Consultation</a>
+      <a class="scl-btn scl-btn--light" href="tel:+19374585084">Call (937) 458-5084</a>
     </div>
   </div>
 </section>
 
-<div class="scf-disclaimer">
+<div class="scl-disclaimer">
   <p>SpringCreek Fertility · Dayton · The information on this page is for general educational purposes and is not a substitute for personalized medical advice. Treatment options and outcomes vary by individual; please consult our physicians to discuss your specific situation.</p>
 </div>
 
@@ -437,7 +419,7 @@
         {"@type":"City","name":"Kettering"},
         {"@type":"City","name":"Beavercreek"},
         {"@type":"City","name":"Springboro"},
-        {"@type":"City","name":"Miamisburg"}
+        {"@type":"City","name":"Fairborn"}
       ],
       "openingHoursSpecification": [
         {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"16:00"}
@@ -475,7 +457,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         {"@type":"Question","name":"Where is SpringCreek Fertility located in Dayton?","acceptedAnswer":{"@type":"Answer","text":"Our Dayton fertility clinic is at 7095 Clyo Road, Dayton, OH 45459, in Washington Township near Centerville and Kettering, with easy access from I-675 and free on-site parking. Call (937) 458-5084 to schedule."}},
-        {"@type":"Question","name":"Do I need a referral to see a fertility specialist in Dayton?","acceptedAnswer":{"@type":"Answer","text":"No referral is required — you can self-refer and book directly. We also accept referrals from OB-GYNs and primary care providers across the Miami Valley. Many insurance plans do not require a referral for an initial fertility consultation."}},
+        {"@type":"Question","name":"Do I need a referral to see a fertility specialist in Dayton?","acceptedAnswer":{"@type":"Answer","text":"No referral is required — you can self-refer and book directly. We also accept referrals from OB-GYNs and primary care providers across Greater Dayton. Many insurance plans do not require a referral for an initial fertility consultation."}},
         {"@type":"Question","name":"What fertility treatments are available at the Dayton clinic?","acceptedAnswer":{"@type":"Answer","text":"The Dayton center offers fertility testing, ovulation induction, IUI, IVF, egg and embryo freezing, preimplantation genetic testing (PGT), and donor and third-party reproduction, supported by an on-site IVF laboratory."}},
         {"@type":"Question","name":"How much does IVF cost in Dayton, Ohio?","acceptedAnswer":{"@type":"Answer","text":"IVF cost varies based on your treatment plan, medications, and added services such as genetic testing. At your consultation we provide clear, itemized pricing and review insurance and financing options. Call (937) 458-5084 for a personalized estimate."}},
         {"@type":"Question","name":"When should I see a fertility specialist?","acceptedAnswer":{"@type":"Answer","text":"Consider an evaluation if you are under 35 and have tried to conceive for 12 months, or 6 months if you are 35 or older. Reach out sooner with irregular cycles, conditions like PCOS or endometriosis, prior pregnancy losses, or to plan ahead with egg or embryo freezing."}}
