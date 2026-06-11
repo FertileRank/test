@@ -104,3 +104,35 @@ python3 _build/build.py     # regenerates all standalone pages + Elementor block
 To add a long-tail page, copy a page dict in the matching `_build/content_*.py`, edit its content and
 JSON-LD, add it to the module's `PAGES`, and rebuild. The header/nav/footer and CSS are shared, so new
 pages inherit the design system automatically.
+
+---
+
+## Brand v2 update — client-supplied location pages + homepage (CSS rewired to Global CSS)
+
+The following pages were replaced/added using the client's attached Brand v2 HTML, with their
+CSS **rewired to the SpringCreek Global CSS** (no teal):
+
+| Page | Source | Notes |
+|------|--------|-------|
+| Homepage (`index.html`) | attached `homepagebody.elementor.html` | Teal tokens → navy/green via `--e-global-color-*`; Playfair/Open Sans/Poppins → **Lora/Work Sans**; green CTAs + navy-with-green-underline links added. |
+| Locations pillar (`locations.html`) | attached `locationshub` | New hub page; nav "Locations" now points here. |
+| Dayton (`dayton-fertility-center.html`) | **built to match** | No Dayton file was provided, so it was authored in the identical `.scl` Brand v2 style (founding center + on-site IVF lab focus). |
+| Columbus (`columbus-fertility-center.html`) | attached | Verbatim, CSS rewired. |
+| Cincinnati (`cincinnati-fertility-center.html`) | attached | Verbatim, CSS rewired. (Two identical Cincinnati files were supplied; one was used.) |
+
+**CSS rewiring (all five):** the `.scl`/`.scf-home` scoped tokens now bridge to `--e-global-color-primary`
+(navy `#183356`), `--e-global-color-accent` (green `#90C962`), `--e-global-color-secondary` (blue `#A7D8F1`),
+`--e-global-color-126eaba` (blue `#60B9E5`), `--e-global-color-dbe2b42` (cream), `--e-global-color-1d0b13d`
+(mint), `--e-global-color-text`, `--e-global-color-b86a1f1` (border); fonts bridge to
+`--e-global-typography-primary-font-family` (Lora) / `-text-` / `-accent-` (Work Sans). **Zero teal**, verified.
+
+**Compliance edits applied to the supplied copy** (superlatives the Blocked Keywords Library prohibits):
+"leading Cincinnati IVF clinic experience" → "an advanced Cincinnati IVF experience"; "leading-edge science"
+→ "advanced science"; "Leading-edge reproductive technology" → "Advanced reproductive technology";
+"leading vitrification" → "advanced vitrification".
+
+**Notes / `// VERIFY`:**
+- The homepage uses **lucide** icons via CDN (`data-lucide` + one `<script>`). This is the client's file; icons are decorative (`aria-hidden`). Say the word and I'll swap them for inline SVG to keep the page fully JS-free (matching the location pages).
+- `aggregateRating` on the location pages uses the client's real Google data (Dayton 4.5/177, Columbus 4.4/63, Cincinnati 4.2/21) — refresh periodically.
+- Confirm Columbus hours (supplied as Mon–Fri 7:30 AM–3:30 PM) and the Cincinnati suite (225).
+- The supplied pages describe the practice as "physician-owned" — confirm against current ownership before publish.

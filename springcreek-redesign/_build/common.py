@@ -27,7 +27,8 @@ NAV = [
         ("https://www.springcreekfertility.com/ivf-laboratory/", "Our IVF Laboratory"),
         ("https://www.springcreekfertility.com/fertility-treatment/", "All treatment options &rarr;"),
     ]),
-    ("Locations", "dayton-fertility-center.html", [
+    ("Locations", "locations.html", [
+        ("locations.html", "All Locations"),
         ("dayton-fertility-center.html", "Dayton (Centerville)"),
         ("columbus-fertility-center.html", "Columbus (Dublin)"),
         ("cincinnati-fertility-center.html", "Cincinnati (Mason)"),
