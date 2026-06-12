@@ -18,14 +18,15 @@ NAV = [
     ("Treatments", "fertility-treatment.html", [
         ("__hdr__", "Popular treatments"),
         ("ivf-icsi.html", "IVF &amp; ICSI"),
+        ("iui.html", "IUI (Intrauterine Insemination)"),
         ("egg-freezing.html", "Egg Freezing"),
-        ("https://www.springcreekfertility.com/iui/", "IUI (Intrauterine Insemination)"),
-        ("https://www.springcreekfertility.com/fertility-preservation/", "Fertility Preservation"),
-        ("https://www.springcreekfertility.com/pgt/", "Preimplantation Genetic Testing (PGT)"),
-        ("https://www.springcreekfertility.com/donor-egg/", "Donor Egg Program"),
+        ("fertility-preservation.html", "Fertility Preservation"),
+        ("pgt.html", "Preimplantation Genetic Testing (PGT)"),
+        ("donor-egg.html", "Donor Egg Program"),
+        ("third-party-reproduction.html", "Third-Party Reproduction"),
         ("lgbtqia-family-building.html", "LGBTQIA+ Family Building"),
-        ("https://www.springcreekfertility.com/ivf-laboratory/", "Our IVF Laboratory"),
-        ("https://www.springcreekfertility.com/fertility-treatment/", "All treatment options &rarr;"),
+        ("ivf-laboratory.html", "Our IVF Laboratory"),
+        ("fertility-treatment.html", "All treatment options &rarr;"),
     ]),
     ("Locations", "locations.html", [
         ("locations.html", "All Locations"),
@@ -36,17 +37,17 @@ NAV = [
     ("About", "about.html", [
         ("about.html", "About SpringCreek"),
         ("fertility-specialists.html", "Meet Our Team"),
-        ("https://www.springcreekfertility.com/doctor-jeremy-groll/", "Dr. Jeremy Groll, MD"),
-        ("https://www.springcreekfertility.com/dr-kasey-marelic/", "Dr. Kasey Reynolds Marelić, MD"),
-        ("https://www.springcreekfertility.com/our-fertility-center/", "Our Fertility Center"),
-        ("https://www.springcreekfertility.com/tour/", "Take a Tour"),
+        ("doctor-jeremy-groll.html", "Dr. Jeremy Groll, MD"),
+        ("dr-kasey-marelic.html", "Dr. Kasey Reynolds Marelić, MD"),
+        ("our-fertility-center.html", "Our Fertility Center"),
+        ("tour.html", "Take a Tour"),
     ]),
-    ("Patients", "https://www.springcreekfertility.com/new-patient-resources/", [
-        ("https://www.springcreekfertility.com/new-patient-resources/", "New Patient Resources"),
-        ("https://www.springcreekfertility.com/fertility-faqs/", "Fertility FAQs"),
-        ("https://www.springcreekfertility.com/fertility-library/", "Fertility Library"),
-        ("https://www.springcreekfertility.com/understanding-insurance-benefits/", "Insurance Benefits"),
-        ("https://www.springcreekfertility.com/patient-portal/", "Patient Portal"),
+    ("Patients", "new-patient-resources.html", [
+        ("new-patient-resources.html", "New Patient Resources"),
+        ("fertility-faqs.html", "Fertility FAQs"),
+        ("fertility-library.html", "Fertility Library"),
+        ("understanding-insurance-benefits.html", "Insurance Benefits"),
+        ("patient-portal.html", "Patient Portal"),
     ]),
     ("Cost &amp; Financing", "financing-options.html", None),
     ("Contact", "contact.html", None),
@@ -113,9 +114,9 @@ def footer_html():
         <ul>
           <li><a href="ivf-icsi.html">IVF &amp; ICSI</a></li>
           <li><a href="egg-freezing.html">Egg Freezing</a></li>
-          <li><a href="https://www.springcreekfertility.com/iui/">IUI</a></li>
+          <li><a href="iui.html">IUI</a></li>
           <li><a href="lgbtqia-family-building.html">LGBTQIA+ Family Building</a></li>
-          <li><a href="https://www.springcreekfertility.com/fertility-treatment/">All Treatments</a></li>
+          <li><a href="fertility-treatment.html">All Treatments</a></li>
         </ul>
       </div>
       <div>
@@ -136,7 +137,7 @@ def footer_html():
     <div class="scf-footer__bottom">
       <div class="scf-footer__bottom-in">
         <span>&copy; 2026 SpringCreek Fertility. All rights reserved. This site is for general education and is not medical advice.</span>
-        <span><a href="https://www.springcreekfertility.com/privacy-policy/">Privacy Policy</a> &middot; <a href="https://www.springcreekfertility.com/understanding-insurance-benefits/">Insurance</a> &middot; <a href="https://www.springcreekfertility.com/careers/">Careers</a></span>
+        <span><a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="understanding-insurance-benefits.html">Insurance</a> &middot; <a href="careers.html">Careers</a> &middot; <a href="covid-19-notice.html">COVID-19</a></span>
       </div>
     </div>
   </footer>'''
@@ -218,6 +219,13 @@ def standalone(p):
 </html>
 '''
 
+def delocalize(html):
+    """For Elementor output: convert relative slug.html links to absolute live URLs."""
+    html = re.sub(r'href="index\.html"', 'href="https://www.springcreekfertility.com/"', html)
+    html = re.sub(r'href="([a-z0-9][a-z0-9-]*)\.html(#[^"]*)?"',
+                  r'href="https://www.springcreekfertility.com/\1/\2"', html)
+    return html
+
 def elementor(p):
     note = (f"<!-- =====================================================================\n"
             f"   SpringCreek Fertility — Elementor paste block: {p['title']}\n"
@@ -229,15 +237,14 @@ def elementor(p):
             f"   2) Paste the JSON-LD <script> into this page's <head> (SEO plugin or\n"
             f"      Elementor Custom Code, location: <head>).\n"
             f"   3) Paste the markup below into an Elementor HTML widget.\n"
-            f"   No JavaScript is used except the JSON-LD block.\n"
+            f"   Internal links use absolute live URLs. No JavaScript except JSON-LD.\n"
             f"   ===================================================================== -->")
+    body = delocalize(hero_html(p) + "\n" + p["main_html"] + "\n" + cta_html(p))
     return f'''{note}
 {jsonld_block(p).strip()}
 
 <div class="scf-page scf-page--{p["slug"]}">
-{hero_html(p)}
-{p["main_html"]}
-{cta_html(p)}
+{body}
 </div>
 '''
 

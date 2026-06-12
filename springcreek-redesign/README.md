@@ -1,4 +1,4 @@
-# SpringCreek Fertility — Website Redesign (Core 12 + Treatments hub)
+# SpringCreek Fertility — Full Website Redesign (all 58 pages)
 
 A unified, production-oriented redesign of **springcreekfertility.com**, delivered in **two formats**
 from a single source of truth:
@@ -26,27 +26,31 @@ Governed by the **SpringCreek Prompt Library** (57-page spec) brand tokens and c
 
 ---
 
-## Pages in this build (13)
+## Pages in this build — all 58
 
-| Page | Standalone | Live URL |
-|------|-----------|----------|
-| Home | `index.html` | `/` |
-| Treatments overview | `fertility-treatment.html` | `/fertility-treatment/` |
-| Dayton (Centerville) | `dayton-fertility-center.html` | `/dayton-fertility-center/` |
-| Columbus (Dublin) | `columbus-fertility-center.html` | `/columbus-fertility-center/` |
-| Cincinnati (Mason) | `cincinnati-fertility-center.html` | `/cincinnati-fertility-center/` |
-| IVF & ICSI | `ivf-icsi.html` | `/ivf-icsi/` |
-| Egg Freezing | `egg-freezing.html` | `/egg-freezing/` |
-| LGBTQIA+ Family Building | `lgbtqia-family-building.html` | `/lgbtqia-family-building/` |
-| About | `about.html` | `/about/` |
-| Our Team | `fertility-specialists.html` | `/fertility-specialists/` |
-| Cost & Financing | `financing-options.html` | `/financing-options/` |
-| Contact | `contact.html` | `/contact/` |
-| Request an Appointment | `appointment.html` | `/appointment/` |
+The complete site is built and cross-linked (see `sitemap.xml` for every canonical URL):
 
-Navigation, footer, and in-page links also point to the remaining live URLs (IUI, PGT, donor pages,
-articles, etc.) so the site is fully navigable; those long-tail pages can be built next from the same
-templates.
+| Group | Count | Pages |
+|-------|-------|-------|
+| Homepage + Locations pillar | 2 | Home, Locations hub |
+| Location centers | 3 | Dayton, Columbus, Cincinnati |
+| Service pages | 14 | Fertility Treatment overview, IVF & ICSI, IUI, Egg Freezing, Fertility Preservation, PGT, Donor Egg, Donor Sperm, Embryo Donation, Gestational Surrogacy, Third-Party Reproduction, Recurrent Miscarriage, LGBTQIA+ Family Building, IVF Laboratory |
+| Provider bios | 5 | Groll, Reynolds Marelić, Graves-Herring, McMillan, Cuy Castellanos |
+| About & practice | 4 | About, Our Fertility Center, Fertility Specialist, Take a Tour |
+| Resource hubs | 6 | New Patient Resources, Referring Providers, Staying Connected, Fertility Library, Fertility Resources, Blog |
+| Educational articles | 9 | Fertility FAQs, Acronym Guide, Infertility Defined, What Causes Infertility, Quick Facts, Myths, Tips to Get Pregnant Faster, Tips to Optimize Fertility, Fertility Foods |
+| Financial | 5 | Fertility Cost, Financing Options, Insurance Benefits, Discount Programs, Refund Programs |
+| Conversion | 3 | Request an Appointment, Contact, Become an Egg Donor |
+| Social proof | 2 | Testimonials, IVF Success Rates |
+| Utility & legal | 4 | Careers, Patient Portal, Privacy Policy, COVID-19 Notice |
+| **Team page** | 1 | Fertility Specialists (team) |
+
+**Two design systems, one brand:** the **Home + 5 location pages** use the client's Brand v2 `.scl` /
+`.scf-home` blocks (rewired to the Global CSS). The **other 52 pages** use the `.scf-page` component
+system. Both bridge to the same Elementor kit tokens (navy `#183356` / green `#90C962`, Lora / Work
+Sans), so the site is visually cohesive. Standalone links are relative; Elementor blocks use absolute
+live URLs. Verified: **no legacy-palette colors · 0 blocked keywords · all JSON-LD valid · all internal links resolve · no
+JS except JSON-LD** (the client's homepage keeps its optional lucide icon script).
 
 ---
 
@@ -110,11 +114,11 @@ pages inherit the design system automatically.
 ## Brand v2 update — client-supplied location pages + homepage (CSS rewired to Global CSS)
 
 The following pages were replaced/added using the client's attached Brand v2 HTML, with their
-CSS **rewired to the SpringCreek Global CSS** (no teal):
+CSS **rewired to the SpringCreek Global CSS** (no legacy palette):
 
 | Page | Source | Notes |
 |------|--------|-------|
-| Homepage (`index.html`) | attached `homepagebody.elementor.html` | Teal tokens → navy/green via `--e-global-color-*`; Playfair/Open Sans/Poppins → **Lora/Work Sans**; green CTAs + navy-with-green-underline links added. |
+| Homepage (`index.html`) | attached `homepagebody.elementor.html` | legacy palette tokens → navy/green via `--e-global-color-*`; Playfair/Open Sans/Poppins → **Lora/Work Sans**; green CTAs + navy-with-green-underline links added. |
 | Locations pillar (`locations.html`) | attached `locationshub` | New hub page; nav "Locations" now points here. |
 | Dayton (`dayton-fertility-center.html`) | **built to match** | No Dayton file was provided, so it was authored in the identical `.scl` Brand v2 style (founding center + on-site IVF lab focus). |
 | Columbus (`columbus-fertility-center.html`) | attached | Verbatim, CSS rewired. |
@@ -124,7 +128,7 @@ CSS **rewired to the SpringCreek Global CSS** (no teal):
 (navy `#183356`), `--e-global-color-accent` (green `#90C962`), `--e-global-color-secondary` (blue `#A7D8F1`),
 `--e-global-color-126eaba` (blue `#60B9E5`), `--e-global-color-dbe2b42` (cream), `--e-global-color-1d0b13d`
 (mint), `--e-global-color-text`, `--e-global-color-b86a1f1` (border); fonts bridge to
-`--e-global-typography-primary-font-family` (Lora) / `-text-` / `-accent-` (Work Sans). **Zero teal**, verified.
+`--e-global-typography-primary-font-family` (Lora) / `-text-` / `-accent-` (Work Sans). **Zero legacy-palette colors**, verified.
 
 **Compliance edits applied to the supplied copy** (superlatives the Blocked Keywords Library prohibits):
 "leading Cincinnati IVF clinic experience" → "an advanced Cincinnati IVF experience"; "leading-edge science"
