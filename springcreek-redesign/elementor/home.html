@@ -264,9 +264,48 @@
   .scf-home .scf-btn--white { background:#fff; color:var(--e-global-color-primary,#183356); border-color:#fff; }
   .scf-home .scf-btn--ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.7); }
   .scf-home :is(p,li) a { color:var(--e-global-color-primary,#183356); text-decoration:underline; text-decoration-color:var(--e-global-color-accent,#90C962); text-decoration-thickness:2px; text-underline-offset:3px; }
+  /* ---- Homepage hero (added) ---- */
+  .scf-home .scf-hero { position:relative; color:#fff; overflow:hidden; background:linear-gradient(115deg, var(--brand-ink,#122333) 0%, var(--brand,#183356) 58%, #1c4377 100%); }
+  .scf-home .scf-hero::after { content:""; position:absolute; right:-130px; top:-130px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(96,185,229,.22), transparent 70%); pointer-events:none; }
+  .scf-home .scf-hero__inner { position:relative; max-width:48rem; padding:84px 0 78px; }
+  @media (min-width:768px){ .scf-home .scf-hero__inner { padding:112px 0 100px; } }
+  .scf-home .scf-hero__eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); color:#fff; font-family:var(--font-ui); font-size:.78rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border-radius:999px; margin:0 0 20px; }
+  .scf-home .scf-hero__eyebrow i { width:15px; height:15px; }
+  .scf-home .scf-hero h1 { font-family:var(--font-display); color:#fff; font-weight:700; line-height:1.1; letter-spacing:-.01em; font-size:clamp(2.3rem, 1.55rem + 3vw, 3.9rem); margin:0 0 18px; }
+  .scf-home .scf-hero h1 em { font-style:normal; color:var(--blue-soft,#A7D8F1); }
+  .scf-home .scf-hero__lead { font-size:clamp(1.06rem, 1rem + .45vw, 1.3rem); color:rgba(255,255,255,.9); max-width:58ch; margin:0 0 30px; }
+  .scf-home .scf-hero__cta { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .scf-home .scf-hero__cta .scf-btn i { width:18px; height:18px; vertical-align:-3px; }
+  .scf-home .scf-hero .scf-btn--ghost:hover { background:rgba(255,255,255,.12); color:#fff; border-color:#fff; }
+  .scf-home .scf-hero__trust { list-style:none; margin:44px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:14px 26px; }
+  .scf-home .scf-hero__trust li { display:inline-flex; align-items:center; gap:9px; font-family:var(--font-ui); font-size:.94rem; color:rgba(255,255,255,.82); }
+  .scf-home .scf-hero__trust strong { color:#fff; font-weight:700; }
+  .scf-home .scf-hero__trust i { width:18px; height:18px; color:var(--blue-soft,#A7D8F1); }
+  @media (max-width:560px){ .scf-home .scf-hero__cta .scf-btn { width:100%; text-align:center; justify-content:center; } }
 </style>
 
 <div class="scf-home">
+  <!-- ================= HERO (added) ================= -->
+  <header class="scf-hero" aria-label="Welcome to SpringCreek Fertility">
+    <div class="scf-container">
+      <div class="scf-hero__inner">
+        <p class="scf-hero__eyebrow"><i data-lucide="map-pin" aria-hidden="true"></i> Fertility care across Dayton, Columbus &amp; Cincinnati</p>
+        <h1>Compassionate fertility care for <em>every family</em> in Ohio</h1>
+        <p class="scf-hero__lead">Personalized guidance, evidence-informed treatment, and a supportive environment &mdash; from your very first visit. We partner with individuals and families across the Miami Valley, Central Ohio, and Southwest Ohio.</p>
+        <div class="scf-hero__cta">
+          <a class="scf-btn" href="https://www.springcreekfertility.com/appointment/">Request a Consultation <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <a class="scf-btn scf-btn--ghost" href="https://www.springcreekfertility.com/fertility-treatment/">Explore Treatments</a>
+        </div>
+        <ul class="scf-hero__trust">
+          <li><i data-lucide="calendar-heart" aria-hidden="true"></i> Caring for Ohio families <strong>since 2014</strong></li>
+          <li><i data-lucide="flask-conical" aria-hidden="true"></i> <strong>On-site</strong> IVF laboratory</li>
+          <li><i data-lucide="map-pin" aria-hidden="true"></i> <strong>Three</strong> Ohio locations</li>
+          <li><i data-lucide="heart-handshake" aria-hidden="true"></i> <strong>Inclusive</strong> of diverse families</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
   <!-- Medically-reviewed trust bar (grounded E-E-A-T) -->
   <div class="scf-review">
     <div class="scf-container">
