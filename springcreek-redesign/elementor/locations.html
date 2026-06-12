@@ -1,0 +1,342 @@
+<!-- =====================================================================
+   SpringCreek Fertility — Elementor paste block (Brand v2): Our Locations | Fertility Clinics in Dayton, Columbus &amp; Cincinnati | SpringCreek
+   URL: https://www.springcreekfertility.com/locations/
+   CSS bridged to the SpringCreek Global CSS (elementor-kit-7):
+   navy #183356 / green #90C962 / blue #A7D8F1 via --e-global-color-*,
+   Lora headings + Work Sans body; navy/green/blue only. Self-contained block.
+   Paste into an Elementor HTML widget. JSON-LD is inside the block.
+   ===================================================================== -->
+<!--
+============================================================================
+  SpringCreek Fertility — "OUR LOCATIONS" PILLAR / HUB PAGE
+  (Brand v2: Navy / Blue / Green)
+  Permalink: /locations/
+  PASTE THIS ENTIRE BLOCK into an Elementor "HTML" widget (or Pro Code widget).
+
+  Inherits SpringCreek Global CSS v2 tokens via var(--token, fallback) and is
+  namespaced ".scl-*" so it never collides with global ".scf-*" utilities.
+  Self-contained: scoped CSS + markup + JSON-LD. No libraries, no JS, no @import.
+
+  SET IN ELEMENTOR PAGE SETTINGS / RankMath / Yoast:
+    • SEO Title:        Our Locations | Fertility Clinics in Dayton, Columbus & Cincinnati | SpringCreek
+    • Meta Description: SpringCreek Fertility has physician-owned fertility clinics in Dayton, Columbus
+                        (Dublin) & Cincinnati (Mason), Ohio. Find IVF, IUI & egg freezing near you.
+    • Canonical URL:    https://www.springcreekfertility.com/locations/
+============================================================================
+-->
+<div class="scl">
+<style>
+.scl *{box-sizing:border-box}
+.scl{
+  --navy:var(--e-global-color-primary,#183356);--navy-dark:var(--e-global-color-bb34028,#0B1722);
+  --blue-soft:var(--e-global-color-secondary,#A7D8F1);--blue:var(--e-global-color-126eaba,#60B9E5);
+  --green:var(--e-global-color-accent,#90C962);--green-dark:var(--scf-green-dark,#6fa844);
+  --green-pale:var(--e-global-color-bb9718b,#E7FFB9);--mint:var(--e-global-color-1d0b13d,#E9FFDB);
+  --ink:var(--e-global-color-text,#2D2D2D);--cream:var(--e-global-color-dbe2b42,#FCF9F0);--white:#fff;
+  --muted:var(--scf-gray-500,#5b6566);--border:var(--e-global-color-b86a1f1,#E7EBED);
+  --f-display:var(--e-global-typography-primary-font-family,"Lora"),Georgia,"Times New Roman",serif;
+  --f-body:var(--e-global-typography-text-font-family,"Work Sans"),system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --f-ui:var(--e-global-typography-accent-font-family,"Work Sans"),system-ui,sans-serif;
+  --radius:var(--scf-radius,12px);--radius-lg:var(--scf-radius-lg,20px);
+  --shadow-sm:var(--scf-shadow-sm,0 2px 8px rgba(24,51,86,.08));
+  --shadow:var(--scf-shadow,0 10px 30px rgba(24,51,86,.12));
+  --shadow-lg:var(--scf-shadow-lg,0 24px 60px rgba(24,51,86,.16));
+  --maxw:1160px;
+  font-family:var(--f-body);color:var(--ink);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased;
+}
+.scl img{max-width:100%;height:auto;display:block}
+.scl-wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.scl h1,.scl h2,.scl h3{font-family:var(--f-display);line-height:1.18;letter-spacing:-.01em;margin:0 0 .5em;color:var(--navy);font-weight:700}
+.scl p{margin:0 0 1em}
+.scl-icon{width:1em;height:1em;flex:0 0 auto;display:inline-block;vertical-align:-.12em}
+.scl-breadcrumb{font-family:var(--f-ui);font-size:13px;color:var(--muted);padding:16px 0 0}
+.scl-breadcrumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.scl-breadcrumb li::after{content:"›";margin-left:6px;color:#9aa6a8}
+.scl-breadcrumb li:last-child::after{content:""}
+.scl-breadcrumb a{color:var(--muted);text-decoration:none}
+.scl-breadcrumb a:hover{color:var(--navy)}
+.scl-hero{background:var(--navy);color:var(--white);padding:10px 0 52px;text-align:center}
+.scl-hero :is(h1,h2,h3){color:var(--white)}
+.scl-eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);
+  color:#fff;padding:7px 16px;border-radius:999px;font-family:var(--f-ui);font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.08em;margin:22px 0 18px}
+.scl-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.scl-hero h1{font-size:var(--scf-fs-h1,clamp(2.25rem,1.6rem + 2.6vw,3.5rem));max-width:20ch;margin:0 auto .4em}
+.scl-hero h1 em{font-style:normal;color:var(--blue-soft)}
+.scl-lead{font-size:clamp(1.05rem,1rem + .4vw,1.3rem);color:rgba(255,255,255,.86);max-width:64ch;margin:0 auto 22px}
+.scl-lead strong{color:#fff;font-weight:700}
+.scl-hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px;margin-top:26px;font-family:var(--f-ui);font-weight:700;color:#fff}
+.scl-hero-stats span{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:rgba(255,255,255,.9)}
+.scl-hero-stats b{font-size:22px;color:#fff}
+.scl-hero-stats .s{color:var(--green)}
+.scl-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;font-family:var(--f-ui);font-weight:600;
+  border-radius:999px;padding:14px 28px;font-size:16px;border:2px solid transparent;cursor:pointer;text-align:center;
+  text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,transform .2s,box-shadow .2s}
+.scl-btn:hover{text-decoration:none;transform:translateY(-2px)}
+.scl-btn--primary{background:var(--green);color:var(--navy);border-color:var(--green);box-shadow:var(--shadow-sm)}
+.scl-btn--primary:hover{background:var(--green-dark);border-color:var(--green-dark);color:#fff;box-shadow:var(--shadow)}
+.scl-btn--light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.scl-btn--light:hover{background:#fff;color:var(--navy);border-color:#fff}
+.scl-section{padding:56px 0}
+.scl-section--soft{background:var(--mint)}
+.scl-section--cream{background:var(--cream)}
+.scl-section__head{text-align:center;max-width:62ch;margin:0 auto}
+.scl-kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-ui);text-transform:uppercase;letter-spacing:.12em;
+  font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.scl-kicker::before{content:"";width:20px;height:3px;border-radius:2px;background:var(--green)}
+.scl-section h2{font-size:var(--scf-fs-h2,clamp(1.75rem,1.3rem + 1.8vw,2.5rem))}
+.scl-section .intro{font-size:1.08rem;color:var(--ink)}
+/* location cards */
+.scl-loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:38px}
+.scl-loccard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+.scl-loccard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.scl-loccard__top{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);color:#fff;padding:22px 24px}
+.scl-loccard__city{font-family:var(--f-display);font-size:1.5rem;font-weight:700;color:#fff;margin:0 0 4px}
+.scl-loccard__area{font-family:var(--f-ui);font-size:13px;color:rgba(255,255,255,.85);margin:0}
+.scl-loccard__rating{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(255,255,255,.16);
+  padding:5px 12px;border-radius:999px;font-family:var(--f-ui);font-size:13px;font-weight:700;color:#fff}
+.scl-loccard__rating .s{color:var(--green);letter-spacing:1px}
+.scl-loccard__body{padding:22px 24px;flex:1;display:flex;flex-direction:column;gap:12px}
+.scl-loccard__row{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--ink)}
+.scl-loccard__row .scl-icon{width:18px;height:18px;color:var(--green-dark);margin-top:3px}
+.scl-loccard__row a{color:var(--navy);font-weight:700}
+.scl-loccard__foot{padding:0 24px 24px;display:flex;flex-direction:column;gap:10px}
+.scl-loccard__foot .scl-btn{width:100%;padding:13px 20px;font-size:15px}
+.scl-loccard__dir{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:var(--f-ui);font-weight:600;font-size:14px;
+  color:var(--navy);padding:11px 16px;border-radius:999px;background:var(--mint);text-decoration:none}
+.scl-loccard__dir:hover{background:var(--green-pale);text-decoration:none;color:var(--navy)}
+/* why (centered 3-up) */
+.scl-why__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 30px;margin-top:36px}
+.scl-feature{text-align:center;padding:6px}
+.scl-feature__ic{width:56px;height:56px;border-radius:50%;background:var(--blue-soft);color:var(--navy);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.scl-feature__ic .scl-icon{width:26px;height:26px}
+.scl-feature h3{font-family:var(--f-display);font-size:1.18rem;margin-bottom:6px;color:var(--navy)}
+.scl-feature p{font-size:.97rem;color:var(--ink);margin:0}
+/* cta */
+.scl-cta{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);color:#fff;border-radius:var(--radius-lg);
+  padding:48px 40px;text-align:center;margin:56px auto;max-width:var(--maxw);box-shadow:var(--shadow)}
+.scl-cta h2{color:#fff;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.25rem);max-width:24ch;margin:0 auto .5em}
+.scl-cta p{color:rgba(255,255,255,.9);font-size:1.08rem;max-width:56ch;margin:0 auto 26px}
+.scl-cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.scl-disclaimer{max-width:var(--maxw);margin:0 auto;padding:0 22px 50px}
+.scl-disclaimer p{font-size:12.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:20px;margin:0}
+@media (prefers-reduced-motion:reduce){.scl *{transition:none!important}}
+@media (max-width:900px){.scl-loc-grid,.scl-why__grid{grid-template-columns:1fr}.scl-section{padding:44px 0}.scl-cta{padding:40px 24px}}
+@media (max-width:560px){.scl-btn{width:100%}.scl-cta-row{flex-direction:column}}
+</style>
+
+<!-- ============ BREADCRUMB ============ -->
+<nav class="scl-breadcrumb" aria-label="Breadcrumb">
+  <div class="scl-wrap">
+    <ol>
+      <li><a href="https://www.springcreekfertility.com/">Home</a></li>
+      <li aria-current="page">Locations</li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="scl-hero">
+  <div class="scl-wrap">
+    <span class="scl-eyebrow"><span class="dot"></span> Physician-Owned Fertility Care Across Ohio</span>
+    <h1>Find a SpringCreek Fertility Clinic <em>Near You</em></h1>
+    <p class="scl-lead">Wherever you are on your path to parenthood, expert, compassionate fertility care is close to home. SpringCreek Fertility serves families across Ohio from three welcoming locations — in <strong>Dayton</strong>, <strong>Columbus</strong>, and <strong>Cincinnati</strong> — each delivering the same physician-led excellence and personal support.</p>
+    <div class="scl-hero-stats">
+      <span><b>3</b> Ohio locations</span>
+      <span><span class="s" aria-hidden="true">★</span> <b>4.4</b> avg. Google rating</span>
+      <span><b>2014</b> serving Ohio since</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INTRO + LOCATION CARDS ============ -->
+<section class="scl-section" style="padding-bottom:10px">
+  <div class="scl-wrap">
+    <div class="scl-section__head">
+      <span class="scl-kicker">Our Locations</span>
+      <h2>One trusted practice, three convenient clinics</h2>
+      <p class="intro">SpringCreek Fertility is a physician-owned reproductive care practice offering IVF, IUI, egg freezing, and comprehensive fertility services. Choose the location nearest you to explore services, hours, directions, and your local care team.</p>
+    </div>
+
+    <div class="scl-loc-grid">
+
+      <!-- DAYTON -->
+      <article class="scl-loccard">
+        <div class="scl-loccard__top">
+          <h3 class="scl-loccard__city">Dayton</h3>
+          <p class="scl-loccard__area">Main Center · Greater Dayton · Est. 2014</p>
+          <span class="scl-loccard__rating"><span class="s" aria-hidden="true">★★★★★</span> 4.5 · 175+ reviews</span>
+        </div>
+        <div class="scl-loccard__body">
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>7095 Clyo Road,<br>Dayton, OH 45459</span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><a href="tel:+19374585084">(937) 458-5084</a></span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span>Mon–Fri, 7:00 AM – 4:00 PM</span>
+          </div>
+        </div>
+        <div class="scl-loccard__foot">
+          <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/dayton-fertility-center/">View Dayton Center</a>
+          <a class="scl-loccard__dir" href="https://www.google.com/maps/dir/?api=1&destination=7095+Clyo+Road,+Dayton,+OH+45459">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Get Directions
+          </a>
+        </div>
+      </article>
+
+      <!-- COLUMBUS -->
+      <article class="scl-loccard">
+        <div class="scl-loccard__top">
+          <h3 class="scl-loccard__city">Columbus</h3>
+          <p class="scl-loccard__area">Dublin · Greater Columbus Metro</p>
+          <span class="scl-loccard__rating"><span class="s" aria-hidden="true">★★★★★</span> 4.4 · 60+ reviews</span>
+        </div>
+        <div class="scl-loccard__body">
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>6760 Avery-Muirfield Dr, Ste A,<br>Dublin, OH 43016</span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><a href="tel:+16144014113">(614) 401-4113</a></span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span>Mon–Fri, 7:30 AM – 3:30 PM</span>
+          </div>
+        </div>
+        <div class="scl-loccard__foot">
+          <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/columbus-fertility-center/">View Columbus Center</a>
+          <a class="scl-loccard__dir" href="https://www.google.com/maps/dir/?api=1&destination=6760+Avery-Muirfield+Dr,+Suite+A,+Dublin,+OH+43016">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Get Directions
+          </a>
+        </div>
+      </article>
+
+      <!-- CINCINNATI -->
+      <article class="scl-loccard">
+        <div class="scl-loccard__top">
+          <h3 class="scl-loccard__city">Cincinnati</h3>
+          <p class="scl-loccard__area">Mason · Greater Cincinnati</p>
+          <span class="scl-loccard__rating"><span class="s" aria-hidden="true">★★★★★</span> 4.2 · Google reviewed</span>
+        </div>
+        <div class="scl-loccard__body">
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>9313 Mason Montgomery Rd, Ste 225,<br>Mason, OH 45040</span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><a href="tel:+15134575200">(513) 457-5200</a></span>
+          </div>
+          <div class="scl-loccard__row">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span>Mon–Fri, 7:00 AM – 4:00 PM</span>
+          </div>
+        </div>
+        <div class="scl-loccard__foot">
+          <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/cincinnati-fertility-center/">View Cincinnati Center</a>
+          <a class="scl-loccard__dir" href="https://www.google.com/maps/dir/?api=1&destination=9313+Mason+Montgomery+Road+Suite+225,+Mason,+OH+45040">
+            <svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Get Directions
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY SPRINGCREEK ============ -->
+<section class="scl-section scl-section--cream">
+  <div class="scl-wrap">
+    <div class="scl-section__head">
+      <span class="scl-kicker">The SpringCreek Difference</span>
+      <h2>The same compassionate care at every location</h2>
+      <p class="intro">No matter which clinic you choose, you’ll be supported by board-certified reproductive endocrinologists and a team that treats you like family.</p>
+    </div>
+    <div class="scl-why__grid">
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Physician-Owned &amp; Led</h3>
+        <p>Your reproductive endocrinologist personally directs your care — never a rotating, impersonal hand-off.</p>
+      </div>
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M5 8l7-4 7 4M5 16l7 4 7-4"/></svg></div>
+        <h3>Advanced IVF &amp; Lab Care</h3>
+        <p>Advanced reproductive technology and embryology supporting every treatment across our Ohio clinics.</p>
+      </div>
+      <div class="scl-feature">
+        <div class="scl-feature__ic"><svg class="scl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Inclusive &amp; Affirming</h3>
+        <p>Every location is an LGBTQ+ friendly, transgender-safe space welcoming all paths to parenthood.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section aria-label="Schedule a consultation">
+  <div class="scl-cta">
+    <h2>Ready to begin? We’re here at a location near you.</h2>
+    <p>Schedule a consultation at the SpringCreek Fertility clinic closest to you and take the first hopeful step toward your family — with specialists who truly listen.</p>
+    <div class="scl-cta-row">
+      <a class="scl-btn scl-btn--primary" href="https://www.springcreekfertility.com/appointment/">Schedule a Consultation</a>
+      <a class="scl-btn scl-btn--light" href="https://www.springcreekfertility.com/contact/">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<div class="scl-disclaimer">
+  <p>SpringCreek Fertility · Ohio · The information on this page is for general educational purposes and is not a substitute for personalized medical advice. Treatment options and outcomes vary by individual; please consult our physicians to discuss your specific situation.</p>
+</div>
+
+<!-- ============ STRUCTURED DATA (JSON-LD) ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalOrganization",
+      "@id": "https://www.springcreekfertility.com/#organization",
+      "name": "SpringCreek Fertility",
+      "url": "https://www.springcreekfertility.com/",
+      "medicalSpecialty": "Gynecologic",
+      "sameAs": [
+        "https://www.facebook.com/SpringCreekFertility",
+        "https://www.instagram.com/springcreek_fertility/",
+        "https://www.linkedin.com/company/springcreek-fertility/",
+        "https://www.youtube.com/channel/UC9j44LjwMOgALcv6LyLtv9A"
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Our Locations | SpringCreek Fertility",
+      "url": "https://www.springcreekfertility.com/locations/",
+      "about": {"@id": "https://www.springcreekfertility.com/#organization"},
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"item":{"@type":"MedicalClinic","name":"SpringCreek Fertility — Dayton","url":"https://www.springcreekfertility.com/dayton-fertility-center/","telephone":"+1-937-458-5084","address":{"@type":"PostalAddress","streetAddress":"7095 Clyo Road","addressLocality":"Dayton","addressRegion":"OH","postalCode":"45459","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"16:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.5","reviewCount":"177","bestRating":"5"}}},
+          {"@type":"ListItem","position":2,"item":{"@type":"MedicalClinic","name":"SpringCreek Fertility — Columbus (Dublin)","url":"https://www.springcreekfertility.com/columbus-fertility-center/","telephone":"+1-614-401-4113","address":{"@type":"PostalAddress","streetAddress":"6760 Avery-Muirfield Drive, Suite A","addressLocality":"Dublin","addressRegion":"OH","postalCode":"43016","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:30","closes":"15:30"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.4","reviewCount":"63","bestRating":"5"}}},
+          {"@type":"ListItem","position":3,"item":{"@type":"MedicalClinic","name":"SpringCreek Fertility — Cincinnati (Mason)","url":"https://www.springcreekfertility.com/cincinnati-fertility-center/","telephone":"+1-513-457-5200","address":{"@type":"PostalAddress","streetAddress":"9313 Mason Montgomery Road, Suite 225","addressLocality":"Mason","addressRegion":"OH","postalCode":"45040","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"16:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.2","reviewCount":"21","bestRating":"5"}}}
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.springcreekfertility.com/"},
+        {"@type":"ListItem","position":2,"name":"Locations","item":"https://www.springcreekfertility.com/locations/"}
+      ]
+    }
+  ]
+}
+</script>
+</div>
+
