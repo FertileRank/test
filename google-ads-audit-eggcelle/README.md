@@ -37,9 +37,16 @@ SearchAtlas PPC integration.
 - **Do the conversion fixes before enabling bidding.** See `IMPORT_INSTRUCTIONS.md`.
 - Nothing here deletes existing campaigns; legacy ones are *paused* (reversible), never removed.
 
-## Regenerate the CSVs
+## Performance Max build pack (`performance-max/`)
+Per-location PMax campaigns (MI/OH/NC) as a build pack — all text assets, settings, sitelinks,
+callouts, and snippets, char-validated, **Paused**. Note: **Editor can't CSV-import PMax**, so these
+are assembled in the UI or built natively via SearchAtlas; see `performance-max/README_PMAX.md`.
+Do **not** launch PMax until the conversion-tracking fix is done.
+
+## Regenerate the files
 ```bash
-python3 generate_editor_files.py
+python3 generate_editor_files.py   # Search build (campaigns, ad groups, keywords, RSAs, negatives)
+python3 generate_pmax_files.py     # Performance Max build pack (per-location text assets + settings)
 ```
 
 > Generated as an advisory package from account data. Keyword lists, copy, and budgets are a strong
