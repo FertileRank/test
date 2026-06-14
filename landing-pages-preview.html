@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EggCelle PPC Landing Pages — Client Review</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FFF7F1;color:#4A4350;padding:48px 24px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-family:'Fraunces',serif;font-size:42px;color:#2A2530;letter-spacing:-.01em;margin-bottom:8px}
+.sub{color:#8C8390;font-size:16px;margin-bottom:36px}
+.meta{display:inline-block;background:#FBE3D7;color:#D85F4E;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.card{background:#fff;border-radius:18px;padding:28px;border:1px solid #EFE3DA;box-shadow:0 12px 28px -16px rgba(42,37,48,.18);display:flex;flex-direction:column}
+.card h2{font-family:'Fraunces',serif;font-size:22px;color:#2A2530;margin-bottom:6px}
+.card .loc{font-size:13px;color:#8C8390;margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.card .clinic{font-family:'Fraunces',serif;font-size:15px;color:#ED7B6A;margin-bottom:14px}
+.card ul{list-style:none;margin:0 0 22px;padding:0;font-size:14px;color:#4A4350}
+.card ul li{padding:6px 0;border-bottom:1px dashed #EFE3DA;display:flex;justify-content:space-between}
+.card ul li:last-child{border:0}
+.card ul li strong{color:#2A2530;font-weight:600}
+.card .actions{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.btn{display:block;text-align:center;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none}
+.btn-primary{background:#ED7B6A;color:#fff}
+.btn-ghost{background:#FBE3D7;color:#D85F4E}
+.notes{margin-top:36px;background:#fff;border:1px solid #EFE3DA;border-radius:14px;padding:22px;font-size:14px}
+.notes h3{font-family:'Fraunces',serif;font-size:18px;color:#2A2530;margin-bottom:10px}
+.notes p{margin-bottom:8px}
+.notes code{background:#FBE3D7;padding:2px 6px;border-radius:4px;font-size:13px}
+@media(max-width:780px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="meta">Client Review · EggCelle PPC</span>
+  <h1>Co-branded Google Ads landing pages</h1>
+  <p class="sub">Squeeze pages for the three EggCelle search campaigns, one per partner clinic. Mobile-first, single-form, conversion-focused.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h2>North Carolina</h2>
+      <div class="loc">Charlotte · Campaign 23722959272</div>
+      <div class="clinic">× Reproductive Specialists of the Carolinas</div>
+      <ul>
+        <li>Hero geo <strong>Charlotte, NC</strong></li>
+        <li>Clinic accent <strong>Teal</strong></li>
+        <li>Form fields <strong>6</strong></li>
+        <li>Avg load <strong>&lt; 50KB</strong></li>
+      </ul>
+      <div class="actions">
+        <a href="eggcelle-nc-charlotte.html" class="btn btn-primary">Open Live Preview →</a>
+        <a href="eggcelle-nc-charlotte.html" class="btn btn-ghost" target="_blank">Open in new tab</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Ohio</h2>
+      <div class="loc">Dayton · Columbus · Cincinnati · Campaign 23722959269</div>
+      <div class="clinic">× SpringCreek Fertility</div>
+      <ul>
+        <li>Hero geo <strong>3 OH metros</strong></li>
+        <li>Clinic accent <strong>Pink</strong></li>
+        <li>Form fields <strong>7</strong> (location)</li>
+        <li>3 office cards in partner block</li>
+      </ul>
+      <div class="actions">
+        <a href="eggcelle-oh-springcreek.html" class="btn btn-primary">Open Live Preview →</a>
+        <a href="eggcelle-oh-springcreek.html" class="btn btn-ghost" target="_blank">Open in new tab</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Michigan</h2>
+      <div class="loc">Troy · Metro Detroit · Campaign 23722959275</div>
+      <div class="clinic">× RMA of Michigan</div>
+      <ul>
+        <li>Hero geo <strong>Metro Detroit</strong></li>
+        <li>Clinic accent <strong>Blue</strong></li>
+        <li>Form fields <strong>6</strong></li>
+        <li>Names 4 REIs in partner block</li>
+      </ul>
+      <div class="actions">
+        <a href="eggcelle-mi-troy.html" class="btn btn-primary">Open Live Preview →</a>
+        <a href="eggcelle-mi-troy.html" class="btn btn-ghost" target="_blank">Open in new tab</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>Implementation notes for dev handoff</h3>
+    <p><strong>Conversion tracking:</strong> Replace <code>AW-XXXXXXXXX</code> in the gtag snippets (currently commented out at the top of each file) with the live Google Ads conversion ID and label. Uncomment the snippets and the <code>gtag('event','conversion',…)</code> call inside the form submit handler.</p>
+    <p><strong>Form endpoint:</strong> Each form posts to <code>/api/leads</code> with hidden fields <code>campaign_id</code>, <code>location</code>, and <code>partner_clinic</code> so leads can be routed by campaign in your CRM.</p>
+    <p><strong>Phone number:</strong> All pages use the EggCelle main line <code>(866) 230-0094</code>. Swap for tracked numbers if call attribution is desired.</p>
+    <p><strong>Clinic logos:</strong> Each partner block currently shows a styled wordmark placeholder. Drop the partner clinic logo PNG/SVG into <code>.clinic-logo-placeholder</code>.</p>
+    <p><strong>SEO:</strong> All pages are <code>noindex, nofollow</code> — these are paid-only landing pages, never organic.</p>
+  </div>
+</div>
+</body>
+</html>
