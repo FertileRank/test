@@ -25,6 +25,9 @@ the WordPress permalinks to match the Search Atlas site structure.
 .mm-header h4 { margin: 0; padding: 0; }
 .mm-header button { -webkit-appearance: none; appearance: none; }
 .mm-header-spacer { height: 88px; }
+/* Converted .mtfs-page layouts already offset the fixed header in their
+   hero sections - auto-disable the spacer there */
+body:has(.mtfs-page) .mm-header-spacer { display: none; }
 @media (max-width: 1024px) { .mm-header-spacer { height: 76px; } }
 
 /* =============================================================================

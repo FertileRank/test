@@ -66,3 +66,70 @@ theme styles.
 - **Phone number / CTA**: appears twice — in the `.mm-right` block of the
   markup and nowhere else.
 - **Footer columns**: plain HTML lists inside `footer.html`.
+
+## Full-page conversion (`pages/` + `global.css`)
+
+Every page of the site converted for Divi 5 — content unchanged.
+
+| File | What it is |
+|---|---|
+| `global.css` | One consolidated stylesheet for all 19 pages |
+| `pages/<page>.html` | That page's full content for a Divi Code module |
+
+### Install the global stylesheet (once)
+
+Paste the contents of `global.css` into **Divi → Theme Options →
+General → Custom CSS** (or enqueue it from a child theme, which is
+better for a stylesheet this size — see below).
+
+Child theme option:
+
+```php
+// functions.php
+add_action('wp_enqueue_scripts', function () {
+  wp_enqueue_style('mtfs-global', get_stylesheet_directory_uri() . '/mtfs-global.css', [], '1.0');
+});
+```
+
+### Install a page
+
+1. Create the WordPress page with the matching permalink
+   (`pages/lab-solutions-gpo-purchasing.html` → `/lab-solutions/gpo-purchasing/`;
+   the exact path is in the comment at the top of each file).
+2. Edit with Divi, add one regular section, one column, **0 padding**
+   top/bottom on section and row, full width.
+3. Add a **Code** module and paste the page file's entire contents. Save.
+
+### How the conversion works
+
+- Each page is wrapped in `<div class="mtfs-page mtfs-<page>">`.
+- Every CSS rule in `global.css` is scoped to the page(s) that
+  originally defined it — `.mtfs-page …` for rules shared by all
+  pages, `.mtfs-<page> …` for page-specific rules. All prefixes are a
+  single class, so every original specificity relationship is
+  preserved and nothing can leak into Divi, wp-admin, or other theme
+  areas.
+- Page-level `noindex`/dev scripts were already removed; the Website
+  Studio page-observer script and per-page footers were dropped
+  (tracking comes from the OTTO pixel, the footer from the global
+  footer template). Each page keeps its own small interactivity
+  script (scroll animations, FAQ accordions, the contact-form
+  handler) and its JSON-LD structured data.
+- The header template auto-hides its spacer on converted pages
+  (`body:has(.mtfs-page)`), because these layouts already offset the
+  fixed header inside their hero sections.
+
+### Verified
+
+Each converted page was rendered next to its static original in
+headless Chromium (1366px, full page) and pixel-diffed. All 19 match
+except the footer block — intentionally replaced by the single global
+footer (five lab pages previously had a variant footer with
+placeholder links to pages that don't exist) — and the nav highlight,
+which keys off real permalinks.
+
+### Titles / meta / SEO
+
+Page `<title>`, meta description, canonical, and Open Graph tags are
+not part of the body HTML — set them in WordPress (the site's SEO
+plugin or OTTO), using the original values from the static pages.
