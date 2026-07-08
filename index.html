@@ -428,6 +428,11 @@
         .comp-text h2 { font-size: clamp(24px, 3vw, 32px); margin-bottom: 14px; }
         .comp-text p { color: var(--color-text-soft); margin-bottom: 18px; }
 
+        .section-cta {
+            text-align: center;
+            margin-top: 36px;
+        }
+
         .checklist {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -489,7 +494,7 @@
             justify-content: center;
             box-shadow: var(--shadow-sm);
         }
-        .step h4 { margin: 8px 0; font-size: 17px; }
+        .step h3 { margin: 8px 0; font-size: 17px; font-weight: 700; }
         .step p { color: var(--color-text-soft); font-size: 14px; }
 
         .cities {
@@ -646,7 +651,7 @@
 </head>
 <body>
     <div class="top-bar">
-        Now accepting applicants from Charlotte, Raleigh, Greensboro &amp; Winston-Salem &middot; <a href="tel:+17042472209">Call (704) 247-2209</a>
+        Now accepting applicants from Charlotte, Raleigh, Greensboro &amp; Winston-Salem &middot; <a href="tel:+17042472209">Call&nbsp;(704)&nbsp;247&#8209;2209</a>
     </div>
 
     <header>
@@ -656,6 +661,7 @@
         </div>
     </header>
 
+    <main id="main-content">
     <section class="hero" id="top">
         <div class="container hero-grid">
             <div>
@@ -738,7 +744,7 @@
                 <p>EggCelle donors receive transparent, generous compensation. Every penny of your medical care, screening, medications, and travel is covered &mdash; on top of your cycle payment.</p>
                 <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">See If I Qualify</a>
             </div>
-            <div class="comp-table" aria-label="Compensation breakdown">
+            <div class="comp-table" role="group" aria-label="Compensation breakdown">
                 <div class="comp-row"><span>Base compensation (first cycle)</span><span class="v">$8,000</span></div>
                 <div class="comp-row"><span>Repeat-donor bonus</span><span class="v">+ $1,000&ndash;$2,000</span></div>
                 <div class="comp-row"><span>Medical screening &amp; medications</span><span class="v">100% covered</span></div>
@@ -764,7 +770,7 @@
                 <li><span class="badge">&check;</span> Reliable, on-time, and committed to the process</li>
                 <li><span class="badge">&check;</span> U.S. citizen or permanent resident</li>
             </ul>
-            <div style="text-align:center; margin-top: 36px;">
+            <div class="section-cta">
                 <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">I Meet the Requirements &mdash; Apply Now</a>
             </div>
         </div>
@@ -778,19 +784,19 @@
             </div>
             <div class="steps">
                 <div class="step">
-                    <h4>Apply Online</h4>
+                    <h3>Apply Online</h3>
                     <p>Complete the short form. We&rsquo;ll follow up within 24 hours to schedule your initial consult.</p>
                 </div>
                 <div class="step">
-                    <h4>Medical Screening</h4>
+                    <h3>Medical Screening</h3>
                     <p>Comprehensive health, genetic, and psychological evaluation &mdash; fully paid for by EggCelle.</p>
                 </div>
                 <div class="step">
-                    <h4>Cycle &amp; Monitoring</h4>
+                    <h3>Cycle &amp; Monitoring</h3>
                     <p>Follow your personalized medication protocol with regular monitoring at our Charlotte clinic.</p>
                 </div>
                 <div class="step">
-                    <h4>Retrieval &amp; Payment</h4>
+                    <h3>Retrieval &amp; Payment</h3>
                     <p>Egg retrieval is a 20-minute outpatient procedure. Compensation is paid promptly after.</p>
                 </div>
             </div>
@@ -877,14 +883,15 @@
             <a href="https://eggcelle.eggdonorconnect.com/donorprescreen" class="btn-primary js-prescreen">Apply Now &rarr;</a>
         </div>
     </section>
+    </main>
 
     <footer>
         <div class="container footer-inner">
             <div>&copy; 2026 EggCelle Donor Program. North Carolina program in partnership with Reproductive Specialists of the Carolinas.</div>
             <div class="footer-links">
-                <a href="/privacy">Privacy</a>
-                <a href="/terms">Terms</a>
-                <a href="tel:+17042472209">(704) 247-2209</a>
+                <a href="https://eggcelle.com/privacy">Privacy</a>
+                <a href="https://eggcelle.com/terms">Terms</a>
+                <a href="tel:+17042472209">(704)&nbsp;247&#8209;2209</a>
             </div>
         </div>
     </footer>
