@@ -28,6 +28,11 @@ the WordPress permalinks to match the Search Atlas site structure.
 /* Converted .mtfs-page layouts already offset the fixed header in their
    hero sections - auto-disable the spacer there */
 body:has(.mtfs-page) .mm-header-spacer { display: none; }
+
+/* WordPress admin bar sits above everything at the top of the viewport */
+body.admin-bar .mm-header { top: 32px; }
+@media screen and (max-width: 782px) { body.admin-bar .mm-header { top: 46px; } }
+@media screen and (max-width: 600px) { body.admin-bar .mm-header { position: absolute; } }
 @media (max-width: 1024px) { .mm-header-spacer { height: 76px; } }
 
 /* =============================================================================
@@ -2048,6 +2053,25 @@ body.mm-menu-lock {
   }
 })();
 
+</script>
+<script>
+/* Divi wraps this Code module in section/row/column divs. If any wrapper
+   has a transform, filter, backdrop-filter, or sticky/overflow behavior,
+   position:fixed children get trapped inside it and the header disappears
+   behind the page. Lift the fixed elements out to <body> so no wrapper
+   can ever trap or clip them. Event listeners survive the move. */
+(function () {
+  function lift() {
+    ['#mm-header', '.mm-mobile-scrim', '#mm-back-to-top', '#mm-search-overlay'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (el && el.parentElement !== document.body) document.body.appendChild(el);
+    });
+  }
+  lift();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', lift, { once: true });
+  }
+})();
 </script>
 <script>
 /* Keep the spacer exactly as tall as the (unscrolled) fixed header */
