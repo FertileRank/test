@@ -36,7 +36,7 @@
       snippet: 'Founded in 2005 and headquartered in White Plains, NY — MedTech For Solutions brings 100+ years of combined ART industry expertise to every fertility practice we serve.'
     },
     {
-      href: '/staff.html',
+      href: '/staff/',
       title: 'Our Team',
       section: 'Team',
       icon: 'users',
@@ -363,7 +363,7 @@
     +                     '<span class="mm-item-ico">' + ICONS.userGroup + '</span>'
     +                     '<span class="mm-item-body"><strong>About Us</strong><span>Our mission, history, and values</span></span>'
     +                   '</a></li>'
-    +                   '<li><a class="mm-item" href="/staff.html" data-mm-section="about">'
+    +                   '<li><a class="mm-item" href="/staff/" data-mm-section="about">'
     +                     '<span class="mm-item-ico">' + ICONS.users + '</span>'
     +                     '<span class="mm-item-body"><strong>Our Team</strong><span>Meet the MedTech specialists</span></span>'
     +                   '</a></li>'
