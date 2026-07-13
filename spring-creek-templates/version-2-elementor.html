@@ -1,0 +1,398 @@
+<!--
+  ============================================================================
+  SpringCreek Fertility — Elementor-Friendly Landing Page Module
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  • Paste this entire block into an Elementor "HTML" widget (or a Custom Code
+    block). No <html>, <head>, or <body> wrappers are used, so it drops cleanly
+    into any Elementor container.
+  • Every class is namespaced with `.scf-lp-` to prevent style bleed / conflicts
+    with the active WordPress theme. The wrapper `.scf-lp` also scopes all rules.
+  • Replace the placeholder image URLs (via.placeholder.com) and the form
+    `action` with your real assets / form handler (Jotform, Gravity Forms, etc.).
+  • Fonts load from Google Fonts; if your theme already loads Lora / Open Sans
+    you may delete the @import line.
+  ============================================================================
+-->
+
+<div class="scf-lp">
+
+  <!-- Fonts (delete if theme already provides them) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+    /* ---- Scoped design tokens ---- */
+    .scf-lp {
+      --scf-cream: #FCF9F0;
+      --scf-white: #FFFFFF;
+      --scf-sky: #60B9E5;
+      --scf-sky-light: #A7D8F1;
+      --scf-sky-pale: #EAF4FB;
+      --scf-navy: #0E2A47;
+      --scf-navy-dark: #0A1F36;
+      --scf-slate: #2A3F5A;
+      --scf-muted: #5C6F84;
+      --scf-green: #4CAF50;
+      --scf-green-soft: #7BA86A;
+      --scf-green-pale: #E4F2DA;
+      --scf-gold: #F5B100;
+      --scf-border: #E0E6EC;
+      --scf-shadow-card: 0 1px 3px rgba(14,42,71,.06), 0 12px 32px rgba(14,42,71,.08);
+      --scf-shadow-soft: 0 4px 24px rgba(14,42,71,.06);
+    }
+
+    /* ---- Reset within scope only ---- */
+    .scf-lp *, .scf-lp *::before, .scf-lp *::after { box-sizing: border-box; }
+    .scf-lp {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--scf-slate);
+      line-height: 1.65;
+      background: var(--scf-cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    .scf-lp h1, .scf-lp h2, .scf-lp h3, .scf-lp h4 {
+      font-family: 'Lora', Georgia, serif;
+      color: var(--scf-navy);
+      line-height: 1.2;
+      margin: 0;
+    }
+    .scf-lp p { margin: 0; }
+    .scf-lp img { max-width: 100%; display: block; }
+    .scf-lp a { text-decoration: none; color: inherit; }
+    .scf-lp ul { list-style: none; margin: 0; padding: 0; }
+
+    /* ---- Inner width (respects Elementor container padding) ---- */
+    .scf-lp-inner { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); }
+    .scf-lp-eyebrow {
+      display: inline-block; font-size: .78rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--scf-sky); margin-bottom: 12px;
+    }
+
+    /* ---- Buttons ---- */
+    .scf-lp-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1rem;
+      padding: 15px 28px; border-radius: 50px; border: 2px solid transparent;
+      cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .scf-lp-btn--primary { background: var(--scf-sky); color: #fff; box-shadow: 0 8px 20px rgba(96,185,229,.34); }
+    .scf-lp-btn--primary:hover { background: #4aa8d8; transform: translateY(-2px); }
+    .scf-lp-btn--outline { background: transparent; color: var(--scf-navy); border-color: var(--scf-border); }
+    .scf-lp-btn--outline:hover { border-color: var(--scf-sky); color: var(--scf-sky); }
+    .scf-lp-btn--block { width: 100%; }
+
+    /* ---- Hero ---- */
+    .scf-lp-hero {
+      background:
+        radial-gradient(1000px 460px at 12% -10%, var(--scf-sky-pale) 0%, rgba(234,244,251,0) 60%),
+        linear-gradient(180deg, var(--scf-cream) 0%, #fbf6ea 100%);
+      padding: 64px 0 76px;
+    }
+    .scf-lp-hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 52px; align-items: center; }
+    .scf-lp-hero__title { font-size: clamp(2.2rem, 4.6vw, 3.3rem); font-weight: 700; margin-bottom: 18px; }
+    .scf-lp-hero__title .scf-lp-accent { color: var(--scf-sky); }
+    .scf-lp-hero__sub { font-size: 1.12rem; color: var(--scf-muted); margin-bottom: 22px; max-width: 520px; }
+    .scf-lp-hero__trust { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; }
+    .scf-lp-hero__trust li { display: flex; align-items: center; gap: 8px; font-size: .9rem; font-weight: 600; color: var(--scf-slate); }
+    .scf-lp-hero__check { width: 20px; height: 20px; border-radius: 50%; background: var(--scf-green-pale); color: var(--scf-green); display: grid; place-items: center; font-size: .72rem; font-weight: 800; }
+
+    /* ---- Lead form ---- */
+    .scf-lp-form-card { background: #fff; border: 1px solid var(--scf-border); border-radius: 22px; box-shadow: var(--scf-shadow-card); padding: 32px; }
+    .scf-lp-form-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .scf-lp-form-card__sub { font-size: .92rem; color: var(--scf-muted); margin-bottom: 20px; }
+    .scf-lp-field { margin-bottom: 15px; }
+    .scf-lp-field label { display: block; font-size: .82rem; font-weight: 700; color: var(--scf-navy); margin-bottom: 6px; }
+    .scf-lp-field input, .scf-lp-field select {
+      width: 100%; padding: 13px 15px; font-family: 'Open Sans', sans-serif; font-size: .98rem;
+      color: var(--scf-navy); background: #fbfcfe; border: 1.5px solid var(--scf-border); border-radius: 10px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .scf-lp-field input:focus, .scf-lp-field select:focus { outline: none; border-color: var(--scf-sky); box-shadow: 0 0 0 3px rgba(96,185,229,.18); }
+    .scf-lp-form-secure { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: .8rem; color: var(--scf-muted); margin-top: 12px; }
+
+    /* ---- Section shell ---- */
+    .scf-lp-section { padding: 78px 0; }
+    .scf-lp-section--white { background: #fff; }
+    .scf-lp-section--sky { background: var(--scf-sky-pale); }
+    .scf-lp-head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+    .scf-lp-head h2 { font-size: clamp(1.85rem, 3.4vw, 2.5rem); margin-bottom: 12px; }
+    .scf-lp-head p { font-size: 1.06rem; color: var(--scf-muted); }
+
+    /* ---- Value proposition (3 col) ---- */
+    .scf-lp-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+    .scf-lp-value { background: var(--scf-cream); border: 1px solid var(--scf-border); border-radius: 16px; padding: 36px 28px; text-align: center; transition: transform .2s ease, box-shadow .2s ease; }
+    .scf-lp-value:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(14,42,71,.12); }
+    .scf-lp-value__icon { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 20px; object-fit: cover; }
+    .scf-lp-value h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .scf-lp-value p { font-size: .97rem; color: var(--scf-muted); }
+
+    /* ---- Social proof ---- */
+    .scf-lp-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 46px; }
+    .scf-lp-badge { background: #fff; border: 1px solid var(--scf-border); border-radius: 50px; padding: 10px 20px; font-weight: 700; font-size: .88rem; color: var(--scf-navy); display: flex; align-items: center; gap: 8px; box-shadow: var(--scf-shadow-soft); }
+    .scf-lp-badge__star { color: var(--scf-gold); }
+    .scf-lp-carousel { max-width: 780px; margin: 0 auto; }
+    .scf-lp-quote { background: #fff; border-radius: 22px; box-shadow: var(--scf-shadow-card); padding: 44px 46px; text-align: center; display: none; }
+    .scf-lp-quote.is-active { display: block; animation: scf-lp-fade .5s ease; }
+    @keyframes scf-lp-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .scf-lp-quote__stars { color: var(--scf-gold); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .scf-lp-quote blockquote { font-family: 'Lora', serif; font-size: 1.3rem; line-height: 1.55; color: var(--scf-navy); margin: 0 0 22px; }
+    .scf-lp-quote__author { display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .scf-lp-quote__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+    .scf-lp-quote__name { font-weight: 700; color: var(--scf-navy); }
+    .scf-lp-quote__role { font-size: .85rem; color: var(--scf-muted); }
+    .scf-lp-dots { display: flex; justify-content: center; gap: 10px; margin-top: 26px; }
+    .scf-lp-dots button { width: 11px; height: 11px; border-radius: 50%; border: none; background: #c3d3e0; cursor: pointer; transition: background .2s, transform .2s; }
+    .scf-lp-dots button.is-active { background: var(--scf-sky); transform: scale(1.25); }
+
+    /* ---- Final CTA ---- */
+    .scf-lp-cta { text-align: center; background: #fff; }
+    .scf-lp-cta__inner { background: linear-gradient(135deg, var(--scf-sky-pale) 0%, var(--scf-green-pale) 100%); border: 1px solid var(--scf-border); border-radius: 28px; padding: 58px 32px; }
+    .scf-lp-cta h2 { font-size: clamp(1.85rem, 3.4vw, 2.4rem); margin-bottom: 12px; }
+    .scf-lp-cta p { color: var(--scf-slate); font-size: 1.06rem; margin-bottom: 26px; }
+    .scf-lp-cta__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ---- Footer ---- */
+    .scf-lp-footer { background: var(--scf-navy-dark); color: #b9c6d6; padding: 54px 0 26px; }
+    .scf-lp-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 38px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .scf-lp-footer__grid h4 { color: #fff; font-family: 'Open Sans', sans-serif; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+    .scf-lp-footer__brand p { font-size: .92rem; margin-top: 14px; max-width: 300px; }
+    .scf-lp-footer__logo { font-family: 'Lora', serif; font-weight: 700; font-size: 1.25rem; color: #fff; }
+    .scf-lp-footer li { margin-bottom: 11px; font-size: .93rem; }
+    .scf-lp-footer a:hover { color: var(--scf-sky-light); }
+    .scf-lp-footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 22px; font-size: .84rem; }
+    .scf-lp-footer__bottom nav { display: flex; gap: 18px; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 940px) {
+      .scf-lp-hero__grid { grid-template-columns: 1fr; gap: 38px; }
+      .scf-lp-form-card { max-width: 520px; }
+      .scf-lp-values { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+      .scf-lp-footer__grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 640px) {
+      .scf-lp-section { padding: 56px 0; }
+      .scf-lp-hero { padding: 44px 0 56px; }
+      .scf-lp-quote { padding: 32px 24px; }
+      .scf-lp-quote blockquote { font-size: 1.12rem; }
+      .scf-lp-footer__grid { grid-template-columns: 1fr; }
+      .scf-lp-footer__bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+
+  <!-- ============ HERO + LEAD FORM ============ -->
+  <section class="scf-lp-hero">
+    <div class="scf-lp-inner scf-lp-hero__grid">
+      <div class="scf-lp-hero__copy">
+        <span class="scf-lp-eyebrow">Cincinnati's Trusted Fertility Clinic</span>
+        <h1 class="scf-lp-hero__title">IVF &amp; <span class="scf-lp-accent">Personalized</span> Fertility Care</h1>
+        <p class="scf-lp-hero__sub">Compassionate care. Advanced technology. Personalized treatment plans — right here in Cincinnati, guiding you on every path to parenthood.</p>
+        <ul class="scf-lp-hero__trust">
+          <li><span class="scf-lp-hero__check">&#10003;</span> Financing &amp; insurance support</li>
+          <li><span class="scf-lp-hero__check">&#10003;</span> Consults within 1&ndash;2 weeks</li>
+          <li><span class="scf-lp-hero__check">&#10003;</span> Board-certified specialists</li>
+        </ul>
+      </div>
+
+      <div class="scf-lp-form-card">
+        <h2>Start Your Journey</h2>
+        <p class="scf-lp-form-card__sub">Request your consultation &mdash; we'll call you within one business day.</p>
+        <!-- Replace action with your form endpoint (Jotform, Gravity Forms, etc.) -->
+        <form class="scf-lp-form" action="#" method="post" onsubmit="return scfLpLead(event)">
+          <div class="scf-lp-field">
+            <label for="scf-lp-name">Full Name</label>
+            <input type="text" id="scf-lp-name" name="name" placeholder="Jane Doe" required>
+          </div>
+          <div class="scf-lp-field">
+            <label for="scf-lp-email">Email Address</label>
+            <input type="email" id="scf-lp-email" name="email" placeholder="jane@email.com" required>
+          </div>
+          <div class="scf-lp-field">
+            <label for="scf-lp-phone">Phone Number</label>
+            <input type="tel" id="scf-lp-phone" name="phone" placeholder="(513) 555-0123" required>
+          </div>
+          <div class="scf-lp-field">
+            <label for="scf-lp-location">Preferred Location</label>
+            <select id="scf-lp-location" name="location" required>
+              <option value="" disabled selected>Select a location</option>
+              <option value="mason">Mason Satellite Clinic</option>
+              <option value="cincinnati">Greater Cincinnati</option>
+              <option value="dayton">Dayton Main Clinic</option>
+              <option value="virtual">Virtual Consultation</option>
+            </select>
+          </div>
+          <button type="submit" class="scf-lp-btn scf-lp-btn--primary scf-lp-btn--block">Schedule an Appointment</button>
+        </form>
+        <p class="scf-lp-form-secure">&#128274; Your information is secure and confidential</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUE PROPOSITION ============ -->
+  <section class="scf-lp-section scf-lp-section--white">
+    <div class="scf-lp-inner">
+      <div class="scf-lp-head">
+        <span class="scf-lp-eyebrow">Why Choose SpringCreek</span>
+        <h2>Why Cincinnati Families Choose SpringCreek</h2>
+        <p>Every family's path is different. Ours is built around you &mdash; with the expertise, technology, and warmth you deserve.</p>
+      </div>
+      <div class="scf-lp-values">
+        <article class="scf-lp-value">
+          <img class="scf-lp-value__icon" src="https://via.placeholder.com/64/EAF4FB/60B9E5?text=%E2%99%A5" alt="Personalized care icon">
+          <h3>Personalized Care</h3>
+          <p>Individualized treatment plans built around your body, your goals, and your story &mdash; never a one-size-fits-all approach.</p>
+        </article>
+        <article class="scf-lp-value">
+          <img class="scf-lp-value__icon" src="https://via.placeholder.com/64/E4F2DA/4CAF50?text=%E2%86%97" alt="Success rates icon">
+          <h3>High Success Rates</h3>
+          <p>Outcomes that consistently exceed national averages, powered by advanced reproductive technology and proven protocols.</p>
+        </article>
+        <article class="scf-lp-value">
+          <img class="scf-lp-value__icon" src="https://via.placeholder.com/64/FFF4D6/F5B100?text=%2B" alt="Expert team icon">
+          <h3>Expert Team</h3>
+          <p>Board-certified reproductive endocrinologists and embryologists who listen, explain, and support you at every step.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOCIAL PROOF ============ -->
+  <section class="scf-lp-section scf-lp-section--sky">
+    <div class="scf-lp-inner">
+      <div class="scf-lp-head">
+        <span class="scf-lp-eyebrow">Real Patients. Real Families.</span>
+        <h2>Trusted by Families Across Greater Cincinnati</h2>
+      </div>
+
+      <div class="scf-lp-badges">
+        <span class="scf-lp-badge"><span class="scf-lp-badge__star">&#9733;</span> 4.9/5 Patient Rating</span>
+        <span class="scf-lp-badge">&#127942; Top Fertility Clinic 2025</span>
+        <span class="scf-lp-badge">&#128300; CAP &amp; CLIA Accredited</span>
+        <span class="scf-lp-badge">&#128155; LGBTQIA+ Inclusive</span>
+        <span class="scf-lp-badge">&#129309; SART Member</span>
+      </div>
+
+      <div class="scf-lp-carousel" id="scfLpCarousel">
+        <div class="scf-lp-quote is-active">
+          <div class="scf-lp-quote__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;After years of uncertainty, the SpringCreek team gave us a plan and real hope. Our daughter is proof that compassionate, expert care changes lives.&rdquo;</blockquote>
+          <div class="scf-lp-quote__author">
+            <img class="scf-lp-quote__avatar" src="https://via.placeholder.com/48/60B9E5/FFFFFF?text=SM" alt="">
+            <div style="text-align:left"><div class="scf-lp-quote__name">Sarah &amp; Michael</div><div class="scf-lp-quote__role">IVF patients, Mason</div></div>
+          </div>
+        </div>
+        <div class="scf-lp-quote">
+          <div class="scf-lp-quote__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Every question was answered with patience and kindness. I never felt like a number &mdash; I felt cared for from the very first call.&rdquo;</blockquote>
+          <div class="scf-lp-quote__author">
+            <img class="scf-lp-quote__avatar" src="https://via.placeholder.com/48/7BA86A/FFFFFF?text=JT" alt="">
+            <div style="text-align:left"><div class="scf-lp-quote__name">Jasmine T.</div><div class="scf-lp-quote__role">Egg freezing patient</div></div>
+          </div>
+        </div>
+        <div class="scf-lp-quote">
+          <div class="scf-lp-quote__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;The financing support made treatment possible for us. The whole team celebrated with us when we got the news &mdash; they truly care.&rdquo;</blockquote>
+          <div class="scf-lp-quote__author">
+            <img class="scf-lp-quote__avatar" src="https://via.placeholder.com/48/0E2A47/FFFFFF?text=DR" alt="">
+            <div style="text-align:left"><div class="scf-lp-quote__name">David &amp; Ryan</div><div class="scf-lp-quote__role">Donor program, Cincinnati</div></div>
+          </div>
+        </div>
+        <div class="scf-lp-dots" id="scfLpDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="scf-lp-section scf-lp-cta">
+    <div class="scf-lp-inner">
+      <div class="scf-lp-cta__inner">
+        <span class="scf-lp-eyebrow">Start Your Journey</span>
+        <h2>Book Your First Fertility Consultation Today</h2>
+        <p>Most consultations available within 1&ndash;2 weeks. Insurance and financing accepted.</p>
+        <div class="scf-lp-cta__actions">
+          <a href="#scfLpCarousel" class="scf-lp-btn scf-lp-btn--primary">Schedule a Consultation</a>
+          <a href="tel:5134575200" class="scf-lp-btn scf-lp-btn--outline">Call 513.457.5200</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="scf-lp-footer">
+    <div class="scf-lp-inner">
+      <div class="scf-lp-footer__grid">
+        <div class="scf-lp-footer__brand">
+          <div class="scf-lp-footer__logo">SpringCreek Fertility</div>
+          <p>Compassionate, personalized fertility care for Greater Cincinnati &mdash; helping every family find their path to parenthood.</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>&#128205; 9313 Mason Montgomery Rd, Suite 225, Mason, OH 45040</li>
+            <li>&#128222; <a href="tel:5134575200">513.457.5200</a></li>
+            <li>&#9993; <a href="mailto:care@springcreekfertility.com">care@springcreekfertility.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#">Fertility Services</a></li>
+            <li><a href="#">Why SpringCreek</a></li>
+            <li><a href="#">Our Care Team</a></li>
+            <li><a href="#">Book a Consultation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="scf-lp-footer__bottom">
+        <span>&copy; 2026 SpringCreek Fertility. All rights reserved.</span>
+        <nav>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Accessibility</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPT (scoped, namespaced) ============ -->
+  <script>
+    (function () {
+      var root = document.currentScript ? document.currentScript.closest('.scf-lp') : document.querySelector('.scf-lp');
+      if (!root) return;
+
+      // Testimonial carousel
+      var slides = root.querySelectorAll('.scf-lp-quote');
+      var dotsWrap = root.querySelector('#scfLpDots');
+      var current = 0;
+      if (dotsWrap && slides.length) {
+        slides.forEach(function (s, i) {
+          var b = document.createElement('button');
+          b.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+          if (i === 0) b.classList.add('is-active');
+          b.addEventListener('click', function () { scfShow(i); });
+          dotsWrap.appendChild(b);
+        });
+        var dots = dotsWrap.querySelectorAll('button');
+        var scfShow = function (i) {
+          slides[current].classList.remove('is-active');
+          dots[current].classList.remove('is-active');
+          current = i;
+          slides[current].classList.add('is-active');
+          dots[current].classList.add('is-active');
+        };
+        setInterval(function () { scfShow((current + 1) % slides.length); }, 6000);
+      }
+
+      // Lead form (demo handler — replace with real submission)
+      window.scfLpLead = function (e) {
+        e.preventDefault();
+        var btn = e.target.querySelector('button[type="submit"]');
+        btn.textContent = '✓ Request Received';
+        btn.style.background = '#4CAF50';
+        btn.disabled = true;
+        return false;
+      };
+    })();
+  </script>
+
+</div>
+<!-- ============ END SpringCreek Fertility Elementor Module ============ -->
