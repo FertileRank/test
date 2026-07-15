@@ -1,0 +1,36 @@
+# FertileRank
+
+> FertileRank is a specialist digital growth agency for fertility clinics, IVF centers, and reproductive
+> health organizations in the United States. It builds and operates SEO, local search, Google Ads,
+> reputation, website conversion, and patient-intake systems that turn qualified demand into booked
+> consultations — with privacy-first workflows designed around HIPAA obligations. Tagline: "The Blueprint
+> for Digital Fertility Triumphs."
+
+Key facts:
+- Category: fertility clinic marketing agency / IVF marketing agency / reproductive healthcare marketing agency
+- Serves: IVF and fertility clinics, reproductive endocrinology (REI) practices, egg donor and surrogacy programs, cryobanks, OB/GYN groups
+- Approach: documented blueprints, transparent monthly reporting tied to consultations, clients own all accounts and data
+- FertileRank provides marketing services, not medical advice, and does not guarantee specific outcomes
+
+## Note on this site
+This is a lead-generation starter site. The homepage is a single high-converting landing page that
+covers all services, who we help, and how we work as on-page sections, with a lead-capture form in the
+hero. Deeper per-service pages are available in the full FertileRank site build.
+
+## Pages
+- [Home / Landing](https://fertilerank.com/): services, who we serve, how we work, about, FAQ, and the free growth-audit lead form
+- [Contact](https://fertilerank.com/contact): book a strategy call — hello@fertilerank.com
+- [Privacy Policy](https://fertilerank.com/privacy-policy)
+- [Terms of Service](https://fertilerank.com/terms-of-service)
+- [Cookie Policy](https://fertilerank.com/cookie-policy)
+- [Accessibility Statement](https://fertilerank.com/accessibility-statement)
+
+## Services (covered on the landing page)
+- Fertility Clinic SEO — YMYL-grade SEO for fertility and IVF clinics
+- Local SEO & Google Business Profile — Maps rankings, compliance-safe local presence
+- Google Ads & Paid Media — paid search built for lead quality and cost-per-consultation efficiency
+- Reputation Management — privacy-safe review growth and response workflows
+- Website Conversion (CRO) — landing pages and conversion optimization for consultation requests
+- CRM & Intake Automation — speed-to-lead, follow-up sequences, and intake workflows
+- Egg Donor Recruitment Marketing — compliant donor acquisition funnels
+- Analytics & Attribution — privacy-safe attribution and reporting
