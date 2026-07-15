@@ -377,6 +377,29 @@
   .footer-bottom nav { display: flex; gap: 20px; }
   .footer-bottom a:hover { color: var(--sky-light); }
 
+  /* ---------- FertileRank logo lockup ---------- */
+  /* Recreated inline from the FertileRank brand mark (orange hex knot + wordmark).
+     Swap the <svg> for the official asset any time; colours are editable below. */
+  .fr-logo { display: inline-flex; align-items: center; gap: 9px; line-height: 1; }
+  .fr-logo__mark { width: 30px; height: 30px; flex: 0 0 auto; }
+  .fr-logo__text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.12rem;
+    letter-spacing: -0.02em;
+    color: inherit;
+  }
+  .fr-eyebrow { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; opacity: 0.7; }
+
+  /* Header placement (light bg → dark wordmark) */
+  .nav-fr { color: var(--navy-dark); padding-left: 18px; border-left: 1px solid var(--border); }
+  .nav-fr .fr-logo__text { font-size: 1.02rem; }
+
+  /* Footer placement (dark bg → white wordmark) */
+  .footer-credit { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .footer-fr { color: var(--white); }
+  .footer-fr .fr-logo__text { font-size: 1rem; }
+
   /* ---------- Responsive ---------- */
   @media (max-width: 940px) {
     .hero-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -386,7 +409,7 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
   @media (max-width: 720px) {
-    .nav-links, .nav-phone { display: none; }
+    .nav-links, .nav-phone, .nav-fr { display: none; }
     .nav-toggle { display: block; }
     .nav-links.open {
       display: flex; flex-direction: column; gap: 16px;
@@ -431,6 +454,16 @@
       <div class="nav-cta">
         <a class="nav-phone" href="tel:5134575200">513.457.5200</a>
         <a class="btn btn-primary" href="#consult">Schedule</a>
+        <a class="fr-logo nav-fr" href="https://fertilerank.com/" target="_blank" rel="noopener" title="Landing page designed by FertileRank">
+          <svg class="fr-logo__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M24 2.5 43 13.75 43 34.25 24 45.5 5 34.25 5 13.75Z" fill="#F5822A"/>
+            <g stroke="#fff" stroke-width="4.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19.5 31.5c-5-1.5-5.5-8 0-10.5 3.5-1.6 7 0 8.5 2.5"/>
+              <path d="M28.5 16.5c5 1.5 5.5 8 0 10.5-3.5 1.6-7 0-8.5-2.5"/>
+            </g>
+          </svg>
+          <span class="fr-logo__text">FertileRank</span>
+        </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </div>
@@ -613,7 +646,19 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 SpringCreek Fertility. All rights reserved.</span>
+        <div class="footer-credit">
+          <span>© 2026 SpringCreek Fertility. All rights reserved.</span>
+          <a class="fr-logo footer-fr" href="https://fertilerank.com/" target="_blank" rel="noopener" title="Design by FertileRank">
+            <svg class="fr-logo__mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M24 2.5 43 13.75 43 34.25 24 45.5 5 34.25 5 13.75Z" fill="#F5822A"/>
+              <g stroke="#0A1F36" stroke-width="4.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19.5 31.5c-5-1.5-5.5-8 0-10.5 3.5-1.6 7 0 8.5 2.5"/>
+                <path d="M28.5 16.5c5 1.5 5.5 8 0 10.5-3.5 1.6-7 0-8.5-2.5"/>
+              </g>
+            </svg>
+            <span class="fr-logo__text">FertileRank</span>
+          </a>
+        </div>
         <nav aria-label="Legal">
           <a href="#privacy">Privacy Policy</a>
           <a href="#terms">Terms of Use</a>
