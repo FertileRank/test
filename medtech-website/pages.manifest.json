@@ -554,6 +554,33 @@
         "Call to Action"
       ],
       "hasBlogSection": false
+    },
+    {
+      "id": "coming_soon",
+      "name": "Coming Soon",
+      "slug": "coming-soon",
+      "isHome": false,
+      "filePath": "coming-soon/index.html",
+      "pageId": null,
+      "inNavigation": false,
+      "seo": {
+        "title": "New Website Coming Soon | MedTech For Solutions",
+        "description": "The new MedTech For Solutions website is launching soon. Sign up to be notified at launch.",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "https://medtech4solutions.com/coming-soon/",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Countdown",
+        "Notify Form",
+        "Feature Preview",
+        "Contact"
+      ],
+      "hasBlogSection": false
     }
   ],
   "navigation": {
