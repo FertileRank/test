@@ -232,6 +232,8 @@ html { scroll-behavior: smooth; }
 .mtfs-home .hero, .mtfs-staff .hero { padding:150px 0 100px;background:var(--g900);position:relative;overflow:hidden }
 .mtfs-home .hero::before, .mtfs-staff .hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 10% 40%,rgba(0,139,139,.2) 0%,transparent 70%),radial-gradient(ellipse 500px 400px at 90% 20%,rgba(107,45,91,.12) 0%,transparent 70%) }
 .mtfs-home .hero-inner, .mtfs-staff .hero-inner { max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1 }
+/* A1: home hero collapsed to the existing single-column pattern after the Key Metrics card removal */
+.mtfs-home .hero-inner { grid-template-columns:1fr }
 .mtfs-home .hero-badge, .mtfs-staff .hero-badge { display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(197,216,45,.35);border-radius:100px;padding:6px 18px;font-size:.8rem;font-weight:600;color:var(--lime);margin-bottom:20px }
 .mtfs-home .hero-badge .dot, .mtfs-staff .hero-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--lime) }
 .mtfs-home .hero h1, .mtfs-staff .hero h1 { font-size:3.2rem;color:var(--w);margin-bottom:20px;line-height:1.15 }
