@@ -19,11 +19,18 @@ hero. Deeper per-service pages are available in the full FertileRank site build.
 
 ## Pages
 - [Home / Landing](https://fertilerank.com/): services, who we serve, how we work, about, FAQ, and the free growth-audit lead form
-- [Contact](https://fertilerank.com/contact): book a strategy call — hello@fertilerank.com
-- [Privacy Policy](https://fertilerank.com/privacy-policy)
-- [Terms of Service](https://fertilerank.com/terms-of-service)
-- [Cookie Policy](https://fertilerank.com/cookie-policy)
-- [Accessibility Statement](https://fertilerank.com/accessibility-statement)
+- [Fertility Clinic SEO](https://fertilerank.com/fertility-clinic-seo/): YMYL-grade SEO for fertility and IVF clinics
+- [Google Ads for Fertility Clinics](https://fertilerank.com/fertility-clinic-google-ads/): disciplined paid search measured to consultations
+- [Egg Donor Recruitment Marketing](https://fertilerank.com/egg-donor-recruitment-marketing/): compliance-first donor acquisition funnels
+- [About](https://fertilerank.com/about/): company profile, operating principles, editorial and compliance standards
+- [Blog & Resources](https://fertilerank.com/blog/): fertility clinic marketing guides
+- [How Much Does Fertility Clinic Marketing Cost?](https://fertilerank.com/blog/fertility-clinic-marketing-cost/): 2026 pricing guide
+- [How to Get More IVF Patients](https://fertilerank.com/blog/how-to-get-more-ivf-patients/): a 9-step growth system
+- [Contact](https://fertilerank.com/contact/): book a strategy call — hello@fertilerank.com
+- [Privacy Policy](https://fertilerank.com/privacy-policy/)
+- [Terms of Service](https://fertilerank.com/terms-of-service/)
+- [Cookie Policy](https://fertilerank.com/cookie-policy/)
+- [Accessibility Statement](https://fertilerank.com/accessibility-statement/)
 
 ## Services (covered on the landing page)
 - Fertility Clinic SEO — YMYL-grade SEO for fertility and IVF clinics

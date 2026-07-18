@@ -8,6 +8,13 @@ step required to serve it.
 
 WHAT'S HERE (clean URLs, one folder per page)
   index.html                          -> /                          (Landing page — the star)
+  fertility-clinic-seo/index.html     -> /fertility-clinic-seo      (Service landing + lead form)
+  fertility-clinic-google-ads/…       -> /fertility-clinic-google-ads (Service landing + lead form)
+  egg-donor-recruitment-marketing/…   -> /egg-donor-recruitment-marketing (Service landing + lead form)
+  about/index.html                    -> /about                     (Company profile)
+  blog/index.html                     -> /blog                      (Blog pillar/hub)
+  blog/fertility-clinic-marketing-cost/…    -> blog post (pricing guide)
+  blog/how-to-get-more-ivf-patients/…       -> blog post (growth system)
   contact/index.html                  -> /contact                   (Book a call + inquiry form)
   thank-you/index.html                -> /thank-you                 (Post-submit confirmation)
   privacy-policy/index.html           -> /privacy-policy
