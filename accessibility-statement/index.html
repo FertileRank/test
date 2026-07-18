@@ -31,10 +31,13 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"></noscript>
     <link rel="stylesheet" href="../assets/global.css">
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fertilerank.com/"},{"@type":"ListItem","position":2,"name":"Accessibility Statement","item":"https://fertilerank.com/accessibility-statement/"}]}
+</script>
+      <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://fertilerank.com/accessibility-statement/#webpage","url":"https://fertilerank.com/accessibility-statement/","name":"Accessibility Statement | FertileRank","isPartOf":{"@id":"https://fertilerank.com/#website"},"about":{"@id":"https://fertilerank.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fertilerank.com/"},{"@type":"ListItem","position":2,"name":"Accessibility Statement","item":"https://fertilerank.com/accessibility-statement/"}]}]}
 </script>
   </head>
   <body>
@@ -73,21 +76,7 @@
   </div>
 </header>
 
-<script>
-(function () {
-  var toggle = document.getElementById('fr-nav-toggle');
-  var menu = document.getElementById('fr-mobilenav');
-  if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = menu.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    });
-  }
-})();
-</script>
-
-    <main class="fr-page" id="main-content">
+<main class="fr-page" id="main-content">
   <section class="fr-section">
     <div class="fr-container">
       <div class="fr-prose">
@@ -220,33 +209,7 @@
   </button>
 </div>
 
-<script>
-(function () {
-  var top = document.getElementById('fr-totop');
-  if (top) {
-    top.addEventListener('click', function () {
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-    });
-  }
-
-  var bar = document.getElementById('fr-sticky');
-  if (!bar) return;
-  var hiddenPaths = ['/contact', '/privacy-policy', '/terms-of-service', '/cookie-policy', '/accessibility-statement'];
-  var path = location.pathname.replace(/\/+$/, '') || '/';
-  if (hiddenPaths.indexOf(path) !== -1 || sessionStorage.getItem('frStickyDismissed')) return;
-  bar.hidden = false;
-  var onScroll = function () {
-    bar.classList.toggle('is-visible', window.scrollY > 600);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  document.getElementById('fr-sticky-close').addEventListener('click', function () {
-    bar.classList.remove('is-visible');
-    window.removeEventListener('scroll', onScroll);
-    try { sessionStorage.setItem('frStickyDismissed', '1'); } catch (e) {}
-  });
-})();
-</script>
+<script src="../assets/site.js" defer></script>
     <!-- ▼ TRACKING: BODY-END (e.g. GTM <noscript>, chat widget, scripts) ▼ -->
 
     <!-- ▲ TRACKING: BODY-END ▲ -->

@@ -18,6 +18,7 @@ WHAT'S HERE (clean URLs, one folder per page)
   404/index.html                      -> /404/  (folder version for CMS/clean-URL hosts;
                                           identical file, root-relative paths)
   assets/global.css                   -> the single global stylesheet
+  assets/site.js                      -> all page behaviors, loaded with `defer`
   favicon.svg, og-cover.png           -> brand assets
   robots.txt, sitemap.xml, llms.txt
 
