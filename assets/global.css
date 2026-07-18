@@ -745,3 +745,8 @@ a.fr-card:hover h3 { color: var(--fr-brand-800); }
 }
 .fr-skip:focus { left: 0; }
 @media (min-width: 1024px) { .fr-mobilenav, .fr-mobilenav.is-open { display: none; } }
+
+/* Brand logo images (header + footer lockups) */
+.fr-logo__img { height: 34px; width: auto; display: block; }
+.fr-logo__img--footer { height: 30px; }
+@media (min-width: 640px) { .fr-logo__img { height: 36px; } }
