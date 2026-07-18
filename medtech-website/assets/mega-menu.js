@@ -81,7 +81,7 @@
       section: 'Lab Solutions',
       icon: 'users',
       keywords: ['staffing', 'staff', 'embryologist', 'HCLD', 'TS ABB', 'certified', 'temporary', 'recruitment', 'hire', 'placement'],
-      snippet: 'TS (ABB) certified embryologists and HCLD off-site directors — temporary and permanent staffing placement for fertility clinics and IVF labs.'
+      snippet: 'TS (ABB) certified embryologists and HCLD off-site directors — temporary staffing placement for fertility clinics and IVF labs.'
     },
     {
       href: '/lab-solutions/gpo-purchasing/',
@@ -350,7 +350,6 @@
     +           panelMarkup('mm-mgmt-panel', 'mgmt', 'Management Services', 5, MGMT_SERVICES, 'Operational support', 'Marketing, call center, finance, HR, and risk support for growing fertility practices.', 'Five management service lines.', '/management-services/', 'Explore management')
     +         '</li>'
     +         '<li><a href="/lab-solutions/gpo-purchasing/" data-mm-match="^/lab-solutions/gpo-purchasing(/|$)">GPO</a></li>'
-    +         '<li><a href="/services/" data-mm-match="^/services(/|$)">All Services</a></li>'
     +         '<li class="mm-has-drop">'
     +           '<button type="button" data-mm-trigger="about" aria-expanded="false" aria-controls="mm-about-panel" data-mm-match="^/(about|staff)(/|$)">'
     +             'About <span class="mm-caret">' + ICONS.caret + '</span>'
