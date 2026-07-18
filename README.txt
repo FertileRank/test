@@ -14,7 +14,9 @@ WHAT'S HERE (clean URLs, one folder per page)
   terms-of-service/index.html         -> /terms-of-service
   cookie-policy/index.html            -> /cookie-policy
   accessibility-statement/index.html  -> /accessibility-statement
-  404.html                            -> shown on unknown paths
+  404.html                            -> shown on unknown paths (host error page)
+  404/index.html                      -> /404/  (folder version for CMS/clean-URL hosts;
+                                          identical file, root-relative paths)
   assets/global.css                   -> the single global stylesheet
   favicon.svg, og-cover.png           -> brand assets
   robots.txt, sitemap.xml, llms.txt
