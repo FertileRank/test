@@ -120,10 +120,13 @@ img{max-width:100%;display:block}
 (function(){var P="3eb33219-1e9f-4a00-8e22-b18885625945",S="0cd8bcc9-9a1d-49d1-8b70-a56191666c58",E="https://api.builder.searchatlas.com/track/";function g(k){try{var v=localStorage.getItem(k);if(v)return v;v=crypto.randomUUID();localStorage.setItem(k,v);return v}catch(e){return crypto.randomUUID()}}var V=g("_lps_vid");function sid(){try{var s=sessionStorage.getItem("_lps_sid");if(s)return s;s=crypto.randomUUID();sessionStorage.setItem("_lps_sid",s);return s}catch(e){return crypto.randomUUID()}}function t(){var d={project_id:P,tracking_secret:S,visitor_id:V,session_id:sid(),page_url:location.href,referrer:document.referrer||""};try{var b=new Blob([JSON.stringify(d)],{type:"application/json"});navigator.sendBeacon(E,b)}catch(e){}}t();var op=history.pushState;history.pushState=function(){op.apply(this,arguments);t()};window.addEventListener("popstate",t)})()
 } catch (e) {}</script>
 <!-- LPS Visitor Tracker End --><!-- ws:header-embeddings end -->
+<link rel="stylesheet" href="/assets/mtfs-images.css">
 </head><body data-lps-eid="management-services-index-e19">
 
 <section data-lps-eid="management-services-index-e20" class="ph" style="background:linear-gradient(135deg,var(--tl) 0%,var(--w) 40%,var(--w) 60%,#FDF3EC 100%)">
 <div data-lps-eid="management-services-index-e21" class="ctr">
+<div class="mtfs-hero-split">
+<div class="mtfs-hero-copy">
 <div data-lps-eid="management-services-index-e22" class="bc"><a data-lps-eid="management-services-index-e23" href="/">Home</a> / Management Services</div>
 <div data-lps-eid="management-services-index-e24" class="badge" style="border-color:var(--teal);color:var(--teal)"><span data-lps-eid="management-services-index-e25" class="dot" style="background:var(--lime)"></span> Practice Operations</div>
 <h1 data-lps-eid="management-services-index-e26">Fertility Practice <span data-lps-eid="management-services-index-e27">Management Services</span> for IVF Clinics</h1>
@@ -131,6 +134,12 @@ img{max-width:100%;display:block}
 <div data-lps-eid="management-services-index-e29" class="hbtns">
 <a data-lps-eid="management-services-index-e30" href="/contact/" class="bp">Schedule Consultation <svg data-lps-eid="management-services-index-e31" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path data-lps-eid="management-services-index-e32" d="M5 12h14M12 5l7 7-7 7"/></svg></a>
 <a data-lps-eid="management-services-index-e33" href="/" class="bs">Back to Home</a>
+</div>
+</div>
+<picture class="mtfs-media mtfs-media--standard" data-image-id="IMG-2.4-A">
+<source type="image/webp" srcset="/site-assets/mtfs-mgmt-hero-operations.webp">
+<img src="/site-assets/mtfs-mgmt-hero-operations.jpg" width="1000" height="667" alt="Practice management consultants reviewing performance reports in a medical office" loading="eager" fetchpriority="high" decoding="async">
+</picture>
 </div>
 </div>
 </section>

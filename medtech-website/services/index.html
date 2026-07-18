@@ -191,6 +191,7 @@ img{max-width:100%;display:block}
 (function(){var P="3eb33219-1e9f-4a00-8e22-b18885625945",S="0cd8bcc9-9a1d-49d1-8b70-a56191666c58",E="https://api.builder.searchatlas.com/track/";function g(k){try{var v=localStorage.getItem(k);if(v)return v;v=crypto.randomUUID();localStorage.setItem(k,v);return v}catch(e){return crypto.randomUUID()}}var V=g("_lps_vid");function sid(){try{var s=sessionStorage.getItem("_lps_sid");if(s)return s;s=crypto.randomUUID();sessionStorage.setItem("_lps_sid",s);return s}catch(e){return crypto.randomUUID()}}function t(){var d={project_id:P,tracking_secret:S,visitor_id:V,session_id:sid(),page_url:location.href,referrer:document.referrer||""};try{var b=new Blob([JSON.stringify(d)],{type:"application/json"});navigator.sendBeacon(E,b)}catch(e){}}t();var op=history.pushState;history.pushState=function(){op.apply(this,arguments);t()};window.addEventListener("popstate",t)})()
 } catch (e) {}</script>
 <!-- LPS Visitor Tracker End --><!-- ws:header-embeddings end -->
+<link rel="stylesheet" href="/assets/mtfs-images.css">
 </head>
 <body data-lps-eid="services-index-e20">
 
@@ -202,7 +203,6 @@ img{max-width:100%;display:block}
 <h1 data-lps-eid="services-index-e25">MedTech For Solutions — Comprehensive <span data-lps-eid="services-index-e26">IVF & ART Services</span> for Fertility Practices</h1>
 <p data-lps-eid="services-index-e27" class="sub">From laboratory operations and regulatory compliance to practice management, marketing, finance, HR, and risk support, MedTech For Solutions delivers focused support for reproductive healthcare facilities.</p>
 
-</div>
 </div>
 </section>
 
@@ -271,6 +271,15 @@ img{max-width:100%;display:block}
 <div data-lps-eid="services-index-e106" class="impact-item"><div data-lps-eid="services-index-e107" class="num">1800+</div><div data-lps-eid="services-index-e108" class="lbl">GPO Contracts</div></div>
 <div data-lps-eid="services-index-e109" class="impact-item"><div data-lps-eid="services-index-e110" class="num">24/7</div><div data-lps-eid="services-index-e111" class="lbl">Lab Monitoring</div></div>
 </div>
+</div>
+</section>
+
+<section class="mtfs-photo-band" aria-label="Laboratory and practice operations">
+<div class="ctr">
+<picture class="mtfs-media mtfs-media--wide aos" data-image-id="IMG-3.1-A">
+<source type="image/webp" srcset="/site-assets/mtfs-services-band-lab-office.webp">
+<img src="/site-assets/mtfs-services-band-lab-office.jpg" width="1536" height="768" alt="Fertility center corridor connecting the IVF laboratory and practice offices" loading="lazy" decoding="async">
+</picture>
 </div>
 </section>
 

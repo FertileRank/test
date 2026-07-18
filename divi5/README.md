@@ -75,6 +75,7 @@ Every page of the site converted for Divi 5 — content unchanged.
 |---|---|
 | `global.css` | One consolidated stylesheet for all 19 pages |
 | `pages/<page>.html` | That page's full content for a Divi Code module |
+| `site-assets/` | Local page imagery (JPG + WebP pairs) referenced as `/site-assets/…` — upload this folder to the site root (or rewrite the `src`/`srcset` paths to Media Library URLs) |
 | `pages/coming-soon.html` | Bonus: "new website coming soon" promo page — fully self-contained (does not need `global.css`); set the launch date in its CONFIG line, and optionally assign it a blank Theme Builder template for a true standalone splash |
 
 ### Install the global stylesheet (once)
