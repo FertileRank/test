@@ -850,3 +850,10 @@ html { scroll-behavior: smooth; }
 @media(max-width:768px){
   .mtfs-home section#lab-solutions .sg, .mtfs-home section#mgmt-services .sg { grid-template-columns:1fr }
 }
+
+/* ---------- home hero centered layout ---------- */
+.mtfs-home .hero-inner { justify-items:center }
+.mtfs-home .hero-inner > div { text-align:center;max-width:940px;margin:0 auto }
+.mtfs-home .hero .lead { margin-left:auto;margin-right:auto }
+.mtfs-home .hero-btns { justify-content:center }
+.mtfs-home .hero-trust { justify-content:center }

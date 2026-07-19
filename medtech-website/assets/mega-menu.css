@@ -123,8 +123,6 @@ body.mm-menu-lock {
   display: block;
   transition: height .3s var(--mm-easing);
 }
-/* logo art only - white PNG background rendered transparent on the light header */
-.mm-logo img { mix-blend-mode: multiply; }
 
 .mm-header.mm-scrolled .mm-logo img { height: 32px; }
 .mm-logo-fallback {

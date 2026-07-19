@@ -331,7 +331,7 @@
     +   '<div class="mm-bar">'
 
     +     '<a class="mm-logo" href="/" aria-label="MedTech For Solutions Home">'
-    +       '<img src="https://media.cdn.builder.searchatlas.com/user-uploads/1c7195a1-2e83-4f53-8045-f7d80893566c_MedTech-For-Solutions-Logo.png" alt="MedTech For Solutions" />'
+    +       '<img src="/site-assets/mtfs-logo.svg" alt="MedTech For Solutions" />'
     +     '</a>'
 
     +     '<nav role="navigation" aria-label="Primary">'

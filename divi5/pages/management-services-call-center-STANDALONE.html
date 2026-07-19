@@ -1,0 +1,249 @@
+<!-- ============================================================
+Call Center Services | MedTech For Solutions  (STANDALONE VERSION)
+Page: /management-services/call-center/
+Self-contained Divi 5 Code module: all styles for this page are
+inlined below, so it renders correctly even if the global.css in
+Divi > Theme Options is missing or outdated. Page image loads from
+/site-assets/mtfs-callcenter-team.jpg — upload the site-assets
+folder or swap to a Media Library URL.
+============================================================= -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+html { scroll-behavior: smooth; }
+.mtfs-page *, .mtfs-page *::before, .mtfs-page *::after, .mtfs-page *::before, .mtfs-page *::after { box-sizing:border-box;margin:0;padding:0 }
+.mtfs-page a { text-decoration:none;color:inherit;transition:color .3s }
+.mtfs-management-services-call-center img { max-width:100%;display:block }
+.mtfs-management-services-call-center .ctr { max-width:1200px;margin:0 auto;padding:0 24px }
+.mtfs-management-services-call-center .ni { max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px }
+.mtfs-management-services-call-center .ni img { height:42px }
+.mtfs-management-services-call-center .nl { display:flex;gap:28px;align-items:center }
+.mtfs-management-services-call-center .nl a.ac { color:var(--teal);font-weight:600 }
+.mtfs-management-services-call-center .nl a:hover { color:var(--teal) }
+.mtfs-management-services-call-center .sec { padding:100px 0 }
+.mtfs-management-services-call-center .cbs { display:flex;gap:16px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap }
+.mtfs-management-services-call-center .ft { background:var(--g900);color:rgba(255,255,255,.6);padding:72px 0 32px }
+.mtfs-management-services-call-center .ftg { display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px }
+.mtfs-management-services-call-center .ftb p { font-size:.88rem;line-height:1.7;margin-top:16px;max-width:300px }
+.mtfs-management-services-call-center .ftc h4 { font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--w);margin-bottom:20px }
+.mtfs-management-services-call-center .ftc ul { list-style:none }
+.mtfs-management-services-call-center { --teal:#008B8B;--td:#006D6D;--tl:#E0F5F5;--lime:#C5D82D;--orange:#E8751A;--plum:#6B2D5B;--w:#fff;--ow:#F8F9FA;--g50:#F4F5F7;--g100:#E8EAED;--g200:#D1D5DB;--g400:#9CA3AF;--g600:#4B5563;--g800:#1F2937;--g900:#111827;--r:12px;--rl:20px }
+.mtfs-management-services-call-center { font-family:'DM Sans',sans-serif;color:var(--g800);line-height:1.65;background:var(--w);overflow-x:hidden;-webkit-font-smoothing:antialiased }
+.mtfs-management-services-call-center h1, .mtfs-management-services-call-center h2, .mtfs-management-services-call-center h3, .mtfs-management-services-call-center h4 { font-family:'Playfair Display',serif;line-height:1.2 }
+.mtfs-management-services-call-center .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,.08) }
+.mtfs-management-services-call-center .nl a { font-size:.88rem;font-weight:500;color:var(--g600);position:relative;padding-bottom:2px }
+.mtfs-management-services-call-center .nl a::after { content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--teal);transition:width .3s }
+.mtfs-management-services-call-center .nl a:hover::after { width:100% }
+.mtfs-management-services-call-center .nl a.ac::after { width:100% }
+.mtfs-management-services-call-center .nc { background:var(--teal)!important;color:var(--w)!important;padding:10px 22px!important;border-radius:8px;font-weight:600!important;transition:all .3s!important }
+.mtfs-management-services-call-center .nc::after { display:none!important }
+.mtfs-management-services-call-center .nc:hover { background:var(--td)!important;transform:translateY(-1px) }
+.mtfs-management-services-call-center .hb span { width:24px;height:2px;background:var(--g800);border-radius:2px }
+.mtfs-management-services-call-center .bc a { color:var(--g400) }
+.mtfs-management-services-call-center .bc a:hover { color:var(--teal) }
+.mtfs-management-services-call-center .sec.alt { background:var(--ow) }
+.mtfs-management-services-call-center .sec.dk { background:var(--g900);color:var(--w) }
+.mtfs-management-services-call-center .shl .d { width:24px;height:2px;background:var(--teal);border-radius:2px }
+.mtfs-management-services-call-center .sec.dk .sh h2 { color:var(--w) }
+.mtfs-management-services-call-center .sec.dk .sh p { color:rgba(255,255,255,.6) }
+.mtfs-management-services-call-center .sec.dk .shl { color:var(--lime) }
+.mtfs-management-services-call-center .sec.dk .shl .d { background:var(--lime) }
+.mtfs-management-services-call-center .aos.v { opacity:1;transform:translateY(0) }
+.mtfs-management-services-call-center .bp { background:var(--teal);color:var(--w);padding:14px 32px;border-radius:10px;font-weight:600;font-size:.95rem;display:inline-flex;align-items:center;gap:8px;transition:all .3s;border:none;cursor:pointer }
+.mtfs-management-services-call-center .nav { position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.06);transition:box-shadow .3s }
+.mtfs-management-services-call-center .sh { text-align:center;max-width:700px;margin:0 auto 60px }
+.mtfs-management-services-call-center .sh h2 { font-size:2.4rem;color:var(--g900);margin-bottom:16px }
+.mtfs-management-services-call-center .sh p { font-size:1.05rem;color:var(--g600) }
+.mtfs-management-services-call-center .aos { opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease }
+.mtfs-management-services-call-center .hb { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px }
+.mtfs-management-services-call-center .shl { display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px }
+.mtfs-management-services-call-center .ci { background:var(--g900);border-radius:var(--rl);padding:80px 60px;text-align:center;position:relative;overflow:hidden }
+.mtfs-management-services-call-center .cbp:hover { background:var(--lime);color:var(--g900);transform:translateY(-2px) }
+.mtfs-management-services-call-center .cbb:hover { border-color:var(--w) }
+.mtfs-management-services-call-center .ph { padding:140px 0 80px;position:relative;overflow:hidden }
+.mtfs-management-services-call-center .ph .ctr { position:relative;z-index:1 }
+.mtfs-management-services-call-center .bc { font-size:.85rem;color:var(--g400);margin-bottom:16px }
+.mtfs-management-services-call-center .badge { display:inline-flex;align-items:center;gap:8px;border:1px solid;border-radius:100px;padding:6px 16px;font-size:.8rem;font-weight:600;margin-bottom:20px }
+.mtfs-management-services-call-center .badge .dot { width:8px;height:8px;border-radius:50% }
+.mtfs-management-services-call-center .ph h1 { font-size:3rem;margin-bottom:20px }
+.mtfs-management-services-call-center .ph h1 span { color:var(--teal) }
+.mtfs-management-services-call-center .ph .sub { font-size:1.12rem;color:var(--g600);max-width:620px;margin-bottom:32px }
+.mtfs-management-services-call-center .hbtns { display:flex;gap:16px;flex-wrap:wrap }
+.mtfs-management-services-call-center .bp:hover { background:var(--td);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.1) }
+.mtfs-management-services-call-center .bs { background:transparent;color:var(--g800);padding:14px 32px;border-radius:10px;font-weight:600;font-size:.95rem;border:2px solid var(--g200);display:inline-flex;align-items:center;gap:8px;transition:all .3s;cursor:pointer }
+.mtfs-management-services-call-center .bs:hover { border-color:var(--teal);color:var(--teal) }
+.mtfs-management-services-call-center .hg { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center }
+.mtfs-management-services-call-center .sc { background:var(--w);border-radius:var(--rl);box-shadow:0 16px 48px rgba(0,0,0,.1);padding:32px }
+.mtfs-management-services-call-center .sr { display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px }
+.mtfs-management-services-call-center .sb { background:var(--g50);border-radius:var(--r);padding:20px;text-align:center }
+.mtfs-management-services-call-center .sb .n { font-size:1.8rem;font-weight:700;color:var(--teal);font-family:'Playfair Display',serif }
+.mtfs-management-services-call-center .sb .l { font-size:.78rem;color:var(--g600);margin-top:4px }
+.mtfs-management-services-call-center .fg { display:grid;grid-template-columns:repeat(3,1fr);gap:28px }
+.mtfs-management-services-call-center .fc { background:var(--w);border-radius:var(--rl);padding:36px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--g100);transition:all .3s }
+.mtfs-management-services-call-center .fc:hover { transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.1);border-color:var(--teal) }
+.mtfs-management-services-call-center .fi { width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px }
+.mtfs-management-services-call-center .fi.t { background:rgba(0,139,139,.1) }
+.mtfs-management-services-call-center .fi.o { background:rgba(232,117,26,.1) }
+.mtfs-management-services-call-center .fi.p { background:rgba(107,45,91,.1) }
+.mtfs-management-services-call-center .fi.l { background:rgba(197,216,45,.15) }
+.mtfs-management-services-call-center .fi.b { background:rgba(59,130,246,.1) }
+.mtfs-management-services-call-center .fi.r { background:rgba(239,68,68,.1) }
+.mtfs-management-services-call-center .fi svg { width:28px;height:28px }
+.mtfs-management-services-call-center .fc h3 { font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--g900) }
+.mtfs-management-services-call-center .fc p { font-size:.9rem;color:var(--g600) }
+.mtfs-management-services-call-center .sp { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center }
+.mtfs-management-services-call-center .spc h2 { font-size:2rem;margin-bottom:16px }
+.mtfs-management-services-call-center .spc p { font-size:1rem;color:var(--g600);margin-bottom:20px }
+.mtfs-management-services-call-center .spc ul { list-style:none;margin-bottom:24px }
+.mtfs-management-services-call-center .spc ul li { font-size:.92rem;color:var(--g600);padding:8px 0 8px 24px;position:relative }
+.mtfs-management-services-call-center .spc ul li::before { content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--teal) }
+.mtfs-management-services-call-center .sv { background:var(--g50);border-radius:var(--rl);padding:48px;display:flex;align-items:center;justify-content:center;min-height:360px }
+.mtfs-management-services-call-center .sv .inn { background:var(--w);border-radius:var(--r);box-shadow:0 4px 16px rgba(0,0,0,.08);padding:32px;width:100% }
+.mtfs-management-services-call-center .pg { display:grid;grid-template-columns:repeat(4,1fr);gap:24px }
+.mtfs-management-services-call-center .ps { text-align:center;padding:32px 20px }
+.mtfs-management-services-call-center .ps .sn { width:48px;height:48px;border-radius:50%;background:var(--teal);color:var(--w);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;margin:0 auto 16px;font-family:'DM Sans',sans-serif }
+.mtfs-management-services-call-center .ps h3 { font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px }
+.mtfs-management-services-call-center .ps p { font-size:.85rem;color:var(--g600) }
+.mtfs-management-services-call-center .cb { padding:100px 0 }
+.mtfs-management-services-call-center .ci::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(0,139,139,.15) 0%,transparent 50%),radial-gradient(circle at 80% 50%,rgba(232,117,26,.1) 0%,transparent 50%) }
+.mtfs-management-services-call-center .ci h2 { font-size:2.5rem;color:var(--w);margin-bottom:16px;position:relative;z-index:1 }
+.mtfs-management-services-call-center .ci p { font-size:1.1rem;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 36px;position:relative;z-index:1 }
+.mtfs-management-services-call-center .cbp { background:var(--teal);color:var(--w);padding:16px 36px;border-radius:10px;font-weight:600;font-size:1rem;transition:all .3s;cursor:pointer;border:none }
+.mtfs-management-services-call-center .cbb { color:var(--w);padding:16px 36px;border-radius:10px;font-weight:600;font-size:1rem;border:2px solid rgba(255,255,255,.3);transition:all .3s;cursor:pointer;background:transparent }
+.mtfs-management-services-call-center .ftc ul li { margin-bottom:12px }
+.mtfs-management-services-call-center .ftc ul li a { font-size:.88rem;transition:color .3s }
+.mtfs-management-services-call-center .ftc ul li a:hover { color:var(--teal) }
+.mtfs-management-services-call-center .fbt { border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.82rem }
+.mtfs-management-services-call-center .hub-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px }
+.mtfs-management-services-call-center .hub-card { background:var(--w);border-radius:var(--rl);padding:36px;border:1px solid var(--g100);transition:all .3s;text-align:center }
+.mtfs-management-services-call-center .hub-card:hover { transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.1);border-color:var(--teal) }
+.mtfs-management-services-call-center .hub-card .hci { width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px }
+.mtfs-management-services-call-center .hub-card h3 { font-family:'DM Sans',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:10px }
+.mtfs-management-services-call-center .hub-card p { font-size:.88rem;color:var(--g600);margin-bottom:20px }
+.mtfs-management-services-call-center .hub-card a.lnk { display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:600;color:var(--teal) }
+.mtfs-management-services-call-center .hub-card a.lnk:hover { text-decoration:underline }
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.8} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+.mtfs-page .mtfs-media { display: block; width: 100%; overflow: hidden; border: 1px solid rgba(17, 24, 39, 0.08); border-radius: 20px; background: #e8eaed; box-shadow: 0 18px 46px rgba(17, 24, 39, 0.13) }
+.mtfs-page .mtfs-media img { display: block; width: 100%; height: 100%; object-fit: cover }
+.mtfs-page .mtfs-media--standard { aspect-ratio: 3 / 2 }
+.mtfs-page .mtfs-media--wide { aspect-ratio: 2 / 1 }
+.mtfs-page .mtfs-media--panoramic { aspect-ratio: 21 / 9 }
+.mtfs-page .mtfs-media--team { aspect-ratio: 16 / 9 }
+.mtfs-page .mtfs-media--portrait { aspect-ratio: 4 / 5 }
+.mtfs-page .mtfs-home-partner-visual { width: 100%; max-width: 520px; margin: 0; justify-self: end }
+.mtfs-page .mtfs-home-partner-visual .mtfs-media img { object-position: center center }
+.mtfs-page .mtfs-media-stack { display: grid; gap: 18px }
+.mtfs-page .mtfs-intro-grid { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 48px; align-items: center; margin-bottom: 56px }
+.mtfs-page .mtfs-intro-grid .sh { max-width: none; margin: 0; text-align: left }
+.mtfs-page .mtfs-hero-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr); gap: 52px; align-items: center }
+.mtfs-page .mtfs-hero-copy .sub { max-width: 720px }
+.mtfs-page .mtfs-about-hero { isolation: isolate }
+.mtfs-page .mtfs-about-hero .mtfs-hero-image { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100% }
+.mtfs-page .mtfs-about-hero .mtfs-hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 64% }
+.mtfs-page .mtfs-about-hero::before { z-index: 1; background: linear-gradient( 90deg, rgba(17, 24, 39, 0.96) 0%, rgba(17, 24, 39, 0.82) 48%, rgba(17, 24, 39, 0.7) 100% ), radial-gradient( ellipse 680px 420px at 15% 50%, rgba(0, 139, 139, 0.26) 0%, transparent 72% ) }
+.mtfs-page .mtfs-about-hero .ctr { position: relative; z-index: 2 }
+.mtfs-page .mtfs-photo-band { padding: 72px 0; background: #f8f9fa }
+.mtfs-page .mtfs-photo-band .mtfs-media { max-height: 640px }
+.mtfs-page .mtfs-location-photo { align-self: stretch; margin: 0 }
+.mtfs-page .mtfs-location-photo .mtfs-media { height: 100%; min-height: 430px }
+.mtfs-page .mtfs-location-photo figcaption { margin-top: 10px; color: #6b7280; font-size: 0.76rem; line-height: 1.5; text-align: center }
+@media(max-width:1024px) {
+  .mtfs-management-services-call-center .ftg { grid-template-columns:repeat(2,1fr) }
+  .mtfs-management-services-call-center .hg, .mtfs-management-services-call-center .sp { grid-template-columns:1fr }
+  .mtfs-management-services-call-center .fg { grid-template-columns:repeat(2,1fr) }
+  .mtfs-management-services-call-center .pg { grid-template-columns:repeat(2,1fr) }
+  .mtfs-management-services-call-center .hub-grid { grid-template-columns:repeat(2,1fr) }
+}
+@media(max-width:768px) {
+  .mtfs-management-services-call-center .ftg { grid-template-columns:1fr }
+  .mtfs-management-services-call-center .ci { padding:48px 24px }
+  .mtfs-management-services-call-center .nl { display:none }
+  .mtfs-management-services-call-center .nl.open { display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--w);padding:24px;box-shadow:0 8px 32px rgba(0,0,0,.1);gap:16px }
+  .mtfs-management-services-call-center .hb { display:flex }
+  .mtfs-management-services-call-center .sh h2 { font-size:1.8rem }
+  .mtfs-management-services-call-center .ph { padding:110px 0 60px }
+  .mtfs-management-services-call-center .ph h1 { font-size:2.2rem }
+  .mtfs-management-services-call-center .fg, .mtfs-management-services-call-center .pg, .mtfs-management-services-call-center .hub-grid { grid-template-columns:1fr }
+  .mtfs-management-services-call-center .ci h2 { font-size:1.8rem }
+  .mtfs-management-services-call-center .fbt { flex-direction:column;gap:12px;text-align:center }
+  .mtfs-management-services-call-center .sr { grid-template-columns:1fr }
+}
+@media (max-width: 1024px) {
+  .mtfs-page .mtfs-intro-grid, .mtfs-page .mtfs-hero-split { grid-template-columns: 1fr }
+  .mtfs-page .mtfs-intro-grid .sh { max-width: 720px; margin: 0 auto; text-align: center }
+  .mtfs-page .mtfs-hero-split .mtfs-media { max-width: 760px; margin: 0 auto }
+  .mtfs-page .mtfs-home-partner-visual { max-width: 620px; margin: 0 auto; justify-self: center }
+  .mtfs-page .mtfs-location-photo .mtfs-media { min-height: 0; aspect-ratio: 3 / 2 }
+}
+@media (max-width: 768px) {
+  .mtfs-page .mtfs-intro-grid { gap: 28px; margin-bottom: 40px }
+  .mtfs-page .mtfs-hero-split { gap: 34px }
+  .mtfs-page .mtfs-photo-band { padding: 48px 0 }
+  .mtfs-page .mtfs-media, .mtfs-page .mtfs-about-hero .mtfs-hero-image { border-radius: 14px }
+  .mtfs-page .mtfs-media--panoramic { aspect-ratio: 16 / 9 }
+  .mtfs-page .mtfs-about-hero .mtfs-hero-image { border-radius: 0 }
+}
+</style>
+<div class="mtfs-page mtfs-management-services-call-center">
+<section class="ph" style="background:linear-gradient(135deg,var(--tl) 0%,var(--w) 50%,#F5F0F8 100%)">
+<div class="ctr"><div class="hg">
+<div>
+<div class="bc"><a href="/">Home</a> / <a href="/management-services/">Management Services</a> / Call Center</div>
+<div class="badge" style="border-color:var(--teal);color:var(--teal)"><span class="dot" style="background:var(--teal)"></span> Patient First</div>
+<h1>Fertility Clinic <span>Call Center</span> & Patient Communication Services</h1>
+<p class="sub">Dedicated call center solutions improve scheduling and ensure empathetic handling of patient inquiries, creating a positive clinic experience from the very first interaction.</p>
+<div class="hbtns">
+<a href="/contact/" class="bp">Get Started <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="/management-services/" class="bs">All Services</a>
+</div>
+</div>
+<div><div class="sc">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+<div style="width:48px;height:48px;background:linear-gradient(135deg,var(--teal),var(--td));border-radius:12px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+<div><h3 style="font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600">Call Center Metrics</h3></div>
+</div>
+<div class="sr"><div class="sb"><div class="n"><15s</div><div class="l">Avg Answer Time</div></div><div class="sb"><div class="n">98%</div><div class="l">Patient Satisfaction</div></div><div class="sb"><div class="n">0%</div><div class="l">Missed Calls</div></div><div class="sb"><div class="n">24/7</div><div class="l">Availability</div></div></div>
+</div></div>
+</div></div>
+</section>
+<section class="sec">
+<div class="ctr">
+<div class="mtfs-intro-grid">
+<div class="sh aos"><div class="shl"><span class="d"></span> Services</div><h2>Professional Patient Communication</h2><p>Every patient interaction shapes their experience. Our call center solutions ensure every call, message, and inquiry is handled with care and efficiency.</p></div>
+<picture class="mtfs-media mtfs-media--standard aos" data-image-id="IMG-4.07">
+<source type="image/webp" srcset="/site-assets/mtfs-callcenter-team.webp">
+<img src="/site-assets/mtfs-callcenter-team.jpg" width="1000" height="667" alt="Patient coordinators with headsets supporting callers in a modern healthcare call center" loading="lazy" decoding="async">
+</picture>
+</div>
+<div class="fg"><div class="fc aos"><div class="fi t"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="var(--teal)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><h3>Inbound Call Management</h3><p>Professional reception of all patient calls with trained fertility-specific operators who understand the sensitivity and urgency of reproductive medicine inquiries.</p></div><div class="fc aos"><div class="fi o"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="var(--orange)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><h3>Appointment Scheduling</h3><p>Efficient scheduling systems that optimize provider calendars, reduce no-shows, and ensure patients are matched with the right specialists and time slots.</p></div><div class="fc aos"><div class="fi p"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="var(--plum)" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div><h3>Empathetic Patient Support</h3><p>Specially trained call agents who understand the emotional journey of fertility patients, providing compassionate and supportive communication at every touchpoint.</p></div><div class="fc aos"><div class="fi t"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="var(--teal)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><h3>Multi-Channel Communication</h3><p>Unified management of phone calls, emails, patient portal messages, and text communications to ensure no inquiry goes unanswered.</p></div><div class="fc aos"><div class="fi b"><svg width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><h3>Performance Analytics</h3><p>Detailed reporting on call volumes, wait times, resolution rates, and patient satisfaction scores to continuously improve communication quality.</p></div></div>
+</div>
+</section>
+<section class="sec alt">
+<div class="ctr"><div class="sp aos">
+<div class="spc">
+<div class="shl"><span class="d"></span> Why It Matters</div>
+<h2>First Impressions Matter Most</h2>
+<p>For fertility patients, the first phone call is often their most vulnerable moment. Our trained specialists ensure that every interaction builds trust, conveys empathy, and advances the patient journey.</p>
+<ul><li>Fertility-specific call training and protocols</li><li>Bilingual support capabilities</li><li>Insurance verification and pre-authorization</li><li>New patient intake and screening</li><li>Follow-up call scheduling and reminders</li><li>Overflow and after-hours coverage</li></ul>
+<a href="/contact/" class="bp">Request Consultation</a>
+</div>
+<div class="sv"><div class="inn"><h3 style="font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:20px;color:var(--teal)">Daily Call Dashboard</h3><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--g50);border-radius:8px"><span style="font-size:.88rem;font-weight:600">Calls Answered</span><span style="font-weight:700;color:var(--teal)">247</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--g50);border-radius:8px"><span style="font-size:.88rem;font-weight:600">Appointments Booked</span><span style="font-weight:700;color:#059669">89</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--g50);border-radius:8px"><span style="font-size:.88rem;font-weight:600">Avg Hold Time</span><span style="font-weight:700;color:var(--orange)">12s</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--g50);border-radius:8px"><span style="font-size:.88rem;font-weight:600">Satisfaction Score</span><span style="font-weight:700;color:var(--plum)">4.9/5</span></div></div></div></div>
+</div></div>
+</section>
+<section class="cb"><div class="ctr"><div class="ci aos">
+<h2>Elevate Your Patient Experience</h2><p>Our dedicated call center solutions ensure every patient interaction builds trust and drives your practice forward.</p>
+<div class="cbs"><a href="/contact/" class="cbp">Contact Us</a><a href="tel:+18666349144" class="cbb">Call (866) 634-9144</a></div>
+</div></div></section>
+<script>
+new IntersectionObserver((e)=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('v')}})},{threshold:.1}).observe(document.body);
+document.querySelectorAll('.aos').forEach(el=>new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('v')}})},{threshold:.1}).observe(el));
+</script>
+
+
+
+
+
+<!-- ws:page-observer start -->
+<!-- ws:page-observer end -->
+</div>
