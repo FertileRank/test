@@ -331,7 +331,7 @@
     +   '<div class="mm-bar">'
 
     +     '<a class="mm-logo" href="/" aria-label="MedTech For Solutions Home">'
-    +       '<img src="/site-assets/mtfs-logo.svg" alt="MedTech For Solutions" />'
+    +       '<img src="/site-assets/mtfs-logo.png" alt="MedTech For Solutions" />'
     +     '</a>'
 
     +     '<nav role="navigation" aria-label="Primary">'

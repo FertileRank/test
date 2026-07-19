@@ -48,9 +48,11 @@ theme styles.
 - All navigation URLs are root-relative (`/about/`, `/lab-solutions/…`,
   `/contact/`, `/staff/`) and match the Search Atlas site structure in
   `pages.manifest.json`. WordPress permalinks must resolve the same paths.
-- The logo loads from the Search Atlas CDN
-  (`media.cdn.builder.searchatlas.com`). To self-host it, upload the PNG to
-  the WordPress Media Library and swap the `src` in the `.mm-logo` `<img>`.
+- The logo is a transparent PNG at `/site-assets/mtfs-logo.png` (upload the
+  `site-assets/` folder to the site root). To serve it from the Media Library
+  instead, swap the `src` in the `.mm-logo` `<img>` — it appears twice in
+  `header-mega-menu.html` (static markup + the `HEADER_HTML` fallback in the
+  script).
 - The DM Sans font is pulled from Google Fonts via `@import` at the top of
   each snippet's `<style>`. If your Divi theme already loads DM Sans, you can
   remove the import.
