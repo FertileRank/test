@@ -26,8 +26,28 @@ WHAT'S HERE (clean URLs, one folder per page)
                                           identical file, root-relative paths)
   assets/global.css                   -> the single global stylesheet
   assets/site.js                      -> all page behaviors, loaded with `defer`
-  favicon.svg, og-cover.png           -> brand assets
+  assets/logo-color.svg, assets/logo-white.svg -> brand logos (header / footer)
+  favicon.webp, fertilerank-og-meta-image.webp -> brand assets
   robots.txt, sitemap.xml, llms.txt
+
+SEARCH ATLAS / CMS / WORDPRESS MIGRATION
+  Structure compliance:
+    - EVERY page is its own folder containing exactly one index.html, so each
+      serves a clean trailing-slash URL (/about/, /blog/, /fertility-clinic-seo/ …).
+    - The homepage is the root index.html (Search Atlas Website Studio convention).
+    - 404.html at the root is the host error page; 404/index.html is the same
+      document as a routable page for CMS platforms that require folder pages.
+    - Blog posts live under blog/<post-slug>/index.html, which maps 1:1 to a
+      WordPress "/blog/%postname%/" permalink structure; every other folder maps
+      to a WordPress page at "/%pagename%/".
+  Upload: unzip and upload the CONTENTS of the top-level folder, preserving the
+  folder structure. No build step, no server-side code, no external JS — one CSS
+  file, one deferred JS file, self-contained SVG/WebP assets, all paths relative
+  (pages keep working if extracted into a subdirectory).
+  Sync-safe details: unique <title> + meta description + canonical per page;
+  self-contained JSON-LD in each page head; UTF-8; lang="en"; no query-string
+  URLs; no fragments in sitemap.xml (13 canonical URLs, trailing-slash form
+  matching internal links).
 
 THE LANDING PAGE
   The homepage is a single high-converting landing page with:
@@ -65,6 +85,10 @@ FONTS load from Google Fonts (absolute CDN URL). Self-host WOFF2 subsets for bes
 Core Web Vitals if desired.
 
 GROWING THE SITE
-  The full FertileRank build includes deeper standalone pages (per-service pages,
-  Who We Serve, How We Work, About, Pricing, Resources, IVF landing). Add them back when
-  ready — the header/footer nav and landing sections are structured to accept them.
+  The site now includes standalone landing pages for the three flagship services,
+  a company profile (/about/), and a blog hub with two posts. To add a page:
+  create <slug>/index.html (copy an existing page as the template), add it to
+  sitemap.xml and llms.txt, and link it from the nav/footer or a landing section.
+  New blog posts go in blog/<post-slug>/index.html and get a card on /blog/.
+  Remaining full-build pages (per-service pages for the other five systems,
+  Who We Serve, How We Work, Pricing) can be added the same way.
