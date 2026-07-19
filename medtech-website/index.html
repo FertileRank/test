@@ -144,7 +144,7 @@ footer[role="contentinfo"]{background:var(--g900);color:rgba(255,255,255,.6);pad
 .sg>.aos{opacity:1;transform:none}
 @media(max-width:1024px){.hero-inner,.ag{grid-template-columns:1fr}.hero{text-align:center}.hero .lead{margin:0 auto 36px}.hero-btns,.hero-trust{justify-content:center}.hcard{max-width:500px;margin:0 auto}.sg{grid-template-columns:repeat(2,1fr)}.impg{grid-template-columns:repeat(3,1fr)}.wg{grid-template-columns:repeat(2,1fr)}.avis{max-width:500px;margin:0 auto}.ftg{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.hero{padding:120px 0 70px}.hero h1{font-size:2.2rem}section.sec{padding:72px 0}.sg,.wg{grid-template-columns:1fr}.impg{grid-template-columns:repeat(2,1fr)}.sh h2{font-size:1.8rem}.ctx{padding:48px 24px}.ctx h2{font-size:1.8rem}.ftg{grid-template-columns:1fr}.fbot{flex-direction:column;text-align:center}.astats{justify-content:center}.hstats{grid-template-columns:1fr}}
-</style>
+/* Hero v2: two rows - full-width image + centered content */.hero.hero-v2{padding:88px 0 96px}.hero-v2 .hero-media{position:relative;z-index:1;width:100%}.hero-v2 .hero-media img{display:block;width:100%;height:clamp(320px,42vw,600px);object-fit:cover}.hero-v2 .hero-media picture{display:block}.hero-v2 .hero-inner{text-align:center;padding-top:72px;max-width:940px}.hero-v2 .lead{margin-left:auto;margin-right:auto}.hero-v2 .hero-btns{justify-content:center}.hero-v2 .hero-trust{justify-content:center}/* Section card grids (client spec) */section#lab-solutions .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:100%!important;grid-auto-flow:row;justify-content:center;align-items:stretch;align-content:start}section#mgmt-services .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100%!important;max-width:1440px!important;grid-auto-flow:row;justify-content:center;align-items:stretch;align-content:start}@media(max-width:1024px){section#lab-solutions .sg,section#mgmt-services .sg{grid-template-columns:repeat(2,1fr)}.hero.hero-v2{padding:76px 0 80px}}@media(max-width:768px){section#lab-solutions .sg,section#mgmt-services .sg{grid-template-columns:1fr}.hero-v2 .hero-inner{padding-top:48px}}</style>
 <!-- Global Mega Menu – injected into every page via JS; hides legacy navs -->
 <link data-lps-eid="index-e25" rel="stylesheet" href="/assets/mega-menu.css">
 <script data-lps-eid="index-e26" src="/assets/mega-menu.js" defer></script>  <!-- ws:header-embeddings start -->
@@ -159,7 +159,14 @@ footer[role="contentinfo"]{background:var(--g900);color:rgba(255,255,255,.6);pad
 <a data-lps-eid="index-e32" href="#main" style="position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:#008B8B;color:#fff;padding:12px 24px;border-radius:0 0 8px 8px;z-index:9999;font-weight:600" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to main content</a>
 
 <main data-lps-eid="index-e33" id="main" role="main">
-<section data-lps-eid="index-e34" class="hero" aria-labelledby="h1">
+<section data-lps-eid="index-e34" class="hero hero-v2" aria-labelledby="h1">
+<div class="hero-media">
+<picture>
+<source type="image/webp" srcset="/site-assets/mtfs-home-band-ivf-lab.webp">
+<img src="/site-assets/mtfs-home-band-ivf-lab.jpg" width="1600" height="686" alt="Modern IVF laboratory with incubators and cryostorage equipment" loading="eager" fetchpriority="high" decoding="async">
+</picture>
+</div>
+
 <div data-lps-eid="index-e35" class="hero-inner">
 <div data-lps-eid="index-e36">
 <div data-lps-eid="index-e37" class="hero-badge"><span data-lps-eid="index-e38" class="dot"></span> Founded 2005 &middot; White Plains, NY</div>
@@ -255,10 +262,6 @@ footer[role="contentinfo"]{background:var(--g900);color:rgba(255,255,255,.6);pad
 <section data-lps-eid="index-e241" class="sec alt" aria-labelledby="why-h">
 <div data-lps-eid="index-e242" class="ctr">
 <div data-lps-eid="index-e243" class="sh aos"><div data-lps-eid="index-e244" class="shtag"><span data-lps-eid="index-e245" class="d"></span> Why Choose Us</div><h2 data-lps-eid="index-e246" id="why-h">Built Exclusively for Reproductive Healthcare</h2><p data-lps-eid="index-e247">Unlike generic consultants, MedTech For Solutions operates exclusively in the ART/IVF industry with hands-on leadership experience.</p></div>
-<picture class="mtfs-media mtfs-media--panoramic aos" data-image-id="IMG-2.3-B" style="margin-bottom:48px">
-<source type="image/webp" srcset="/site-assets/mtfs-home-band-ivf-lab.webp">
-<img src="/site-assets/mtfs-home-band-ivf-lab.jpg" width="1600" height="686" alt="Modern IVF laboratory with incubators and cryostorage equipment" loading="lazy" decoding="async">
-</picture>
 <div data-lps-eid="index-e248" class="wg">
 <article data-lps-eid="index-e249" class="wc aos"><div data-lps-eid="index-e250" class="wico"><svg data-lps-eid="index-e251" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path data-lps-eid="index-e252" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div><h3 data-lps-eid="index-e253">ART/IVF Specialists</h3><p data-lps-eid="index-e254">Our entire team specializes in assisted reproductive technology with deep expertise across embryology, laboratory design, and practice operations.</p></article>
 <article data-lps-eid="index-e255" class="wc aos"><div data-lps-eid="index-e256" class="wico"><svg data-lps-eid="index-e257" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path data-lps-eid="index-e258" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg></div><h3 data-lps-eid="index-e259">Hands-On Implementation</h3><p data-lps-eid="index-e260">We don't just advise. Hands-on management support from laboratory design through operational optimization delivers measurable results.</p></article>
