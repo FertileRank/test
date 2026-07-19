@@ -841,34 +841,12 @@ html { scroll-behavior: smooth; }
   .mtfs-page .mtfs-about-hero .mtfs-hero-image { border-radius: 0 }
 }
 
-/* ---------- home hero v2 + section grid spec ---------- */
-.mtfs-home .hero.hero-v2 { padding:88px 0 96px }
-.mtfs-home .hero-v2 .hero-media { position:relative;z-index:1;width:100% }
-.mtfs-home .hero-v2 .hero-media picture { display:block }
-.mtfs-home .hero-v2 .hero-media img { display:block;width:100%;height:clamp(320px,42vw,600px);object-fit:cover }
-.mtfs-home .hero-v2 .hero-inner { text-align:center;padding-top:72px;max-width:940px }
-.mtfs-home .hero-v2 .lead { margin-left:auto;margin-right:auto }
-.mtfs-home .hero-v2 .hero-btns { justify-content:center }
-.mtfs-home .hero-v2 .hero-trust { justify-content:center }
+/* ---------- home section grid spec ---------- */
 .mtfs-home section#lab-solutions .sg { display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:100% !important;grid-auto-flow:row;justify-content:center;align-items:stretch;align-content:start }
 .mtfs-home section#mgmt-services .sg { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100% !important;max-width:1440px !important;grid-auto-flow:row;justify-content:center;align-items:stretch;align-content:start }
 @media(max-width:1024px){
   .mtfs-home section#lab-solutions .sg, .mtfs-home section#mgmt-services .sg { grid-template-columns:repeat(2,1fr) }
-  .mtfs-home .hero.hero-v2 { padding:76px 0 80px }
 }
 @media(max-width:768px){
   .mtfs-home section#lab-solutions .sg, .mtfs-home section#mgmt-services .sg { grid-template-columns:1fr }
-  .mtfs-home .hero-v2 .hero-inner { padding-top:48px }
 }
-
-/* ---------- home hero v3: background image + gradient overlay ---------- */
-.mtfs-home .hero.hero-v3 { padding:150px 0 110px;position:relative;overflow:hidden;isolation:isolate }
-.mtfs-home .hero-v3 .hero-bg { position:absolute;inset:0;z-index:0 }
-.mtfs-home .hero-v3 .hero-bg picture { display:block;width:100%;height:100% }
-.mtfs-home .hero-v3 .hero-bg img { width:100%;height:100%;object-fit:cover;object-position:center }
-.mtfs-home .hero-v3::before { content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(11,18,32,.82) 0%,rgba(17,24,39,.66) 55%,rgba(17,24,39,.92) 100%),radial-gradient(ellipse 700px 500px at 12% 40%,rgba(0,139,139,.22) 0%,transparent 70%) }
-.mtfs-home .hero-v3 .hero-inner { position:relative;z-index:2;text-align:center;max-width:940px }
-.mtfs-home .hero-v3 .lead { margin-left:auto;margin-right:auto }
-.mtfs-home .hero-v3 .hero-btns { justify-content:center }
-.mtfs-home .hero-v3 .hero-trust { justify-content:center }
-@media(max-width:768px){ .mtfs-home .hero.hero-v3 { padding:120px 0 80px } }
