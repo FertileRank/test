@@ -53,6 +53,9 @@ theme styles.
   instead, swap the `src` in the `.mm-logo` `<img>` — it appears twice in
   `header-mega-menu.html` (static markup + the `HEADER_HTML` fallback in the
   script).
+- **Favicon**: upload `site-assets/favicon-512.png` as the WordPress **Site
+  Icon** (Appearance → Customize → Site Identity, or Settings → General →
+  Site Icon). WordPress generates all favicon sizes from it automatically.
 - The DM Sans font is pulled from Google Fonts via `@import` at the top of
   each snippet's `<style>`. If your Divi theme already loads DM Sans, you can
   remove the import.
