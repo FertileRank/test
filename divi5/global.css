@@ -304,6 +304,7 @@ html { scroll-behavior: smooth; }
 .mtfs-home .impi .n { font-size:2.2rem;font-weight:700;font-family:'Playfair Display',serif }
 .mtfs-home .impi .l { font-size:.82rem;opacity:.7;margin-top:4px }
 .mtfs-home .wg { display:grid;grid-template-columns:repeat(3,1fr);gap:28px }
+.mtfs-home #testimonials .wg { grid-template-columns:repeat(2,1fr) }
 .mtfs-home .wc { padding:36px;border-radius:var(--rl);background:var(--w);border:1px solid var(--g100);text-align:center;transition:all .3s }
 .mtfs-home .wc:hover { transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.08) }
 .mtfs-home .wico { width:64px;height:64px;border-radius:50%;background:var(--tl);display:flex;align-items:center;justify-content:center;margin:0 auto 20px }
