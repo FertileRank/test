@@ -100,6 +100,13 @@ add_action('wp_enqueue_scripts', function () {
 
 ### Install a page
 
+> **Call Center note**: `pages/management-services-call-center.html` is
+> fully self-contained — all of its styles are inlined in the file, so it
+> renders correctly even if the `global.css` in Theme Options is missing
+> or outdated. If the page ever looks broken/unstyled on the live site,
+> delete the Code module's contents and re-paste this file; no Theme
+> Options change is required.
+
 1. Create the WordPress page with the matching permalink
    (`pages/lab-solutions-gpo-purchasing.html` → `/lab-solutions/gpo-purchasing/`;
    the exact path is in the comment at the top of each file).
