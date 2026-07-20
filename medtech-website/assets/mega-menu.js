@@ -51,7 +51,7 @@
       snippet: 'A full suite of laboratory and management services designed exclusively for fertility clinics and IVF programs.'
     },
     {
-      href: '/lab-solutions/',
+      href: '/services/lab-solutions/',
       title: 'Lab Solutions',
       section: 'Lab Solutions',
       icon: 'monitor',
@@ -59,7 +59,7 @@
       snippet: 'Comprehensive laboratory solutions including monitoring, compliance, staffing, GPO purchasing, and practice development for IVF facilities.'
     },
     {
-      href: '/lab-solutions/real-time-monitoring/',
+      href: '/services/lab-solutions/real-time-monitoring/',
       title: 'Real-Time Monitoring',
       section: 'Lab Solutions',
       icon: 'monitor',
@@ -67,7 +67,7 @@
       snippet: '24/7 OvaTools real-time monitoring with QC dashboards, equipment tracking, and automated alerts for IVF laboratory environments.'
     },
     {
-      href: '/lab-solutions/regulatory-compliance/',
+      href: '/services/lab-solutions/regulatory-compliance/',
       title: 'Regulatory Compliance',
       section: 'Lab Solutions',
       icon: 'shield',
@@ -75,7 +75,7 @@
       snippet: 'FDA, CLIA, CAP, and AABB regulatory readiness — audit preparation, compliance programs, and ongoing quality management for ART laboratories.'
     },
     {
-      href: '/lab-solutions/staffing-solutions/',
+      href: '/services/lab-solutions/staffing-solutions/',
       title: 'Staffing Solutions',
       section: 'Lab Solutions',
       icon: 'users',
@@ -83,7 +83,7 @@
       snippet: 'TS (ABB) certified embryologists and HCLD off-site directors — temporary staffing placement for fertility clinics and IVF labs.'
     },
     {
-      href: '/lab-solutions/gpo-purchasing/',
+      href: '/services/lab-solutions/gpo-purchasing/',
       title: 'GPO Purchasing',
       section: 'Lab Solutions',
       icon: 'cart',
@@ -91,7 +91,7 @@
       snippet: 'Free to join — pool buying power with 300+ IVF practices and access 1,800+ vendor contracts including Staples, FedEx, Roche, Nikon, Olympus, and GE.'
     },
     {
-      href: '/lab-solutions/practice-development/',
+      href: '/services/lab-solutions/practice-development/',
       title: 'Practice Development',
       section: 'Lab Solutions',
       icon: 'trending',
@@ -99,7 +99,7 @@
       snippet: 'IVF lab design, construction oversight, workflow optimization, and team training — MedTech has designed 30+ ART laboratories nationally.'
     },
     {
-      href: '/management-services/',
+      href: '/services/management-services/',
       title: 'Management Services',
       section: 'Management',
       icon: 'book',
@@ -107,7 +107,7 @@
       snippet: 'Five management service lines — marketing, call center, accounting, HR, and insurance — to support the business operations of fertility practices.'
     },
     {
-      href: '/management-services/marketing/',
+      href: '/services/management-services/marketing/',
       title: 'Marketing',
       section: 'Management',
       icon: 'megaphone',
@@ -115,7 +115,7 @@
       snippet: 'Data-driven patient acquisition campaigns, digital strategy, and marketing programs built specifically for fertility clinic growth.'
     },
     {
-      href: '/management-services/call-center/',
+      href: '/services/management-services/call-center/',
       title: 'Call Center',
       section: 'Management',
       icon: 'phone',
@@ -123,7 +123,7 @@
       snippet: 'Dedicated call center operations staffed by fertility-trained agents who handle patient inquiries, scheduling, and follow-up with care and empathy.'
     },
     {
-      href: '/management-services/accounting-finance/',
+      href: '/services/management-services/accounting-finance/',
       title: 'Accounting & Finance',
       section: 'Management',
       icon: 'book',
@@ -131,7 +131,7 @@
       snippet: 'Financial oversight, budgeting, revenue reporting, and forecasting services tailored for fertility practice financial management.'
     },
     {
-      href: '/management-services/human-resources/',
+      href: '/services/management-services/human-resources/',
       title: 'Human Resources',
       section: 'Management',
       icon: 'userGroup',
@@ -139,7 +139,7 @@
       snippet: 'Recruitment, onboarding, performance management, and HR compliance services to support fertility clinic workforce needs.'
     },
     {
-      href: '/management-services/insurance-risk-management/',
+      href: '/services/management-services/insurance-risk-management/',
       title: 'Insurance & Risk Management',
       section: 'Management',
       icon: 'lock',
@@ -292,18 +292,18 @@
   // SERVICE DATA — single source of truth for the mega panel.
   // ---------------------------------------------------------------------------
   var LAB_SERVICES = [
-    { href: '/lab-solutions/real-time-monitoring/',  title: 'Real-Time Monitoring',   blurb: '24/7 OvaTools tracking & QC dashboards', icon: 'monitor'  },
-    { href: '/lab-solutions/regulatory-compliance/', title: 'Regulatory Compliance',  blurb: 'FDA, CLIA, CAP, AABB readiness',          icon: 'shield'   },
-    { href: '/lab-solutions/staffing-solutions/',    title: 'Staffing Solutions',     blurb: 'TS (ABB) certified embryologists & directors', icon: 'users'  },
-    { href: '/lab-solutions/gpo-purchasing/',        title: 'GPO Purchasing',         blurb: '1,800+ vendor contracts, free to join',   icon: 'cart'     },
-    { href: '/lab-solutions/practice-development/',  title: 'Practice Development',   blurb: 'Lab design, optimization & training',     icon: 'trending' }
+    { href: '/services/lab-solutions/real-time-monitoring/',  title: 'Real-Time Monitoring',   blurb: '24/7 OvaTools tracking & QC dashboards', icon: 'monitor'  },
+    { href: '/services/lab-solutions/regulatory-compliance/', title: 'Regulatory Compliance',  blurb: 'FDA, CLIA, CAP, AABB readiness',          icon: 'shield'   },
+    { href: '/services/lab-solutions/staffing-solutions/',    title: 'Staffing Solutions',     blurb: 'TS (ABB) certified embryologists & directors', icon: 'users'  },
+    { href: '/services/lab-solutions/gpo-purchasing/',        title: 'GPO Purchasing',         blurb: '1,800+ vendor contracts, free to join',   icon: 'cart'     },
+    { href: '/services/lab-solutions/practice-development/',  title: 'Practice Development',   blurb: 'Lab design, optimization & training',     icon: 'trending' }
   ];
   var MGMT_SERVICES = [
-    { href: '/management-services/marketing/',                  title: 'Marketing',                   blurb: 'Patient-acquisition campaigns',           icon: 'megaphone' },
-    { href: '/management-services/call-center/',                title: 'Call Center',                 blurb: 'Empathetic patient inquiry handling',     icon: 'phone'     },
-    { href: '/management-services/accounting-finance/',         title: 'Accounting & Finance',        blurb: 'Reporting, budgeting, forecasting',       icon: 'book'      },
-    { href: '/management-services/human-resources/',            title: 'Human Resources',             blurb: 'Recruitment & performance management',    icon: 'userGroup' },
-    { href: '/management-services/insurance-risk-management/',  title: 'Insurance & Risk Management', blurb: 'Professional liability for ART practices', icon: 'lock'      },
+    { href: '/services/management-services/marketing/',                  title: 'Marketing',                   blurb: 'Patient-acquisition campaigns',           icon: 'megaphone' },
+    { href: '/services/management-services/call-center/',                title: 'Call Center',                 blurb: 'Empathetic patient inquiry handling',     icon: 'phone'     },
+    { href: '/services/management-services/accounting-finance/',         title: 'Accounting & Finance',        blurb: 'Reporting, budgeting, forecasting',       icon: 'book'      },
+    { href: '/services/management-services/human-resources/',            title: 'Human Resources',             blurb: 'Recruitment & performance management',    icon: 'userGroup' },
+    { href: '/services/management-services/insurance-risk-management/',  title: 'Insurance & Risk Management', blurb: 'Professional liability for ART practices', icon: 'lock'      },
   ];
 
   function svc(item, group) {
@@ -350,18 +350,18 @@
     +       '<ul class="mm-nav" id="mm-nav">'
     +         '<li><a href="/" data-mm-match="^/$">Home</a></li>'
     +         '<li>'
-    +           '<button type="button" data-mm-trigger="lab" aria-expanded="false" aria-controls="mm-lab-panel" data-mm-match="^/lab-solutions(/|$)">'
+    +           '<button type="button" data-mm-trigger="lab" aria-expanded="false" aria-controls="mm-lab-panel" data-mm-match="^/services/lab-solutions(/|$)">'
     +             'Lab Solutions <span class="mm-caret">' + ICONS.caret + '</span>'
     +           '</button>'
-    +           panelMarkup('mm-lab-panel', 'lab', 'Laboratory Solutions', 5, LAB_SERVICES, 'Built for ART labs', 'Monitoring, compliance, staffing, GPO purchasing, and practice development for fertility programs.', 'Five lab-focused service lines.', '/lab-solutions/', 'Explore lab solutions')
+    +           panelMarkup('mm-lab-panel', 'lab', 'Laboratory Solutions', 5, LAB_SERVICES, 'Built for ART labs', 'Monitoring, compliance, staffing, GPO purchasing, and practice development for fertility programs.', 'Five lab-focused service lines.', '/services/lab-solutions/', 'Explore lab solutions')
     +         '</li>'
     +         '<li>'
-    +           '<button type="button" data-mm-trigger="mgmt" aria-expanded="false" aria-controls="mm-mgmt-panel" data-mm-match="^/management-services(/|$)">'
+    +           '<button type="button" data-mm-trigger="mgmt" aria-expanded="false" aria-controls="mm-mgmt-panel" data-mm-match="^/services/management-services(/|$)">'
     +             'Management <span class="mm-caret">' + ICONS.caret + '</span>'
     +           '</button>'
-    +           panelMarkup('mm-mgmt-panel', 'mgmt', 'Management Services', 5, MGMT_SERVICES, 'Operational support', 'Marketing, call center, finance, HR, and risk support for growing fertility practices.', 'Five management service lines.', '/management-services/', 'Explore management')
+    +           panelMarkup('mm-mgmt-panel', 'mgmt', 'Management Services', 5, MGMT_SERVICES, 'Operational support', 'Marketing, call center, finance, HR, and risk support for growing fertility practices.', 'Five management service lines.', '/services/management-services/', 'Explore management')
     +         '</li>'
-    +         '<li><a href="/lab-solutions/gpo-purchasing/" data-mm-match="^/lab-solutions/gpo-purchasing(/|$)">GPO</a></li>'
+    +         '<li><a href="/services/lab-solutions/gpo-purchasing/" data-mm-match="^/services/lab-solutions/gpo-purchasing(/|$)">GPO</a></li>'
     +         '<li>'
     +           '<button type="button" data-mm-trigger="about" aria-expanded="false" aria-controls="mm-about-panel" data-mm-match="^/(about|staff)(/|$)">'
     +             'About <span class="mm-caret">' + ICONS.caret + '</span>'

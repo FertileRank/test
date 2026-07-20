@@ -164,9 +164,9 @@
     {
       "id": "lab_solutions",
       "name": "Laboratory Solutions",
-      "slug": "lab-solutions",
+      "slug": "services/lab-solutions",
       "isHome": false,
-      "filePath": "lab-solutions/index.html",
+      "filePath": "services/lab-solutions/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -190,9 +190,9 @@
     {
       "id": "lab_solutions/practice_development",
       "name": "Practice Development",
-      "slug": "lab-solutions/practice-development",
+      "slug": "services/lab-solutions/practice-development",
       "isHome": false,
-      "filePath": "lab-solutions/practice-development/index.html",
+      "filePath": "services/lab-solutions/practice-development/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -217,9 +217,9 @@
     {
       "id": "lab_solutions/real_time_monitoring",
       "name": "Real-Time Monitoring",
-      "slug": "lab-solutions/real-time-monitoring",
+      "slug": "services/lab-solutions/real-time-monitoring",
       "isHome": false,
-      "filePath": "lab-solutions/real-time-monitoring/index.html",
+      "filePath": "services/lab-solutions/real-time-monitoring/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -244,9 +244,9 @@
     {
       "id": "lab_solutions/gpo_purchasing",
       "name": "GPO Purchasing",
-      "slug": "lab-solutions/gpo-purchasing",
+      "slug": "services/lab-solutions/gpo-purchasing",
       "isHome": false,
-      "filePath": "lab-solutions/gpo-purchasing/index.html",
+      "filePath": "services/lab-solutions/gpo-purchasing/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -271,9 +271,9 @@
     {
       "id": "lab_solutions/staffing_solutions",
       "name": "Staffing Solutions",
-      "slug": "lab-solutions/staffing-solutions",
+      "slug": "services/lab-solutions/staffing-solutions",
       "isHome": false,
-      "filePath": "lab-solutions/staffing-solutions/index.html",
+      "filePath": "services/lab-solutions/staffing-solutions/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -298,9 +298,9 @@
     {
       "id": "lab_solutions/regulatory_compliance",
       "name": "Regulatory Compliance",
-      "slug": "lab-solutions/regulatory-compliance",
+      "slug": "services/lab-solutions/regulatory-compliance",
       "isHome": false,
-      "filePath": "lab-solutions/regulatory-compliance/index.html",
+      "filePath": "services/lab-solutions/regulatory-compliance/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -325,9 +325,9 @@
     {
       "id": "management_services",
       "name": "Management Services",
-      "slug": "management-services",
+      "slug": "services/management-services",
       "isHome": false,
-      "filePath": "management-services/index.html",
+      "filePath": "services/management-services/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -351,9 +351,9 @@
     {
       "id": "management_services/call_center",
       "name": "Call Center",
-      "slug": "management-services/call-center",
+      "slug": "services/management-services/call-center",
       "isHome": false,
-      "filePath": "management-services/call-center/index.html",
+      "filePath": "services/management-services/call-center/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -378,9 +378,9 @@
     {
       "id": "management_services/human_resources",
       "name": "Human Resources",
-      "slug": "management-services/human-resources",
+      "slug": "services/management-services/human-resources",
       "isHome": false,
-      "filePath": "management-services/human-resources/index.html",
+      "filePath": "services/management-services/human-resources/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -405,9 +405,9 @@
     {
       "id": "management_services/accounting_finance",
       "name": "Accounting & Finance",
-      "slug": "management-services/accounting-finance",
+      "slug": "services/management-services/accounting-finance",
       "isHome": false,
-      "filePath": "management-services/accounting-finance/index.html",
+      "filePath": "services/management-services/accounting-finance/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -432,9 +432,9 @@
     {
       "id": "management_services/marketing",
       "name": "Marketing",
-      "slug": "management-services/marketing",
+      "slug": "services/management-services/marketing",
       "isHome": false,
-      "filePath": "management-services/marketing/index.html",
+      "filePath": "services/management-services/marketing/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -531,9 +531,9 @@
     {
       "id": "management_services/insurance_risk_management",
       "name": "Insurance & Risk Management",
-      "slug": "management-services/insurance-risk-management",
+      "slug": "services/management-services/insurance-risk-management",
       "isHome": false,
-      "filePath": "management-services/insurance-risk-management/index.html",
+      "filePath": "services/management-services/insurance-risk-management/index.html",
       "pageId": null,
       "inNavigation": true,
       "seo": {
@@ -568,7 +568,7 @@
         "description": "The new MedTech For Solutions website is launching soon. Sign up to be notified at launch.",
         "keywords": [],
         "ogImage": "",
-        "canonicalUrl": "https://medtech4solutions.com/coming-soon/",
+        "canonicalUrl": "https://18fb4ade-3482-4694-8ed8-1fbeb8fac622.dev.builder.searchatlas.com/coming-soon/",
         "noindex": false,
         "structuredDataType": "WebPage",
         "structuredData": null

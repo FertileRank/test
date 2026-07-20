@@ -45,7 +45,7 @@ theme styles.
 
 ## Link + asset assumptions
 
-- All navigation URLs are root-relative (`/about/`, `/lab-solutions/…`,
+- All navigation URLs are root-relative (`/about/`, `/services/lab-solutions/…`,
   `/contact/`, `/staff/`) and match the Search Atlas site structure in
   `pages.manifest.json`. WordPress permalinks must resolve the same paths.
 - The logo is a transparent PNG at `/site-assets/mtfs-logo.png` (upload the
@@ -108,7 +108,7 @@ add_action('wp_enqueue_scripts', function () {
 > Options change is required.
 
 1. Create the WordPress page with the matching permalink
-   (`pages/lab-solutions-gpo-purchasing.html` → `/lab-solutions/gpo-purchasing/`;
+   (`pages/lab-solutions-gpo-purchasing.html` → `/services/lab-solutions/gpo-purchasing/`;
    the exact path is in the comment at the top of each file).
 2. Edit with Divi, add one regular section, one column, **0 padding**
    top/bottom on section and row, full width.

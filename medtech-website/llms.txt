@@ -6,29 +6,29 @@
   Sections: Hero, Services Overview, Why Choose MedTech, Testimonials, Call to Action
 - [Services](/services/)
   Sections: Hero, Laboratory Solutions, Management Services, Call to Action
-- [Laboratory Solutions](/lab-solutions/)
+- [Laboratory Solutions](/services/lab-solutions/)
   Sections: Hero, Core Services, Impact Metrics, Call to Action
-- [Real-Time Monitoring](/lab-solutions/real-time-monitoring/)
+- [Real-Time Monitoring](/services/lab-solutions/real-time-monitoring/)
   Sections: Hero, Features, Benefits, Process, Call to Action
-- [Regulatory Compliance](/lab-solutions/regulatory-compliance/)
+- [Regulatory Compliance](/services/lab-solutions/regulatory-compliance/)
   Sections: Hero, Compliance Standards, Services, Process, Call to Action
-- [Staffing Solutions](/lab-solutions/staffing-solutions/)
+- [Staffing Solutions](/services/lab-solutions/staffing-solutions/)
   Sections: Hero, Staffing Services, Available Positions, Process, Call to Action
-- [GPO Purchasing](/lab-solutions/gpo-purchasing/)
+- [GPO Purchasing](/services/lab-solutions/gpo-purchasing/)
   Sections: Hero, GPO Benefits, Vendor Partners, Process, Call to Action
-- [Practice Development](/lab-solutions/practice-development/)
+- [Practice Development](/services/lab-solutions/practice-development/)
   Sections: Hero, Development Services, Process, Call to Action
-- [Management Services](/management-services/)
+- [Management Services](/services/management-services/)
   Sections: Hero, Management Services Overview, Call to Action
-- [Marketing](/management-services/marketing/)
+- [Marketing](/services/management-services/marketing/)
   Sections: Hero, Marketing Services, Call to Action
-- [Call Center](/management-services/call-center/)
+- [Call Center](/services/management-services/call-center/)
   Sections: Hero, Call Center Services, Call to Action
-- [Accounting & Finance](/management-services/accounting-finance/)
+- [Accounting & Finance](/services/management-services/accounting-finance/)
   Sections: Hero, Accounting Services, Call to Action
-- [Human Resources](/management-services/human-resources/)
+- [Human Resources](/services/management-services/human-resources/)
   Sections: Hero, HR Services, Call to Action
-- [Insurance & Risk Management](/management-services/insurance-risk-management/)
+- [Insurance & Risk Management](/services/management-services/insurance-risk-management/)
   Sections: Hero, Insurance Services, Call to Action
 - [About](/about/)
   Sections: Hero, Company Story, Team, Call to Action
