@@ -40,3 +40,5 @@
   Sections: Hero, Leadership, Specialists, Expertise, Testimonials, Call to Action
 - [New Website Coming Soon](/coming-soon/)
   Sections: Countdown, Highlights, Contact
+- [Sitemap](/sitemap/)
+  Sections: Page Directory

@@ -581,6 +581,30 @@
         "Contact"
       ],
       "hasBlogSection": false
+    },
+    {
+      "id": "sitemap",
+      "name": "Sitemap",
+      "slug": "sitemap",
+      "isHome": false,
+      "filePath": "sitemap/index.html",
+      "pageId": null,
+      "inNavigation": false,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Page Directory"
+      ],
+      "hasBlogSection": false
     }
   ],
   "navigation": {
