@@ -107,6 +107,13 @@ add_action('wp_enqueue_scripts', function () {
 > delete the Code module's contents and re-paste this file; no Theme
 > Options change is required.
 
+0. **Pretty URLs (once)**: WordPress admin → **Settings → Permalinks** →
+   select **Post name** (`/%postname%/`) and Save. This enables the clean
+   trailing-slash URLs all navigation in this package uses
+   (`/services/lab-solutions/gpo-purchasing/` instead of `?page_id=…`).
+   Nested paths come from the page hierarchy: create parent pages
+   (`services`, then `lab-solutions` / `management-services` under it) and
+   assign each service page its parent so the full slug matches.
 1. Create the WordPress page with the matching permalink
    (`pages/lab-solutions-gpo-purchasing.html` → `/services/lab-solutions/gpo-purchasing/`;
    the exact path is in the comment at the top of each file).
