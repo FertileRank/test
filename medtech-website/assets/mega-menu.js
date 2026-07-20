@@ -2,8 +2,7 @@
    MedTech For Solutions — Global Mega Menu Component
    -----------------------------------------------------------------------------
    Drop-in module: include /assets/mega-menu.css and /assets/mega-menu.js on
-   any page. The script auto-injects the mega menu into <body>, removes any
-   legacy <nav class="nav"> or <header role="banner"> already on the page, and
+   any page. The script auto-injects the mega menu into <body> and
    wires up sticky/compact-on-scroll, back-to-top, active-link highlighting,
    and keyboard / touch interactions.
 
@@ -154,6 +153,22 @@
       icon: 'phone',
       keywords: ['contact', 'schedule', 'consultation', 'phone', 'email', 'address', 'reach', 'talk', 'appointment', '866-634-9144'],
       snippet: 'Schedule a consultation with our ART specialists. Call (866) 634-9144, email info@medtech4solutions.com, or submit an inquiry online.'
+    },
+    {
+      href: '/privacy-policy/',
+      title: 'Privacy Policy',
+      section: 'Legal',
+      icon: 'lock',
+      keywords: ['privacy', 'policy', 'data', 'personal information', 'HIPAA', 'legal'],
+      snippet: 'How MedTech For Solutions collects, uses, and protects personal information across its website and services.'
+    },
+    {
+      href: '/terms-of-service/',
+      title: 'Terms of Service',
+      section: 'Legal',
+      icon: 'book',
+      keywords: ['terms', 'terms of service', 'conditions', 'agreement', 'legal', 'use'],
+      snippet: 'The terms and conditions governing use of the MedTech For Solutions website and services.'
     }
   ];
 
@@ -228,7 +243,6 @@
   }
 
   function highlightSnippet(snippet, queryTokens) {
-    var raw = tokenize(snippet);
     var words = snippet.split(/(\s+)/);
     return words.map(function (word) {
       var clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -263,7 +277,6 @@
     trending:  '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>',
     megaphone: '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>',
     phone:     '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>',
-    dollar:    '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
     book:      '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>',
     userGroup: '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>',
     lock:      '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>',
@@ -272,7 +285,6 @@
     arrowU:    '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
     caret:     '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 1l5 5 5-5"/></svg>',
     search:    '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
-    searchX:   '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>',
     sparks:    '<svg width="24" height="24" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>'
   };
 
@@ -350,7 +362,7 @@
     +           panelMarkup('mm-mgmt-panel', 'mgmt', 'Management Services', 5, MGMT_SERVICES, 'Operational support', 'Marketing, call center, finance, HR, and risk support for growing fertility practices.', 'Five management service lines.', '/management-services/', 'Explore management')
     +         '</li>'
     +         '<li><a href="/lab-solutions/gpo-purchasing/" data-mm-match="^/lab-solutions/gpo-purchasing(/|$)">GPO</a></li>'
-    +         '<li class="mm-has-drop">'
+    +         '<li>'
     +           '<button type="button" data-mm-trigger="about" aria-expanded="false" aria-controls="mm-about-panel" data-mm-match="^/(about|staff)(/|$)">'
     +             'About <span class="mm-caret">' + ICONS.caret + '</span>'
     +           '</button>'
@@ -620,6 +632,7 @@
 
       var qTokens = expandQuery(tokenize(query));
       var list = document.createElement('div');
+      list.className = 'mm-search-results';
       list.setAttribute('role', 'listbox');
       list.setAttribute('aria-label', 'Search results');
 
