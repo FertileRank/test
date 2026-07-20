@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Medtech Website Updated",
-    "domain": "https://medtech-website-searchatlas-html-upload-3.preview.builder.searchatlas.com",
+    "domain": "",
     "language": "en",
     "intent": {
       "business_type": "healthcare",
@@ -568,7 +568,7 @@
         "description": "The new MedTech For Solutions website is launching soon. Sign up to be notified at launch.",
         "keywords": [],
         "ogImage": "",
-        "canonicalUrl": "https://medtech-website-searchatlas-html-upload-3.preview.builder.searchatlas.com/coming-soon/",
+        "canonicalUrl": "/coming-soon/",
         "noindex": false,
         "structuredDataType": "WebPage",
         "structuredData": null
