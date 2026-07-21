@@ -1,0 +1,22 @@
+/*
+Theme Name:   MedTech For Solutions — Divi Child
+Theme URI:    https://medtech4solutions.com/
+Description:  Divi 5 child theme for the MedTech For Solutions website. Loads the consolidated site stylesheet (mtfs-global.css) that styles every converted page's Code module, serves the site's local imagery from /site-assets/, and keeps all customizations update-safe. Requires the Divi parent theme (5.x).
+Author:       MedTech For Solutions
+Author URI:   https://medtech4solutions.com/
+Template:     Divi
+Version:      1.0.0
+Requires PHP: 7.4
+License:      GNU General Public License v2 or later
+License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  medtech-divi-child
+Tags:         divi-child
+*/
+
+/* ==========================================================================
+   Child-theme CSS overrides.
+
+   Site-wide page styles live in mtfs-global.css (enqueued by functions.php)
+   so Divi updates never touch them. Add small ad-hoc overrides below this
+   line — they load after both the Divi parent stylesheet and mtfs-global.css.
+   ========================================================================== */

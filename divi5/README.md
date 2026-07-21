@@ -85,18 +85,14 @@ Every page of the site converted for Divi 5 — content unchanged.
 
 ### Install the global stylesheet (once)
 
-Paste the contents of `global.css` into **Divi → Theme Options →
-General → Custom CSS** (or enqueue it from a child theme, which is
-better for a stylesheet this size — see below).
+**Preferred:** install the companion child theme (`medtech-divi-child.zip`,
+Appearance → Themes → Add New → Upload Theme). It enqueues `global.css`
+(as `mtfs-global.css`), serves the `site-assets/` imagery, and keeps
+everything update-safe — skip the manual steps below entirely.
 
-Child theme option:
-
-```php
-// functions.php
-add_action('wp_enqueue_scripts', function () {
-  wp_enqueue_style('mtfs-global', get_stylesheet_directory_uri() . '/mtfs-global.css', [], '1.0');
-});
-```
+**Manual alternative:** paste the contents of `global.css` into
+**Divi → Theme Options → General → Custom CSS**. Do not do both — the
+styles would load twice.
 
 ### Install a page
 
