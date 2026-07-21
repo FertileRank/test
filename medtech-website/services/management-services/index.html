@@ -71,6 +71,30 @@ img{max-width:100%;display:block}
 .hub-grid>.aos{opacity:1;transform:none}
 @media(max-width:1024px){.ftg{grid-template-columns:repeat(2,1fr)}.hub-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.nl.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--w);padding:24px;box-shadow:0 8px 32px rgba(0,0,0,.1);gap:16px}.ph{padding:110px 0 60px}.ph h1{font-size:2.2rem}.fg,.pg,.hub-grid{grid-template-columns:1fr}.sh h2{font-size:1.8rem}.ci{padding:48px 24px}.ci h2{font-size:1.8rem}.ftg{grid-template-columns:1fr}.fbt{flex-direction:column;gap:12px;text-align:center}}
+
+/* --- Conversion enhancement sections (steps, FAQ, assurance, image placeholders) --- */
+.cvx-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.cvx-step{background:#fff;border:1px solid #E8EAED;border-radius:14px;padding:28px;box-shadow:0 4px 14px rgba(17,24,39,.04)}
+.cvx-step .n{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#008B8B,#006D6D);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:16px;font-family:'DM Sans',sans-serif}
+.cvx-step h3{font-size:1.08rem;margin-bottom:8px}
+.cvx-step p{font-size:.92rem;color:#4B5563;line-height:1.6}
+.cvx-assure{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:.85rem;color:#4B5563}
+.cvx-assure span{display:inline-flex;align-items:center;gap:7px}
+.cvx-faq{max-width:840px;margin:44px auto 0}
+.cvx-fi{border:1px solid #E8EAED;border-radius:12px;background:#fff;margin-bottom:12px;overflow:hidden}
+.cvx-fq{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:600;color:#1F2937;text-align:left}
+.cvx-fq svg{flex-shrink:0;transition:transform .3s;color:#008B8B}
+.cvx-fa{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 22px}
+.cvx-fa p{padding-bottom:18px;font-size:.93rem;color:#4B5563;line-height:1.65}
+.cvx-fi.open .cvx-fa{max-height:260px}
+.cvx-fi.open .cvx-fq svg{transform:rotate(45deg)}
+.cvx-imgph{border:2px dashed #9CA3AF;border-radius:16px;background:#F8F9FA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:56px 24px;text-align:center;color:#4B5563;margin-top:44px}
+.cvx-imgph strong{color:#1F2937;font-size:1rem}
+.cvx-imgph small{font-size:.8rem;max-width:600px;line-height:1.6}
+.cvx-chipbar{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px}
+.cvx-chip{background:#fff;border:1px solid #E8EAED;border-radius:100px;padding:10px 22px;font-size:.9rem;font-weight:600;color:#1F2937;box-shadow:0 3px 10px rgba(17,24,39,.05)}
+.cvx-chip b{color:#008B8B}
+@media(max-width:900px){.cvx-steps{grid-template-columns:1fr}}
 </style><!-- Global Mega Menu (auto-injects nav + back-to-top) -->
 <link rel="stylesheet" href="/assets/mega-menu.css">
 <script src="/assets/mega-menu.js" defer></script>  <!-- ws:header-embeddings start -->
@@ -84,6 +108,7 @@ img{max-width:100%;display:block}
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can we start with just one service?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Many practices begin with a single service line &mdash; often the call center or accounting &mdash; and expand as results build. Every plan is scoped to what your practice actually needs."}},{"@type":"Question","name":"How are engagements priced?","acceptedAnswer":{"@type":"Answer","text":"Each solution is scoped individually after a free consultation, based on your practice&rsquo;s size, goals, and the services involved. You&rsquo;ll always know the plan before anything begins."}},{"@type":"Question","name":"How quickly can we get started?","acceptedAnswer":{"@type":"Answer","text":"We respond to every inquiry within one business day, and most engagements begin with an operational assessment scheduled within the first conversation."}}]}</script>
 </head><body>
 
 <section class="ph" style="background:linear-gradient(135deg,var(--tl) 0%,var(--w) 40%,var(--w) 60%,#FDF3EC 100%)">
@@ -93,7 +118,7 @@ img{max-width:100%;display:block}
 <div class="bc"><a href="/">Home</a> / Management Services</div>
 <div class="badge" style="border-color:var(--teal);color:var(--teal)"><span class="dot" style="background:var(--lime)"></span> Practice Operations</div>
 <h1>Fertility Practice <span>Management Services</span> for IVF Clinics</h1>
-<p class="sub" style="max-width:720px">Comprehensive management services designed to support every operational dimension of your fertility practice — from marketing and call center operations to finance, HR, and risk management.</p>
+<p class="sub" style="max-width:720px">Marketing, patient communication, finance, HR, and risk — five service lines that take the operational weight off your shoulders and give your fertility practice room to grow.</p>
 <div class="hbtns">
 <a href="/contact/" class="bp">Schedule Consultation <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
 <a href="/" class="bs">Back to Home</a>
@@ -106,6 +131,7 @@ img{max-width:100%;display:block}
 </div>
 </div>
 </section>
+<div class="cvx-chipbar aos"><div class="cvx-chip"><b>10% &ndash; 50%</b> typical cost savings</div><div class="cvx-chip"><b>300+</b> IVF practices served</div><div class="cvx-chip"><b>24/7</b> patient communication coverage</div><div class="cvx-chip"><b>30+ yrs</b> ART industry leadership</div></div>
 <section class="sec">
 <div class="ctr">
 <div class="sh aos">
@@ -141,9 +167,15 @@ img{max-width:100%;display:block}
 </div></div>
 </div>
 </section>
+<section class="sec-cvx-steps" style="padding:88px 0;background:#F8F9FA"><div class="ctr"><div class="sh aos" style="text-align:center;max-width:720px;margin:0 auto"><div class="shl" style="justify-content:center"><span class="d"></span> How It Works</div><h2>Assess. Plan. Implement.</h2><p>A straightforward engagement model designed around your practice&rsquo;s operations.</p></div><div class="cvx-steps aos"><div class="cvx-step"><div class="n">1</div><h3>Operational Assessment</h3><p>We start with a free consultation and a clear-eyed review of the operations you want to strengthen &mdash; no commitments, no generic playbooks.</p></div><div class="cvx-step"><div class="n">2</div><h3>Custom Service Plan</h3><p>You get a scoped plan covering exactly the service lines you need, whether that&rsquo;s one area or all five working together.</p></div><div class="cvx-step"><div class="n">3</div><h3>Hands-On Management</h3><p>Our specialists embed with your team, implement the plan, and report results &mdash; adjusting continuously as your practice grows.</p></div></div></div></section>
+<section class="sec-cvx-faq" style="padding:88px 0"><div class="ctr"><div class="sh aos" style="text-align:center"><h2>Frequently Asked Questions</h2></div><div class="cvx-faq aos"><div class="cvx-fi"><button type="button" class="cvx-fq" aria-expanded="false">Can we start with just one service?<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="cvx-fa"><p>Absolutely. Many practices begin with a single service line &mdash; often the call center or accounting &mdash; and expand as results build. Every plan is scoped to what your practice actually needs.</p></div></div><div class="cvx-fi"><button type="button" class="cvx-fq" aria-expanded="false">How are engagements priced?<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="cvx-fa"><p>Each solution is scoped individually after a free consultation, based on your practice&rsquo;s size, goals, and the services involved. You&rsquo;ll always know the plan before anything begins.</p></div></div><div class="cvx-fi"><button type="button" class="cvx-fq" aria-expanded="false">How quickly can we get started?<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="cvx-fa"><p>We respond to every inquiry within one business day, and most engagements begin with an operational assessment scheduled within the first conversation.</p></div></div></div>
+<!-- IMAGE PLACEHOLDER IMG-CVX-MG-1 — ChatGPT image prompt:
+Photorealistic over-the-shoulder view of a practice manager and a consultant reviewing a clean operations dashboard &mdash; calendar density, finance chart, staffing roster &mdash; on a large monitor in a tidy clinic back office; teal-and-white interface tones, bright professional lighting, shallow depth of field, 3:2 aspect ratio, no readable text or logos.
+Export as JPG + WebP, save to /site-assets/, then replace this placeholder with a <picture> block like the others on this page. -->
+<div class="cvx-imgph aos" data-image-id="IMG-CVX-MG-1" role="img" aria-label="Practice operations review (image placeholder)"><svg width="34" height="34" fill="none" stroke="#9CA3AF" stroke-width="1.6" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><strong>Practice operations review</strong><small>Image placeholder IMG-CVX-MG-1 — generation prompt provided in the page source comment and the delivery notes.</small></div></div></section>
 <section class="cb"><div class="ctr"><div class="ci aos">
 <h2>Transform Your Practice Operations</h2>
-<p>Let our team of practice management experts assess your operations and build a customized plan for growth and efficiency.</p>
+<p>Book a free operational assessment &mdash; we&rsquo;ll show you where time and money are leaking, and exactly how we&rsquo;d fix it.</p>
 <div class="cbs"><a href="/contact/" class="cbp">Get Started</a><a href="tel:+18666349144" class="cbb">Call (866) 634-9144</a></div>
 </div></div></section>
 <footer class="ft"><div class="ctr">
@@ -177,4 +209,5 @@ img{max-width:100%;display:block}
 document.querySelectorAll('.aos').forEach(el=>new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('v')}})},{threshold:.1}).observe(el));
 </script>
 
+<script>document.querySelectorAll(".cvx-fq").forEach(function(b){b.addEventListener("click",function(){var i=b.parentElement,o=i.classList.contains("open");i.classList.toggle("open");b.setAttribute("aria-expanded",o?"false":"true")})});</script>
 </body></html>

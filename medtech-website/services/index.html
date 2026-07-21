@@ -153,6 +153,30 @@ img{max-width:100%;display:block}
 .fbt{flex-direction:column;gap:12px;text-align:center}
 .cat-header{flex-direction:column;text-align:center}
 }
+
+/* --- Conversion enhancement sections (steps, FAQ, assurance, image placeholders) --- */
+.cvx-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.cvx-step{background:#fff;border:1px solid #E8EAED;border-radius:14px;padding:28px;box-shadow:0 4px 14px rgba(17,24,39,.04)}
+.cvx-step .n{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#008B8B,#006D6D);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:16px;font-family:'DM Sans',sans-serif}
+.cvx-step h3{font-size:1.08rem;margin-bottom:8px}
+.cvx-step p{font-size:.92rem;color:#4B5563;line-height:1.6}
+.cvx-assure{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:.85rem;color:#4B5563}
+.cvx-assure span{display:inline-flex;align-items:center;gap:7px}
+.cvx-faq{max-width:840px;margin:44px auto 0}
+.cvx-fi{border:1px solid #E8EAED;border-radius:12px;background:#fff;margin-bottom:12px;overflow:hidden}
+.cvx-fq{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:600;color:#1F2937;text-align:left}
+.cvx-fq svg{flex-shrink:0;transition:transform .3s;color:#008B8B}
+.cvx-fa{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 22px}
+.cvx-fa p{padding-bottom:18px;font-size:.93rem;color:#4B5563;line-height:1.65}
+.cvx-fi.open .cvx-fa{max-height:260px}
+.cvx-fi.open .cvx-fq svg{transform:rotate(45deg)}
+.cvx-imgph{border:2px dashed #9CA3AF;border-radius:16px;background:#F8F9FA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:56px 24px;text-align:center;color:#4B5563;margin-top:44px}
+.cvx-imgph strong{color:#1F2937;font-size:1rem}
+.cvx-imgph small{font-size:.8rem;max-width:600px;line-height:1.6}
+.cvx-chipbar{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px}
+.cvx-chip{background:#fff;border:1px solid #E8EAED;border-radius:100px;padding:10px 22px;font-size:.9rem;font-weight:600;color:#1F2937;box-shadow:0 3px 10px rgba(17,24,39,.05)}
+.cvx-chip b{color:#008B8B}
+@media(max-width:900px){.cvx-steps{grid-template-columns:1fr}}
 </style>
 <!-- Global Mega Menu (auto-injects nav + back-to-top) -->
 <link rel="stylesheet" href="/assets/mega-menu.css">
@@ -175,7 +199,7 @@ img{max-width:100%;display:block}
 <div class="ctr">
 <div class="badge"><span class="dot"></span> Full-Spectrum Solutions</div>
 <h1>MedTech For Solutions — Comprehensive <span>IVF & ART Services</span> for Fertility Practices</h1>
-<p class="sub">From laboratory operations and regulatory compliance to practice management, marketing, finance, HR, and risk support, MedTech For Solutions delivers focused support for reproductive healthcare facilities.</p>
+<p class="sub">Ten specialized service lines, one accountable partner. From the IVF laboratory to the front office, MedTech For Solutions runs the operational engine of reproductive healthcare &mdash; so your clinicians can stay focused on patients.</p>
 
 </div>
 </section>
@@ -340,12 +364,17 @@ img{max-width:100%;display:block}
 </div>
 </section>
 
+<section class="sec-cvx-steps" style="padding:88px 0;background:#F8F9FA"><div class="ctr"><div class="sh aos" style="text-align:center;max-width:720px;margin:0 auto"><div class="shl" style="justify-content:center"><span class="d"></span> How We Engage</div><h2>From First Call to Measurable Results</h2><p>Every engagement follows the same accountable path &mdash; whether you need one service or all ten.</p></div><div class="cvx-steps aos"><div class="cvx-step"><div class="n">1</div><h3>Consultation &amp; Assessment</h3><p>A no-obligation conversation about your practice, followed by a focused assessment of the operations you want to improve.</p></div><div class="cvx-step"><div class="n">2</div><h3>Custom Solution Plan</h3><p>A right-sized plan built from our ten service lines &mdash; scoped to your goals, timeline, and budget. No bundled extras you don&rsquo;t need.</p></div><div class="cvx-step"><div class="n">3</div><h3>Hands-On Implementation</h3><p>We don&rsquo;t hand you a binder and leave. Our specialists implement, measure, and refine alongside your team until the results are real.</p></div></div></div></section>
+<!-- IMAGE PLACEHOLDER IMG-CVX-SVC-1 — ChatGPT image prompt:
+Photorealistic wide shot of a small consulting team in a glass-walled strategy room reviewing fertility-practice growth charts on a wall screen; one consultant pointing at an upward trend line while a practice director takes notes, modern medical-office interior with teal accents, natural daylight, editorial business photography, 2:1 wide aspect ratio, no readable text.
+Export as JPG + WebP, save to /site-assets/, then replace this placeholder with a <picture> block like the others on this page. -->
+<div class="cvx-imgph aos" style="max-width:1000px;margin-left:auto;margin-right:auto" data-image-id="IMG-CVX-SVC-1" role="img" aria-label="Strategy session with practice leadership (image placeholder)"><svg width="34" height="34" fill="none" stroke="#9CA3AF" stroke-width="1.6" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><strong>Strategy session with practice leadership</strong><small>Image placeholder IMG-CVX-SVC-1 — generation prompt provided in the page source comment and the delivery notes.</small></div>
 <!-- CTA -->
 <section class="cta">
 <div class="ctr">
 <div class="ci aos">
 <h2>Ready to Transform Your Practice?</h2>
-<p>Whether you need one service or all ten, our team will build a customized solution to meet your practice's unique needs.</p>
+<p>Start with a free consultation &mdash; we&rsquo;ll listen first, then show you exactly where we can move the needle.</p>
 <div class="cbs">
 <a href="/contact/" class="cbp">Schedule a Consultation <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
 <a href="tel:+18666349144" class="cbb">Call (866) 634-9144</a>
