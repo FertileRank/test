@@ -1,0 +1,6 @@
+# robots.txt for MedTech For Solutions
+# Updated: 2026-07-20
+# Note: add "Sitemap: https://<final-domain>/sitemap.xml" once the production domain is live.
+
+User-agent: *
+Allow: /

@@ -1,0 +1,44 @@
+# MedTech For Solutions — Website Guide
+
+## Pages
+
+- [Home](/)
+  Sections: Hero, Services Overview, Why Choose MedTech, Testimonials, Call to Action
+- [Services](/services/)
+  Sections: Hero, Laboratory Solutions, Management Services, Call to Action
+- [Laboratory Solutions](/services/lab-solutions/)
+  Sections: Hero, Core Services, Impact Metrics, Call to Action
+- [Real-Time Monitoring](/services/lab-solutions/real-time-monitoring/)
+  Sections: Hero, Features, Benefits, Process, Call to Action
+- [Regulatory Compliance](/services/lab-solutions/regulatory-compliance/)
+  Sections: Hero, Compliance Standards, Services, Process, Call to Action
+- [Staffing Solutions](/services/lab-solutions/staffing-solutions/)
+  Sections: Hero, Staffing Services, Available Positions, Process, Call to Action
+- [GPO Purchasing](/services/lab-solutions/gpo-purchasing/)
+  Sections: Hero, GPO Benefits, Vendor Partners, Process, Call to Action
+- [Practice Development](/services/lab-solutions/practice-development/)
+  Sections: Hero, Development Services, Process, Call to Action
+- [Management Services](/services/management-services/)
+  Sections: Hero, Management Services Overview, Call to Action
+- [Marketing](/services/management-services/marketing/)
+  Sections: Hero, Marketing Services, Call to Action
+- [Call Center](/services/management-services/call-center/)
+  Sections: Hero, Call Center Services, Call to Action
+- [Accounting & Finance](/services/management-services/accounting-finance/)
+  Sections: Hero, Accounting Services, Call to Action
+- [Human Resources](/services/management-services/human-resources/)
+  Sections: Hero, HR Services, Call to Action
+- [Insurance & Risk Management](/services/management-services/insurance-risk-management/)
+  Sections: Hero, Insurance Services, Call to Action
+- [About](/about/)
+  Sections: Hero, Company Story, Team, Call to Action
+- [Contact](/contact/)
+  Sections: Hero, Contact Form, Contact Information
+- [Privacy Policy](/privacy-policy/)
+- [Terms of Service](/terms-of-service/)
+- [Our Team](/staff/)
+  Sections: Hero, Leadership, Specialists, Expertise, Testimonials, Call to Action
+- [New Website Coming Soon](/coming-soon/)
+  Sections: Countdown, Highlights, Contact
+- [Sitemap](/sitemap/)
+  Sections: Page Directory

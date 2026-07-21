@@ -1,0 +1,655 @@
+{
+  "site": {
+    "name": "Medtech Website Updated",
+    "domain": "",
+    "language": "en",
+    "intent": {
+      "business_type": "healthcare",
+      "business_type_title": "Healthcare Consulting & Laboratory Management Services",
+      "tone": "professional",
+      "primary_goal": "schedule consultation for ART laboratory management solutions",
+      "target_audience": [
+        "fertility clinic operators",
+        "IVF laboratory directors",
+        "reproductive medicine practice managers"
+      ],
+      "key_features": [
+        "Real-time laboratory monitoring and equipment tracking",
+        "Regulatory compliance (FDA, CLIA, CAP, AABB)",
+        "Staffing and recruitment of certified ART professionals",
+        "Group purchasing organization with 1,800+ vendor contracts",
+        "Practice development and laboratory design services"
+      ],
+      "unique_selling_points": [
+        "100+ years combined ART industry experience across team",
+        "Serves 300+ IVF practices and designed 30+ labs nationwide",
+        "Hands-on implementation and management support, not just advisory"
+      ],
+      "value_proposition": "End-to-end laboratory management, compliance, staffing, and practice development solutions exclusively for fertility clinics and IVF laboratories.",
+      "is_landing_page": false
+    },
+    "projectAnalysis": {
+      "routingMechanism": "multi_file_html",
+      "styling": "vanilla_css",
+      "pageConvention": "html_files_at_root",
+      "style_layers": {
+        "css_variables": [],
+        "tailwind_config": "tailwind.config.ts",
+        "ts_tokens": [],
+        "css_modules_present": false,
+        "component_local_css": [
+          "src/components/blog/blog-prose.css"
+        ],
+        "css_in_js": null,
+        "inline_tailwind_observed": false,
+        "fonts": {
+          "index_html_link": true,
+          "css_import": false,
+          "next_font": false
+        },
+        "summary": "Tailwind tokens in `tailwind.config.ts`"
+      }
+    },
+    "generator": "lps-website-builder",
+    "manifestSchemaVersion": 1,
+    "lpsProjectId": "3eb33219-1e9f-4a00-8e22-b18885625945",
+    "lpsSignature": "2608ff4391b1cae1a2b1506fb6613d59e8413e1e0dc0326d871abbe3e4a5a41c"
+  },
+  "pages": [
+    {
+      "id": "home",
+      "name": "Home",
+      "slug": "",
+      "isHome": true,
+      "filePath": "index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Services Overview",
+        "Why Choose MedTech",
+        "Impact Statistics",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "staff",
+      "name": "Staff",
+      "slug": "staff",
+      "isHome": false,
+      "filePath": "staff/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Team Overview",
+        "Leadership",
+        "Expertise"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "slug": "services",
+      "isHome": false,
+      "filePath": "services/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Laboratory Solutions",
+        "Management Services",
+        "Service Categories"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "slug": "contact",
+      "isHome": false,
+      "filePath": "contact/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Contact Methods",
+        "Contact Form",
+        "Location Information"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions",
+      "name": "Laboratory Solutions",
+      "slug": "services/lab-solutions",
+      "isHome": false,
+      "filePath": "services/lab-solutions/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Core Services",
+        "Impact Metrics",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions/practice_development",
+      "name": "Practice Development",
+      "slug": "services/lab-solutions/practice-development",
+      "isHome": false,
+      "filePath": "services/lab-solutions/practice-development/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Practice Development Services",
+        "Features",
+        "Process Steps",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions/real_time_monitoring",
+      "name": "Real-Time Monitoring",
+      "slug": "services/lab-solutions/real-time-monitoring",
+      "isHome": false,
+      "filePath": "services/lab-solutions/real-time-monitoring/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Monitoring Features",
+        "Benefits",
+        "Technology Overview",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions/gpo_purchasing",
+      "name": "GPO Purchasing",
+      "slug": "services/lab-solutions/gpo-purchasing",
+      "isHome": false,
+      "filePath": "services/lab-solutions/gpo-purchasing/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "GPO Benefits",
+        "Vendor Network",
+        "Savings Overview",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions/staffing_solutions",
+      "name": "Staffing Solutions",
+      "slug": "services/lab-solutions/staffing-solutions",
+      "isHome": false,
+      "filePath": "services/lab-solutions/staffing-solutions/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Staffing Services",
+        "Qualifications",
+        "Placement Process",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "lab_solutions/regulatory_compliance",
+      "name": "Regulatory Compliance",
+      "slug": "services/lab-solutions/regulatory-compliance",
+      "isHome": false,
+      "filePath": "services/lab-solutions/regulatory-compliance/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Compliance Services",
+        "Regulatory Standards",
+        "Audit Support",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services",
+      "name": "Management Services",
+      "slug": "services/management-services",
+      "isHome": false,
+      "filePath": "services/management-services/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Service Categories",
+        "Management Solutions",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services/call_center",
+      "name": "Call Center",
+      "slug": "services/management-services/call-center",
+      "isHome": false,
+      "filePath": "services/management-services/call-center/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Call Center Services",
+        "Features",
+        "Benefits",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services/human_resources",
+      "name": "Human Resources",
+      "slug": "services/management-services/human-resources",
+      "isHome": false,
+      "filePath": "services/management-services/human-resources/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "HR Services",
+        "Recruitment",
+        "Compliance",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services/accounting_finance",
+      "name": "Accounting & Finance",
+      "slug": "services/management-services/accounting-finance",
+      "isHome": false,
+      "filePath": "services/management-services/accounting-finance/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Accounting Services",
+        "Financial Management",
+        "Reporting",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services/marketing",
+      "name": "Marketing",
+      "slug": "services/management-services/marketing",
+      "isHome": false,
+      "filePath": "services/management-services/marketing/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Marketing Services",
+        "Digital Strategy",
+        "Patient Acquisition",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "about",
+      "name": "About",
+      "slug": "about",
+      "isHome": false,
+      "filePath": "about/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Company Overview",
+        "Mission",
+        "History"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "privacy_policy",
+      "name": "Privacy Policy",
+      "slug": "privacy-policy",
+      "isHome": false,
+      "filePath": "privacy-policy/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Privacy Policy Content"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "terms_of_service",
+      "name": "Terms of Service",
+      "slug": "terms-of-service",
+      "isHome": false,
+      "filePath": "terms-of-service/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Terms of Service Content"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "management_services/insurance_risk_management",
+      "name": "Insurance & Risk Management",
+      "slug": "services/management-services/insurance-risk-management",
+      "isHome": false,
+      "filePath": "services/management-services/insurance-risk-management/index.html",
+      "pageId": null,
+      "inNavigation": true,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Insurance Services",
+        "Risk Management",
+        "Coverage Options",
+        "Call to Action"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "coming_soon",
+      "name": "Coming Soon",
+      "slug": "coming-soon",
+      "isHome": false,
+      "filePath": "coming-soon/index.html",
+      "pageId": null,
+      "inNavigation": false,
+      "seo": {
+        "title": "New Website Coming Soon | MedTech For Solutions",
+        "description": "The new MedTech For Solutions website is launching soon. Sign up to be notified at launch.",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "/coming-soon/",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Countdown",
+        "Notify Form",
+        "Feature Preview",
+        "Contact"
+      ],
+      "hasBlogSection": false
+    },
+    {
+      "id": "sitemap",
+      "name": "Sitemap",
+      "slug": "sitemap",
+      "isHome": false,
+      "filePath": "sitemap/index.html",
+      "pageId": null,
+      "inNavigation": false,
+      "seo": {
+        "title": "",
+        "description": "",
+        "keywords": [],
+        "ogImage": "",
+        "canonicalUrl": "",
+        "noindex": false,
+        "structuredDataType": "WebPage",
+        "structuredData": null
+      },
+      "sections": [
+        "Hero",
+        "Page Directory"
+      ],
+      "hasBlogSection": false
+    }
+  ],
+  "navigation": {
+    "header": [
+      "home",
+      "staff",
+      "services",
+      "contact",
+      "lab_solutions",
+      "lab_solutions/practice_development",
+      "lab_solutions/real_time_monitoring",
+      "lab_solutions/gpo_purchasing",
+      "lab_solutions/staffing_solutions",
+      "lab_solutions/regulatory_compliance",
+      "management_services",
+      "management_services/call_center",
+      "management_services/human_resources",
+      "management_services/accounting_finance",
+      "management_services/marketing",
+      "about",
+      "privacy_policy",
+      "terms_of_service",
+      "management_services/insurance_risk_management"
+    ],
+    "footer": [
+      "home",
+      "staff",
+      "services",
+      "contact",
+      "lab_solutions",
+      "lab_solutions/practice_development",
+      "lab_solutions/real_time_monitoring",
+      "lab_solutions/gpo_purchasing",
+      "lab_solutions/staffing_solutions",
+      "lab_solutions/regulatory_compliance",
+      "management_services",
+      "management_services/call_center",
+      "management_services/human_resources",
+      "management_services/accounting_finance",
+      "management_services/marketing",
+      "about",
+      "privacy_policy",
+      "terms_of_service",
+      "management_services/insurance_risk_management"
+    ]
+  },
+  "sections": {}
+}
