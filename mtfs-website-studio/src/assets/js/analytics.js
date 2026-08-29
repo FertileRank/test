@@ -85,8 +85,13 @@
  * ---------------------------------------------------------------------------
  * MEASURED SIZE  (node:zlib, gzip level 9 / brotli quality 11)
  * ---------------------------------------------------------------------------
- *   this file, as authored : 20,479 B raw · 7,109 B gzip · 6,020 B brotli
+ *   this file, as authored : 20,834 B raw (comments are ~43% of it)
  *   comments stripped      :  11,781 B raw · 3,965 B gzip · 3,462 B brotli
+ * Only figures that are exactly stable are quoted here: the raw byte count,
+ * and the comment-stripped form (stripping removes this header, so those three
+ * numbers do not depend on it). The authored file's own gzip/brotli size is
+ * self-referential — these very digits are inside it — so it is reported in the
+ * build summary rather than baked in here.
  *   replaces               : ~7,090 B of inline, un-cacheable per-page JS
  *                            (~148,890 B site-wide across 21 pages) plus the
  *                            render-blocking inline GTM snippet

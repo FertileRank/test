@@ -39,11 +39,19 @@
  *   1.  For each of the 21 pages, collect its own <style> blocks in DOCUMENT ORDER.
  *   2.  `const { critical, deferred } = splitCritical(pageCss, CRITICAL_SELECTORS)`
  *   3.  `const { shared, perPage } = dedupe(allPagesDeferred)`
- *   4.  siteCss = minifyCss(shared + mega-menu deferred + mtfs-images remainder)
- *       (src/assets/css/site.css already carries the hand-authored shared layer; `shared`
- *        is whatever additionally proves identical across pages at build time)
+ *   4.  siteCss = minifyCss(shared) + minifyCss(src/assets/css/site.css)
+ *       site.css already holds the deferred half of mega-menu.css, the non-CLS half of
+ *       mtfs-images.css, the SSR footer/related/breadcrumb rules and the mega-menu
+ *       design-system overrides; `shared` is whatever ADDITIONALLY proves identical across
+ *       the 21 page blocks at build time, and it goes FIRST so site.css's own trailing
+ *       overrides still win.
  *   5.  `hashName('site.css', siteCss)` -> /assets/site.<hash>.css
  *   6.  Inline block per page = fonts @font-face + critical.css + this page's `critical`.
+ *
+ *   Measured end to end on `/`: 3 render-blocking stylesheets (39,890 B raw, 380 ms) plus
+ *   19,670 B of never-cached inline <style> become 26,166 B of inline critical
+ *   (4,545 B brotli), 13,046 B of inline residual (2,832 B brotli) and one 12,266 B
+ *   (2,863 B brotli) immutable sheet shared by all 21 pages — 0 blocking requests.
  *
  * ---------------------------------------------------------------------------------------
  * CASCADE INVARIANTS — the emitted <head> order is load-bearing, do not reorder
@@ -301,7 +309,7 @@ function minifyPrelude(prelude) {
     const ch = src[i];
 
     if (ch === '"' || ch === "'") { const e = skipString(src, i); out += src.slice(i, e); i = e; continue; }
-    if (ch === '[') { const e = skipBrackets(src, i); out += src.slice(i, e).replace(/\s+/g, ' '); i = e; continue; }
+    if (ch === '[') { const e = skipBrackets(src, i); out += src.slice(i, e); i = e; continue; }
     if (ch === '(') {
       // url(...) is copied byte for byte.
       if (/url\s*$/i.test(out)) { const e = skipParens(src, i); out += src.slice(i, e); i = e; continue; }
@@ -375,6 +383,7 @@ function minifyDeclaration(text) {
 
   const prop = src.slice(0, sep).trim().replace(/\s+/g, ' ');
   const rawValue = src.slice(sep + 1);
+  const isCustomProperty = prop.startsWith('--');
 
   let out = '';
   let i = 0;
@@ -387,7 +396,7 @@ function minifyDeclaration(text) {
     if (ch === '[') { const e = skipBrackets(rawValue, i); out += rawValue.slice(i, e); i = e; continue; }
     if (ch === '(') {
       if (/url\s*$/i.test(out)) { const e = skipParens(rawValue, i); out += rawValue.slice(i, e); i = e; continue; }
-      dropTrailingWs();
+      if (!isCustomProperty) dropTrailingWs();
       out += '(';
       i++;
       while (i < rawValue.length && isWs(rawValue[i])) i++;
@@ -418,21 +427,23 @@ function minifyDeclaration(text) {
 function serialize(nodes) {
   const parts = [];
   for (const node of nodes) {
-    if (node.type === 'comment') { parts.push(node.text); continue; }
-    if (node.type === 'at') { parts.push(minifyPrelude(node.prelude) + ';'); continue; }
-    if (node.type === 'decl') { parts.push(minifyDeclaration(node.text) + ';'); continue; }
+    if (node.type === 'comment') { parts.push({ text: node.text, decl: false }); continue; }
+    if (node.type === 'at') { parts.push({ text: minifyPrelude(node.prelude) + ';', decl: false }); continue; }
+    if (node.type === 'decl') { parts.push({ text: minifyDeclaration(node.text) + ';', decl: true }); continue; }
     if (node.type === 'rule') {
       const body = serialize(node.nodes);
-      parts.push(minifyPrelude(node.prelude) + '{' + body + '}');
+      parts.push({ text: minifyPrelude(node.prelude) + '{' + body + '}', decl: false });
       continue;
     }
   }
-  // Drop the `;` that immediately precedes a `}` — the only structural trim we do.
+  // Drop the `;` that closes the LAST declaration of a block — the only structural trim we
+  // do. It is restricted to declarations: stripping the `;` off a trailing `@import url(x);`
+  // would leave an unterminated at-rule.
   let out = '';
   for (let k = 0; k < parts.length; k++) {
     const part = parts[k];
-    const isLastDecl = part.endsWith(';') && (k === parts.length - 1);
-    out += isLastDecl ? part.slice(0, -1) : part;
+    const last = k === parts.length - 1;
+    out += (last && part.decl) ? part.text.slice(0, -1) : part.text;
   }
   return out;
 }
@@ -594,7 +605,7 @@ const DEFAULT_CRITICAL_SELECTORS = [
   // search overlay body stay in the lazy sheet where the measured 15,335 B of "unused" CSS is
   '=.mm-panel', '=.mm-mobile-scrim', '=.mm-back-to-top', '=.mm-search-overlay',
   // hero variants (all of them — one shared critical block serves all 21 pages)
-  '.hero*', '.page-hero*', '.mtfs-hero*', '.sm-hero*', '.crumb', '.breadcrumb',
+  '.hero*', '.page-hero*', '.mtfs-hero*', '.mtfs-about-hero', '.sm-hero*', '.crumb', '.breadcrumb',
   '.badge', '.bp', '.bs2',
   // CLS-critical image boxes
   '.mtfs-media*',

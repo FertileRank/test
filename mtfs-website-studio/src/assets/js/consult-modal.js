@@ -56,8 +56,13 @@
  * ---------------------------------------------------------------------------
  * MEASURED SIZE  (node:zlib, gzip level 9 / brotli quality 11)
  * ---------------------------------------------------------------------------
- *   this file, as authored : 8,079 B raw · 3,088 B gzip · 2,531 B brotli
- *   comments stripped      : 2,483 B raw · 969 B gzip · 788 B brotli
+ *   this file, as authored : 8,675 B raw (comments are ~71% of it)
+ *   comments stripped      : 2,481 B raw · 966 B gzip · 787 B brotli
+ * Only figures that are exactly stable are quoted here: the raw byte count,
+ * and the comment-stripped form (stripping removes this header, so those three
+ * numbers do not depend on it). The authored file's own gzip/brotli size is
+ * self-referential — these very digits are inside it — so it is reported in the
+ * build summary rather than baked in here.
  *   defers                 : book-consultation-modal.min.js, 58,472 B raw
  *                            (29,964 B brotli; 25,875 B / 6,637 B brotli once
  *                            the 32,626 B base64 PNG of JSCSS-01 is removed)
@@ -94,12 +99,16 @@
   /**
    * Inject the bundle exactly once. `cb` runs when it is ready (or, with a
    * truthy argument, when it could not be loaded).
+   *
+   * At most ONE intent is ever pending: if the visitor clicks twice while the
+   * bundle is still in flight, the later click replaces the earlier one rather
+   * than queuing beside it, so the wizard is opened once, not once per click.
    */
   function load(cb) {
     if (cb) {
       if (state === 2) { cb(); return; }
       if (state === 3) { cb(true); return; }
-      queue.push(cb);
+      queue = [cb];
     }
     if (state) return;
     state = 1;

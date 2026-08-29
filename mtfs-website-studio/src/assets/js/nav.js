@@ -40,51 +40,51 @@
  *
  * JSCSS-10 — <button class="mm-search-close" aria-label="Close search">ESC</button>
  *   failed the label-content-name-mismatch shape (visible text not contained in
- *   the accessible name). The overlay this file injects wraps it as
- *   <button aria-label="Close search"><span aria-hidden="true">ESC</span></button>.
- *   Results use a correct combobox/listbox pairing (input role="combobox" +
- *   aria-activedescendant, options with aria-selected) rather than the shipped
- *   role="option" + stray attributes.
+ *   the accessible name). That markup, and the corrected combobox/listbox
+ *   pairing that replaces the shipped role="option" misuse, now live in
+ *   search.js, which builds the overlay on first intent. This file only detects
+ *   the intent (#mm-search-open click, Cmd/Ctrl-K) and injects that script.
  *
  * ---------------------------------------------------------------------------
  * ACCESSIBILITY NOTE ON "FOCUS TRAPPING"
  * ---------------------------------------------------------------------------
  * The mega panels are DISCLOSURES, not modals: trapping Tab inside one would
  * strand keyboard users, so they use focusout-to-close (the SA-10 fix) plus the
- * stylesheet's :focus-within fallback. A real Tab trap is applied only to the
- * search overlay, which is genuinely role="dialog" aria-modal="true".
- * Closed panels leave the accessibility tree through the stylesheet's
- * visibility:hidden — never opacity/pointer-events alone (SA-08).
+ * stylesheet's :focus-within fallback. A real Tab trap belongs only to the
+ * search overlay, which is genuinely role="dialog" aria-modal="true", and it
+ * ships with that overlay in search.js. Closed panels leave the accessibility
+ * tree through the stylesheet's visibility:hidden — never opacity or
+ * pointer-events alone (SA-08).
  *
  * ---------------------------------------------------------------------------
- * SEARCH INDEX CONTRACT  (/search-index.json, build artifact, never hand-written)
+ * SEARCH HANDOFF
  * ---------------------------------------------------------------------------
- *   {
- *     "suggestions": [ { "label": "IVF lab monitoring",
- *                        "query": "real-time monitoring OvaTools" } ],
- *     "synonyms":    { "monitoring": ["monitor","track","ovatools"] },
- *     "docs":        [ { "href":     "/services/lab-solutions/gpo-purchasing/",
- *                        "title":    "GPO Purchasing",
- *                        "section":  "Lab Solutions",
- *                        "snippet":  "1,800+ vendor contracts…",
- *                        "keywords": ["gpo","purchasing"],
- *                        "iconPath": "M3 3h2l.4 2…"   // optional SVG path data
- *                      } ]
- *   }
- * A bare array of docs is also accepted. Ranking weights are ported verbatim
- * from the shipped engine (title 10, section 6, keyword 5, snippet 3, title
- * prefix +4, keyword substring +2) so result order does not change.
+ * On the first search intent this file injects search.js once and sets
+ * window.__mtfsSearchAutoOpen, so the overlay opens the moment that script
+ * evaluates and the triggering click or keystroke is never swallowed. It also
+ * publishes window.__mtfsSearchIndexUrl, so the hashed /search-index.json
+ * filename is stamped by sync.mjs in exactly one place — nav.js's own script
+ * tag. search.js then owns the overlay markup, the ranking engine and the
+ * corpus fetch, and exposes window.MtfsSearch { open, close, isOpen }, which
+ * this file's Escape handler consults. No search data of any kind lives here.
  *
  * ---------------------------------------------------------------------------
  * MEASURED SIZE  (node:zlib, gzip level 9 / brotli quality 11)
  * ---------------------------------------------------------------------------
- *   this file, as authored : 16,067 B raw · 5,622 B gzip · 4,692 B brotli
+ *   this file, as authored : 16,224 B raw (comments are ~57% of it)
  *   comments stripped      : 6,995 B raw · 2,018 B gzip · 1,727 B brotli
  *   replaces               : mega-menu.min.js, 29,331 B raw · 8,635 B brotli
- * Budget note: the payload audit budgets nav.js at <= 3,000 B minified /
- * <= 1,300 B brotli and search.js at <= 5,000 B raw / <= 1,800 B brotli as two
- * separate artifacts. This build ships them as ONE file, so the applicable
- * ceiling is the sum, 3,100 B brotli — see the delivery notes.
+ * Only figures that are exactly stable are quoted here: the raw byte count,
+ * and the comment-stripped form (stripping removes this header, so those three
+ * numbers do not depend on it). The authored file's own gzip/brotli size is
+ * self-referential — these very digits are inside it — so it is reported in the
+ * build summary rather than baked in here.
+ * Budget: the payload audit caps nav.js at <= 3,000 B minified / <= 1,300 B
+ * brotli and warns that overshooting means data or markup has leaked back in.
+ * The 'comments stripped' row above is an UPPER BOUND — it has had no
+ * identifier mangling and no whitespace collapse — and it contains no data,
+ * no markup and no SVG. The build's own minifier produces the artifact the
+ * budget is measured against.
  */
 (function () {
   'use strict';
