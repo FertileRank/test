@@ -82,6 +82,42 @@ production-like run reports 0.5 s total.)*
 | `label-content-name-mismatch` | fail | **pass** |
 | `color-contrast` (service pages) | fail | **pass** |
 
+## Semantic markup and accessibility
+
+Counted across all 21 pages of the export and all 21 pages of `dist/`.
+
+| Check | Before | After |
+|---|---:|---:|
+| Pages with no `<header>` | 21 | **0** |
+| Pages with no `<nav>` | 20 | **0** |
+| Pages with no `<main>` | 18 | **0** |
+| Pages with no skip link | 18 | **0** |
+| Pages where the skip link precedes the header | 3 | **21** |
+| `"Learn More"` links | 26 | **0** |
+| Footers opening at `<h4>` | 21 | **0** |
+| `<div class="breadcrumb">` with literal `/` text nodes | 14 | **0** |
+| GTM `<noscript>` iframe with no `title` | 21 | **0** |
+| Redundant implicit `role` attributes | 28 | **0** |
+| **Unlabelled `<section>` elements** | **111** | **111** |
+
+The skip-link row is the one worth dwelling on. Three pages had a skip link
+and it was useless on all three: `mega-menu.js` inserted the header with
+`insertAdjacentHTML('afterbegin', …)`, placing it *before* the skip link in the
+DOM, so the first ten tab stops were the logo, four nav items, the phone link,
+the search button, the CTA and the hamburger — and only then "Skip to main
+content", which by that point skipped nothing. Lighthouse reported `skip-link` as
+`notApplicable`, so it never showed up as a failure. Server-rendering the chrome
+puts the skip link first on all 21 pages.
+
+**Not fixed: 111 unlabelled `<section>` elements.** A `<section>` with no
+accessible name is not exposed as a `region` landmark, so it buys nothing over a
+`<div>`. This is body content, and the pipeline deliberately does not rewrite
+body copy or structure beyond the specific audit fixes, so it is left alone.
+It is not a Lighthouse failure — accessibility scores 100 — but it is an
+unrealised opportunity, worst on `/terms-of-service/` (22) and
+`/privacy-policy/` (17). Labelling them from each section's own heading would be
+a safe mechanical pass; it is deliberately out of scope here.
+
 ## Structured data and internal consistency
 
 Lighthouse does not score any of this, so none of it appears in the tables above
