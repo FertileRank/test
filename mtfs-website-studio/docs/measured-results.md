@@ -82,6 +82,37 @@ production-like run reports 0.5 s total.)*
 | `label-content-name-mismatch` | fail | **pass** |
 | `color-contrast` (service pages) | fail | **pass** |
 
+## Structured data and internal consistency
+
+Lighthouse does not score any of this, so none of it appears in the tables above
+— but it is what the Global Sync architecture exists to guarantee. Measured by
+parsing every `application/ld+json` block in all 21 pages on both sides.
+
+| | Before | After |
+|---|---:|---:|
+| Pages with no JSON-LD at all | 1 (`/404/`) | **0** |
+| Pages **defining** the `#organization` `@id` | 3 | **21** |
+| Pages **referencing** it | 18 | 21 |
+| **Dangling references** — reference it, never define it | **15** | **0** |
+| Distinct `@type` shapes on that one `@id` | 2 (`Organization+ProfessionalService`, `Organization+LocalBusiness`) | **1** |
+| Pages carrying a `WebSite` node | 0 | **21** |
+| Pages carrying a `WebPage` node | 11 | **20** |
+| `BreadcrumbList` trails at the correct depth | 8 of 20 | **19 of 19** |
+
+The breadcrumb row is the clearest illustration. Every service detail page
+shipped a trail that skipped its own parent — `Home › Laboratory Solutions › GPO
+Purchasing`, with no `/services/` tier. All twelve now walk the parent pointer:
+`Home › Services › Lab Solutions › GPO Purchasing`.
+
+The home page deliberately has **no** `BreadcrumbList` after the rebuild. The
+export shipped a one-item stub there, which the SEO audit flagged as incorrect —
+a breadcrumb listing only the current page carries no information. `/404/` is
+likewise excluded.
+
+`sitemap.xml` and `llms.txt` now list the same 20 URLs and both exclude `/404/`.
+They agreed before too, but by luck, from three independent generators; they now
+agree by construction, from one array.
+
 ## What a visitor actually downloads on first load
 
 Measured on `/`, first-party only.
