@@ -594,27 +594,72 @@ function applyHeadTags(html, headHtml) {
  */
 function stampAssets(html, assets) {
   const notes = [];
+  if (!assets.navJsHref) return { html, notes };
+
   const wanted = [
     ['data-search-src', assets.searchJsHref],
     ['data-search-index', assets.searchIndexHref],
     ['data-modal-src', assets.modalJsHref],
   ].filter(([, v]) => Boolean(v));
-  if (!wanted.length || !assets.navJsHref) return { html, notes };
 
   let stamped = 0;
-  const result = html.replace(new RegExp('<script\\b(' + ATTRS + ')>', 'gi'), (tag, attrs) => {
-    if ((attrOf(attrs, 'src') || '') !== assets.navJsHref) return tag;
+  let navTagEnd = -1;
+  const re = new RegExp('<script\\b(' + ATTRS + ')>', 'gi');
+  let result = '';
+  let last = 0;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    if ((attrOf(m[1], 'src') || '') !== assets.navJsHref) continue;
     let add = '';
     for (const [name, value] of wanted) {
-      if (attrOf(attrs, name) === null) add += ` ${name}="${escAttr(value)}"`;
+      if (attrOf(m[1], name) === null) add += ` ${name}="${escAttr(value)}"`;
     }
-    if (!add) return tag;
-    stamped++;
-    return '<script' + attrs + add + '>';
-  });
+    if (add) stamped++;
+    result += html.slice(last, m.index) + '<script' + m[1] + add + '>';
+    last = m.index + m[0].length;
+    navTagEnd = result.length;
+  }
+  result += html.slice(last);
 
   if (stamped) notes.push(`stamped ${wanted.map(([n]) => n).join(', ')} onto the nav <script>`);
-  else notes.push(`WARNING: no <script src="${assets.navJsHref}"> to stamp asset URLs onto`);
+  else if (navTagEnd === -1) notes.push(`WARNING: no <script src="${assets.navJsHref}"> to stamp asset URLs onto`);
+
+  /* ------------------------------------------------------------------
+   * The consultation-modal INTENT LOADER.
+   *
+   * src/assets/js/consult-modal.js is a ~9 KB loader that watches for the
+   * three selectors the shipped code binds ('[data-open-consult], .mm-cta,
+   * .open-consult-modal'), the #consult hash, and an idle warm-up, then fetches
+   * the real wizard from its own `data-modal-src`. Nothing else in the pipeline
+   * emits a tag for it: html.mjs's lazy-modal stamps data-modal-src onto the
+   * NAV script, and nav.js does not read that attribute. Without the tag below
+   * the loader is dead weight and every "Book a Consultation" CTA does nothing.
+   *
+   * It is emitted here, next to the nav script, with `defer` and its own
+   * data-modal-src — and only when the document does not already carry it, so
+   * if a pass starts emitting the tag this step becomes a no-op instead of a
+   * duplicate.
+   * ------------------------------------------------------------------ */
+  if (assets.consultLoaderHref && result.indexOf(assets.consultLoaderHref) === -1) {
+    const tag =
+      '<script src="' + escAttr(assets.consultLoaderHref) + '" defer' +
+      (assets.modalJsHref ? ' data-modal-src="' + escAttr(assets.modalJsHref) + '"' : '') +
+      '></script>';
+    // Place it after the nav <script> element when there is one, else at the
+    // end of <body>, so it never blocks the parser.
+    let at = -1;
+    if (navTagEnd !== -1) {
+      const close = result.toLowerCase().indexOf('</script>', navTagEnd);
+      if (close !== -1) at = close + '</script>'.length;
+    }
+    if (at === -1) {
+      const bodyClose = result.toLowerCase().lastIndexOf('</body>');
+      at = bodyClose === -1 ? result.length : bodyClose;
+    }
+    result = result.slice(0, at) + tag + result.slice(at);
+    notes.push('emitted the consultation-modal intent loader ' + assets.consultLoaderHref);
+  }
+
   return { html: result, notes };
 }
 
@@ -806,11 +851,18 @@ async function main() {
     }
   }
   if (!src || !(await isDir(src))) {
-    errorAt('src', `source directory not found${opts.src ? `: ${opts.src}` : ` (looked in ${SRC_CANDIDATES.join(', ')})`}. Pass --src DIR.`);
+    errorAt(
+      'src',
+      `source directory not found${opts.src ? `: ${opts.src}` : ` (looked in ${SRC_CANDIDATES.join(', ')})`}. ` +
+        'Pass --src DIR pointing at the Website Studio export (the directory containing index.html and about/index.html).'
+    );
+    src = null; // nothing downstream can run without the 21 source pages
   }
 
+  if (!src) return finish(opts, 1);
+
   heading(opts.check ? 'MTFS WEBSITE STUDIO — CHECK' : 'MTFS WEBSITE STUDIO — BUILD');
-  say(`  src    ${src || '(unresolved)'}`);
+  say(`  src    ${src}`);
   say(`  out    ${opts.check ? '(nothing is written in --check mode)' : opts.out}`);
   say(`  node   ${process.version}`);
   say(`  routes ${routes.length}`);
@@ -838,8 +890,6 @@ async function main() {
     say('  link check that follows. Refusing to build on a broken manifest.');
     return finish(opts, 1);
   }
-  if (!src) return finish(opts, 1);
-
   const graph = R.buildGraph(routes);
 
   /* ---- 9.4 STEP 2: read every source page ------------------------------ */
@@ -1177,8 +1227,23 @@ async function main() {
   /* ---- 9.10 STEP 8: write dist ----------------------------------------- */
   if (!opts.check) {
     heading('7. WRITE');
-    await rm(opts.out, { recursive: true, force: true });
-    await mkdir(opts.out, { recursive: true });
+
+    // The write step starts by deleting --out, so refuse the handful of targets
+    // where a typo would be unrecoverable: the filesystem root, the repo root
+    // itself, and any ancestor of the repo.
+    const target = path.resolve(opts.out);
+    const unsafe =
+      target === path.parse(target).root ||
+      target === ROOT ||
+      ROOT.startsWith(target + path.sep) ||
+      target === path.resolve(src);
+    if (unsafe) {
+      errorAt('out', `refusing to erase ${target} — --out must be a dedicated build directory, not the repo root, an ancestor of it, or the source export`);
+      return finish(opts, 1);
+    }
+
+    await rm(target, { recursive: true, force: true });
+    await mkdir(target, { recursive: true });
 
     let written = 0;
     let bytes = 0;
@@ -1319,8 +1384,9 @@ async function main() {
     }
   }
   // Fetched at runtime through data-* attributes rather than href/src, so
-  // extractLinks cannot see them. consult-modal.js is DELIBERATELY not seeded:
-  // nothing references it, and that is a finding, not noise.
+  // extractLinks cannot see them. consult-modal.js is NOT seeded: stamp-assets
+  // emits a real <script src> for it, so if it ever shows up as unreferenced
+  // that step has stopped working and the report should say so.
   for (const key of ['searchJsHref', 'searchIndexHref', 'modalJsHref']) {
     if (assets[key]) referenced.add(assets[key]);
   }
