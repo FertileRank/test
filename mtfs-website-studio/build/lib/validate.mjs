@@ -414,8 +414,32 @@ export function validateManifest(routes, opts = {}) {
         err(`${where}: from '${from}' must be a root-relative path`);
       } else {
         const key = pathOf(from);
-        if (froms.has(key)) err(`${where}: duplicate redirect source '${from}' (also redirects[${froms.get(key)}])`);
-        else froms.set(key, i);
+        // '/gpo' and '/gpo/' normalise to the same source. Whether that is a
+        // problem depends entirely on where they point.
+        //
+        // Same target  -> redundant, not wrong. The export's _redirects lists
+        //   both spellings for all 11 legacy paths and its own header says
+        //   "Source paths match with or without trailing slash", so one line
+        //   would do — but the explicit pair is harmless and portable to hosts
+        //   that do NOT match both. Warn so it is visible; never fail on it.
+        // Different target -> genuinely ambiguous: which one wins is a property
+        //   of the host's matching order, not of this manifest. That is an error.
+        if (froms.has(key)) {
+          const prev = redirects[froms.get(key)];
+          const sameTarget = prev && prev.to === to && prev.status === status;
+          const msg =
+            `${where}: duplicate redirect source '${from}' (also redirects[${froms.get(key)}])`;
+          if (sameTarget) {
+            warn(`${msg} — same target, so redundant but harmless`);
+          } else {
+            err(
+              `${msg} — and they disagree: '${prev && prev.to}' (${prev && prev.status}) ` +
+                `vs '${to}' (${status}). Which one wins is up to the host, not this manifest.`
+            );
+          }
+        } else {
+          froms.set(key, i);
+        }
         if (byPath.has(key)) err(`${where}: from '${from}' shadows the real route '${key}'`);
       }
 
