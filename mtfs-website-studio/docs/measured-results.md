@@ -78,9 +78,28 @@ production-like run reports 0.5 s total.)*
 | `link-text` (SEO) | fail | **pass** |
 | `heading-order` | fail | **pass** |
 | `aria-allowed-attr` | fail | **pass** |
-| `aria-progressbar-name` | fail | **pass** |
-| `label-content-name-mismatch` | fail | **pass** |
-| `color-contrast` (service pages) | fail | **pass** |
+| `label-content-name-mismatch` | fail | *notApplicable* — see below |
+| `aria-progressbar-name` | fail | *notApplicable* — see below |
+| `color-contrast` | fail on service pages (passed on `/`) | measured per page |
+
+**`notApplicable` is not the same as `pass`, and this table should not pretend
+otherwise.** Both of those audits now return `notApplicable` because no element
+matching them remains in the served page — the consultation wizard that carried
+the unnamed `role="progressbar"` and the mismatched button label is lazy-loaded,
+so Lighthouse never sees it. That is the intended outcome, and the underlying
+defects *are* fixed in `src/assets/js/book-consultation-modal.js`
+(`aria-pressed` → `aria-selected` on the six `role="option"` buttons,
+`aria-label="Consultation form progress"` on the track). But the audits resume
+the moment the wizard is on the page, so the fix is verified by reading the
+module, not by this score.
+
+Worth stating for the same reason: lazy-loading alone would **not** have cleared
+them. The home page instantiates the same wizard eagerly in `#hero-form-card`, so
+the fixes inside the modal source are what do the work.
+
+`color-contrast` failed on the service-page template and already passed on `/`,
+so the single-page table above cannot represent it; it is measured per template
+in the sweep below.
 
 ## Semantic markup and accessibility
 
