@@ -1,0 +1,34 @@
+# ==============================================================================
+# Robots.txt for medtech4solutions.com
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Allow: /_next/static/
+Allow: /_next/image/
+
+# AI Search & LLM Discovery Crawlers (Explicit Allow)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://medtech4solutions.com/sitemap.xml
+
+# LLM Discovery File
+# https://medtech4solutions.com/llms.txt

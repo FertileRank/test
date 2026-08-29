@@ -1,0 +1,264 @@
+<!-- ==========================================================================
+     10-head-critical.html
+     MedTech For Solutions — Search Atlas Website Studio paste block
+
+     WHERE      Global head embed — the region the export wraps in the marker
+                comments  ws:header-embeddings start / end  — FIRST block.
+     ORDER      charset -> viewport -> THIS FILE -> 20-head-schema.html
+     REPLACES   the three render-blocking <link rel=stylesheet> tags and both
+                <link rel=preload as=image> tags in the current project.
+
+     BEFORE PASTING, delete from the project (full list in 00-README.md §4):
+       <link rel="stylesheet" href="/assets/css/fonts.css?v=20260723">
+       <link rel="stylesheet" href="/assets/mega-menu.css?v=20260722">
+       <link rel="stylesheet" href="/assets/mtfs-images.css?v=20260722">
+       both <link rel="preload" as="image" fetchpriority="high"> tags
+       the three <meta http-equiv> cache tags
+       the inline GTM <script> that currently sits ahead of <meta charset>
+
+     WHY THIS SHAPE (measured, Lighthouse 12.8.2 mobile, on the exact export):
+       Three blocking stylesheets cost an estimated 380 ms:
+         /assets/mega-menu.css     30,074 B   602 ms
+         /assets/mtfs-images.css    3,128 B   302 ms
+         /assets/css/fonts.css      6,688 B   152 ms
+       51% of mega-menu.css (15,335 B of 30,074 B) is unused at load on the home
+       page — but it is unused AT LOAD and needed ON INTERACTION, so it is split,
+       not deleted.
+     ========================================================================== -->
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     1. CHARSET AND VIEWPORT
+
+     Include these two lines ONLY if the Studio head does not already emit them.
+     Duplicates are not fatal (the first declaration wins) but the encoding
+     declaration must appear within the document's first 1024 bytes, and in the
+     current project it does not: a 381-byte inline GTM <script> sits ahead of
+     it. Deleting that script is what fixes the ordering — this block cannot,
+     because a Studio head embed is injected near the END of <head>.
+
+     One viewport spelling site-wide. The export ships three.
+     ────────────────────────────────────────────────────────────────────────── -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     2. ASSET CDN — CONNECTION WARM-UP
+
+     Every font face and every image is served from media.cdn.builder.searchatlas.com.
+     preconnect opens the TCP + TLS connection now; dns-prefetch is the fallback
+     for browsers that ignore preconnect. crossorigin is REQUIRED on the
+     preconnect, because fonts are fetched in CORS mode — without it the browser
+     opens a second, uncredentialed connection and the warm-up is wasted.
+
+     ACCEPTED RISK, documented: _headers governs this origin only. The four woff2
+     faces and every CDN image sit outside our cache policy entirely. Self-hosting
+     the fonts under /assets/fonts/ would bring them under the existing
+     /assets/* immutable rule — that is a follow-up, not part of this work,
+     because it changes asset URLs.
+     ────────────────────────────────────────────────────────────────────────── -->
+<link rel="preconnect" href="https://media.cdn.builder.searchatlas.com" crossorigin>
+<link rel="dns-prefetch" href="https://media.cdn.builder.searchatlas.com">
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     3. FONT PRELOADS — EXACTLY TWO, AND ONLY THESE TWO
+
+     fonts.css declares 14 @font-face blocks resolving to 4 unique woff2 files.
+     The Lighthouse run's network-requests log proves the browser fetched exactly
+     TWO of them: the `latin` subsets of Sora and DM Sans. Neither `latin-ext`
+     file was requested — the only codepoint on the home page outside the latin
+     range is U+2192 "→", which is in NEITHER range and silently falls back to a
+     system font. NEVER preload the two latin-ext files.
+
+       811e1196…woff2  Sora latin      fetchpriority=high — it paints the LCP
+                                       element, which Lighthouse identifies as
+                                       section.hero > div.hero-inner >
+                                       div.hero-copy > h1#h1: a TEXT node, not
+                                       an image.
+       ca72d2bc…woff2  DM Sans latin   body copy, above the fold.
+
+     crossorigin is mandatory on a font preload even for a same-origin font. A
+     preload without it is fetched in a different mode from the CSS-triggered
+     request, so the file is downloaded TWICE and the preload achieves nothing.
+
+     ONE high-priority preload per page. The export ships two image preloads on
+     the home page, neither of which is the LCP element. If a page's own
+     above-the-fold content is genuinely an image, preload that image here
+     INSTEAD of raising Sora to high — never both. (Caveat from the audit: the
+     measured run had the image CDN unreachable, which can change which element
+     wins LCP. Decide from the page's real above-the-fold content.)
+     ────────────────────────────────────────────────────────────────────────── -->
+<link rel="preload" as="font" type="font/woff2" fetchpriority="high" crossorigin
+      href="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/811e11966d29f3a01fcb19b087b61ac0.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/ca72d2bcea8f4daa783dbdfa2d9b4606.woff2">
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     4. INLINE CRITICAL CSS  —  INJECTION POINT
+
+     >> REPLACE THE MARKED LINE BELOW WITH THE MINIFIED CONTENTS OF:
+     >>     src/assets/css/critical.css      (the shared above-the-fold layer)
+     >> PRECEDED BY the 14 @font-face blocks from
+     >>     <export>/assets/css/fonts.css
+     >> AND FOLLOWED BY this page's own hero rules.
+     >>
+     >> The build does this automatically: build/lib/html.mjs's
+     >> `inline-critical-css` pass concatenates fonts + critical.css +
+     >> css.mjs::splitCritical(pageCss) and emits the result as
+     >> <style id="mtfs-critical">. On the home page that block is 36,731 B raw.
+     >> To regenerate it by hand:
+     >>     node build/sync.mjs --out dist
+     >> then copy the contents of <style id="mtfs-critical"> out of
+     >>     dist/index.html
+     >> (or dist/<route>/index.html for any other page — the hero slice differs).
+
+     THIS BLOCK MUST NOT BE DEFERRED. Not with media=print, not with
+     rel=preload, not by moving it into the async sheet. Every hidden state in
+     the header exists ONLY in CSS:
+
+         .mm-panel          { position:fixed; opacity:0; visibility:hidden; … }
+         .mm-mobile-scrim   { display:none }
+         .mm-back-to-top    { opacity:0; visibility:hidden }
+         .mm-search-overlay { hidden by default }
+
+     and below 1180px the nav becomes a fixed off-canvas drawer. Now that the
+     header is server-rendered instead of injected by JavaScript, deferring these
+     rules paints all three mega panels EXPANDED IN FLOW — 144 elements, 12
+     service links with icons and blurbs — plus the back-to-top button, plus the
+     whole mobile nav stack, before snapping them away. That is a
+     multi-thousand-pixel first-paint jump.
+
+     The block must also carry, from critical.css:
+         :root { --mm-header-h: 80px }   with a 76px override at max-width:1180px
+         html  { scroll-padding-top: var(--mm-header-h) }
+     Do NOT add `body { padding-top: … }`. The header is position:fixed and
+     .hero's existing 120px top padding already clears it; body padding would
+     double the offset and shift every page.
+
+     Keep all 14 @font-face blocks. Do not collapse them into 4 with a
+     `font-weight: 400 700` range: the same physical woff2 file backs four
+     weights, and a range on a static (non-variable) file makes the browser
+     synthesise bold.
+     ────────────────────────────────────────────────────────────────────────── -->
+<style id="mtfs-critical">/* >>> INJECT: fonts.css @font-face blocks + critical.css + this page's hero rules <<< */</style>
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     5. SITE STYLESHEET — LOADED WITHOUT BLOCKING RENDER
+
+     Everything that is not needed for first paint: the mega-panel contents,
+     .mm-panel.mm-open / .mm-back-to-top.mm-visible open states, the mobile
+     drawer's open state, the below-fold .mtfs-* image grids, the site-wide
+     design-system layer, and the two <style> blocks the export duplicated
+     byte-for-byte across 20 pages each (#mtfs-context-links 319 B and
+     #mtfs-visible-related-links 1,850 B — 43,351 B site-wide of never-cached
+     inline CSS, now one file cached for a year).
+
+     >> UPDATE THE HASH after every publish. Current: site.2e0bf98e.css
+
+     WHY `onload` IS THE ONE ACCEPTABLE INLINE HANDLER HERE
+     -----------------------------------------------------
+     This project bans inline on* attributes, and strips 812 of them from 406
+     elements. Those were onmouseover/onmouseout/onfocus/onblur doing colour
+     swaps — work CSS :hover and :focus-visible do for free, for keyboard users
+     too. This `onload` is different in kind:
+
+       * There is no CSS or markup mechanism for "a preloaded stylesheet becomes
+         an applied stylesheet". `rel=preload` fetches at high priority without
+         applying; something has to flip `rel` once the bytes have arrived.
+       * It fires exactly once, at load, and performs no styling and no event
+         handling. `this.onload=null` makes the one-shot explicit, guarding
+         against the double-fire some browsers produce when `rel` is reassigned.
+       * The alternative — a separate inline <script> — is strictly worse in a
+         Studio paste block, because the Studio can reorder or relocate script
+         blocks and the script would then run before the <link> exists.
+
+     UNDER A STRICT CSP: `onload` needs script-src 'unsafe-inline' (nonces and
+     hashes do not cover attribute handlers). If you add a strict CSP, switch to
+     the media=print variant commented out below — that is what build/sync.mjs
+     emits, and it needs no inline handler at all.
+
+     The <noscript> copy is not optional. Without it a visitor with JavaScript
+     disabled gets the inline critical CSS and nothing else: a readable page,
+     but every open-state and below-fold rule missing.
+     ────────────────────────────────────────────────────────────────────────── -->
+<link rel="preload" as="style" href="/assets/site.2e0bf98e.css"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/site.2e0bf98e.css"></noscript>
+
+<!-- CSP-safe alternative — use INSTEAD OF the two lines above, not as well as.
+     media="print" makes the sheet non-render-blocking; the tiny script promotes
+     it to media="all" on load. No inline event-handler attribute is involved.
+     This is what build/lib/html.mjs emits.
+
+<link rel="stylesheet" href="/assets/site.2e0bf98e.css" media="print" data-mtfs-async>
+<noscript><link rel="stylesheet" href="/assets/site.2e0bf98e.css"></noscript>
+<script>(function(){var l=document.querySelector('link[data-mtfs-async]');if(!l)return;var f=function(){l.media='all';l.removeAttribute('data-mtfs-async')};if(l.sheet)f();else l.addEventListener('load',f,{once:true})})();</script>
+-->
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     6. ICONS AND SITEMAP DISCOVERY
+     Unchanged from the export — these URLs are correct and already published.
+     ────────────────────────────────────────────────────────────────────────── -->
+<link rel="icon" sizes="48x48"
+      href="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/42dc87f6291bceadc4eba9d04d7e8ad8.ico">
+<link rel="icon" type="image/png" sizes="512x512"
+      href="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/b0c47f8ab9d4c50ba0957bd9aa32b8d9.png">
+<link rel="apple-touch-icon"
+      href="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/f7f9ecf841e6ccf0ed5c4ff7d0041202.png">
+<link rel="sitemap" type="application/xml" href="https://medtech4solutions.com/sitemap.xml">
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     7. PER-PAGE HEAD TAGS
+
+     These five are page-specific and belong in the PER-PAGE head field, not
+     here. Shown with the home page's real values as a worked example.
+
+     robots: exactly one uniform value on all 20 indexable routes —
+       "index, follow, max-image-preview:large, max-snippet:-1"
+     and "noindex, follow" on /404/ only. The export has four different states
+     and 11 pages with no robots meta at all.
+
+     hreflang: one policy, applied to all 20 indexable pages — a self-referencing
+     en + x-default pair. A lone x-default with no language alternate, which is
+     what 12 pages ship today, is a no-op.
+
+     og:image / twitter:image are absent from ALL 21 pages today, while 12 pages
+     declare twitter:card=summary_large_image with no image to fill it. Never
+     emit summary_large_image without an image.
+
+<link rel="canonical" href="https://medtech4solutions.com/">
+<link rel="alternate" hreflang="en" href="https://medtech4solutions.com/">
+<link rel="alternate" hreflang="x-default" href="https://medtech4solutions.com/">
+<meta name="description" content="IVF laboratory management and ART practice solutions: monitoring, compliance, staffing, GPO purchasing, and practice management. Book a consultation.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IVF Lab Management &amp; ART Practice Solutions | MedTech">
+<meta property="og:description" content="IVF laboratory management and ART practice solutions: monitoring, compliance, staffing, GPO purchasing, and practice management. Book a consultation.">
+<meta property="og:site_name" content="MedTech For Solutions">
+<meta property="og:url" content="https://medtech4solutions.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/e1146f7d6594fbe56c52c12aabd092e4.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="686">
+<meta property="og:image:alt" content="Modern IVF laboratory with incubators and cryostorage equipment">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IVF Lab Management &amp; ART Practice Solutions | MedTech">
+<meta name="twitter:description" content="IVF laboratory management and ART practice solutions: monitoring, compliance, staffing, GPO purchasing, and practice management. Book a consultation.">
+<meta name="twitter:image" content="https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/e1146f7d6594fbe56c52c12aabd092e4.jpg">
+<meta name="twitter:image:alt" content="Modern IVF laboratory with incubators and cryostorage equipment">
+
+     geo.* belongs on /contact/ ONLY — the one page with an address, coordinates
+     and opening hours. The export puts it on /, /our-team/ and /sitemap/ and not
+     on /contact/.
+
+<meta name="geo.region" content="US-NY">
+<meta name="geo.placename" content="White Plains">
+     ────────────────────────────────────────────────────────────────────────── -->
+
+<!-- ============================ end 10-head-critical.html ==================== -->

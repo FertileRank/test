@@ -1,0 +1,22 @@
+{
+  "name": "mtfs-website-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static build pipeline for medtech4solutions.com — a zero-dependency refactor of the Search Atlas Website Studio export. Server-renders the navigation, splits and inlines critical CSS, defers third parties, and pre-compresses every text artifact.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build/sync.mjs",
+    "check": "node build/sync.mjs --check",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "report": "node build/sync.mjs --report"
+  },
+  "files": [
+    "build",
+    "src",
+    "site.config.mjs"
+  ]
+}
