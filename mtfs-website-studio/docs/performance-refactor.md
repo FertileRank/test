@@ -25,9 +25,12 @@ could not be reached. Three consequences follow, and they all point the same way
    `fetchpriority=high` preload, rather than hard-coding the font everywhere.
 
 So: **Perf 99 is a ceiling, not a description of the live site.** Real-world third-party cost is
-additional and unmeasured. Nothing in this document projects a post-fix Lighthouse score. Re-measure
-after deploy, ideally twice — once in the same sandboxed conditions to compare like with like, and
-once with third parties reachable to see the truth.
+additional and unmeasured.
+
+An "after" Lighthouse run now exists (§13.3, and `docs/measured-results.md` in full). It was taken
+under the **same** blocked-host conditions, so the before/after comparison is fair — and for the
+same reason neither side describes production. Nothing in this document projects a score: every
+score quoted is measured. Re-measure after deploy with third parties reachable to see the truth.
 
 **Measured baseline (Lighthouse 12.8.2, mobile, export, third parties unreachable):**
 
@@ -196,10 +199,14 @@ CSS belong to a lazily-loaded `search.js`.
 off, the export had no navigational path to either service hub at all. Verified in the output:
 `<header>` 1, `<nav>` 1–2, `<main id="main">` 1 on every page, including `/404/`.
 
-**Honest limit:** SSR does **not** meaningfully reduce the 903-element DOM. The same nodes are
-parser-built instead of script-built. Realistic landing point is ~850 elements after removing the
-search overlay (−24) and trimming decorative panel furniture (−~30) — still over Lighthouse's 800
-threshold, which is driven by page body content, not the header. Do not promise a DOM-size win.
+**Honest limit, and how it turned out.** The payload audit warned that SSR does **not** by itself
+reduce the 903-element DOM — the same nodes are parser-built instead of script-built — and put the
+realistic landing point at ~850 elements, still over Lighthouse's 800 threshold. The measured
+result is **594 elements, passing** (§13.3). The audit's caution was methodologically right and its
+number was wrong in the safe direction: it counted only the search overlay (−24) and panel
+furniture (−~30), not the compounding effect of also removing the always-live second modal
+instance, the dev-tap blocks and the builder scaffolding. The lesson stands even though the number
+moved — **do not promise a DOM-size win from SSR alone**; it came from the deletions.
 
 ---
 
@@ -503,20 +510,82 @@ mobile run and the four audits; "after" numbers come from a real run of `node bu
 | Security headers | **none** | 5, via `/*` | measured |
 | Build gate | none | `--check`: 0 errors, 14 warnings, PASS | measured |
 
-### 13.3 Expected effects — **projected, not measured**
+### 13.3 Lighthouse, before and after — **now measured**
 
-| Lighthouse metric | Direction | Reasoning |
+An "after" Lighthouse run has since been performed and is documented in full in
+`docs/measured-results.md` (raw data: `scratchpad/lh-after-prod.json`). It supersedes the
+projections this section originally carried. **Both runs block the same third-party hosts**, so
+the comparison is fair — but neither describes the live site, where GTM and
+`dynamic_optimization.js` actually execute.
+
+| | Before | After | Basis |
+| --- | ---: | ---: | --- |
+| Performance | 99 | **100** | measured both sides |
+| Accessibility | 91 | **100** | measured both sides |
+| Best Practices | 96 | 96 | measured both sides |
+| SEO | 92 | **100** | measured both sides |
+| First Contentful Paint | 1.7 s | **0.9 s** | measured |
+| Largest Contentful Paint | 1.8 s | **1.2 s** | measured |
+| Speed Index | 1.7 s | **0.9 s** | measured |
+| Time to Interactive | 3.1 s | **1.6 s** | measured |
+| Total Blocking Time | 30 ms | **10 ms** | measured |
+| Cumulative Layout Shift | 0.005 | **0** | measured |
+| Main-thread work | 1.2 s | **0.5 s** | measured |
+| Script bootup time | 0.1 s | **0.0 s** | measured |
+| DOM elements | 903 (failing) | **594 (passing)** | measured |
+| Total byte weight | 213 KiB | **33 KiB** | measured |
+
+**Main-thread breakdown.** This is the table that justifies §4:
+
+| Bucket | Before | After |
+| --- | ---: | ---: |
+| Style & Layout | 562 ms | **332 ms** |
+| Other | 349 ms | 211 ms |
+| Script Evaluation | 123 ms | **58 ms** |
+| Rendering | 66 ms | — |
+| Parse HTML & CSS | 60 ms | 59 ms |
+
+The forecast in §4 was correct about the *shape* of the problem — Style & Layout was the dominant
+cost and it fell the most in absolute terms — and §13's earlier caution about JS Execution Time was
+also correct: 123 ms → 58 ms is a real but modest saving, because script evaluation was never the
+big number.
+
+**Two corrections to what this document originally projected:**
+
+1. **DOM size: the projection was too pessimistic.** §4 said "realistic landing point ~850
+   elements — still over Lighthouse's 800 threshold" and told you not to promise a win. The measured
+   result is **594 elements and a passing audit** — a 34 % reduction. The projection under-counted
+   what removing the search overlay, the always-live second modal instance, the dev-tap blocks and
+   the builder scaffolding takes out together. The instinct not to promise it was still right; the
+   number was wrong in the safe direction.
+2. **`errors-in-console` still fails (score 0).** The four 404s from §5 are gone, but the audit now
+   fails on nine `net::ERR_TUNNEL_CONNECTION_FAILED` entries — the sandbox being unable to reach the
+   image CDN and the two third-party hosts. **This audit cannot be confirmed fixed until it is
+   measured somewhere those hosts are reachable.** Do not report it as passing.
+
+**Audits that flipped:**
+
+| Audit | Before | After |
 | --- | --- | --- |
-| Main Thread Work | should fall substantially | Style & Layout was **561.6 ms of the 1.2 s** measured main thread, dominated by injecting 207 header elements into a live document. SSR moves that to parser-time. Magnitude unverified until re-measured. |
-| JS Execution Time | should fall modestly | Script Evaluation was only **122.9 ms** measured, and `mega-menu.min.js` contributed **78.7 ms**. Removing 87,803 B of pre-interaction JS helps, but this was never the big number. Do not oversell it. |
-| Critical Rendering Path | 3 blocking requests → 0 | measured on both sides; the ~380 ms Lighthouse attributed to them is an estimate from the baseline run |
-| Compression | large improvement | measured: 79.7 % brotli reduction across 36 files, where the export shipped nothing pre-compressed |
-| DOM size | **little change** | 903 elements today; realistic landing point ~850 after removing the search overlay (−24) and trimming panel furniture (−~30). Still over the 800 threshold. **Do not promise a DOM win.** |
-| CLS | should hold at ~0.005 | only if the four hidden-by-default rules and the mobile drawer's closed state stay in the inline critical block. This is the single highest-risk item in the refactor. |
-| LCP | unknown | measured LCP element was `h1#h1`, a text node in Sora — but the image CDN was unreachable, which can change which element wins. `preload-lcp` decides per page and emits at most one `fetchpriority=high` preload. |
-| Third-party cost | **worse than measured, everywhere** | GTM and `dynamic_optimization.js` executed nothing during the baseline run |
+| `uses-text-compression` | fail (est. 140 KiB) | **pass** |
+| `unused-css-rules` | fail (est. 15 KiB) | **pass** |
+| `render-blocking-resources` | fail (est. 380 ms) | **pass** |
+| `dom-size` | fail — 903 | **pass** — 594 |
+| `link-text` | fail (0) | **pass** |
+| `heading-order` | fail (0) | **pass** |
+| `aria-allowed-attr` | fail | **pass** |
+| `color-contrast` (service pages) | fail | **pass** |
+| `aria-progressbar-name` | fail | **notApplicable** — the element no longer exists on the page, because the modal is lazy |
+| `label-content-name-mismatch` | fail (0) | **notApplicable** — no mismatched element remains to evaluate |
+| `errors-in-console` | fail | **still fail** — sandbox tunnel errors only; see above |
 
----
+`notApplicable` is not the same as `pass`. It means axe found nothing of that kind to check, which
+here is the intended outcome — but it also means the audit will start evaluating again the moment a
+progressbar or an `aria-label`ed link returns, so the underlying fixes still have to hold.
+
+**Still true, and unchanged by the after run:** real-world third-party cost is additional and
+unmeasured. Both runs blocked GTM, `dynamic_optimization.js` and the image CDN. Re-measure against
+production before quoting any of these numbers externally.
 
 ## 14. Open issues — honest gaps
 

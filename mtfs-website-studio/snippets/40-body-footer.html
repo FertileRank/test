@@ -1,0 +1,152 @@
+<!-- ==========================================================================
+     40-body-footer.html
+     MedTech For Solutions — Search Atlas Website Studio paste block
+
+     WHERE      Global footer region, immediately after </main>.
+     ORDER      skip link -> <header> -> <main id="main"> -> THIS FILE ->
+                50-body-deferred-scripts.html
+
+     WHAT CHANGED FROM THE EXPORT'S FOOTER
+     -------------------------------------
+     * Column titles are <h2>, not <h4>. This is the measured heading-order
+       failure: Lighthouse cites
+           div.ctr > div.ftg > div.ftc > h4.il27,  nodeLabel "LAB SOLUTIONS"
+       following the page's <h2>. 63 elements across 21 pages — every page in
+       the site. .il27 is purely visual (font-size:.85rem; font-weight:700;
+       text-transform:uppercase), so the level was decoration, not structure.
+       The look is preserved by the class; only the tag changed.
+     * /services/lab-solutions/ and /services/management-services/ are now IN
+       the footer. They were the ONLY two routes the footer omitted, while all
+       ten of their children were in it — so every child had 20 footer linkers
+       against its own parent's 0. With the navigation 100% JavaScript-injected,
+       that static graph was the crawlable graph: with JS off there was no path
+       to either hub from anywhere. Every one of the 21 pages now links all 21
+       routes. build/lib/validate.mjs -> findOrphans fails the build if any
+       route drops below full footer coverage.
+     * role="contentinfo" is gone. <footer> already has that role implicitly;
+       the export repeats it on all 21 pages.
+     * Every list is a real <ul> with aria-labelledby pointing at its column
+       heading's id.
+     * The 812 inline onmouseover/onmouseout handlers are gone. The colour
+       change they produced is now
+           .mtfs-footer a:hover, .mtfs-footer a:focus-visible { color: var(--teal) }
+       in the site stylesheet — which, unlike the handlers, also works for
+       keyboard users. Never key such a rule on an il* class: il13, il15, il23,
+       il25, il30 and il33 each mean two different things on different pages.
+     * The designer credit keeps rel="noopener noreferrer nofollow". Note for
+       the record that this personal LinkedIn profile is NOT the brand's social
+       signal and must not be used as the Organization's sameAs.
+
+     NAP CONSISTENCY: the address below is the one in the Organization JSON-LD
+     and in site.config.mjs. /contact/ currently renders "Suite 303" while the
+     schema and all 21 footers do not. Pick one with the client and make all
+     three agree — this is ordinary local-SEO hygiene and it is broken against
+     the site's own structured data today.
+     ========================================================================== -->
+
+<footer class="mtfs-footer">
+  <div class="ctr">
+    <!-- >> PER-PAGE: on the ONE footer link whose href equals this page's
+         path, add aria-current="page". A global block cannot know the route;
+         if you have no per-page footer override, leave it off everywhere
+         rather than pinning it to a single page. -->
+    <div class="ftg mtfs-footer__grid">
+      <div class="ftb mtfs-footer__brand">
+        <a class="mtfs-footer__logo" href="/" aria-label="MedTech For Solutions Home">
+          <img src="https://media.cdn.builder.searchatlas.com/user-uploads/8938b9ec-89dc-47c4-aa9d-aabb527787a9_medtech-for-solutions-website-logo.webp" alt="MedTech For Solutions" width="220" height="44" loading="lazy" decoding="async">
+        </a>
+        <p class="mtfs-footer__blurb">Comprehensive ART practice solutions for fertility clinics, IVF laboratories, and reproductive medicine facilities. Founded 2005.</p>
+        <p class="mtfs-footer__contact">
+          <a href="tel:+18666349144">(866) 634-9144</a>
+          &middot;
+          <a href="mailto:info@medtech4solutions.com">info@medtech4solutions.com</a>
+          <br>
+          399 Knollwood Road, White Plains, NY 10603
+        </p>
+      </div>
+      <div class="ftc mtfs-footer__col">
+        <h2 class="mtfs-footer__title" id="mtfs-footer-lab-solutions">Lab Solutions</h2>
+        <ul class="mtfs-footer__list" aria-labelledby="mtfs-footer-lab-solutions">
+          <li>
+            <a href="/services/lab-solutions/">Lab Solutions</a>
+          </li>
+          <li>
+            <a href="/services/lab-solutions/real-time-monitoring/">Real-Time Monitoring</a>
+          </li>
+          <li>
+            <a href="/services/lab-solutions/regulatory-compliance/">Regulatory Compliance</a>
+          </li>
+          <li>
+            <a href="/services/lab-solutions/staffing-solutions/">Staffing Solutions</a>
+          </li>
+          <li>
+            <a href="/services/lab-solutions/gpo-purchasing/">GPO Purchasing</a>
+          </li>
+          <li>
+            <a href="/services/lab-solutions/practice-development/">Practice Development</a>
+          </li>
+        </ul>
+      </div>
+      <div class="ftc mtfs-footer__col">
+        <h2 class="mtfs-footer__title" id="mtfs-footer-management-services">Management Services</h2>
+        <ul class="mtfs-footer__list" aria-labelledby="mtfs-footer-management-services">
+          <li>
+            <a href="/services/management-services/">Management Services</a>
+          </li>
+          <li>
+            <a href="/services/management-services/marketing/">Marketing</a>
+          </li>
+          <li>
+            <a href="/services/management-services/call-center/">Call Center</a>
+          </li>
+          <li>
+            <a href="/services/management-services/accounting-finance/">Accounting &amp; Finance</a>
+          </li>
+          <li>
+            <a href="/services/management-services/human-resources/">Human Resources</a>
+          </li>
+          <li>
+            <a href="/services/management-services/insurance-risk-management/">Insurance &amp; Risk Management</a>
+          </li>
+        </ul>
+      </div>
+      <div class="ftc mtfs-footer__col">
+        <h2 class="mtfs-footer__title" id="mtfs-footer-main">Company</h2>
+        <ul class="mtfs-footer__list" aria-labelledby="mtfs-footer-main">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about/">About Us</a>
+          </li>
+          <li>
+            <a href="/our-team/">Our Team</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact</a>
+          </li>
+          <li>
+            <a href="/services/">Services</a>
+          </li>
+          <li>
+            <a href="/#testimonials">Testimonials</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot mtfs-footer__bottom">
+      <span>&copy; 2026 MedTech For Solutions Inc. All rights reserved.</span>
+      <span>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        &middot;
+        <a href="/terms-of-service/">Terms of Use</a>
+        &middot;
+        <a href="/sitemap/">Sitemap</a>
+        &middot;
+        <a href="https://www.linkedin.com/in/kevinryanofficial/" target="_blank" rel="noopener noreferrer nofollow">Design by Kevin Ryan</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ end 40-body-footer.html ==================== -->

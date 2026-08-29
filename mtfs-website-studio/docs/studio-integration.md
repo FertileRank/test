@@ -546,11 +546,21 @@ Two cautions when you read the new numbers:
   `dynamic_optimization.js`, so some metrics can legitimately look *worse* while the site is
   genuinely faster. If you want a like-for-like comparison, re-measure in the same sandboxed
   conditions as well.
-- **Do not expect a DOM-size win.** SSR moves the header's 207 nodes from script-built to
-  parser-built without deleting them. Realistic landing point is ~850 elements — still over
-  Lighthouse's 800 threshold, which is driven by page body content.
+- **A DOM-size win is real but it does not come from SSR.** SSR moves the header's 207 nodes from
+  script-built to parser-built without deleting them. The measured `dist/` result is **594 elements,
+  passing**, down from 903 — but that came from the *deletions* (search overlay, the always-live
+  second modal instance, the dev-tap blocks, the builder scaffolding), not from server-rendering.
+  If you apply the chrome in Mode B without also doing the removals in §5, expect no DOM win.
 
-The four audits that should flip to passing on markup grounds alone are `heading-order`,
-`link-text`, `label-content-name-mismatch` and `errors-in-console`. `aria-allowed-attr` and
-`aria-progressbar-name` flip once the modal changes in §5.3 ship — and note that lazy-loading alone
-does **not** fix them, because the eager inline hero card on `/` instantiates the same wizard.
+Measured against `dist/` under the same blocked-host conditions (`docs/measured-results.md`):
+`heading-order`, `link-text`, `aria-allowed-attr`, `dom-size`, `render-blocking-resources`,
+`unused-css-rules`, `uses-text-compression` and `color-contrast` all pass;
+`label-content-name-mismatch` and `aria-progressbar-name` go **notApplicable** (no such element
+remains to evaluate — which is the intended outcome, but is not the same as "pass": the audits
+resume the moment one returns). **`errors-in-console` still fails**, on sandbox tunnel errors from
+the unreachable CDN and third-party hosts rather than on the four 404s, which are gone — so it
+cannot be confirmed fixed until it is measured where those hosts are reachable.
+
+Note also that lazy-loading the modal alone does **not** clear `aria-allowed-attr` or
+`aria-progressbar-name`: the eager inline hero card on `/` instantiates the same wizard, so the
+`aria-selected` and `aria-label` fixes inside the modal code itself are what do the work.
