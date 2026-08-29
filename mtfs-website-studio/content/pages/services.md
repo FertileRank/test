@@ -142,6 +142,36 @@ Start with the service group that best matches your laboratory or operational go
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-05 / SEO-07 — all ten service cards now name their destination
+  (`Explore Real-Time Monitoring`, `Explore Regulatory Compliance`, …) instead of
+  `Learn More`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — "Proven Track Record" reads: "Over 30 labs designed nationwide, 300+ IVF
+  practices in our GPO, and outcomes that consistently exceed national benchmarks — our
+  results speak for themselves." The first two figures are countable and appear elsewhere on
+  the site; the third is an unsourced clinical-outcome claim. Remove the benchmark clause and
+  keep the two countable facts, each with a date range.
+- AISEO-10 — "30+ years of hands-on leadership experience" appears twice on a page for a
+  company founded in 2005. Label it as collective leadership experience, or drop it.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-07 — the GPO card names "Staples, McKesson, GE, Nikon, Olympus, NextspringHealth".
+  `/services/lab-solutions/` names "Hamilton Thorne, Vitrolife, Cooper-Surgical, Nikon,
+  Olympus, and GE"; `/services/lab-solutions/gpo-purchasing/` names a third set and spells
+  one vendor two ways. Reconcile to one canonical roster with one spelling, then render all
+  three pages from it.
+
+**Structured data**
+
+- SEO-05 — the `OfferCatalog` on this page should reference each child service by
+  `{canonical}#service`, not re-inline it, and `provider` must be a pure
+  `{"@id": "…/#organization"}` reference.

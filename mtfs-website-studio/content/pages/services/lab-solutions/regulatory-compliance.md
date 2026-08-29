@@ -126,6 +126,44 @@ Connect regulatory readiness with monitoring, insurance, and qualified laborator
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Compliance Scorecard" is no longer an `<h3>`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — **delete "with 100% accuracy"** from the Compliance Reporting card ("Automated
+  compliance reports generated in real-time, covering FDA, CLIA, CAP, AABB, and
+  state-specific regulatory requirements with 100% accuracy"). An absolute accuracy claim
+  about regulatory reporting is unverifiable and carries real legal exposure. The stat tiles
+  "Reporting Accuracy: 100%" and "Compliance Gaps: 0" are the same claim in another form and
+  go with it.
+- AISEO-02 — "reduces preparation time by up to 60%" and the "Faster Audit Prep: 60%" tile:
+  state the claim once, with its basis (how many engagements, over what period, measured
+  against what baseline), or drop it. `/services/lab-solutions/` currently restates it as a
+  flat fact, which is worse.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-05 — this page repeats the undifferentiated string "FDA, CLIA, CAP, AABB" five times
+  and explains what none of them regulates. This is the single highest-value content gap on
+  the site: it is genuine, uncopyable expertise MedTech already sells, and the definitions
+  are drafted in [`../../../entities.md`](../../../entities.md) ready for the client's
+  technical review. The distinction a lab director actually needs — CLIA covers andrology
+  and semen analysis but largely not embryology culture, and New York State runs its own
+  tissue-bank licensure — is stated nowhere on the site today.
+- AISEO-09 — unanswered buyer questions: is my embryology lab subject to CLIA or only my
+  andrology lab; do I need FDA HCT/P registration; do I need CAP *and* AABB or one of them;
+  what does an off-site HCLD director sign, and will an inspector accept remote oversight.
+
+**Entities this page should own** — see [`../../../entities.md`](../../../entities.md)
+
+[FDA / HCT-P and 21 CFR Part 1271](../../../entities.md#fda-and-hctp-registration) ·
+[CLIA](../../../entities.md#clia) · [CAP](../../../entities.md#cap) ·
+[AABB](../../../entities.md#aabb) ·
+[New York State tissue-bank licensure](../../../entities.md#new-york-state-tissue-bank-licensure) ·
+[chain of custody](../../../entities.md#chain-of-custody)

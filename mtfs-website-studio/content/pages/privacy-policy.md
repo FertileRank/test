@@ -357,6 +357,24 @@ Review related policies, contact information, and the complete website directory
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / SEO-13 — the "On This Page" table of contents opened at `<h4>` under the `<h1>`;
+  it is now an `<h2>` inside `<aside aria-labelledby>`, closing the h1 → h4 skip.
+
+**Pending — copy change, no new facts needed**
+
+- None. This page is accurate, specific and internally consistent, and it is the only place
+  on the site that expands "American Board of Bioanalysis" — see AISEO-05 and
+  [`entities.md`](../entities.md), which lifts that expansion to where laboratory buyers will
+  actually read it.
+
+**Review cadence**
+
+`**Effective:** January 1, 2026` and `**Last Updated:** January 1, 2026` are hard-coded in
+the page copy. They are not generated from `routes[]`, so a policy revision must update both
+the copy and this file's `lastReviewed` front-matter.

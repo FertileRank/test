@@ -240,6 +240,53 @@ Learn more about our company, specialists, and complete IVF and ART service port
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-05 / SEO-07 / AISEO-13 — the five management-service cards read `Explore Marketing`,
+  `Explore Call Center`, `Explore Accounting & Finance`, `Explore Human Resources`,
+  `Explore Insurance & Risk Management` instead of `Learn More`, and the `aria-label` that
+  contradicted the visible text is gone. This one change clears the Lighthouse `link-text`
+  (SEO, score 0) and `label-content-name-mismatch` (a11y, score 0) failures.
+- SA-13 — each FAQ question is now an `<h3>` wrapping the disclosure button, and each answer
+  panel is toggled with `hidden` rather than `max-height: 0`.
+
+**Known gap introduced by that FAQ fix** — read before regenerating
+
+Collapsed answers now carry `hidden`, and `htmlToMarkdown()` correctly drops `hidden`
+subtrees, so five of the six answers vanish from anything derived from the built page —
+including `llms-full.txt`. The mirror above restores them from the pre-collapse export
+(see the backfill step in `content/regenerate.mjs`); `llms-full.txt` has no such backfill
+and is currently short five answers while the page's FAQPage JSON-LD still asserts them.
+Fix at the source: emit the answer panels un-hidden and collapse them with CSS that still
+removes them from the accessibility tree, or teach `llmsFullTxt()` the same backfill.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-10 — the hero says "two decades of hands-on ART expertise"; `/services/` and
+  `/our-team/` say "30+ years" and `/about/` says "over 125 years of collective
+  multidisciplinary experience". A company founded in 2005 cannot have 30+ years of its
+  own history. Pick one figure, and label it explicitly as company years or as collective
+  staff-years — they are different claims.
+- AISEO-16 — "About MedTech For Solutions" here and the opening of `/about/` are four
+  re-worded paragraphs of the same substance, and the "Why Choose Us" trio is the same
+  three tiles as `/about/`'s "What Sets MedTech Apart". Differentiate: keep the summary
+  here, move the history and the checkable proof points to `/about/`.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-07 — the Gerson testimonial quotes a member saying "we are a MedTech GPO member
+  affiliated with Broadlane". Broadlane has not traded under that name for well over a
+  decade. Either retire the sentence with the client's agreement or date-stamp the quote so
+  its age is visible. Do not silently edit a real attributed client quote.
+
+**Structured data**
+
+- FAQPage JSON-LD belongs here and is correct: six questions, all visible on the page.
+  `/contact/` is the only other page that qualifies. Do not add FAQPage anywhere else.
+- Testimonials stay as `<blockquote>` + `<cite>`. Do not add Review or AggregateRating
+  markup — self-serving review markup for the hosting entity is disallowed by Google and
+  ineligible for rich results.

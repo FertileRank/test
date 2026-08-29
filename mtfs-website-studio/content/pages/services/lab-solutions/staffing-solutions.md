@@ -105,6 +105,35 @@ Combine temporary coverage with HR, compliance, and expert-team resources.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Staffing Overview" is no longer an `<h3>`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-10 — the stat tile reads "**States Covered: 50+**". There are 50 states, and the
+  page's own bullet list says "National coverage across all 50 states". Change the tile to
+  **"All 50 States"**.
+- AISEO-10 — "Years Experience: 30+" on a company founded in 2005; label as collective
+  staff-years or remove.
+- AISEO-02 — "TS (ABB) Certified: 100%" restates the page's own sentence "All MedTech
+  temporary laboratory staff are TS (ABB) certified", which is the better form. Keep the
+  sentence, drop the percentage tile.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-09 — the question every lab director asks and this page does not answer: realistic
+  time-to-fill for an embryologist, by role and region. That is a number MedTech has and
+  nobody else can copy.
+
+**Entities this page should own** — see [`../../../entities.md`](../../../entities.md)
+
+[TS (ABB)](../../../entities.md#ts-abb-technical-supervisor) ·
+[HCLD (ABB)](../../../entities.md#hcld-abb-high-complexity-laboratory-director) ·
+[ELD (ABB)](../../../entities.md#eld-abb-embryology-laboratory-director) ·
+[ABB vs AABB](../../../entities.md#abb-american-board-of-bioanalysis) ·
+[embryology](../../../entities.md#embryology) · [andrology](../../../entities.md#andrology)

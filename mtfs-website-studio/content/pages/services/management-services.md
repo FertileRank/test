@@ -89,6 +89,24 @@ Continue to the operational services most frequently combined by fertility pract
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-05 / SEO-07 — the five cards name their destinations; the final CTA reads
+  `Contact MedTech For Solutions` instead of `Get Started`.
+- SEO-02 — breadcrumb trail now includes the `/services/` tier (Home › Services ›
+  Management Services), from the same `breadcrumbTrail()` output that feeds the JSON-LD.
+- SEO-06 — this hub is now in the site-wide footer.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-10 — "Five specialized service areas" is correct and matches the route inventory
+  (five leaf routes under this hub). Keep this wording as the reference when reconciling the
+  "10 vs 12 services" contradiction on `/contact/`.
+
+**Structured data**
+
+- SEO-05 — the hub `OfferCatalog` should reference each child by `{canonical}#service`.

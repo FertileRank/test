@@ -107,6 +107,29 @@ Jump directly to our full service portfolio or speak with a specialist.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-11 — the three section titles ("Root, About, Team & Contact", "Lab Solutions",
+  "Management Services") were `<p class="sm-sec-title">` and are now `<h2>`; the card titles
+  were `<div class="sm-card-head">` and are now `<h3>`. The page's outline was h1 → h2 → h2 →
+  h4.
+
+**Pending — copy change, no new facts needed**
+
+- SEO-09 — this page still links `/404/` ("404 Not Found"), and it is the error page's only
+  inbound link. A crawlable 200-OK error page advertised from the HTML sitemap is a soft-404
+  invitation. Remove the entry; keep `/404/` out of `sitemap.xml` and `llms.txt` (it already
+  is).
+- The intro says "All 20 published pages" and the XML sitemap link says "(20 canonical
+  URLs)". Both are correct — 21 routes minus `/404/` — and they stay correct only if the
+  `/404/` entry above is removed. Keep the two numbers generated from `routes[]`.
+
+**Note**
+
+`/sitemap/ → /sitemap.xml` is the single legitimate internal link on the site that is not a
+route. It is registered in `EXTRA_ALLOWED_PATHS` in `build/lib/validate.mjs` so
+`validateLinks()` does not fail on it.

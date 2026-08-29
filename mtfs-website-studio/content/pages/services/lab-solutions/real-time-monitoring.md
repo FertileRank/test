@@ -117,6 +117,39 @@ Pair real-time visibility with compliance, staffing, and development support.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — the decorative stat-panel label "Lab Performance Dashboard" is no longer
+  an `<h3>`, so the page no longer emits h1 → h3 → h2.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — "Alert Response: <2s" and "Uptime: 99.2%" are product performance claims with no
+  measurement window or basis. The "OvaTools Dashboard" tiles ("Active Cycles: 147",
+  "Pending Alerts: 12", "Uptime: 99.2%", "Devices Online: 8") read as a screenshot rendered
+  in text; if they are illustrative, label them as an example dashboard, and if they are real
+  service levels, state the measurement period. "Practices Served: 300+" is supported
+  elsewhere on the site.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-11 — OvaTools is named on eight pages and trademarked in the Terms of Use, but has no
+  product page, no screenshot, no specification, no validation statement, no hosting or
+  security posture and no `SoftwareApplication` JSON-LD. This page is the closest thing it
+  has. To make it real, the client needs to supply: monitored parameters and equipment
+  classes, alarm thresholds and escalation paths, notification channels, audit-trail schema,
+  validation status, hosting and security posture, integration points, and screenshots.
+  `content/templates/service-page.md` §4 is the slot this belongs in.
+- AISEO-09 — buyer questions this page does not answer: is OvaTools a validated system; will
+  MedTech sign a BAA; what happens to alerting when the network drops; who owns the data.
+
+**Entities this page should define** — see [`../../../entities.md`](../../../entities.md)
+
+[OvaTools](../../../entities.md#ovatools) ·
+[chain of custody](../../../entities.md#chain-of-custody) ·
+[witnessing](../../../entities.md#witnessing) ·
+[vitrification](../../../entities.md#vitrification)

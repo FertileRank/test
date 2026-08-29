@@ -227,6 +227,67 @@ Learn more about MedTech and the service groups our specialists support.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**BLOCKING — do not publish this page as written**
+
+- AISEO-01 — the "Core Expertise" tiles name eight individuals with no bio, no headshot, no
+  credential verification and no `Person` schema: **Dr. Sarah Chen, HCLD(ABB)**,
+  **Michael Rodriguez, ELD(ABB)**, **Jennifer Walsh**, **David Park**, **Robert Martinez**,
+  **Lisa Thompson**, **Dr. Kevin O'Brien** and **Margaret Evans**. Two of them carry claimed
+  clinical directorship credentials. The page has only four images — a hero, Dwight Ryan,
+  Kathleen Miller and the logo — so none of the eight has a photograph, and the culture
+  quote is signed "— Sarah Chen, Director of Laboratory Solutions", a *different* title from
+  the "Dr. Sarah Chen, HCLD(ABB)" listed eight paragraphs earlier.
+  Verify each name against payroll or contractor records before anything ships. If real:
+  add a bio, headshot, credential verification and a `Person` node with `jobTitle`,
+  `worksFor` and `sameAs`, and reconcile the Chen title. If illustrative: remove the names
+  and describe the capability without personnel attribution. An unverified named individual
+  holding a claimed clinical certification on a healthcare-services site destroys exactly
+  the E-E-A-T that the Ryan and Miller bios earn.
+- AISEO-06 — the Embryology tile lists "**Certifications:** AABB, CLIA, ASRM". None of the
+  three is a personal credential: AABB accredits *facilities*, CLIA certifies *laboratories*,
+  ASRM is a professional society that issues no certification. Replace with the personnel
+  credentials the staff actually hold — HCLD(ABB), ELD(ABB), TS(ABB) — and move facility
+  accreditations to a separate, correctly labelled line.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — Dwight Ryan's bio claims "MedTech has built or retrofitted more IVF practices
+  and laboratories than any company in the industry." Replace the superlative with the
+  countable fact the site already publishes: labs and practices designed, over a stated date
+  range (`/services/lab-solutions/practice-development/` says 30+).
+- AISEO-16 — 🧬 ✓ 🏗 👥 💡 🤝 as section icons; replace with the inline SVG sprite.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-10 — the bio says "Mr. Ryan founded MedTech For Solutions, Inc in 2006". Every other
+  surface — the home page, `/about/`, `/contact/`, all 21 footers, `llms.txt` and the
+  `Organization` JSON-LD `foundingDate` — says 2005. `site.config.mjs` keeps 2005 because it
+  is the overwhelming majority and the value the structured data already publishes. One of
+  the two is wrong; the client resolves it, and the fix then propagates from
+  `site.config.mjs` rather than being patched here.
+- AISEO-07 — the Gerson testimonial's "affiliated with Broadlane" line appears here as well
+  as on the home page. Same decision, applied to both.
+- AISEO-14 — Dwight Ryan and Kathleen Miller have detailed, externally checkable bios
+  (RMA-NJ, RMA-NY, 1991 NASDAQ IPO, RESOLVE national board; IFFS Surveillance managing editor
+  since 2014, 100+ abstracts and papers). They should carry `Person` nodes with `jobTitle`,
+  `worksFor` and `sameAs` (LinkedIn; ORCID or PubMed for Dr. Miller) once the client supplies
+  the URLs. There are currently zero `Person` nodes and zero `sameAs` values site-wide.
+
+**Genuine first-hand material on this page — protect it**
+
+The Montville / Shomento Montana lab build, Wes Edmonds at UAB, the Goldstein and Sharara
+quotes, and the two leadership bios are the least commodity content on the entire site.
+`content/templates/service-page.md` §4 explains how to reuse this kind of material without
+inventing any.
+
+**Entities this page should define** — see [`../entities.md`](../entities.md)
+
+[HCLD (ABB)](../entities.md#hcld-abb-high-complexity-laboratory-director) ·
+[ELD (ABB)](../entities.md#eld-abb-embryology-laboratory-director) ·
+[TS (ABB)](../entities.md#ts-abb-technical-supervisor) ·
+[ABB vs AABB](../entities.md#abb-american-board-of-bioanalysis) ·
+[embryology](../entities.md#embryology) · [andrology](../entities.md#andrology)

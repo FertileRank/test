@@ -129,6 +129,38 @@ Connect purchasing savings with stronger financial operations and practice growt
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-05 / SEO-07 — the hero's second button reads `Contact MedTech For Solutions` instead of
+  `Learn More`.
+- SA-04 / AISEO-12 — "GPO Savings Dashboard" is no longer an `<h3>`; its label/value pairs
+  (Cost to Join $0, IVF Practices 300+, Active Contracts 1800+, Cost Savings 10% – 50%)
+  survive into the Markdown, which they did not in the export's `llms-full.txt`.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-07 — **the aggregation partner is undeclared.** All three CTAs ("Become a Member",
+  "Join GPO Today — It's Free", "Become a GPO Member") point off-site to
+  `register.provista.com`, yet "Provista" appears nowhere in the copy, in any JSON-LD, or in
+  `llms-full.txt`. Name Provista on the page and explain the relationship — what MedTech
+  does, what Provista does, and what the member's relationship is with each — then express it
+  in the `Organization` / `Service` JSON-LD. The relationship itself cannot be written here
+  without the client: only the destination of the links is verifiable from the export.
+  Add `rel="noopener"` and an explicit off-site indication to the three registration links.
+- AISEO-07 — three vendor rosters disagree. This page's "Specialized ART Contracts" names
+  "Roche, NextspringHealth, NextGen, Fisher Scientific, McKesson, and FedEx", while its own
+  Featured Partners grid spells it "NexGen" and omits Roche; `/services/` and
+  `/services/lab-solutions/` name two further sets. One canonical roster, one spelling.
+- AISEO-09 — unanswered buyer questions: does joining bind me to minimums; how is MedTech
+  paid; is there a conflict when MedTech recommends a vendor it holds a contract with. The
+  page already answers "no purchasing obligations or spending commitments" — the economics
+  question is the one that would make this page uncopyable.
+
+**Entities this page should own** — see [`../../../entities.md`](../../../entities.md)
+
+[GPO](../../../entities.md#gpo-group-purchasing-organization) ·
+[Provista](../../../entities.md#provista)

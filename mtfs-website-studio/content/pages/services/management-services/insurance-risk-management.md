@@ -123,6 +123,33 @@ Connect insurance planning with regulatory, financial, and workforce support.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Risk Overview" is no longer an `<h3>`.
+- SA-05 / SEO-07 — the hero CTA reads `Contact MedTech For Solutions` instead of
+  `Get Started`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — "Zero / Gaps" and "Full / Coverage" are absolutes about insurance adequacy.
+  Nothing on the page supports "zero gaps", and in a liability context an unqualified
+  coverage claim is the highest-risk sentence type on the site. Rephrase as what the review
+  process covers, not as a guaranteed outcome.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-05 — "Cryopreservation — Covered" is the **only** occurrence of the word
+  "cryopreservation" on the entire site, and it appears on an insurance page rather than on
+  any laboratory page. Specimen loss is the defining liability exposure of an ART practice;
+  this page should say what that coverage actually contemplates, and the laboratory pages
+  should define the underlying process.
+
+**Entities this page should own** — see [`../../../entities.md`](../../../entities.md)
+
+[cryopreservation](../../../entities.md#cryopreservation) ·
+[witnessing](../../../entities.md#witnessing) ·
+[chain of custody](../../../entities.md#chain-of-custody)

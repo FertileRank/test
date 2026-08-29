@@ -123,6 +123,37 @@ Combine development planning with marketing, monitoring, and financial guidance.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Practice Growth" is no longer an `<h3>`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — **remove** "Our laboratories consistently achieve outcome results that exceed
+  national benchmarks." No benchmark is named (CDC ART Success Rates? SART?), no cohort, no
+  period, and "outcome" is undefined. The stat tiles "Top" / "Outcome Results" are the same
+  claim and go with it. `/about/` carries the same sentence and needs the same edit.
+- AISEO-02 — "Customized: 100%" is not a measurement. Drop it.
+- The countable facts on this page are good and should stay: "Labs & Practices Designed: 30+"
+  and "30+ labs and practices designed nationally". Add the date range they cover.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-11 — **OVA Design** is named on five pages and defined only as "modular designs to
+  premium air filtration systems". Publishing the actual standard — target VOC and
+  particulate thresholds, filtration stack, pressure cascade, materials and off-gassing
+  policy, commissioning and validation protocol, with photographs of completed labs — would
+  be the strongest non-commodity asset on the site. The Montana build described in the
+  `/our-team/` testimonials ("having the air quality assessed… designing the lab space and
+  ordering all of our microscopes, incubators and lab supplies") is the case study that
+  already exists.
+
+**Entities this page should own** — see [`../../../entities.md`](../../../entities.md)
+
+[OVA Design](../../../entities.md#ova-design) ·
+[vitrification](../../../entities.md#vitrification) ·
+[embryology](../../../entities.md#embryology)

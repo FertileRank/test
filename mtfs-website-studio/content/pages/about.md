@@ -247,6 +247,48 @@ Meet our specialists and explore the services that support fertility practices n
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 — the four mission cards ("Scientific Rigor", "True Partnership", "Outcomes Driven",
+  "Compliance First") are `<h3>` under the `<h2>`, closing the h2 → h4 skip.
+- The `/about/` breadcrumb is rendered as `<nav aria-label="Breadcrumb"><ol>` with
+  `aria-current="page"` and CSS separators; it is navigation, so the mirror drops it.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-06 — two occurrences of "TS (AABB)" must read **"TS (ABB)"**: the 2016 timeline entry
+  ("TS (AABB)-certified temporary ART professional placement services launched") and the
+  Staffing & Recruitment tile ("TS (AABB)-certified recruiters"). ABB — the American Board
+  of Bioanalysis — issues the TS, ELD and HCLD *personnel* certifications; AABB is a
+  *facility* accreditation body. Five other pages already say "TS (ABB)". See
+  [entities.md § ABB](../entities.md#abb-american-board-of-bioanalysis).
+- AISEO-02 — the "Today" milestone reads: "MedTech For Solutions remains the only consulting
+  firm built exclusively for the ART industry — with over 125 years of collective
+  multidisciplinary experience and outcomes that consistently exceed national benchmarks."
+  Three problems in one sentence: an unverifiable market-leadership superlative, an
+  experience figure that contradicts every other page, and an unsourced clinical-outcome
+  claim with no named benchmark (CDC ART Success Rates? SART?), no cohort, no period and no
+  definition of "outcome". Remove the superlative and the benchmark clause; keep the
+  collective-experience figure only if it is labelled as collective staff-years.
+- AISEO-16 — 🔬 🤝 📊 🛡️ stand in for iconography. In a YMYL-adjacent medical-services
+  context emoji read as template output; replace with the inline SVG sprite already used by
+  the nav (`navIcons` in `site.config.mjs`).
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-16 — "What Sets MedTech Apart" contains no checkable fact. The material for real
+  proof points is already on the site: the number of labs designed with a date range
+  (`/services/lab-solutions/practice-development/` says 30+), the Montana lab build named in
+  the `/our-team/` testimonials, and the GPO contract count.
+
+**Entities this page should define** — see [`../entities.md`](../entities.md)
+
+[ART / IVF](../entities.md#art-assisted-reproductive-technology) ·
+[ABB](../entities.md#abb-american-board-of-bioanalysis) ·
+[TS (ABB)](../entities.md#ts-abb-technical-supervisor) ·
+[FDA](../entities.md#fda-and-hctp-registration) ·
+[CLIA](../entities.md#clia) · [CAP](../entities.md#cap) · [AABB](../entities.md#aabb)

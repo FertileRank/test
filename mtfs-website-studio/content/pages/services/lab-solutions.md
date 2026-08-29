@@ -95,6 +95,40 @@ Continue to the laboratory solutions most often combined by IVF and ART practice
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-05 / SEO-07 — the five service cards name their destinations instead of reading
+  `Learn More`.
+- SEO-02 — the breadcrumb is now `<nav aria-label="Breadcrumb"><ol>` with the `/services/`
+  tier inserted (Home › Services › Laboratory Solutions), generated from
+  `breadcrumbTrail()` so the visible trail and the `BreadcrumbList` cannot diverge. The
+  mirror drops it because it is navigation.
+- SEO-06 — this hub is now in the site-wide footer. It and `/services/management-services/`
+  were the only two routes the footer omitted, while all ten of their children were in it,
+  so every child outranked its own parent.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — the Real-Time Monitoring card states "Reduces audit prep time by 60%" as fact.
+  The source claim, on `/services/lab-solutions/regulatory-compliance/`, is "reduces
+  preparation time by **up to** 60%". State it once, in one form, with its basis.
+- AISEO-02 — the stat row ("Compliance Rate: 98.7%", "Faster Audits: 60%", "Cost Reduction:
+  40%") publishes three figures with no source, period or cohort. Either attach the basis or
+  remove the row. "GPO Contracts: 1800+" and "Lab Monitoring: 24/7" are supported elsewhere
+  on the site and can stay.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-07 — vendor roster conflict; see the note on `/services/`.
+
+**Entities this page should define** — see [`../../entities.md`](../../entities.md)
+
+[FDA / HCT-P](../../entities.md#fda-and-hctp-registration) ·
+[CLIA](../../entities.md#clia) · [CAP](../../entities.md#cap) ·
+[AABB](../../entities.md#aabb) · [HCLD (ABB)](../../entities.md#hcld-abb-high-complexity-laboratory-director) ·
+[TS (ABB)](../../entities.md#ts-abb-technical-supervisor) ·
+[GPO](../../entities.md#gpo-group-purchasing-organization)

@@ -113,6 +113,27 @@ Connect patient access with marketing, workforce, and practice-development suppo
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Call Center Metrics" is no longer an `<h3>`.
+- SA-05 / SEO-07 — the hero CTA reads `Contact MedTech For Solutions` instead of
+  `Get Started`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — six unsourced performance figures: "Avg Answer Time: <15s", "Patient
+  Satisfaction: 98%", "Missed Calls: 0%", plus the "Daily Call Dashboard" ("Calls Answered —
+  247", "Appointments Booked — 89", "Avg Hold Time — 12s", "Satisfaction Score — 4.9/5").
+  "Missed Calls: 0%" is an absolute. Either attach a service level with its measurement
+  window, or label the dashboard explicitly as an illustrative example.
+
+**Genuine material available**
+
+The strongest line on the page — "For fertility patients, the first phone call is often
+their most vulnerable moment" — is the seed of a real, uncopyable section: what a
+fertility-specific call protocol contains that a general medical answering service does not.
+See `content/templates/service-page.md` §4.

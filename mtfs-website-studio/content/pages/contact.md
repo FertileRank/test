@@ -173,6 +173,51 @@ Review our capabilities before your consultation or learn more about the team yo
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 — "Our Office Address" is an `<h3>` inside the section already labelled by the
+  `<h2>` "Our Headquarters", instead of a second competing `<h2>`.
+
+**Known conversion defect** — affects `llms-full.txt` too
+
+The two `<select>` controls render as run-on text: "Select role…Medical Director /
+PhysicianLaboratory Director…". The build's HTML minifier removes the whitespace between
+`<option>` elements and `htmlToMarkdown()` treats `option` as inline, so the labels fuse.
+Fix in `htmlToMarkdown()` (emit each `option` on its own line, or as a list), not here — the
+same text reaches `llms-full.txt`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-10 — "[Our 12 service areas](/services/)" contradicts the route inventory. There are
+  **10** leaf services: five under `/services/lab-solutions/` and five under
+  `/services/management-services/`. The home page already says "one service or all ten".
+  Change to "Our 10 service areas".
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-10 — this page gives the address as "399 Knollwood Road, **Suite 303**"; all 21
+  footers and every JSON-LD `PostalAddress` omit the suite. NAP consistency is ordinary
+  local-SEO hygiene and is currently broken against the site's own schema. If Suite 303 is
+  correct it must be added once, to `site.config.mjs → site.address.streetAddress`, and
+  rendered from there in the footer, on this page and in the `Organization` node.
+
+**Structured data**
+
+- AISEO-09 / SEO — this page carries seven visible, genuinely useful answers ("Before You
+  Reach Out") and no markup. It is the one page besides `/` that should gain FAQPage
+  JSON-LD. Treat that as machine-readability, not a rich-result play: Google restricts FAQ
+  rich results to authoritative government and health sites.
+- SEO-12 — `geo.region` / `geo.placename` belong on this page — the one with an address,
+  coordinates and opening hours — not on `/`, `/our-team/` and `/sitemap/` where the export
+  put them.
+
+**Note on the PHI answer**
+
+"Please do not include protected health information (PHI)… we will set up secure,
+HIPAA-aligned communication channels and, where applicable, execute a Business Associate
+Agreement (BAA) before any PHI is exchanged" is the most credible prose on the site. Keep it
+verbatim. See [entities.md § BAA](../entities.md#baa-business-associate-agreement-hipaa).

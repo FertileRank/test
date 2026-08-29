@@ -301,6 +301,28 @@ Continue to our privacy policy, contact information, or complete page directory.
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / SEO-13 — the "On This Page" table of contents is an `<h2>`, closing the h1 → h4
+  skip.
+- SEO-02 — the `BreadcrumbList` label now matches the page: the export labelled it "Terms of
+  Service" against a title and `<h1>` of "Terms of Use". Both now read "Terms of Use" from
+  `routes[].navLabel`.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-11 — the trademark clause claims "**OvaTools Training Institute**" as a mark. That
+  string appears exactly once on the entire site — here — and there is no such product,
+  page, curriculum or description anywhere. Either build it out or remove it from the
+  trademark list; asserting a mark for a product that does not visibly exist is the kind of
+  detail a careful buyer notices.
+
+**Review cadence**
+
+`**Effective:** January 1, 2026` / `**Last Updated:** January 1, 2026` and
+`**Governing Law:** New York` are page copy, not generated. Update this file's
+`lastReviewed` alongside any revision.

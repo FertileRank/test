@@ -125,6 +125,25 @@ Use complementary purchasing, development, and risk services to strengthen finan
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Financial Health" is no longer an `<h3>`.
+- SA-05 / SEO-07 — the hero CTA reads `Contact MedTech For Solutions` instead of
+  `Get Started`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — "Transparency: 100%" is not a measurement, and the "Monthly Snapshot" tiles
+  ("Revenue — On Track", "Expenses — Under Budget", "Cash Flow — Healthy", "Tax Compliance —
+  Current") describe an imaginary client. Label the snapshot as an illustrative example or
+  remove it.
+
+**Internal linking**
+
+This page is the natural destination for purchasing-savings copy on
+`/services/lab-solutions/gpo-purchasing/`, and that link already exists in both directions.
+Keep it when the GPO economics section (AISEO-07) is written.

@@ -123,6 +123,35 @@ Connect patient acquisition with call-center operations, development planning, a
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Marketing Performance" is no longer an `<h3>`.
+- SA-05 / SEO-07 — the hero CTA reads `Contact MedTech For Solutions` instead of
+  `Get Started`.
+
+**BLOCKING — remove before publication**
+
+- AISEO-08 — this page carries **two mutually contradictory unsourced stat panels**:
+  - "Marketing Performance": **Patient Leads: 3x**, **Higher Conversions: 40%**
+  - "Channel Performance": **Organic Traffic: +185%**, **Lead Volume: 3.2x**,
+    **Conv. Rate: 42%**, **Cost/Lead: $12**
+
+  No client, timeframe, denominator, cohort or methodology for any of the six figures.
+  "40% Higher Conversions" and "42% Conv. Rate" are different metrics with near-identical
+  labels; "3x Patient Leads" and "3.2x Lead Volume" likewise. Delete all six until real,
+  client-attributed, dated numbers with a stated basis exist to replace them.
+
+**Pending — needs client input (do not guess)**
+
+- AISEO-08 — the page's own differentiation sentence ("We don't do generic healthcare
+  marketing. Our team specializes exclusively in fertility and ART practice marketing") is
+  immediately followed by six generic agency headings: Digital Marketing & SEO, Patient
+  Acquisition, Brand Development, Analytics & Reporting, Content & Email Marketing, Referral
+  Network Development. This is the clearest example on the site of assertion substituting for
+  experience. Rewrite around fertility-specific practice: patient-journey sensitivities, what
+  fertility PPC and ad-platform compliance actually requires, and referral-network mechanics
+  with named referral source types.

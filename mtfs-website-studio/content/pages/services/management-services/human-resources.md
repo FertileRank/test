@@ -124,6 +124,26 @@ Connect HR programs with laboratory staffing, patient access, and risk managemen
 
 ## Content review
 
-Editorial metadata — not page content, and not part of the mirror above.
+Editorial metadata — not page content, and deliberately outside the mirror above. IDs
+refer to `docs/audit/content-aiseo.md` (AISEO-*), `docs/audit/seo-structured-data.md`
+(SEO-*) and `docs/audit/semantics-accessibility.md` (SA-*).
 
-- No pending corrections recorded for this page.
+**Applied in this build** — visible in the mirror above
+
+- SA-04 / AISEO-12 — "Workforce Metrics" is no longer an `<h3>`.
+- SA-05 / SEO-07 — the hero CTA reads `Contact MedTech For Solutions` instead of
+  `Get Started`.
+
+**Pending — copy change, no new facts needed**
+
+- AISEO-02 — the "Team Health" panel publishes "Retention Rate: 96%", "Avg Time to Fill: 14
+  Days", "Compliance: 100%" and "Employee Satisfaction: 4.8/5" with no cohort, period or
+  source, and the "Workforce Metrics" row adds "Compliance: 100%" again. Either attach the
+  basis or remove. Note that "Avg Time to Fill: 14 Days" contradicts nothing on the site but
+  is also the exact figure `/services/lab-solutions/staffing-solutions/` should be publishing
+  with a real cohort — resolve them together.
+
+**Entities this page touches** — see [`../../../entities.md`](../../../entities.md)
+
+[HIPAA / BAA](../../../entities.md#baa-business-associate-agreement-hipaa) ·
+[CLIA personnel requirements](../../../entities.md#clia)
