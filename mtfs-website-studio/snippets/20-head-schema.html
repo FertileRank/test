@@ -1,0 +1,218 @@
+<!-- ==========================================================================
+     20-head-schema.html
+     MedTech For Solutions — Search Atlas Website Studio paste block
+
+     WHERE      Block A -> Global head embed, immediately after 10-head-critical.html.
+                Block B -> Per-page head field, one per page.
+                Block C -> Per-page head field, on the two pages with a visible FAQ.
+     REPLACES   every JSON-LD block currently in the project, and the
+                itemscope/itemtype microdata on <html>.
+
+     WHAT WAS WRONG (measured across all 21 exported pages)
+     -----------------------------------------------------
+     * No WebSite node exists anywhere, so all 8 WebPage nodes set
+       isPartOf -> #organization. WebPage.isPartOf expects a WebSite or
+       CreativeWork; pointing it at an Organization is a mistyped dangling edge.
+     * 13 pages have no WebPage node at all. /404/ has no JSON-LD of any kind.
+     * The single shared @id #organization is declared on 18 pages with FOUR
+       conflicting @type shapes: ["Organization","ProfessionalService"] on / and
+       /sitemap/, ["Organization","LocalBusiness"] on /our-team/, bare
+       "LocalBusiness" on /contact/, and bare "Organization" with a 3-property
+       subset on all 13 Service pages. One @id must have one shape.
+     * Organization carries no logo, no image and no sameAs.
+     * All 13 Service pages re-inline the provider's name/url/telephone instead
+       of referencing the global @id — which is what produces the type conflict.
+       No Service has an @id of its own, so hub OfferCatalog entries cannot
+       reference their children.
+     * 12 of 21 BreadcrumbList trails omit the /services/ tier. / ships a useless
+       1-item stub. /our-team/ is named "Staff" against a nav label of "Our Team";
+       /terms-of-service/ is named "Terms of Service" against an h1 of
+       "Terms of Use".
+     * Four pages carry itemscope itemtype="https://schema.org/WebPage" on <html>
+       while 17 do not — a second vocabulary applied at random. Standardise on
+       JSON-LD and delete the microdata.
+
+     RULES
+     -----
+     1. Block A is byte-identical on all 21 pages. That is the point: one @id,
+        one shape. Never edit a copy of it on a single page.
+     2. Never publish a block that still contains {{ }} tokens. It is valid JSON
+        and invalid data — Google will ingest the literal braces.
+     3. Emit a BreadcrumbList on every page EXCEPT / and /404/. A one-item
+        "Home" trail asserts nothing.
+     4. Emit Block C ONLY where the page renders a visible FAQ. Today that is /
+        (six questions, already visible) and /contact/ (seven answers visible,
+        markup missing). FAQPage for questions the visitor cannot see is a
+        markup-content mismatch. Treat it as machine-readability, not a
+        rich-result play: Google restricts FAQ rich results to authoritative
+        government and health sites.
+     5. Do NOT add Review or AggregateRating to MedTech's own testimonials.
+        Self-serving review markup for the hosting entity is disallowed and
+        ineligible for rich results. Render testimonials as <blockquote> with a
+        <cite> carrying name, title and organisation.
+     6. Do NOT add Person nodes for the six unbioed "specialists" on /our-team/.
+        A named individual carrying a claimed clinical credential (HCLD/ELD)
+        needs a verified bio, headshot and credential check first.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     TOKEN LEGEND — for Block B and Block C
+     ==========================================================================
+
+     TOKEN                  SOURCE (site.config.mjs)      EXAMPLE
+     ---------------------  ----------------------------  ---------------------------------------------
+     {{ORIGIN}}             site.origin                   https://medtech4solutions.com
+     {{CANONICAL}}          origin + route.path           https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/
+                            Absolute. ALWAYS ends in "/". Must equal the page's
+                            rel=canonical exactly. All 21 canonicals in the
+                            export are already self-referencing and correct;
+                            keep that property.
+     {{PAGE_TITLE}}         routes[].title                GPO Purchasing for Fertility Clinics | MedTech For Solutions
+                            30-60 characters. One title in the export exceeds it
+                            (/about/ at 71).
+     {{PAGE_DESCRIPTION}}   routes[].description          Join MedTech's GPO free of charge and access 1,800+ vendor contracts…
+                            70-160 characters. 15 of 21 exceed 160 today.
+     {{NAV_LABEL}}          routes[].navLabel             GPO Purchasing
+                            Also the last breadcrumb name and the Service name.
+                            This is why /our-team/ can never read "Staff" again.
+     {{CRUMB_n_NAME}}       navLabel of the nth ancestor  Services  /  Lab Solutions
+     {{CRUMB_n_URL}}        origin + ancestor path        https://medtech4solutions.com/services/
+                            Walk routes[].parent from the root. Do not hand-write
+                            a trail: that is how 12 pages lost the /services/ tier.
+     {{FAQ_n_QUESTION}}     the visible <h3>/button text  What is MedTech For Solutions?
+     {{FAQ_n_ANSWER}}       the visible answer, plain     MedTech For Solutions is a healthcare consulting company founded in 2005…
+                            text, no HTML tags. Must match what the page shows.
+
+     BREADCRUMB DEPTH — one row per route family
+     -------------------------------------------
+       /                                        no BreadcrumbList (omit Block B's breadcrumb node)
+       /about/  /our-team/  /contact/           2 items   Home > Self
+       /services/  /sitemap/  /privacy-policy/  2 items   Home > Self
+       /terms-of-service/                       2 items   Home > Terms of Use
+       /services/lab-solutions/                 3 items   Home > Services > Lab Solutions
+       /services/management-services/           3 items   Home > Services > Management Services
+       the 10 leaf service pages                4 items   Home > Services > <hub> > <leaf>
+       /404/                                    no BreadcrumbList, and noindex
+
+     The visible <nav aria-label="Breadcrumb"><ol> that 30-body-header.html's
+     sibling markup renders inside <main> must carry the SAME trail. Markup and
+     visible content diverging is the defect this replaces: 20 pages assert a
+     trail today and only /sitemap/ shows one.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     BLOCK A — GLOBAL. Paste verbatim. Identical bytes on all 21 pages.
+     No tokens. Goes in the GLOBAL head embed.
+
+     Organization + ProfessionalService, and the WebSite that every WebPage's
+     isPartOf points at. The full contact set — telephone, fax, email, postal
+     address, geo coordinates and opening hours — lives here, on every page.
+     In the export it existed only on /contact/.
+
+     sameAs IS DELIBERATELY ABSENT. The SEO audit calls it the single most
+     important entity-reconciliation property, and it is missing from all 21
+     pages. It stays missing until the client supplies verified URLs, because
+     the only external social link in the entire export is
+     https://www.linkedin.com/in/kevinryanofficial/ — the web designer's
+     PERSONAL profile, repeated in 21 footers. That is not the brand's social
+     signal, and inventing a company LinkedIn or Google Business Profile URL
+     would be fabricating a third-party reference. An empty "sameAs": [] is
+     also wrong: it is a positive claim of "no profiles".
+     TO DO (client): company LinkedIn page, Google Business Profile, trade or
+     association listings. Add them to site.config.mjs -> site.sameAs and
+     re-copy this block.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://medtech4solutions.com/#organization",
+      "name": "MedTech For Solutions",
+      "url": "https://medtech4solutions.com/",
+      "legalName": "MedTech For Solutions Inc.",
+      "description": "MedTech For Solutions is a comprehensive laboratory management and practice development company specializing exclusively in the assisted reproductive technology (ART) industry. Founded in 2005 and based in White Plains, NY, MedTech supports fertility clinics, IVF laboratories, and reproductive medicine facilities nationwide.",
+      "foundingDate": "2005",
+      "telephone": "+1-866-634-9144",
+      "faxNumber": "+1-866-482-5058",
+      "email": "info@medtech4solutions.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "399 Knollwood Road",
+        "addressLocality": "White Plains",
+        "addressRegion": "NY",
+        "postalCode": "10603",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.0534,
+        "longitude": -73.7629
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "International"
+        }
+      ],
+      "knowsAbout": [
+        "Assisted Reproductive Technology",
+        "IVF Laboratory Management",
+        "Embryology Laboratory Design",
+        "Fertility Clinic Consulting",
+        "ART Regulatory Compliance",
+        "IVF Temporary Staffing",
+        "Healthcare Group Purchasing"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://media.cdn.builder.searchatlas.com/user-uploads/8938b9ec-89dc-47c4-aa9d-aabb527787a9_medtech-for-solutions-website-logo.webp",
+        "width": 220,
+        "height": 44
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/e1146f7d6594fbe56c52c12aabd092e4.jpg",
+        "width": 1600,
+        "height": 686,
+        "caption": "Modern IVF laboratory with incubators and cryostorage equipment"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://medtech4solutions.com/#website",
+      "url": "https://medtech4solutions.com/",
+      "name": "MedTech For Solutions",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://medtech4solutions.com/#organization"
+      },
+      "description": "MedTech For Solutions is a comprehensive laboratory management and practice development company specializing exclusively in the assisted reproductive technology (ART) industry. Founded in 2005 and based in White Plains, NY, MedTech supports fertility clinics, IVF laboratories, and reproductive medicine facilities nationwide."
+    }
+  ]
+}
+</script>
