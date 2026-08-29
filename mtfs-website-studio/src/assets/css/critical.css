@@ -1,0 +1,904 @@
+/* =============================================================================
+   critical.css — the SHARED above-the-fold layer, inlined into <head> on all 21 pages.
+
+   WHY THIS EXISTS
+   The export ships three render-blocking <link rel=stylesheet> in <head>, measured at
+   380 ms of blocking time on the Lighthouse 12.8.2 mobile run:
+       /assets/mega-menu.css    30,074 B   602 ms
+       /assets/mtfs-images.css   3,128 B   302 ms
+       /assets/css/fonts.css     6,688 B   152 ms
+   This file replaces all three in the first paint path. Nothing here may be deferred:
+   every hidden state in the header — .mm-panel, .mm-mobile-scrim, .mm-back-to-top,
+   .mm-search-overlay — exists ONLY in CSS. Now that render.mjs server-renders the header
+   instead of injecting it with document.body.insertAdjacentHTML('afterbegin', HEADER_HTML),
+   deferring these rules would paint all three mega panels expanded in flow, plus the
+   back-to-top button, plus (below 1180px) the whole off-canvas nav stack in normal flow
+   before it snaps to position:fixed.
+
+   WHERE IT GOES — the emitted <head> order is load-bearing, do not reorder:
+       <style>  fonts.css @font-face  +  THIS FILE  +  this page's splitCritical() slice
+       <style>  the page's residual CSS
+       <link rel="stylesheet" href="/assets/site.<hash>.css">   (non-blocking)
+   The site sheet must come AFTER the page's residual <style>, because that is exactly
+   where mega-menu.css and mtfs-images.css sit in the export today, and mega-menu.css's
+   trailing "SITE-WIDE DESIGN SYSTEM OVERRIDES" section deliberately beats the page blocks
+   on equal specificity (e.g. `section.sec,.sec{padding-top:88px}` over the home page's own
+   `section.sec{padding:100px 0}` — 88px is what renders today and must keep rendering).
+
+   WHAT IS NOT HERE, ON PURPOSE
+   - Per-page hero rules. `.hero` means five different things across the export
+     (`/` blush two-column with padding:120px 0 90px, `/about/` and
+     `/services/lab-solutions/` dark centred at 150px, `/our-team/` dark two-column,
+     `/services/` image-backed, and `.page-hero` at 140px on 8 more pages), so a single
+     shared file cannot carry them. Each page's own hero rules reach the inline block
+     through css.mjs::splitCritical(), whose allow-list contains `.hero*`, `.page-hero*`,
+     `.mtfs-hero*` and `.sm-hero*`.
+   - fonts.css's 14 @font-face blocks. They are concatenated ahead of this file by the
+     inline-critical-css pass (measured: 5,862 B minified, 428 B brotli). All 14 are kept:
+     the same physical woff2 backs four weights, so collapsing them to a `font-weight:
+     400 700` range would make the browser synthesise bold if the file is static.
+   - The mega panels' contents, the search overlay and the site design system. Those are
+     /assets/site.<hash>.css.
+
+   SOURCES — every declaration below is transcribed from the export, not invented:
+     assets/mega-menu.css lines 9-295 (shell), 300-320 + 493-535 (hidden states),
+       568-747 (the <=1180px drawer), 812-854 (search button), 857-872 (overlay hidden
+       state), 1161-1171 (reduced motion)
+     the per-page inline <style> blocks (reset, :root, base typography, .il2 skip link)
+     assets/mtfs-images.css lines 1-36 (the CLS-critical .mtfs-media subset)
+   ============================================================================= */
+
+/* ── Global overflow guard — mega-menu.css:9 ───────────────────────────────── */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ── Design tokens ──────────────────────────────────────────────────────────
+   The union of the FOUR different :root blocks the export ships (13 pages, 5 service
+   leaves with the --teal-* / --white aliases, 2 legal pages, and /404/ in lowercase).
+   No value conflicts between them — only spelling — so the union is safe, and it means
+   any page whose own :root is deduped away still resolves every var().
+   --mm-header-h and the scroll-padding-top below are ADDITIONS: the header is
+   position:fixed with no body padding reserving it, so in-page #anchor targets used to
+   land underneath it.                                                                 */
+:root,
+.mm-header {
+  --teal: #1F6E75;
+  --td: #175459;
+  --teal-dark: #175459;
+  --tl: #E4F0EE;
+  --teal-light: #E4F0EE;
+  --pt: #E4F0EE;
+  --lime: #CCDF33;
+  --orange: #F8793F;
+  --plum: #6B3357;
+  --magenta: #C013AE;
+  --rose: #C77E90;
+  --blush: #FBEDEE;
+  --lightrose: #F1E3E4;
+  --neutral: #F4F7F6;
+  --charcoal: #2A2320;
+  --browngray: #5C524B;
+  --muted: #6F6259;
+  --w: #FDFAFA;
+  --white: #FDFAFA;
+  --ow: #F4F7F6;
+  --off-white: #F4F7F6;
+  --g50: #F4F7F6;
+  --g100: #E4EAE8;
+  --g200: #C9D4D1;
+  --g300: #B0BDB9;
+  --g400: #9AADA9;
+  --g600: #5C524B;
+  --g700: #3D342D;
+  --g800: #2A2320;
+  --g900: #1A1210;
+  --r: 16px;
+  --rl: 22px;
+  --rb: 999px;
+  --rform: 11px;
+  --mm-teal: #1F6E75;
+  --mm-teal-d: #175459;
+  --mm-teal-l: #E4F0EE;
+  --mm-lime: #CCDF33;
+  --mm-orange: #F8793F;
+  --mm-plum: #6B3357;
+  --mm-w: #FDFAFA;
+  --mm-ow: #F4F7F6;
+  --mm-g50: #F4F7F6;
+  --mm-g100: #E4EAE8;
+  --mm-g200: #C9D4D1;
+  --mm-g300: #B0BDB9;
+  --mm-g400: #9AADA9;
+  --mm-g600: #5C524B;
+  --mm-g800: #2A2320;
+  --mm-g900: #1A1210;
+  --mm-shadow-md: 0 8px 32px rgba(0,0,0,.08);
+  --mm-shadow-lg: 0 24px 64px rgba(0,0,0,.12);
+  --mm-radius: 16px;
+  --mm-radius-l: 22px;
+  --mm-radius-btn: 999px;
+  --mm-easing: cubic-bezier(.22,.61,.36,1);
+  --mm-header-h: 80px;
+}
+
+html {
+  scroll-padding-top: var(--mm-header-h);
+}
+
+/* ── Reset + base typography (from the per-page inline blocks) ─────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--g800);
+  line-height: 1.65;
+  background: var(--w);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  max-width: 100%;
+  font-size: clamp(1rem, 1.05vw, 1.125rem);
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Sora', sans-serif;
+  line-height: 1.2;
+  color: var(--g900);
+  overflow-wrap: break-word;
+}
+
+h1 { font-size: clamp(2.125rem, 5vw, 3.75rem); font-weight: 800; }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.625rem); font-weight: 700; }
+h3 { font-size: clamp(1.375rem, 2.5vw, 1.875rem); font-weight: 600; }
+h4 { font-size: clamp(1.125rem, 1.6vw, 1.375rem); font-weight: 600; }
+
+p { max-width: 70ch; overflow-wrap: break-word; }
+.lead { font-size: clamp(1.125rem, 1.5vw, 1.25rem); line-height: 1.65; }
+
+*[class*="-grid"] > *,
+*[class*="grid-"] > *,
+.sg > *,
+.ag > *,
+.wg > *,
+.avis > *,
+.ftg > * { min-width: 0; }
+
+a { text-decoration: none; color: inherit; transition: color .3s; }
+img { max-width: 100%; display: block; height: auto; }
+
+.ctr { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+@media (max-width: 320px) {
+  .ctr { padding: 0 16px; }
+}
+
+/* ── Keyboard focus ring — the export's only focus styling, kept verbatim ──── */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.bp:focus-visible,
+.bs2:focus-visible,
+.cbp:focus-visible,
+.cbb:focus-visible,
+.fq:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Skip link ─────────────────────────────────────────────────────────────
+   Was `.il2` plus an inline onfocus/onblur pair
+   (onfocus="this.style.top='0'" onblur="this.style.top='-100%'") on 3 of 21 pages, and
+   it was injected BEHIND the JS-built header so it sat about ten tab stops deep and
+   skipped nothing. render.mjs now emits it as the first node of <body> and the
+   :focus/:focus-visible rules below replace the two handlers.                        */
+.mtfs-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  font-weight: 600;
+}
+
+.mtfs-skip-link:focus,
+.mtfs-skip-link:focus-visible { top: 0; }
+
+/* =============================================================================
+   HEADER SHELL — mega-menu.css:40-295, server-rendered by render.mjs::renderHeader()
+   ============================================================================= */
+.mm-header,
+.mm-header *,
+.mm-header *::before,
+.mm-header *::after {
+  box-sizing: border-box;
+}
+
+.mm-header {
+  position: fixed;
+  top: 4px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(253,250,250,.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #F1E3E4;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--mm-g800);
+  transition: box-shadow .25s var(--mm-easing),
+              background .25s var(--mm-easing);
+}
+
+/* 4px brand colour strip pinned above the header — the topmost painted pixels */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 1001;
+  background: linear-gradient(90deg,
+    #1F6E75 0%,
+    #1F6E75 25%,
+    #CCDF33 25%,
+    #CCDF33 50%,
+    #F8793F 50%,
+    #F8793F 75%,
+    #C013AE 75%,
+    #C013AE 100%
+  );
+  pointer-events: none;
+}
+
+.mm-header.mm-scrolled {
+  background: rgba(253,250,250,.97);
+  box-shadow: var(--mm-shadow-md);
+}
+
+body.mm-menu-lock {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.mm-header svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  max-width: none;
+  min-width: 0;
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.mm-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 88px;
+  transition: height .3s var(--mm-easing);
+}
+
+.mm-header.mm-scrolled .mm-bar { height: 60px; }
+
+/* ── Logo. `.mm-logo-img` replaces the export's inline
+   style="height:44px;width:auto;…" — the contract forbids style= attributes.      */
+.mm-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--mm-g900);
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -.01em;
+  transition: transform .25s var(--mm-easing);
+}
+.mm-logo img,
+.mm-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transition: height .3s var(--mm-easing);
+}
+
+.mm-header.mm-scrolled .mm-logo img,
+.mm-header.mm-scrolled .mm-logo-img { height: 32px; }
+
+/* ── Primary nav bar ──────────────────────────────────────────────────────── */
+.mm-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.mm-nav > li.mm-mobile-only { display: none; }
+.mm-nav > li {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+.mm-nav a,
+.mm-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 44px;
+  text-decoration: none;
+  color: var(--mm-g600);
+  font-size: .92rem;
+  font-weight: 500;
+  line-height: 1;
+  background: none;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  white-space: nowrap;
+  transition: color .2s var(--mm-easing);
+}
+.mm-nav a:hover,
+.mm-nav button:hover,
+.mm-nav button[aria-expanded="true"],
+.mm-nav button.mm-active,
+.mm-nav a.mm-active {
+  color: var(--mm-teal);
+  background: rgba(0,139,139,.08);
+}
+.mm-nav button[aria-expanded="true"] {
+  box-shadow: inset 0 0 0 2px rgba(0,139,139,.22);
+}
+.mm-nav a:focus,
+.mm-nav button:focus,
+.mm-phone:focus,
+.mm-cta:focus {
+  outline: 3px solid rgba(0,139,139,.28);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+.mm-nav .mm-caret {
+  width: 10px;
+  height: 10px;
+  transition: transform .25s var(--mm-easing);
+}
+.mm-nav button[aria-expanded="true"] .mm-caret {
+  transform: rotate(-180deg);
+}
+
+/* ── Right cluster: phone, search, CTA ──────────────────────────────────────
+   NOTE: the :hover states of .mm-logo, .mm-phone, .mm-cta and .mm-search-btn are
+   deliberately NOT here — they are in site.css. Hover cannot fire before a pointer is
+   over the element, and none of them changes layout (colour, transform and box-shadow
+   only), so deferring them cannot shift anything. That is 300 B of the critical budget. */
+.mm-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.mm-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--mm-g800);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s var(--mm-easing);
+}
+.mm-phone svg { width: 16px; height: 16px; color: var(--mm-teal); }
+.mm-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--mm-teal);
+  color: var(--mm-w);
+  padding: 10px 20px;
+  border-radius: var(--mm-radius);
+  font-size: .88rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s var(--mm-easing),
+              transform .2s var(--mm-easing),
+              box-shadow .2s var(--mm-easing);
+}
+.mm-cta svg { width: 14px; height: 14px; }
+
+.mm-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--mm-g100);
+  border-radius: var(--mm-radius);
+  background: var(--mm-g50);
+  color: var(--mm-g600);
+  font-size: .84rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .2s var(--mm-easing),
+              background .2s var(--mm-easing),
+              color .2s var(--mm-easing);
+}
+.mm-search-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.mm-search-btn .mm-search-kbhint {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  font-size: .72rem;
+  color: var(--mm-g400);
+}
+.mm-search-btn .mm-search-kbhint kbd {
+  background: var(--mm-g100);
+  border: 1px solid var(--mm-g200);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: .68rem;
+  color: var(--mm-g600);
+}
+
+/* ── Burger ───────────────────────────────────────────────────────────────── */
+.mm-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--mm-g100);
+  border-radius: 8px;
+  background: var(--mm-w);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+}
+.mm-burger span {
+  width: 18px;
+  height: 2px;
+  background: var(--mm-g800);
+  border-radius: 2px;
+  transition: transform .25s var(--mm-easing), opacity .2s;
+}
+.mm-header.mm-mobile-open .mm-burger span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.mm-header.mm-mobile-open .mm-burger span:nth-child(2) { opacity: 0; }
+.mm-header.mm-mobile-open .mm-burger span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =============================================================================
+   THE FOUR HIDDEN-BY-DEFAULT BASE RULES
+
+   These are the reason this file may never be deferred. Each one is the closed state
+   of chrome that render.mjs now emits into the HTML, and each uses visibility:hidden or
+   display:none — never opacity:0 / pointer-events:none alone — so the closed content
+   really does leave the accessibility tree and the tab order. (The consultation modal in
+   the export got this wrong the other way round: it set the `hidden` attribute but its own
+   stylesheet declared #mtfs-modal-root{display:flex}, so a closed 4-step dialog with ~15
+   focusable controls sat in the tab order on every page.)
+   The panel bodies, the open states and the whole search overlay UI live in the deferred
+   sheet and in search.js — only the closed geometry is here.
+   ============================================================================= */
+.mm-panel {
+  position: fixed;
+  top: 96px;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  width: min(1140px, calc(100vw - 32px));
+  background: var(--mm-w);
+  border: 1px solid var(--mm-g100);
+  border-radius: var(--mm-radius-l);
+  box-shadow: var(--mm-shadow-lg);
+  padding: 28px 28px 22px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .22s var(--mm-easing),
+              transform .26s var(--mm-easing),
+              visibility 0s linear .26s;
+  margin-top: 8px;
+  z-index: 999;
+}
+.mm-header.mm-scrolled .mm-panel { top: 68px; }
+
+.mm-mobile-scrim { display: none; }
+
+.mm-back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--mm-teal);
+  color: var(--mm-w);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,139,139,.32);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity .25s var(--mm-easing),
+              transform .25s var(--mm-easing),
+              visibility 0s linear .25s,
+              background .2s var(--mm-easing);
+  z-index: 998;
+}
+.mm-back-to-top svg { display: block; width: 20px; height: 20px; }
+
+.mm-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  background: rgba(17,24,39,.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .22s var(--mm-easing), visibility 0s linear .22s;
+}
+
+/* =============================================================================
+   BREADCRUMB — new markup from render.mjs::renderBreadcrumbs(), sits directly under the
+   fixed header on all 19 non-home indexable pages. Separators are CSS-generated; the
+   export used literal "/" text nodes inside a <div class="breadcrumb">, which screen
+   readers announce.
+   ============================================================================= */
+.mtfs-breadcrumb {
+  font-size: .85rem;
+  color: var(--g600);
+}
+.mtfs-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mtfs-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.mtfs-breadcrumb__item + .mtfs-breadcrumb__item::before {
+  content: "/";
+  color: var(--g400);
+  speak: never;
+}
+.mtfs-breadcrumb__item a {
+  color: var(--teal);
+  text-decoration: none;
+}
+.mtfs-breadcrumb__item a:hover,
+.mtfs-breadcrumb__item a:focus-visible {
+  text-decoration: underline;
+}
+.mtfs-breadcrumb__current { color: var(--g600); }
+
+.dk .mtfs-breadcrumb,
+.hero .mtfs-breadcrumb,
+.dk .mtfs-breadcrumb__current,
+.hero .mtfs-breadcrumb__current { color: rgba(255,255,255,.6); }
+.dk .mtfs-breadcrumb__item a,
+.hero .mtfs-breadcrumb__item a { color: var(--lime); }
+.dk .mtfs-breadcrumb__item + .mtfs-breadcrumb__item::before,
+.hero .mtfs-breadcrumb__item + .mtfs-breadcrumb__item::before { color: rgba(255,255,255,.35); }
+
+/* =============================================================================
+   CLS-CRITICAL IMAGE BOXES — mtfs-images.css:1-36 only.
+   This is the 528 B subset that reserves an image's box before the CDN image resolves.
+   The other ~1,930 B of that file is below-fold grid layout and lives in the site sheet.
+   Keeping this inline STRENGTHENS the measured CLS of 0.005 while removing the third
+   render-blocking request (302 ms).
+   ============================================================================= */
+.mtfs-media {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 20px;
+  background: #e8eaed;
+  box-shadow: 0 18px 46px rgba(17, 24, 39, 0.13);
+}
+.mtfs-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mtfs-media--standard { aspect-ratio: 3 / 2; }
+.mtfs-media--wide { aspect-ratio: 2 / 1; }
+.mtfs-media--panoramic { aspect-ratio: 21 / 9; }
+.mtfs-media--team { aspect-ratio: 16 / 9; }
+.mtfs-media--portrait { aspect-ratio: 4 / 5; }
+
+/* Two more rules out of mtfs-images.css that are structural above the fold rather than
+   decorative: the /services/management-services/ hero is a two-column grid, and the
+   /about/ hero image is absolutely positioned behind the copy. Deferring either one
+   stacks the hero and then snaps it. Their gradients, object-position and the mobile
+   overrides stay in the site sheet — those only repaint. */
+.mtfs-hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+  gap: 52px;
+  align-items: center;
+}
+.mtfs-about-hero { isolation: isolate; }
+.mtfs-about-hero .mtfs-hero-image {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.mtfs-about-hero .mtfs-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================================================
+   RESPONSIVE HEADER — mega-menu.css:540-805.
+   The <=1180px block is reproduced IN FULL for the closed state, because below that
+   width the nav becomes a fixed off-canvas drawer. With this deferred, first paint on a
+   phone would show the nav as an in-flow vertical stack and then snap it to the right
+   edge — a multi-thousand-pixel layout jump. The drawer's OPEN-state refinements at
+   <=900/640/420px are in the site sheet: the drawer is closed at first paint, so a stale
+   `top` on an invisible, translated-off-screen element is not observable.
+   ============================================================================= */
+/* Source order matters and is preserved: mega-menu.css declares <=1024 BEFORE <=1280,
+   so below 1024px the 1280 block's `padding:0 12px` is the one that wins. */
+@media (max-width: 1024px) {
+  .mm-bar { padding: 0 20px; height: 76px; }
+  .mm-header.mm-scrolled .mm-bar { height: 56px; }
+  .mm-phone { display: none; }
+  .mm-nav a,
+  .mm-nav button { padding: 0 14px; font-size: .88rem; }
+}
+
+@media (max-width: 1280px) {
+  .mm-bar {
+    max-width: none;
+    padding: 0 20px;
+    gap: 16px;
+  }
+  .mm-phone { display: none; }
+  .mm-nav a,
+  .mm-nav button {
+    padding: 0 12px;
+    font-size: .88rem;
+  }
+  .mm-cta {
+    padding: 10px 16px;
+    font-size: .84rem;
+  }
+}
+
+@media (max-width: 1180px) {
+  :root { --mm-header-h: 76px; }
+
+  .mm-bar { height: 76px; gap: 14px; }
+  .mm-header.mm-scrolled .mm-bar { height: 64px; }
+  .mm-header.mm-mobile-open .mm-bar,
+  .mm-header.mm-mobile-open.mm-scrolled .mm-bar { height: 76px; }
+  .mm-logo { min-width: 0; }
+  .mm-burger { display: inline-flex; }
+  .mm-header.mm-mobile-open .mm-burger {
+    border-color: var(--mm-g100);
+    background: var(--mm-w);
+  }
+  .mm-right .mm-cta { display: none; }
+
+  .mm-mobile-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 990;
+    background: rgba(17,24,39,.48);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .24s var(--mm-easing), visibility 0s linear .24s;
+  }
+  .mm-header.mm-mobile-open + .mm-mobile-scrim {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity .24s var(--mm-easing), visibility 0s linear 0s;
+  }
+
+  /* The export selected `nav[role="navigation"]`. render.mjs drops that redundant
+     implicit role, so the selector is the bare element now. */
+  .mm-header nav {
+    position: static;
+    display: block;
+  }
+  .mm-nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed !important;
+    top: 76px;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: min(430px, 100vw);
+    height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
+    max-height: calc(100vh - 76px);
+    max-height: calc(100dvh - 76px);
+    background: var(--mm-w);
+    border-left: 1px solid var(--mm-g100);
+    padding: 18px 16px 24px;
+    box-shadow: -24px 0 56px rgba(17,24,39,.2);
+    gap: 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(100%,0,0);
+    transition: transform .28s var(--mm-easing),
+                opacity .22s var(--mm-easing),
+                visibility 0s linear .28s;
+    z-index: 1002;
+  }
+  .mm-header.mm-scrolled .mm-nav {
+    top: 64px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+  }
+  .mm-header.mm-mobile-open .mm-nav,
+  .mm-header.mm-mobile-open.mm-scrolled .mm-nav {
+    top: 76px;
+    height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
+    max-height: calc(100vh - 76px);
+    max-height: calc(100dvh - 76px);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0,0,0);
+    transition: transform .28s var(--mm-easing),
+                opacity .22s var(--mm-easing),
+                visibility 0s linear 0s;
+  }
+  .mm-nav > li {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--mm-g100);
+    padding: 4px 0;
+    flex: 0 0 auto;
+  }
+  .mm-nav > li:last-child { border-bottom: 0; }
+  .mm-nav > li.mm-mobile-only { display: block; }
+  .mm-nav a,
+  .mm-nav button {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 14px;
+    min-height: 50px;
+    height: auto;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.25;
+    white-space: normal;
+  }
+  .mm-mobile-only a {
+    justify-content: center;
+    margin-top: 8px;
+    border-radius: var(--mm-radius);
+    background: var(--mm-teal);
+    color: var(--mm-w);
+    font-weight: 700;
+  }
+  /* Closed state of the panel inside the drawer. The open state, the panel grid and
+     every .mm-item rule are deferred. */
+  .mm-panel {
+    position: static;
+    width: 100%;
+    transform: none;
+    box-shadow: none;
+    border: 1px solid var(--mm-g100);
+    border-radius: 14px;
+    background: var(--mm-g50);
+    margin: 6px 0 12px;
+    padding: 14px;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    overflow: hidden;
+  }
+  .mm-back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+}
+
+@media (max-width: 900px) {
+  .mm-bar { height: 64px; gap: 12px; }
+  .mm-header.mm-scrolled .mm-bar { height: 56px; }
+  .mm-header.mm-mobile-open .mm-bar,
+  .mm-header.mm-mobile-open.mm-scrolled .mm-bar { height: 64px; }
+  .mm-search-btn .mm-search-kbhint { display: none; }
+}
+
+@media (max-width: 640px) {
+  .mm-search-btn span:not(.mm-search-kbhint) { display: none; }
+  .mm-search-btn { padding: 8px; border-radius: 8px; }
+}
+
+@media (max-width: 420px) {
+  .mm-bar {
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .mm-burger {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mm-bar { padding: 0 10px; }
+}
+
+/* ── Reduced motion — mega-menu.css:1161 ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mm-header,
+  .mm-bar,
+  .mm-logo img,
+  .mm-logo-img,
+  .mm-panel,
+  .mm-back-to-top,
+  .mm-cta { transition: none !important; }
+}

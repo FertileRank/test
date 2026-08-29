@@ -17,12 +17,21 @@
  *     `unused-css-rules` is a SPLITTING problem, not a deletion problem: the unused bytes
  *     are the search overlay (8,135 B) and the mega panels (6,563 B), which are needed on
  *     interaction. splitCritical() splits; it never deletes.
- *   - 263,821 B of inline <style> site-wide (measured over all 21 pages), of which
- *     35,460 B is byte-identical duplication: `#mtfs-context-links` (250 B) and
- *     `#mtfs-visible-related-links` (1,720 B) each repeat across 19 pages — 18 redundant
- *     copies each, 18 * (250 + 1720) = 35,460 B that is re-sent on every page view and
- *     never cached. dedupe() hoists them into the shared sheet, which _headers can then
- *     serve `immutable` because hashName() content-hashes it.
+ *   - 263,821 B of inline <style> site-wide (measured over all 21 pages, sum of every
+ *     <style> body), of which 35,460 B is byte-identical duplication: `#mtfs-context-links`
+ *     (250 B) and `#mtfs-visible-related-links` (1,720 B) each repeat across 19 pages —
+ *     18 redundant copies each, 18 * (250 + 1720) = 35,460 B that is re-sent on every page
+ *     view and never cached.
+ *     Those two blocks are NOT removed by dedupe(): index.html spells the same colours with
+ *     var(--teal) where the other 19 pages use #1f6e75, so the selector `.mtfs-related` has
+ *     two definitions site-wide and the cascade guard below (correctly) refuses to hoist it.
+ *     They are removed by construction instead — src/assets/css/site.css owns those rules
+ *     and render.mjs::renderRelated() emits the markup, so the ssr-chrome pass deletes both
+ *     <style> elements from all 19 pages.
+ *     What dedupe() does remove is everything else that proves identical: measured over the
+ *     21 real page blocks it hoists 15,845 B into the shared sheet and drops the 21 blocks
+ *     from 257,186 B to 178,892 B — 62,449 B of never-cached inline CSS turned into one
+ *     hashed file that _headers can serve `immutable`, because hashName() content-hashes it.
  *
  * ---------------------------------------------------------------------------------------
  * PIPELINE (what sync.mjs is expected to do with these four functions)
@@ -486,16 +495,21 @@ function selectorTokens(selector) {
  * Does one allow-list entry match one selector?
  *
  * Entry syntax (explicit, no heuristics, no guessing):
- *   `.foo`        the selector references class `foo` anywhere
- *   `.foo*`       the selector references any class whose name starts with `foo`
- *   `#foo`        the selector references id `foo` anywhere
- *   `:foo`        the selector references pseudo-class/element `foo` anywhere
- *   `html`        EXACT selector match (so `p` matches `p` but never `.sh p`)
- *   `*::before`   EXACT selector match, pseudo-elements included
- *   `@font-face`  at-rule name (checked against at-rule preludes, not selectors)
+ *   `.foo`         the selector references class `foo` anywhere
+ *   `.foo*`        the selector references any class whose name starts with `foo`
+ *   `#foo`         the selector references id `foo` anywhere
+ *   `:foo`         the selector references pseudo-class/element `foo` anywhere
+ *   `html`         EXACT selector match (so `p` matches `p` but never `.sh p`)
+ *   `*::before`    EXACT selector match, pseudo-elements included
+ *   `=.mm-panel`   EXACT selector match for anything, including a class. Use this for the
+ *                  hidden-by-default base rules: `.mm-search-overlay` as a token entry
+ *                  would also pull in `.mm-search-overlay.mm-search-open .mm-search-modal`,
+ *                  i.e. the whole 8,135 B search overlay that must stay in the lazy sheet.
+ *   `@font-face`   at-rule name (checked against at-rule preludes, not selectors)
  */
 function entryMatchesSelector(entry, tok) {
   if (entry.startsWith('@')) return false;
+  if (entry.startsWith('=')) return tok.text === minifyPrelude(entry.slice(1));
   if (entry.startsWith('.')) {
     const name = entry.slice(1);
     if (name.endsWith('*')) {
@@ -575,8 +589,10 @@ const DEFAULT_CRITICAL_SELECTORS = [
   // header / nav shell + the four hidden-by-default states
   '.mm-header', '.mm-bar', '.mm-logo*', '.mm-nav', '.mm-caret', '.mm-right', '.mm-phone',
   '.mm-cta', '.mm-search-btn', '.mm-search-kbhint', '.mm-burger', '.mm-mobile-only',
-  '.mm-mobile-scrim', '.mm-menu-lock', '.mm-scrolled', '.mm-mobile-open',
-  '.mm-panel', '.mm-back-to-top', '.mm-search-overlay',
+  '.mm-menu-lock', '.mm-scrolled', '.mm-mobile-open',
+  // the four hidden-by-default base rules — EXACT matches only, so the panel bodies and the
+  // search overlay body stay in the lazy sheet where the measured 15,335 B of "unused" CSS is
+  '=.mm-panel', '=.mm-mobile-scrim', '=.mm-back-to-top', '=.mm-search-overlay',
   // hero variants (all of them — one shared critical block serves all 21 pages)
   '.hero*', '.page-hero*', '.mtfs-hero*', '.sm-hero*', '.crumb', '.breadcrumb',
   '.badge', '.bp', '.bs2',
