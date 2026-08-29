@@ -869,6 +869,9 @@ export function renderFooter(currentRoute, graph, cfg) {
       ? ''
       : String(site.copyrightYear) + ' ';
 
+  // "MedTech For Solutions Inc." already ends in a period — do not add a second one.
+  const legalName = String(site.legalName || site.name || '');
+
   return join([
     '<footer class="mtfs-footer">',
     '<div class="ctr">',
@@ -902,7 +905,7 @@ export function renderFooter(currentRoute, graph, cfg) {
     '</div>',
 
     '<div class="fbot mtfs-footer__bottom">',
-    '<span>&copy; ' + year + esc(site.legalName || site.name || '') + '. All rights reserved.</span>',
+    '<span>&copy; ' + year + esc(legalName) + (legalName.endsWith('.') ? ' ' : '. ') + 'All rights reserved.</span>',
     '<span>',
     bottomRoutes.map((r, i) => (i === 0 ? '' : ' &middot; ') + link(r)).join(''),
     credit,
@@ -1169,7 +1172,9 @@ export function renderHeadTags(route, graph, cfg) {
   }
 
   /* --- 6. Open Graph ------------------------------------------------------- */
-  head.push(metaProperty('og:type', path === '/' ? 'website' : 'article'));
+  // og:type is "website" on every page. None of the 21 routes is an article, and Open Graph
+  // has no type for a service page; the 7 export pages that declare og:type all say website.
+  head.push(metaProperty('og:type', 'website'));
   head.push(metaProperty('og:title', title));
   head.push(metaProperty('og:description', description));
   head.push(metaProperty('og:site_name', site.name));
