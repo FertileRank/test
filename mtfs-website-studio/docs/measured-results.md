@@ -39,13 +39,32 @@ site's absolute score.
 | First Contentful Paint | 1.7 s | **0.9 s** | −47% |
 | Largest Contentful Paint | 1.8 s | **1.2 s** | −33% |
 | Speed Index | 1.7 s | **0.9 s** | −47% |
-| Time to Interactive | 3.1 s | **1.6 s** | −48% |
-| Total Blocking Time | 30 ms | **10 ms** | −67% |
+| Time to Interactive | 3.1 s | **1.7 s** | −45% |
+| Total Blocking Time | 30 ms | 30 ms | **no change** |
 | Cumulative Layout Shift | 0.005 | **0** | eliminated |
-| Main-thread work | 1.2 s | **0.5 s** | −58% |
+| Main-thread work | 1.2 s | **0.6 s** | −50% |
 | Script bootup time | 0.1 s | **0.0 s** | — |
-| DOM elements | 903 (failing) | **594 (passing)** | −34% |
-| Total byte weight | 213 KiB | **33 KiB** | −85% |
+| DOM elements | 903 (failing) | **595 (passing)** | −34% |
+| Total byte weight | 213 KiB | **36 KiB** | −83% |
+
+> **Correction.** An earlier revision of this document reported TBT 10 ms, TTI
+> 1.6 s, main-thread 0.5 s, DOM 594 and 33 KiB. Those came from a `dist/` that
+> had been built before `src/assets/js/book-consultation-modal.js` existed, so
+> the served page carried no `consult-modal.js` loader tag and the browser
+> fetched one fewer deferred script than a correct build does. The numbers above
+> are from a clean build of the current tree, verified to contain the loader
+> (`200 · 3,305 B · consult-modal.f64fcb9e.js` in the network log).
+>
+> The honest consequence is that **Total Blocking Time did not improve** — it is
+> 30 ms before and after. The earlier 10 ms was an artefact of the missing
+> script. TBT was already passing comfortably at 30 ms, and nothing in this
+> refactor targeted it; the wins are in paint, interactivity and bytes.
+
+**Reproducibility.** Two consecutive builds from an unchanged tree produce
+byte-identical output — `diff -rq` over the full `dist/` reports zero differing
+paths, `.br` and `.gz` siblings included. That is what makes a stale build
+detectable at all, and it is why `routes.mjs` and `render.mjs` contain no `Date`
+or `Math.random` and why `copyrightYear` is a manifest literal.
 
 ## Main-thread breakdown
 
@@ -65,7 +84,7 @@ them at runtime.
 
 *(the AFTER column is from the `no-store` dev-server run, which is the only run
 where both breakdowns were captured under identical caching; the
-production-like run reports 0.5 s total.)*
+production-like run reports 0.6 s total.)*
 
 ## Audits that flipped from failing to passing
 
@@ -74,7 +93,7 @@ production-like run reports 0.5 s total.)*
 | `uses-text-compression` | fail — est. savings of 140 KiB | **pass** |
 | `unused-css-rules` | fail — est. savings of 15 KiB | **pass** |
 | `render-blocking-resources` | fail — est. savings of 380 ms | **pass** |
-| `dom-size` | fail — 903 elements | **pass** — 594 |
+| `dom-size` | fail — 903 elements | **pass** — 595 |
 | `link-text` (SEO) | fail | **pass** |
 | `heading-order` | fail | **pass** |
 | `aria-allowed-attr` | fail | **pass** |
