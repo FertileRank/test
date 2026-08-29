@@ -89,13 +89,16 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
 
 /**
- * Candidate source directories, first hit wins. The original Website Studio
- * export is read-only reference material and lives outside the repo; if it is
- * ever vendored into the repo it is picked up without a flag.
+ * Candidate source directories, first hit wins.
+ *
+ * Vendor the Website Studio export at src/source-export/ and it is found with
+ * no flag; keep it anywhere else and pass --src DIR. An earlier revision also
+ * listed an absolute path from the machine this was developed on, which worked
+ * there and nowhere else — a build that silently succeeds for one person and
+ * fails for everyone else is worse than one that asks for --src.
  */
 const SRC_CANDIDATES = [
   path.join(ROOT, 'src', 'source-export'),
-  '/tmp/claude-0/-home-user-test/da065df0-1665-52a8-b803-716d1ee66e9a/scratchpad/src/source-export',
 ];
 
 const DEFAULT_OUT = path.join(ROOT, 'dist');
@@ -103,10 +106,25 @@ const DEFAULT_OUT = path.join(ROOT, 'dist');
 /** Files copied verbatim from the source export into dist. */
 const PASSTHROUGH = [
   { from: 'favicon.ico', to: 'favicon.ico', kind: 'file' },
-  // The /404/ page's own bundle. Already content-hashed by the builder
-  // (route.5fb2523d0a44.css, runtime.66dc1f96c7dd.js …), so it satisfies the
-  // /assets/* immutable rule that headerRules depends on.
-  { from: 'assets/404', to: 'assets/404', kind: 'dir' },
+  // NOT copied: assets/404/ — the /404/ page's own legacy bundle from the
+  // Website Studio builder (route.5fb2523d0a44.css, a second copy of
+  // mega-menu.js and consultation-modal.js, and 15 wordmark/brand-icon
+  // variants). 290,741 B across 18 files.
+  //
+  // It became dead weight in this build rather than being dropped on a hunch:
+  // inline-critical-css removes every /assets/*.css stylesheet link, which
+  // takes route.5fb2523d0a44.css off /404/, and the 15 images were only ever
+  // reachable from inside that CSS. Verified before removing that /404/ still
+  // renders styled — all 16 classes its <main> uses are defined in the inline
+  // critical block or site.css — and the asset cross-reference pass reports
+  // every one of the 18 as unreferenced.
+  //
+  // The one file still needed from it, the 96px brand icon the consultation
+  // modal paints at 28x28, was copied into src/assets/img/ instead, so it
+  // ships as a first-party hashed asset.
+  //
+  // If a future change genuinely references something here, the
+  // unreferenced-asset check will not catch it — re-add the entry.
 ];
 
 /** First-party JS shipped from src/assets/js/, in emission order. */
@@ -496,6 +514,52 @@ const REPLACED_LINK_RELS = new Set([
   'prerender',
   'modulepreload',
 ]);
+
+/**
+ * Pull hand-authored JSON-LD out of a source document's <head> so `head-tags`
+ * can reinstate it after wiping the rest.
+ *
+ * Only the @types named in `keep` are carried. Everything else is regenerated
+ * from the manifest and must NOT survive, or the build would emit two of each
+ * node and reintroduce exactly the @id conflicts the audit found (18 pages
+ * referencing an #organization that 3 pages defined, with 2 different shapes).
+ *
+ * @param {string} html   the source document
+ * @param {string[]} keep @type values to preserve, e.g. ['FAQPage']
+ * @returns {{blocks: string[], types: string[]}}
+ */
+function carryForwardJsonLd(html, keep) {
+  const blocks = [];
+  const types = [];
+  const headMatch = /<head[^>]*>([\s\S]*?)<\/head>/i.exec(html || '');
+  if (!headMatch) return { blocks, types };
+  const re = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = re.exec(headMatch[1])) !== null) {
+    let parsed;
+    try {
+      parsed = JSON.parse(m[1]);
+    } catch {
+      continue; // malformed JSON-LD in the source is not this build's to repair
+    }
+    const nodes = Array.isArray(parsed['@graph']) ? parsed['@graph'] : [parsed];
+    const hit = nodes.find((n) => {
+      const t = n && n['@type'];
+      const list = Array.isArray(t) ? t : [t];
+      return list.some((x) => keep.indexOf(x) !== -1);
+    });
+    if (!hit) continue;
+    // Re-serialise rather than reusing the raw source text: it strips the
+    // builder's data-lps-eid attribute from the <script> tag and normalises
+    // whitespace, so the output is byte-stable across builds.
+    blocks.push(
+      '<script type="application/ld+json">' + JSON.stringify(parsed) + '</script>'
+    );
+    const t = hit['@type'];
+    types.push(Array.isArray(t) ? t.join('+') : String(t));
+  }
+  return { blocks, types };
+}
 
 /**
  * STEP `head-tags` — install the rendered <head> metadata block.
@@ -1063,7 +1127,24 @@ async function main() {
     // (b) head-tags (orchestrator-owned; see the file header)
     let html = p.srcHtml;
     try {
-      const headHtml = RENDER.renderHeadTags(route, graph, cfg) + orgJsonLd;
+      // head-tags removes every application/ld+json block in the source head
+      // before installing the rendered one. Most of those are regenerated from
+      // the manifest — but FAQPage is not: it is hand-authored page content
+      // (six Question/Answer pairs on the home page) that no manifest field
+      // describes. Dropping it silently deleted the site's only FAQPage while
+      // the visible FAQ copy stayed on the page.
+      //
+      // Carry it forward verbatim rather than trying to regenerate it: the
+      // answers are editorial prose and this build does not author copy.
+      const carried = carryForwardJsonLd(p.srcHtml, ['FAQPage']);
+      if (carried.blocks.length) {
+        notes.push(
+          `carried ${carried.blocks.length} hand-authored JSON-LD block(s) ` +
+            `forward from the source head: ${carried.types.join(', ')}`
+        );
+      }
+      const headHtml =
+        RENDER.renderHeadTags(route, graph, cfg) + orgJsonLd + carried.blocks.join('');
       const applied = applyHeadTags(html, headHtml);
       html = applied.html;
       notes.push(...applied.notes);
@@ -1394,7 +1475,18 @@ async function main() {
   let emittedAssets;
   if (opts.check) {
     emittedAssets = assetFiles.map((a) => '/' + a.rel);
-    for (const f of await listFiles(path.join(src, 'assets/404'))) emittedAssets.push('/assets/404/' + f);
+    // --check writes nothing, so it has to MODEL what a build would emit. Derive
+    // the passthrough contribution from PASSTHROUGH rather than naming a
+    // directory here: an earlier revision hardcoded assets/404, and when that
+    // entry was dropped from PASSTHROUGH this line kept reporting 18 dead files
+    // that a real build no longer emits — a false warning in the very check
+    // whose job is to catch dead weight.
+    for (const item of PASSTHROUGH) {
+      if (item.kind !== 'dir' || !item.to.startsWith('assets/')) continue;
+      for (const f of await listFiles(path.join(src, item.from))) {
+        emittedAssets.push('/' + item.to + '/' + f);
+      }
+    }
   } else {
     emittedAssets = (await listFiles(path.join(opts.out, 'assets'))).map((f) => '/assets/' + f);
   }

@@ -849,6 +849,26 @@ const deferThirdParty = {
         notes.push('removed the parser-discovered <script id="sa-dynamic-optimization"> — folded into the idle loader');
       }
 
+      // (a2) /404/ ships its own pre-bundled runtime.<hash>.js, which is a
+      // second copy of the GTM boot AND the LPS visitor tracker. analytics.js
+      // supersedes both, so leaving it would initialise GTM twice and run two
+      // trackers on that one page. The other three /assets/404/ references
+      // (route CSS, the legacy mega-menu and consultation-modal bundles) are
+      // already removed by inline-critical-css and the modal passes; this is
+      // the last one, and removing it makes the whole directory unreferenced.
+      for (let i = 0; i < chunks.length; i++) {
+        if (chunks[i].kind !== 'script') continue;
+        const m = /<script\b([\s\S]*?)>/i.exec(chunks[i].raw);
+        if (!m) continue;
+        const src = getAttr(m[1], 'src') || '';
+        if (!/^\/assets\/404\/runtime\.[0-9a-f]+\.js$/.test(src)) continue;
+        text = dropChunk(text, chunks, i);
+        notes.push(
+          `removed ${src} — the /404/ page's own bundled GTM boot + LPS tracker, ` +
+            'superseded by the deferred analytics module (it would have run both)'
+        );
+      }
+
       // (b) the inline LPS visitor tracker -> cacheable module
       const trackerIdx = findChunks(chunks, (c) =>
         c.kind === 'script' && /api\/section-engagement\//.test(c.raw) && /_lps_vid/.test(c.raw));

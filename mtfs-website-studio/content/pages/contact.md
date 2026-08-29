@@ -46,9 +46,49 @@ Phone
 
 Practice / Organization*
 
-Your Role Select role…Medical Director / PhysicianLaboratory DirectorEmbryologistPractice AdministratorClinic OwnerOperations ManagerOther
+Your Role
 
-Service Interest* Select service…Real-Time Monitoring (OvaTools)Regulatory ComplianceStaffing & RecruitmentGPO PurchasingPractice DevelopmentMarketingCall CenterAccounting & FinanceHuman ResourcesInsurance & Risk ManagementMultiple / Not Sure
+Select role…
+
+Medical Director / Physician
+
+Laboratory Director
+
+Embryologist
+
+Practice Administrator
+
+Clinic Owner
+
+Operations Manager
+
+Other
+
+Service Interest*
+
+Select service…
+
+Real-Time Monitoring (OvaTools)
+
+Regulatory Compliance
+
+Staffing & Recruitment
+
+GPO Purchasing
+
+Practice Development
+
+Marketing
+
+Call Center
+
+Accounting & Finance
+
+Human Resources
+
+Insurance & Risk Management
+
+Multiple / Not Sure
 
 How Can We Help?*
 

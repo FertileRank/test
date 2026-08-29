@@ -962,6 +962,17 @@ const BLOCK_TAGS = new Set([
   'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'main', 'nav', 'ol',
   'p', 'picture', 'pre', 'section', 'summary', 'table', 'tbody', 'td', 'tfoot',
   'th', 'thead', 'tr', 'ul',
+  // `option` is inline in HTML but must break here. minifyHtml strips the
+  // inter-tag whitespace, so without a break the /contact/ role picker fused
+  // into one unreadable run: "Select role…Medical Director / PhysicianLaboratory
+  // DirectorEmbryologistPractice AdministratorClinic OwnerOperations ManagerOther".
+  // That is how an AI crawler would have read the form's only set of choices.
+  //
+  // `select` has to be here too, and listing `option` alone is not enough: the
+  // walker only descends into a child that is itself a block, so an inline
+  // `select` sends its whole subtree down the inline path where BLOCK_TAGS is
+  // never consulted again and the options fuse anyway.
+  'select', 'option', 'optgroup', 'legend', 'label',
 ]);
 
 /**
@@ -1217,7 +1228,17 @@ function isDropped(node) {
   // The author has declared this decorative. Believe them: it keeps the "→"
   // glyph out of every related-links label and the dot spans out of every badge.
   if (node.attrs['aria-hidden'] === 'true') return true;
-  if (node.attrs.hidden !== undefined && node.attrs.hidden !== 'false') return true;
+  // NOTE: a bare `hidden` attribute is deliberately NOT a drop signal.
+  //
+  // `aria-hidden="true"` means "decorative, hide from everyone" and is the
+  // genuine marker, kept above. `hidden` on its own only means "not shown in
+  // the current state" — on this site it is what fix-a11y puts on the five
+  // collapsed FAQ answers. Treating it as a drop signal silently removed five
+  // of the home page's six FAQ answers from llms-full.txt while the page's own
+  // FAQPage schema went on asserting all six, so the corpus and the structured
+  // data contradicted each other on the deliverable built for AI crawlers.
+  //
+  // A collapsed disclosure panel is real content behind one click. Keep it.
   if (node.tag === 'nav' || node.tag === 'header' || node.tag === 'footer') return true;
   const cls = String(node.attrs.class || '').split(/\s+/);
   for (const c of cls) if (CHROME_CLASSES.has(c)) return true;

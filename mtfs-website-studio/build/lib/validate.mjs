@@ -413,24 +413,26 @@ export function validateManifest(routes, opts = {}) {
       if (typeof from !== 'string' || !from.startsWith('/')) {
         err(`${where}: from '${from}' must be a root-relative path`);
       } else {
-        const key = pathOf(from);
-        // '/gpo' and '/gpo/' normalise to the same source. Whether that is a
-        // problem depends entirely on where they point.
+        // A redirect SOURCE is a literal request path, not a canonical route,
+        // so it is keyed on the raw string. '/gpo' and '/gpo/' are two
+        // different rules matching two different requests, and a _redirects
+        // file is expected to carry both — the export does, for all 11 legacy
+        // paths.
         //
-        // Same target  -> redundant, not wrong. The export's _redirects lists
-        //   both spellings for all 11 legacy paths and its own header says
-        //   "Source paths match with or without trailing slash", so one line
-        //   would do — but the explicit pair is harmless and portable to hosts
-        //   that do NOT match both. Warn so it is visible; never fail on it.
-        // Different target -> genuinely ambiguous: which one wins is a property
-        //   of the host's matching order, not of this manifest. That is an error.
+        // An earlier revision keyed this on normalizePath(from), which
+        // collapsed each of those pairs into one key and reported 11
+        // "duplicate redirect source" problems on every single run. Downgrading
+        // them to warnings did not fix it: 11 permanent false warnings train an
+        // operator to ignore the warning channel, which is exactly where the
+        // two real warnings live. Canonicalisation still applies to the
+        // redirect TARGET below, which genuinely does need it.
+        const key = from;
         if (froms.has(key)) {
           const prev = redirects[froms.get(key)];
-          const sameTarget = prev && prev.to === to && prev.status === status;
           const msg =
             `${where}: duplicate redirect source '${from}' (also redirects[${froms.get(key)}])`;
-          if (sameTarget) {
-            warn(`${msg} — same target, so redundant but harmless`);
+          if (prev && prev.to === to && prev.status === status) {
+            warn(`${msg} — identical rule declared twice`);
           } else {
             err(
               `${msg} — and they disagree: '${prev && prev.to}' (${prev && prev.status}) ` +

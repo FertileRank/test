@@ -49,19 +49,6 @@ function defaultSrcDir() {
   return path.join(ROOT, 'dist');
 }
 
-/**
- * The pre-build export, used only for the `hidden` backfill described below.
- * Same candidate list build/sync.mjs uses. Optional: when it is absent the
- * backfill is skipped and the affected sections stay empty.
- */
-function exportDir() {
-  const candidates = [
-    path.join(ROOT, 'src', 'source-export'),
-    '/tmp/claude-0/-home-user-test/da065df0-1665-52a8-b803-716d1ee66e9a/scratchpad/src/source-export',
-  ];
-  return candidates.find((dir) => existsSync(path.join(dir, 'index.html'))) || null;
-}
-
 /** '/services/lab-solutions/' -> 'services/lab-solutions/index.html' */
 function htmlFileFor(route) {
   return route.path === '/' ? 'index.html' : route.path.replace(/^\//, '') + 'index.html';
@@ -133,72 +120,6 @@ function dropShortEcho(md) {
   return out.join('\n').replace(/\n{3,}/g, '\n\n');
 }
 
-/**
- * 3. Backfill sections the BUILT page hides behind the `hidden` attribute.
- *
- *    The fix-a11y pass collapses FAQ answers with `hidden` (correct: it takes
- *    them out of the accessibility tree and the tab order), and
- *    htmlToMarkdown() drops `hidden` subtrees (also correct: it must not emit
- *    invisible text). The two together delete five of the six answers on / from
- *    any Markdown derived from the built page — including llms-full.txt.
- *
- *    Here we restore them from the pre-collapse export, matching on the exact
- *    question text. Nothing is invented: the text comes from the export's own
- *    HTML, converted by the same function.
- */
-function backfillHiddenSections(builtMd, exportMd) {
-  if (!exportMd) return builtMd;
-
-  const builtLines = builtMd.split('\n');
-  const headingTexts = new Set(
-    builtLines.filter((l) => /^#{1,6}\s/.test(l)).map((l) => l.replace(/^#+\s*/, '').trim())
-  );
-
-  const exportLines = exportMd.split('\n');
-  const firstSeen = new Map();
-  exportLines.forEach((line, i) => {
-    const t = line.trim();
-    if (t !== '' && !firstSeen.has(t)) firstSeen.set(t, i);
-  });
-
-  const out = [];
-  for (let i = 0; i < builtLines.length; i++) {
-    const line = builtLines[i];
-    out.push(line);
-
-    const m = /^(#{2,6})\s+(.+)$/.exec(line);
-    if (!m) continue;
-
-    // Section is "empty" when the next non-blank line is another heading.
-    let empty = true;
-    for (let j = i + 1; j < builtLines.length; j++) {
-      if (/^#{1,6}\s/.test(builtLines[j])) break;
-      if (builtLines[j].trim() !== '') {
-        empty = false;
-        break;
-      }
-    }
-    if (!empty) continue;
-
-    const at = firstSeen.get(m[2].trim());
-    if (at === undefined) continue;
-
-    const grabbed = [];
-    for (let k = at + 1; k < exportLines.length; k++) {
-      const t = exportLines[k].trim();
-      if (/^#{1,6}\s/.test(t)) break; // next heading in the export
-      if (t !== '' && headingTexts.has(t)) break; // next question/heading of the built page
-      grabbed.push(exportLines[k]);
-    }
-    while (grabbed.length && grabbed[0].trim() === '') grabbed.shift();
-    while (grabbed.length && grabbed[grabbed.length - 1].trim() === '') grabbed.pop();
-    if (grabbed.length === 0) continue;
-
-    out.push('', ...grabbed);
-  }
-
-  return out.join('\n').replace(/\n{3,}/g, '\n\n');
-}
 
 /** The full mirror body for one route. */
 export function mirrorFor(route, opts) {
@@ -208,14 +129,17 @@ export function mirrorFor(route, opts) {
 
   const built = htmlToMarkdown(readFileSync(htmlPath, 'utf8'));
 
-  let exportMd = null;
-  const expDir = opts.exportDir;
-  if (expDir) {
-    const expPath = path.join(expDir, htmlFileFor(route));
-    if (existsSync(expPath)) exportMd = htmlToMarkdown(readFileSync(expPath, 'utf8'));
-  }
-
-  let md = backfillHiddenSections(built, exportMd);
+  // No backfill step. There used to be one: htmlToMarkdown() dropped any
+  // subtree carrying a bare `hidden` attribute, which deleted five of the six
+  // collapsed FAQ answers on / from every Markdown derived from a built page,
+  // so this script restored them from the pre-build export. That was a
+  // workaround for a converter bug, and the bug is fixed — `hidden` is no
+  // longer a drop signal in artifacts.mjs, because a collapsed disclosure
+  // panel is real content behind one click, not content hidden from everyone.
+  // Verified after the fix: all six answers are present in the built Markdown
+  // with no backfill, so the step was dead code carrying a dependency on the
+  // export still being on disk.
+  let md = built;
   md = dropBreadcrumb(md);
   md = collapseAdjacentDuplicates(md);
   md = dropShortEcho(md);
@@ -290,14 +214,13 @@ function currentMirror(existing) {
  * ------------------------------------------------------------------ */
 
 function parseArgs(argv) {
-  const opts = { write: false, strict: false, only: null, src: null, allowMissingExport: false };
+  const opts = { write: false, strict: false, only: null, src: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--write') opts.write = true;
     else if (a === '--strict') opts.strict = true;
     else if (a === '--only') opts.only = argv[++i];
     else if (a.startsWith('--only=')) opts.only = a.slice(7);
-    else if (a === '--allow-missing-export') opts.allowMissingExport = true;
     else if (a === '--src') opts.src = path.resolve(process.cwd(), argv[++i]);
     else if (a.startsWith('--src=')) opts.src = path.resolve(process.cwd(), a.slice(6));
     else if (a === '--help' || a === '-h') opts.help = true;
@@ -310,8 +233,7 @@ function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (opts.help) {
     process.stdout.write(
-      'usage: node content/regenerate.mjs [--write] [--strict] [--only ROUTE_ID] [--src DIR]\n' +
-        '                                  [--allow-missing-export]\n'
+      'usage: node content/regenerate.mjs [--write] [--strict] [--only ROUTE_ID] [--src DIR]\n'
     );
     return 0;
   }
@@ -324,18 +246,6 @@ function main() {
     );
     return 2;
   }
-  const expDir = exportDir();
-  if (opts.write && !expDir && !opts.allowMissingExport) {
-    process.stderr.write(
-      'content/regenerate.mjs: refusing to --write without the source export.\n' +
-        '  The built pages hide the collapsed FAQ answers on / behind `hidden`, so writing\n' +
-        '  now would silently delete five answers from content/pages/index.md.\n' +
-        '  Put the Website Studio export at src/source-export/, or pass\n' +
-        '  --allow-missing-export if the loss is understood and intended.\n'
-    );
-    return 2;
-  }
-
   const byId = new Map(routes.map((r) => [r.id, r]));
   const rows = [];
 
@@ -343,7 +253,7 @@ function main() {
     if (opts.only && route.id !== opts.only) continue;
 
     const file = path.join(PAGES, markdownFileFor(route));
-    const body = mirrorFor(route, { srcDir, exportDir: expDir });
+    const body = mirrorFor(route, { srcDir });
     if (body === null) {
       rows.push({ id: route.id, state: 'NO HTML' });
       continue;
@@ -392,11 +302,6 @@ function main() {
   process.stdout.write(
     `\n  ${rows.length} routes · ${rows.length - bad.length} in sync · ${bad.length} needing attention\n`
   );
-  if (!expDir) {
-    process.stdout.write(
-      '  note: source export not found — `hidden` sections (the collapsed FAQ answers on /) were not backfilled\n'
-    );
-  }
   return opts.strict && bad.length > 0 ? 1 : 0;
 }
 

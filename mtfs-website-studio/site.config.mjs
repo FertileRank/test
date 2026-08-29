@@ -584,6 +584,7 @@ export const routes = [
   },
   {
     id: 'about',
+    webPageType: 'AboutPage',   // schema.org subtype; the export shipped AboutPage here
     path: '/about/',
     parent: 'home',
     // Shortened from 71 chars ("About MedTech For Solutions | IVF & ART Industry
@@ -640,6 +641,7 @@ export const routes = [
   },
   {
     id: 'contact',
+    webPageType: 'ContactPage', // schema.org subtype; the export shipped ContactPage here
     path: '/contact/',
     parent: 'home',
     title: 'Contact MedTech For Solutions | Schedule a Consultation',

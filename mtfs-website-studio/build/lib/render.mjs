@@ -455,8 +455,45 @@ const SERVICE_PREFIX = '/services/';
 /** areaServed used by every Service node when site.config.mjs does not override it. */
 const DEFAULT_AREA_SERVED = { '@type': 'Country', name: 'United States' };
 
+/**
+ * Map `site.areaServed` from the manifest's authoring shape to schema.org's.
+ *
+ * site.config.mjs writes `{type, name}` because that is the natural spelling
+ * when hand-editing a config; schema.org requires `{'@type', name}`. Emitting
+ * the raw config shape produces a `type` key that every JSON-LD consumer
+ * ignores, so the value is present in the bytes and absent from the graph —
+ * the worst kind of failure, because it validates as JSON and reads correctly
+ * to a human. artifacts.mjs does this mapping for the Organization node; this
+ * is the same mapping for the 13 Service nodes.
+ *
+ * Returns null when there is nothing usable, so the caller falls back to
+ * DEFAULT_AREA_SERVED rather than emitting an empty array.
+ */
+function normaliseAreaServed(value) {
+  if (!Array.isArray(value) || value.length === 0) return null;
+  const mapped = value
+    .filter((a) => a && typeof a === 'object')
+    .map((a) => {
+      const t = a['@type'] || a.type;
+      return t ? { '@type': String(t), name: a.name } : null;
+    })
+    .filter(Boolean);
+  return mapped.length ? mapped : null;
+}
+
 /** Only /contact/ carries geo.* meta: it is the page with the address and opening hours. */
 const GEO_META_PATH = '/contact/';
+
+/**
+ * schema.org WebPage subtypes a route may declare via `webPageType`.
+ * Restricted to the real vocabulary so a typo falls back to WebPage rather
+ * than emitting an @type no consumer recognises.
+ */
+const WEBPAGE_SUBTYPES = new Set([
+  'AboutPage', 'CheckoutPage', 'CollectionPage', 'ContactPage', 'FAQPage',
+  'ItemPage', 'MedicalWebPage', 'ProfilePage', 'QAPage', 'RealEstateListing',
+  'SearchResultsPage', 'WebPage',
+]);
 
 /* ================================================================== *
  * renderSkipLink
@@ -1250,8 +1287,17 @@ export function renderHeadTags(route, graph, cfg) {
   const breadcrumb = breadcrumbNode(r, graph, site);
 
   if (indexable) {
+    // A route may declare a more specific WebPage subtype. The export shipped
+    // AboutPage on /about/ and ContactPage on /contact/; emitting a bare
+    // WebPage everywhere would have been a downgrade. Only schema.org WebPage
+    // subtypes are accepted — anything else falls back rather than emitting an
+    // invalid @type.
+    const subtype =
+      r.webPageType && WEBPAGE_SUBTYPES.has(String(r.webPageType))
+        ? String(r.webPageType)
+        : 'WebPage';
     const webPage = {
-      '@type': 'WebPage',
+      '@type': subtype,
       '@id': canonical + '#webpage',
       url: canonical,
       name: title,
@@ -1272,7 +1318,13 @@ export function renderHeadTags(route, graph, cfg) {
       name: labelOf(r),
       url: canonical,
       provider: { '@id': origin + '/#organization' },
-      areaServed: site.areaServed || DEFAULT_AREA_SERVED,
+      // site.config.mjs stores these as {type, name}; schema.org needs
+      // {'@type', name}. Passing the config shape through unmapped emits a
+      // plain `type` key, which every JSON-LD consumer ignores — so both
+      // areaServed values were being silently dropped on all 13 service
+      // pages while the Organization node in the SAME document, which goes
+      // through artifacts.mjs's mapping, spelled it correctly.
+      areaServed: normaliseAreaServed(site.areaServed) || DEFAULT_AREA_SERVED,
     };
     if (r.serviceType) service.serviceType = String(r.serviceType);
     if (description !== '') service.description = description;
