@@ -153,12 +153,27 @@
   }, true);
 
   /* -----------------------------------------------------------------------
-     2. #consult hash, on load and on hashchange.
+     2. Consultation hash, on load and on hashchange.
+
+     Two spellings are accepted. #contactForm is what render.mjs emits on the
+     header CTA, because it is an id the export's contact form already carries
+     — pointing at a #consult id that no element has made validateLinks fail
+     the build with 42 missing-fragment errors. #consult stays supported so an
+     inbound link, a campaign URL or a Studio-authored button using the more
+     obvious spelling still opens the wizard.
+
      On / the wizard lives inline in #hero-form-card, so scroll to it instead
      of opening a popup the shipped code could never reach anyway.
+
+     On /contact/ the browser's own fragment navigation lands the visitor on
+     the form, so JS opening the wizard on top of it would be redundant: bail
+     out and let the anchor do its job.
      ----------------------------------------------------------------------- */
+  var CONSULT_HASHES = ['#contactForm', '#consult'];
+
   function fromHash() {
-    if (location.hash !== '#consult') return;
+    if (CONSULT_HASHES.indexOf(location.hash) === -1) return;
+    if (D.getElementById('contactForm')) return;
     var hero = D.getElementById('hero-form-card');
     if (hero) {
       var reduce = window.matchMedia &&

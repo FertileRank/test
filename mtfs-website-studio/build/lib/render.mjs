@@ -411,12 +411,21 @@ const SERVICES_HUB_PATH = '/services/';
 /**
  * Where the header CTA points.
  *
- * `#consult` is a deliberate ADDITION: the lazy loader opens the consultation modal on this
- * hash at load and on hashchange, and the anchor gives a no-JS visitor a real destination.
- * PRECONDITION: `/contact/` must carry an element with `id="consult"`, otherwise
- * `validateLinks` reports `missing-fragment` for every page.
+ * The fragment is a deliberate ADDITION: consult-modal.js opens the consultation wizard on
+ * this hash at load and on hashchange, and the anchor gives a no-JS visitor a real
+ * destination instead of a button that does nothing.
+ *
+ * It targets `#contactForm` — the id the export's contact form ALREADY carries
+ * (`<form class="form-card" id="contactForm">`) — rather than a new `#consult` id. An
+ * earlier draft used `#consult`, and validateLinks correctly failed the build with 42
+ * missing-fragment errors because no element on `/contact/` has that id. Reusing the real
+ * anchor means a no-JS visitor lands on the form itself, and no markup has to be invented.
+ *
+ * PRECONDITION, enforced by validateLinks: `/contact/` must carry `id="contactForm"`.
+ * consult-modal.js accepts BOTH this hash and `#consult`, so an inbound link, campaign URL
+ * or Studio-authored button using either spelling still opens the wizard.
  */
-const CONSULT_HREF = '/contact/#consult';
+const CONSULT_HREF = '/contact/#contactForm';
 
 /**
  * Fonts to preload. Verified against the Lighthouse network-requests log: of the four unique
@@ -824,10 +833,31 @@ export function renderFooter(currentRoute, graph, cfg) {
     ]);
   };
 
+  /**
+   * Footer entries that are NOT routes.
+   *
+   * The export's Company column links "Testimonials" at `/#testimonials` — a
+   * fragment on the home page, not a page of its own. Building the footer purely
+   * from `routes[]` silently dropped it from all 21 pages, which a copy-drift
+   * diff against the export caught. `site.footerExtraLinks` is the escape hatch:
+   * `[{ group, label, href }]`, rendered inside the named column after its
+   * routes. Keep it for genuine non-route destinations only — anything that is a
+   * page belongs in `routes[]`, where the sitemap and llms.txt can see it.
+   */
+  const extras = Array.isArray(site.footerExtraLinks) ? site.footerExtraLinks : [];
+  const extrasByGroup = new Map();
+  for (const x of extras) {
+    if (!x || !x.href || !x.label) continue;
+    const key = FOOTER_GROUP_ORDER.includes(x.group) ? x.group : 'main';
+    if (!extrasByGroup.has(key)) extrasByGroup.set(key, []);
+    extrasByGroup.get(key).push(x);
+  }
+
   const columns = ordered
     .map((group) => {
       const routesInGroup = byGroup.get(group) || [];
-      if (routesInGroup.length === 0) return '';
+      const extrasInGroup = extrasByGroup.get(group) || [];
+      if (routesInGroup.length === 0 && extrasInGroup.length === 0) return '';
       const titleId = 'mtfs-footer-' + esc(group);
       return join([
         '<div class="ftc mtfs-footer__col">',
@@ -836,6 +866,15 @@ export function renderFooter(currentRoute, graph, cfg) {
         '</h2>',
         '<ul class="mtfs-footer__list" aria-labelledby="' + titleId + '">',
         routesInGroup.map((r) => '<li>' + link(r) + '</li>').join(''),
+        extrasInGroup
+          .map((x) =>
+            join([
+              '<li><a',
+              urlAttr('href', x.href),
+              '>' + esc(x.label) + '</a></li>',
+            ])
+          )
+          .join(''),
         '</ul>',
         '</div>',
       ]);

@@ -271,6 +271,76 @@ export const site = {
   lang: 'en',
 
   // ---------------------------------------------------------------------------
+  // Footer content
+  //
+  // These four keys are optional in render.mjs and every one of them degrades
+  // SILENTLY when absent — which is exactly how they were missed. A copy-drift
+  // diff of all 21 rendered pages against the export showed the footer had
+  // quietly dropped the copyright year (21 pages), the "Design by Kevin Ryan"
+  // credit (20 pages) and the shorter footer blurb, because render.mjs fell back
+  // to `description` and omitted the rest rather than failing.
+  //
+  // Nothing here is invented: every string is copied from the export's own
+  // footer. Verify with:
+  //   grep -o '<footer[\s\S]*</footer>' services/index.html
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Footer blurb. The export's own wording, verbatim. Without this render.mjs
+   * falls back to `site.description`, which is the 300-character Organization
+   * schema description — accurate, but three times too long for a footer column
+   * and not what the site actually said.
+   */
+  footerBlurb:
+    'Comprehensive ART practice solutions for fertility clinics, IVF laboratories, ' +
+    'and reproductive medicine facilities. Founded 2005.',
+
+  /**
+   * Copyright year, as a literal.
+   *
+   * render.mjs deliberately contains no `new Date()` — a build whose output
+   * changes with the wall clock cannot be byte-compared between runs, and the
+   * whole pipeline is built to be deterministic. So the year is data, not code.
+   * The export's footer reads "© 2026 MedTech For Solutions Inc."
+   *
+   * MAINTENANCE: this is the one field that needs a human edit each January.
+   * validate.mjs cannot catch a stale year — only a person can.
+   */
+  copyrightYear: 2026,
+
+  /**
+   * The design credit in the footer bottom row. Present on all 21 export pages
+   * as an external link with rel="noopener noreferrer nofollow".
+   */
+  credit: {
+    label: 'Design by Kevin Ryan',
+    href: 'https://www.linkedin.com/in/kevinryanofficial/',
+  },
+
+  /**
+   * Human-readable phone. `telephone` above is the E.164 form schema.org wants
+   * and `tel:` needs; this is what the footer and header actually display.
+   */
+  telephoneDisplay: '(866) 634-9144',
+
+  /**
+   * Footer links that are not routes.
+   *
+   * "Testimonials" is a fragment on the home page (`id="testimonials"`, verified
+   * in the export), not a page, so it cannot live in `routes[]` — putting it
+   * there would add a phantom URL to sitemap.xml and llms.txt. It was in the
+   * export's Company column on all 21 pages, and `_redirects` still carries
+   * /testimonials -> /#testimonials, so dropping the link while keeping the
+   * redirect would have left the destination reachable but unlinked.
+   *
+   * Use this ONLY for real non-route destinations. Anything that is a page
+   * belongs in `routes[]`.
+   */
+  footerExtraLinks: [
+    { group: 'main', label: 'Testimonials', href: '/#testimonials' },
+  ],
+
+  // ---------------------------------------------------------------------------
   // Third parties (kept working, moved off the critical path)
   // ---------------------------------------------------------------------------
 
