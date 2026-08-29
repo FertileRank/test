@@ -333,9 +333,15 @@ Nothing in the export is pre-compressed and `_headers` sets no
 
 | | Raw | Brotli | Gzip |
 |---|---:|---:|---:|
-| 35 files in `dist/` | 1,798,316 B | **363,838 B** | 431,011 B |
+| 36 compressible files in `dist/` | 1,842,266 B | **373,843 B** | 442,474 B |
 
-Saved: 1,434,478 B brotli / 1,367,305 B gzip.
+Saved: **1,468,423 B brotli (79.7%)** / 1,399,792 B gzip (76.0%). Every one of
+the 36 gets both a `.br` and a `.gz` sibling — verified 36/36 for each.
+
+Note this is a *whole-deploy* figure and is not the number to quote for page
+speed. It counts all 21 documents plus every asset, whereas a visitor loads one
+document and the shared assets once. The per-visit number is the first-load table
+below.
 
 ## Page-level output
 
