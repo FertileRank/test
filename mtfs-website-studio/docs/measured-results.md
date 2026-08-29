@@ -98,8 +98,63 @@ them. The home page instantiates the same wizard eagerly in `#hero-form-card`, s
 the fixes inside the modal source are what do the work.
 
 `color-contrast` failed on the service-page template and already passed on `/`,
-so the single-page table above cannot represent it; it is measured per template
-in the sweep below.
+so the single-page table above cannot represent it. See the sweep below.
+
+## Site-wide sweep — the gains are not a one-page result
+
+Everything above is `/`. To check the refactor generalises, five representative
+templates were run through the same before/after harness.
+
+| Template | Before P/A/BP/SEO | After P/A/BP/SEO | FCP | TTI |
+|---|---|---|---|---|
+| `/` | 99 / 91 / 96 / 92 | **100 / 100 / 96 / 100** | 1.7 → **0.9 s** | 3.0 → **1.5 s** |
+| `/services/lab-solutions/gpo-purchasing/` | 99 / 88 / 96 / 92 | **100 / 95 / 96 / 100** | 1.6 → **0.7 s** | 2.9 → **1.1 s** |
+| `/contact/` | 99 / 88 / 96 / 100 | **100 / 100 / 96 / 100** | 1.7 → **1.1 s** | 3.0 → **1.5 s** |
+| `/privacy-policy/` | 99 / 88 / 96 / 100 | **100 / 100 / 96 / 100** | 1.7 → **0.9 s** | 3.0 → **1.2 s** |
+| `/404/` | 99 / 91 / 96 / 69 | **100 / 100 / 96 / 69** | 1.5 → **0.8 s** | 1.9 → **1.4 s** |
+
+Performance reaches 100 on every template and FCP and TTI improve on every one.
+Two rows need explaining rather than glossing.
+
+### `/404/` SEO stays at 69 — and should
+
+The only failing SEO audit is `is-crawlable: Page is blocked from indexing`. A
+404 page *ought* to be `noindex`; the export marked it `noindex, follow` and the
+manifest keeps that. Lighthouse scores the page as a document without knowing it
+is an error page. **Do not "fix" this.** Making `/404/` indexable to win 31
+points would put a soft 404 in the index.
+
+### The service template reaches 95 on accessibility, not 100
+
+One `color-contrast` failure survives, and it is a real defect this refactor did
+**not** fix:
+
+```
+div.hero-stat-card > div.il5 > div > p.il8
+contrast 2.26  —  foreground #9aada9 on background #fdfafa at 9.6pt
+```
+
+That is the `--g400` grey used as caption text under the hero stat cards. It
+fails WCAG AA. It is body-content styling, and the pipeline deliberately does not
+restyle body content, so it is reported rather than silently changed. Fixing it
+means darkening that one caption colour — `--g600` (`#5c524b`) clears AA at that
+size.
+
+What the refactor *did* fix on that template is worse than what remains. The
+export had four contrast failures there; three were footer links rendering
+`#ffffff` on `#fdfafa` — **contrast ratio 1.03, white on white, effectively
+invisible**:
+
+```
+div.ftc > ul.il29 > li.il30 > a.il31
+contrast 1.03  —  foreground #ffffff on background #fdfafa at 10.6pt
+```
+
+Those were three links to `/services/management-services/marketing/`,
+`/call-center/` and `/accounting-finance/`. They are fixed because the
+server-rendered footer uses `.mtfs-footer` with real declarations instead of the
+builder's per-page `il29`/`il30`/`il31` classes, whose meaning shifted from page
+to page — the exact hazard `css.mjs::dedupe()` refuses to hoist.
 
 ## Semantic markup and accessibility
 

@@ -20,9 +20,12 @@
        ten of their children were in it — so every child had 20 footer linkers
        against its own parent's 0. With the navigation 100% JavaScript-injected,
        that static graph was the crawlable graph: with JS off there was no path
-       to either hub from anywhere. Every one of the 21 pages now links all 21
-       routes. build/lib/validate.mjs -> findOrphans fails the build if any
-       route drops below full footer coverage.
+       to either hub from anywhere. Every one of the 21 pages now links all 20
+       indexable routes from this footer. (/404/ is deliberately not linked from
+       anywhere: an error page should not be crawled, and the export's only
+       inbound link to it — from the HTML sitemap — is being removed.)
+       build/lib/validate.mjs -> findOrphans fails the build if any route drops
+       below full footer coverage.
      * role="contentinfo" is gone. <footer> already has that role implicitly;
        the export repeats it on all 21 pages.
      * Every list is a real <ul> with aria-labelledby pointing at its column

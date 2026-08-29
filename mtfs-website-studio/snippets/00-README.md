@@ -149,7 +149,8 @@ Run these against the published site, not the Studio preview.
 3. Exactly one `<h1>`, and it is not inside `<header>` or `<footer>`.
 4. Tab once from the address bar: the first stop is "Skip to main content", and it lands on
    `<main id="main">`.
-5. Search the source for `on mouseover`/`onmouseout` (no space) — expect zero hits.
+5. Search the served HTML for the attribute names `onmouseover`, `onmouseout`, `onfocus` and
+   `onblur` — expect zero hits. The export carries 812 of them across 406 elements.
 6. Search for `role="option"` and `aria-pressed` together — expect zero. `aria-pressed` is not allowed
    on `role="option"`.
 7. Network panel: exactly two font files requested (`811e1196…woff2` Sora latin, `ca72d2bc…woff2`
