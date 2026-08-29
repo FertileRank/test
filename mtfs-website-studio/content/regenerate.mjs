@@ -290,13 +290,14 @@ function currentMirror(existing) {
  * ------------------------------------------------------------------ */
 
 function parseArgs(argv) {
-  const opts = { write: false, strict: false, only: null, src: null };
+  const opts = { write: false, strict: false, only: null, src: null, allowMissingExport: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--write') opts.write = true;
     else if (a === '--strict') opts.strict = true;
     else if (a === '--only') opts.only = argv[++i];
     else if (a.startsWith('--only=')) opts.only = a.slice(7);
+    else if (a === '--allow-missing-export') opts.allowMissingExport = true;
     else if (a === '--src') opts.src = path.resolve(process.cwd(), argv[++i]);
     else if (a.startsWith('--src=')) opts.src = path.resolve(process.cwd(), a.slice(6));
     else if (a === '--help' || a === '-h') opts.help = true;
@@ -309,7 +310,8 @@ function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (opts.help) {
     process.stdout.write(
-      'usage: node content/regenerate.mjs [--write] [--strict] [--only ROUTE_ID] [--src DIR]\n'
+      'usage: node content/regenerate.mjs [--write] [--strict] [--only ROUTE_ID] [--src DIR]\n' +
+        '                                  [--allow-missing-export]\n'
     );
     return 0;
   }
@@ -323,6 +325,16 @@ function main() {
     return 2;
   }
   const expDir = exportDir();
+  if (opts.write && !expDir && !opts.allowMissingExport) {
+    process.stderr.write(
+      'content/regenerate.mjs: refusing to --write without the source export.\n' +
+        '  The built pages hide the collapsed FAQ answers on / behind `hidden`, so writing\n' +
+        '  now would silently delete five answers from content/pages/index.md.\n' +
+        '  Put the Website Studio export at src/source-export/, or pass\n' +
+        '  --allow-missing-export if the loss is understood and intended.\n'
+    );
+    return 2;
+  }
 
   const byId = new Map(routes.map((r) => [r.id, r]));
   const rows = [];
