@@ -78,8 +78,8 @@
  * ---------------------------------------------------------------------------
  * MEASURED SIZE  (node:zlib, gzip level 9 / brotli quality 11)
  * ---------------------------------------------------------------------------
- *   this file, as authored : 15,894 B raw · 4,073 B gzip · 3,504 B brotli
- *   comments stripped      : 10,268 B raw · 3,190 B gzip · 2,760 B brotli
+ *   this file, as authored : 16,067 B raw · 5,622 B gzip · 4,692 B brotli
+ *   comments stripped      : 6,995 B raw · 2,018 B gzip · 1,727 B brotli
  *   replaces               : mega-menu.min.js, 29,331 B raw · 8,635 B brotli
  * Budget note: the payload audit budgets nav.js at <= 3,000 B minified /
  * <= 1,300 B brotli and search.js at <= 5,000 B raw / <= 1,800 B brotli as two

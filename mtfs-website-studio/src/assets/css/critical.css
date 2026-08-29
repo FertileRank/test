@@ -609,7 +609,6 @@ body.mm-menu-lock {
 .mtfs-breadcrumb__item + .mtfs-breadcrumb__item::before {
   content: "/";
   color: var(--g400);
-  speak: never;
 }
 .mtfs-breadcrumb__item a {
   color: var(--teal);

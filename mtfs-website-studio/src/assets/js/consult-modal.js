@@ -56,8 +56,8 @@
  * ---------------------------------------------------------------------------
  * MEASURED SIZE  (node:zlib, gzip level 9 / brotli quality 11)
  * ---------------------------------------------------------------------------
- *   this file, as authored : 7,529 B raw · 2,242 B gzip · 1,927 B brotli
- *   comments stripped      : 2,720 B raw · 1,048 B gzip ·   906 B brotli
+ *   this file, as authored : 8,079 B raw · 3,088 B gzip · 2,531 B brotli
+ *   comments stripped      : 2,483 B raw · 969 B gzip · 788 B brotli
  *   defers                 : book-consultation-modal.min.js, 58,472 B raw
  *                            (29,964 B brotli; 25,875 B / 6,637 B brotli once
  *                            the 32,626 B base64 PNG of JSCSS-01 is removed)

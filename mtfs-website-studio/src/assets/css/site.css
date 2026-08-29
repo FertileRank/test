@@ -212,7 +212,12 @@
   background: var(--mm-g50);
   transform: translateX(2px);
 }
-.mm-item.mm-active { background: var(--mm-teal-l); }
+/* The one deliberate ADDITION in this file. render.mjs emits `mm-active` on the current
+   page's .mm-item (build-time aria-current, replacing the runtime data-mm-match RegExp
+   loop), and mega-menu.css only ever styled `.mm-nav a.mm-active` / `button.mm-active` —
+   the panel item had no rule, so the class would render nothing. It reuses the panel's
+   own existing hover background rather than introducing a new colour. */
+.mm-item.mm-active { background: var(--mm-g50); }
 .mm-item-ico {
   width: 36px;
   height: 36px;
