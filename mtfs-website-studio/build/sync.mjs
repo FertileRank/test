@@ -1286,7 +1286,16 @@ async function main() {
   for (const p of pages) {
     if (p.route.inLlms === false || !p.outHtml) continue;
     try {
-      pageMarkdown.set(p.route.id, ART.htmlToMarkdown(p.outHtml));
+      // The { origin } option is not optional here. llms-full.txt is fetched by
+      // third-party crawlers and read away from the origin, so a link that
+      // reads "](/services/)" cannot be resolved by its entire audience.
+      // Omitting it shipped 263 root-relative links and 0 absolute ones, while
+      // llms.txt — built through a different path — was absolutising correctly
+      // the whole time, so the two artifacts disagreed.
+      pageMarkdown.set(
+        p.route.id,
+        ART.htmlToMarkdown(p.outHtml, { origin: cfg.site.origin })
+      );
     } catch (err) {
       errorAt('artifacts', `htmlToMarkdown(${p.route.path}) threw: ${reason(err)}`);
     }

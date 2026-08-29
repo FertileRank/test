@@ -97,8 +97,9 @@ If a crawler cannot fetch and parse it, nothing else in this document matters.
 - The nav is now server-rendered, so the static link graph **is** the crawlable graph.
 - `/services/lab-solutions/` and `/services/management-services/` were the only two routes missing
   from the site-wide footer while all ten of their children were in it — so every child outranked
-  its own parent (`/services/lab-solutions/staffing-solutions/` had 33 page-sources against its
-  parent's 10). Both hubs are now `inFooter: true`, and `validateLinks` fails the build if footer
+  its own parent (`/services/lab-solutions/staffing-solutions/` was linked from 21 pages / 39 link
+  instances against its parent's 10 pages / 14 instances; an earlier revision said "33
+  page-sources", which is impossible on a 21-page site — it was link instances counted per page). Both hubs are now `inFooter: true`, and `validateLinks` fails the build if footer
   coverage regresses.
 - Visible breadcrumbs on all 19 non-home indexable pages, generated from the same
   `breadcrumbTrail()` call that feeds the `BreadcrumbList` JSON-LD.
@@ -146,7 +147,7 @@ guidance warns against, and this site currently avoids it.
 
 ### 2.6 Define your entities
 
-**Measured across all 21 pages:** FDA appears in 9 files, CLIA 9, CAP 9, AABB 9, HCLD 7,
+**Measured across all 21 pages:** FDA appears in 8 files, CLIA 9, CAP 9, AABB 9, HCLD 7,
 "TS (ABB)" 5, ELD(ABB) 1, ASRM 1. Full expansions have **zero** occurrences sitewide —
 "Food and Drug Administration" 0, "Clinical Laboratory Improvement" 0, "College of American
 Pathologists" 0, "High Complexity Laboratory Director" 0, "Technical Supervisor" 0, "Embryology
@@ -280,12 +281,12 @@ types. This page is the clearest example on the site of assertion substituting f
 | Experience | "over 30 years of combined"; "30+ years serving the ART industry"; "over 125 years of collective multidisciplinary"; "two decades of hands-on ART expertise"; "30+ years of hands-on leadership" — a company founded in 2005 cannot have 30+ years of its own history |
 | Service count | "10 Service Areas" and "one service or all ten" on `/`; **"Our 12 service areas"** on `/contact/`; the route inventory has **10** leaf services |
 | State coverage | "50+ States Covered" on `/services/lab-solutions/staffing-solutions/` — there are 50, and every other page says "all 50 states" |
-| Address | `/contact/` says "399 Knollwood Road, **Suite 303**"; all 21 footers and the JSON-LD `streetAddress` omit the suite |
+| Address | `/contact/` says "399 Knollwood Road, **Suite 303**"; all 21 footers and the JSON-LD `streetAddress` omit the suite; `/privacy-policy/` says **Suite 300** |
 
 Pick one founding year **with the client** and propagate it from `site.config.mjs`. Label the
 experience figure precisely — company years and collective staff-years are different claims.
 Standardise the service count against the route inventory. Change "50+ States Covered" to
-"All 50 States". Decide whether Suite 303 is part of the address and make all three agree.
+"All 50 States". Decide whether Suite 303 is part of the address and make all four locations agree.
 
 ---
 

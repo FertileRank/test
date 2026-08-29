@@ -202,7 +202,7 @@ off, the export had no navigational path to either service hub at all. Verified 
 **Honest limit, and how it turned out.** The payload audit warned that SSR does **not** by itself
 reduce the 903-element DOM — the same nodes are parser-built instead of script-built — and put the
 realistic landing point at ~850 elements, still over Lighthouse's 800 threshold. The measured
-result is **594 elements, passing** (§13.3). The audit's caution was methodologically right and its
+result is **595 elements, passing** (§13.3). The audit's caution was methodologically right and its
 number was wrong in the safe direction: it counted only the search overlay (−24) and panel
 furniture (−~30), not the compounding effect of also removing the always-live second modal
 instance, the dev-tap blocks and the builder scaffolding. The lesson stands even though the number
@@ -527,13 +527,20 @@ the comparison is fair — but neither describes the live site, where GTM and
 | First Contentful Paint | 1.7 s | **0.9 s** | measured |
 | Largest Contentful Paint | 1.8 s | **1.2 s** | measured |
 | Speed Index | 1.7 s | **0.9 s** | measured |
-| Time to Interactive | 3.1 s | **1.6 s** | measured |
-| Total Blocking Time | 30 ms | **10 ms** | measured |
+| Time to Interactive | 3.1 s | **1.7 s** | measured |
+| Total Blocking Time | 30 ms | 30 ms | measured — **no change** |
 | Cumulative Layout Shift | 0.005 | **0** | measured |
-| Main-thread work | 1.2 s | **0.5 s** | measured |
+| Main-thread work | 1.2 s | **0.6 s** | measured |
 | Script bootup time | 0.1 s | **0.0 s** | measured |
-| DOM elements | 903 (failing) | **594 (passing)** | measured |
-| Total byte weight | 213 KiB | **33 KiB** | measured |
+| DOM elements | 903 (failing) | **595 (passing)** | measured |
+| Total byte weight | 213 KiB | **36 KiB** | measured |
+
+> **Source and correction.** After-run: `scratchpad/lh-final.json`, a clean build of the current
+> tree. An earlier revision of this table quoted TBT 10 ms, TTI 1.6 s, main-thread 0.5 s, DOM 594
+> and 33 KiB from `scratchpad/lh-after-prod.json` — a `dist/` built before
+> `src/assets/js/book-consultation-modal.js` existed, so the page fetched one fewer deferred
+> script. **Total Blocking Time did not improve**: it is 30 ms on both sides. It was already
+> passing comfortably and nothing in this refactor targeted it. See `docs/measured-results.md`.
 
 **Main-thread breakdown.** This is the table that justifies §4:
 
@@ -554,7 +561,7 @@ big number.
 
 1. **DOM size: the projection was too pessimistic.** §4 said "realistic landing point ~850
    elements — still over Lighthouse's 800 threshold" and told you not to promise a win. The measured
-   result is **594 elements and a passing audit** — a 34 % reduction. The projection under-counted
+   result is **595 elements and a passing audit** — a 34 % reduction. The projection under-counted
    what removing the search overlay, the always-live second modal instance, the dev-tap blocks and
    the builder scaffolding takes out together. The instinct not to promise it was still right; the
    number was wrong in the safe direction.
@@ -570,11 +577,11 @@ big number.
 | `uses-text-compression` | fail (est. 140 KiB) | **pass** |
 | `unused-css-rules` | fail (est. 15 KiB) | **pass** |
 | `render-blocking-resources` | fail (est. 380 ms) | **pass** |
-| `dom-size` | fail — 903 | **pass** — 594 |
+| `dom-size` | fail — 903 | **pass** — 595 |
 | `link-text` | fail (0) | **pass** |
 | `heading-order` | fail (0) | **pass** |
 | `aria-allowed-attr` | fail | **pass** |
-| `color-contrast` (service pages) | fail | **pass** |
+| `color-contrast` (service pages) | fail — 10 nodes | **still fails — 1 node** |
 | `aria-progressbar-name` | fail | **notApplicable** — the element no longer exists on the page, because the modal is lazy |
 | `label-content-name-mismatch` | fail (0) | **notApplicable** — no mismatched element remains to evaluate |
 | `errors-in-console` | fail | **still fail** — sandbox tunnel errors only; see above |
@@ -620,5 +627,10 @@ cleared, but it is still an ARIA construction where native HTML would do. Worth 
 `/assets/consult-modal.<hash>.js` is emitted but currently unreferenced. Both are reported as
 warnings by the asset cross-reference step. Dead weight in the deploy, not a correctness problem.
 
-**4. Every projection in §13.3 is unverified.** Re-measure with Lighthouse after deploy before
-quoting any of it to anyone.
+**4. Every figure in §13.3 was measured with third parties unreachable.** GTM,
+`dashboard.fertilerank.com` and the image/font CDN could not be reached in either run, so their
+cost is absent from both sides. The comparison is therefore fair, but the absolute scores are not
+predictions of the live site — re-measure after deploy before quoting any of it to anyone.
+(This item previously called §13.3 "projections". It has not been one since the real after-run
+replaced them; every row there is measured, and the two rows that were briefly wrong — TBT and
+DOM size — are corrected above rather than hedged.)

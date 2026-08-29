@@ -123,6 +123,23 @@
      TO DO (client): company LinkedIn page, Google Business Profile, trade or
      association listings. Add them to site.config.mjs -> site.sameAs and
      re-copy this block.
+
+     >> VERIFY (client): the logo ImageObject carries NO width/height, on purpose.
+     The only dimensional statement anywhere in the export is a CSS box in
+     assets/mega-menu.js:
+         style="height:44px;width:auto;max-width:220px;object-fit:contain"
+     `width:auto` with a `max-width` cap is a ceiling, not a width, so publishing
+     "220 x 44" would assert a 5:1 aspect ratio nobody has measured. The CDN
+     returns 403 through the build proxy, so the true intrinsics could not be
+     read. schema.org treats width/height as assertions about the file itself, so
+     omitting them is correct until someone fetches the asset and measures it.
+
+     Do NOT "fix" this by deleting width/height from the <img> tags in
+     30-body-header.html and 40-body-footer.html. Those two uses are different
+     and both are right as they stand: on an <img>, width/height reserve the
+     layout box and prevent the CDN's latency from shifting the header, and with
+     object-fit:contain a 220x44 box letterboxes the real asset without
+     distorting it. In schema.org they would be a claim about the file.
      ========================================================================== -->
 <script type="application/ld+json">
 {
@@ -188,11 +205,9 @@
         "IVF Temporary Staffing",
         "Healthcare Group Purchasing"
       ],
-      "logo": {
+  "logo": {
         "@type": "ImageObject",
-        "url": "https://media.cdn.builder.searchatlas.com/user-uploads/8938b9ec-89dc-47c4-aa9d-aabb527787a9_medtech-for-solutions-website-logo.webp",
-        "width": 220,
-        "height": 44
+        "url": "https://media.cdn.builder.searchatlas.com/user-uploads/8938b9ec-89dc-47c4-aa9d-aabb527787a9_medtech-for-solutions-website-logo.webp"
       },
       "image": {
         "@type": "ImageObject",

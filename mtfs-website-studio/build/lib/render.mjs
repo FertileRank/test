@@ -109,8 +109,10 @@
  *   copyrightYear     2026                   - otherwise the year is omitted (no `new Date()`)
  *   credit            {label, href}          - the "Design by ..." footer credit
  *   areaServed        schema.org node        - one value shared by all 13 Service nodes
- *   fontPreloads      [{href, type, fetchpriority}] - otherwise FONT_PRELOADS below
- *   preconnect        ['https://host']       - otherwise PRECONNECT below
+ *   fonts.preload     [{href, type, fetchpriority}] - otherwise FONT_PRELOADS below
+ *   fonts.preconnect  ['https://host']       - otherwise PRECONNECT below
+ *                     (the flat `fontPreloads` / `preconnect` spellings are also
+ *                      accepted; site.config.mjs uses the nested `fonts.*` shape)
  *   twitterSite       '@handle'              - omitted when absent
  *
  * `navIcons` is TRUSTED first-party config: its values are inline `<svg>` strings emitted
@@ -1230,12 +1232,23 @@ export function renderHeadTags(route, graph, cfg) {
   }
 
   /* --- 5. connection hints + the two font preloads ------------------------- */
-  const preconnect = Array.isArray(site.preconnect) ? site.preconnect : PRECONNECT;
+  // Read site.fonts.{preconnect,preload} — the shape site.config.mjs actually
+  // defines — and accept the flat site.{preconnect,fontPreloads} spelling too.
+  // This module previously read only the flat names, which are undefined in the
+  // manifest, so both guards always fell through to the constants below. The
+  // values happened to match, so the output was right by accident while the
+  // config block was dead: editing a font URL in site.config.mjs would have
+  // shipped the old one with no warning, and the single-source-of-truth
+  // guarantee was false for exactly the two resources on the critical path.
+  const fontCfg = (site.fonts && typeof site.fonts === 'object') ? site.fonts : {};
+  const preconnectCfg = Array.isArray(site.preconnect) ? site.preconnect : fontCfg.preconnect;
+  const preconnect = Array.isArray(preconnectCfg) && preconnectCfg.length ? preconnectCfg : PRECONNECT;
   for (const host of preconnect) {
     head.push('<link rel="preconnect"' + urlAttr('href', host) + ' crossorigin>');
     head.push('<link rel="dns-prefetch"' + urlAttr('href', host) + '>');
   }
-  const fonts = Array.isArray(site.fontPreloads) ? site.fontPreloads : FONT_PRELOADS;
+  const fontsCfg = Array.isArray(site.fontPreloads) ? site.fontPreloads : fontCfg.preload;
+  const fonts = Array.isArray(fontsCfg) && fontsCfg.length ? fontsCfg : FONT_PRELOADS;
   for (const font of fonts) {
     if (!font || !font.href) continue;
     head.push(

@@ -225,8 +225,10 @@ first paint show all three mega panels expanded in flow.
 `immutable` header honest, and `sync.mjs` asserts the invariant rather than assuming it.
 
 ### `build/lib/html.mjs` — the 12 passes
-Each pass is `{ name, description, run(html, ctx) }` and `transform()` runs them in contract order,
-returning `{ html, applied }`. Passes operate on strings, but not naively: the module tokenizes
+Each pass is `{ name, description, run(html, ctx) }`. `run` returns **either a string (the new
+html) or `{ html, notes }`** — the notes are what the build's per-page pass report is built from, so
+most passes return the object form. Compose passes with `transform()` rather than by hand: it
+normalises both shapes, runs them in contract order and returns `{ html, applied }`. Passes operate on strings, but not naively: the module tokenizes
 `<script>`, `<style>`, `<pre>`, `<textarea>` and comments out of harm's way first, edits the
 remaining markup, then detokenizes. That is why `minifyHtml()` can collapse inter-tag whitespace
 without corrupting a script body.

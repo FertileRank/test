@@ -12,7 +12,7 @@ estimate produced by a tool, it says so and names the tool.
 | BEFORE | the unmodified Website Studio export, served over HTTP with no `Content-Encoding` — which is exactly how it ships today, because `_headers` sets none |
 | AFTER | `dist/` from `node build/sync.mjs`, served the way the generated `_headers` says production will: `.br` negotiated by `Accept-Encoding`, `/assets/*` `immutable`, HTML `must-revalidate` |
 | Page | `/` |
-| Raw data | `scratchpad/lh-mobile.json` (before), `scratchpad/lh-after-prod.json` (after) |
+| Raw data | `scratchpad/lh-mobile.json` (before), `scratchpad/lh-final.json` (after). `scratchpad/lh-after-prod.json` is the superseded run cited in the Correction block below — do not quote it. |
 
 **One caveat that applies to both runs.** The sandbox cannot reach
 `media.cdn.builder.searchatlas.com`, `www.googletagmanager.com`,
@@ -160,17 +160,18 @@ means darkening that one caption colour — `--g600` (`#5c524b`) clears AA at th
 size.
 
 What the refactor *did* fix on that template is worse than what remains. The
-export had four contrast failures there; three were footer links rendering
-`#ffffff` on `#fdfafa` — **contrast ratio 1.03, white on white, effectively
-invisible**:
+export had **ten** contrast failures there, and **nine of them were in the
+footer** — eight links plus the column heading — rendering `#ffffff` on
+`#fdfafa` at **contrast ratio 1.03, white on white, effectively invisible**:
 
 ```
 div.ftc > ul.il29 > li.il30 > a.il31
 contrast 1.03  —  foreground #ffffff on background #fdfafa at 10.6pt
 ```
 
-Those were three links to `/services/management-services/marketing/`,
-`/call-center/` and `/accounting-finance/`. They are fixed because the
+Those nine covered the footer column heading and links to `/services/`,
+`/about/`, `/our-team/`, `/contact/`, `/#testimonials` and the three
+management-services children. They are fixed because the
 server-rendered footer uses `.mtfs-footer` with real declarations instead of the
 builder's per-page `il29`/`il30`/`il31` classes, whose meaning shifted from page
 to page — the exact hazard `css.mjs::dedupe()` refuses to hoist.
@@ -362,7 +363,7 @@ against 16,323 B br after.
 
 | Item | Detail |
 |---|---|
-| `max-potential-fid` 90 ms | The only failing performance audit. |
+| `max-potential-fid` 110 ms | The only failing performance audit on the clean build. |
 | `errors-in-console` | `ERR_TUNNEL_CONNECTION_FAILED` against the four blocked third-party hosts. Present in the BEFORE run too. The four `/src/lib/*.ts` 404s the export produced are gone. |
 | No JS minifier | The pipeline deliberately carries no npm dependencies, so nothing renames identifiers. `nav.js` is 1,646 B brotli against the audit's 1,300 B target, `analytics.js` 3,304 B against 1,000 B. Adding a minifier to the deploy step would close the gap; the structural work (search overlay and modal off the critical path) is already done. |
 | Inline critical CSS averages 28.7 KB/page | Above the ~14 KB first-RTT guideline. It buys 3 → 0 render-blocking stylesheets, which is the better trade, but tightening `splitCritical`'s allow-list would improve it further. |

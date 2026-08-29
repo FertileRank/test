@@ -547,14 +547,18 @@ Two cautions when you read the new numbers:
   genuinely faster. If you want a like-for-like comparison, re-measure in the same sandboxed
   conditions as well.
 - **A DOM-size win is real but it does not come from SSR.** SSR moves the header's 207 nodes from
-  script-built to parser-built without deleting them. The measured `dist/` result is **594 elements,
+  script-built to parser-built without deleting them. The measured `dist/` result is **595 elements,
   passing**, down from 903 — but that came from the *deletions* (search overlay, the always-live
   second modal instance, the dev-tap blocks, the builder scaffolding), not from server-rendering.
   If you apply the chrome in Mode B without also doing the removals in §5, expect no DOM win.
 
 Measured against `dist/` under the same blocked-host conditions (`docs/measured-results.md`):
 `heading-order`, `link-text`, `aria-allowed-attr`, `dom-size`, `render-blocking-resources`,
-`unused-css-rules`, `uses-text-compression` and `color-contrast` all pass;
+`unused-css-rules` and `uses-text-compression` all pass;
+`color-contrast` still FAILS on the service template — one node, the hero stat-card caption at
+contrast 2.26 (`#9aada9` on `#fdfafa`, 9.6pt), which is why that template scores 95 on
+accessibility rather than 100; it is body-content styling this refactor deliberately did not
+restyle, and `--g600` (`#5c524b`) clears AA.
 `label-content-name-mismatch` and `aria-progressbar-name` go **notApplicable** (no such element
 remains to evaluate — which is the intended outcome, but is not the same as "pass": the audits
 resume the moment one returns). **`errors-in-console` still fails**, on sandbox tunnel errors from

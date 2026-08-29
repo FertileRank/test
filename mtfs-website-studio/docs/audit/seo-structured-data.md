@@ -420,7 +420,7 @@ HTML. Three near-orphan conditions matter:
 
 1. **`/404/` is linked from exactly one page** (`/sitemap/`). That is the correct amount of linking for an error page — but it means `/404/` is a live, `200 OK`, crawlable URL that is deliberately advertised in the site's HTML sitemap. See §7.3.
 2. **`/services/lab-solutions/` and `/services/management-services/` are the only two routes absent from the site-wide footer.** The footer of all 21 pages links 18 of the 21 routes — including all 10 of their *children* — but skips both parents (and `/404/`), plus a `/#testimonials` fragment link. Their entire inbound profile is 10 editorial body links each.
-3. **Inverted hierarchy.** Every child outranks its parent in inbound links: `staffing-solutions` has 33 linking pages (13 body + 20 footer) against its parent `lab-solutions`' 10. A crawler's importance model reads the leaves as more central than the hubs. With JS disabled the hubs are reachable only via body prose — no navigational path exists to them at all.
+3. **Inverted hierarchy.** Every child outranks its parent in inbound links: `staffing-solutions` has 33 inbound LINKS (13 body + 20 footer) from 21 distinct pages, against its parent `lab-solutions`' 10 pages. (These are link instances, not page-sources: a 33-page count is impossible on a 21-page site.) A crawler's importance model reads the leaves as more central than the hubs. With JS disabled the hubs are reachable only via body prose — no navigational path exists to them at all.
 
 ### 6.2 Anchor-text quality
 

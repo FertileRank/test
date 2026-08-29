@@ -15,9 +15,9 @@ re-verified against the export while writing this file):
 
 | Term | Pages naming it | Times the site expands or defines it |
 | --- | --- | --- |
-| FDA | 9 of 21 | 0 |
+| FDA | 8 of 21 | 0 |
 | CLIA | 9 of 21 | 0 |
-| CAP | 8 of 21 | 0 |
+| CAP | 9 of 21 | 0 |
 | AABB | 9 of 21 | 0 |
 | HCLD | 7 of 21 | 0 |
 | TS (ABB) | 5 of 21 | 0 |
