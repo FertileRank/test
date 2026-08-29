@@ -9,6 +9,13 @@ still ship the corrected chrome.
 `dist/` — not written by hand, not illustrative. If the two ever disagree, the build wins and the
 snippet is stale. Re-copy from `dist/` rather than editing a snippet in place.
 
+The markup blocks are pretty-printed one tag per line, so they differ from `dist/` only in
+insignificant inter-tag whitespace and in the two things a global block cannot know: the per-page
+`aria-current="page"`, and the per-page head tags. Verified by diffing this directory against
+`dist/privacy-policy/index.html` — a route that appears in no nav panel, so its served header carries
+no `aria-current` either. Every remaining difference is a collapsed space inside an inline container,
+which changes neither rendering nor the computed accessible name.
+
 ---
 
 ## 1. The seven files

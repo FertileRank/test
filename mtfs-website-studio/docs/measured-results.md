@@ -264,6 +264,25 @@ plain-text mirror for review, and its own header says exactly that. The reason t
 fix it is that a partial mirror is worse than none — a crawler treats its silence
 as absence.
 
+### Converter quality
+
+`htmlToMarkdown` was run over all 21 built pages and the output checked
+programmatically for the failure modes a naive tag-stripper produces:
+
+| Check | Result |
+|---|---|
+| Pages converted | 21 |
+| Total Markdown | 138,122 B |
+| Inline links preserved | 383 |
+| Leftover HTML tags | **0** |
+| Undecoded entities (`&amp;`, `&nbsp;`, `&#39;`…) | **0** |
+| Empty headings | **0** |
+| Runs of 4+ blank lines | **0** |
+| Pages without exactly one `#` H1 | **0** |
+
+Because the same function feeds `llms-full.txt` and the `content/` mirror, the
+two cannot disagree with each other or with the page.
+
 ## What a visitor actually downloads on first load
 
 Measured on `/`, first-party only.
