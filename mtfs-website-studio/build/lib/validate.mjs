@@ -631,7 +631,8 @@ export function validateLinks(pages, graph, opts = {}) {
 
       if (isRoute) {
         const targetRoute = byPath.get(target);
-        if (targetRoute && targetRoute.inSitemapXml === false) {
+        // A page linking to itself is not an inbound link to a noindex route.
+        if (targetRoute && targetRoute.inSitemapXml === false && target !== pagePath) {
           add(
             'warn',
             pagePath,
@@ -655,19 +656,31 @@ export function validateLinks(pages, graph, opts = {}) {
       }
     }
 
-    /* --- absolute internal links ---------------------------------- */
+    /* --- absolute internal links ---------------------------------- *
+     * Navigational links only. <link rel="canonical">, <link rel="alternate" hreflang>,
+     * <link rel="sitemap"> and <meta content="…"> are REQUIRED to be absolute — flagging
+     * them would fail every build (the export carries 53 such tags, all correct).        */
     if (origin) {
-      const absRe = new RegExp('(?:href|src|action)\\s*=\\s*["\']' + escapeRe(origin) + '(/[^"\']*)?["\']', 'gi');
       const cleaned = stripScriptAndStyleBodies(page.html);
-      let am;
-      while ((am = absRe.exec(cleaned)) !== null) {
-        add(
-          'error',
-          pagePath,
-          'absolute-internal',
-          `internal link written as an absolute URL (${origin}${am[1] || '/'}) — use the root-relative form`,
-          origin + (am[1] || '/')
-        );
+      TAG_RE.lastIndex = 0;
+      let tm;
+      while ((tm = TAG_RE.exec(cleaned)) !== null) {
+        const tag = String(tm[1]).toLowerCase();
+        if (tag === 'link' || tag === 'meta' || tag === 'base') continue;
+        const attrs = parseAttrs(tm[2]);
+        for (const attr of ['href', 'src', 'action']) {
+          const value = attrs[attr];
+          if (value === undefined) continue;
+          const v = decodeEntities(value).trim();
+          if (v !== origin && !v.startsWith(origin + '/') && !v.startsWith(origin + '?') && !v.startsWith(origin + '#')) continue;
+          add(
+            'error',
+            pagePath,
+            'absolute-internal',
+            `<${tag} ${attr}="${v}"> is an internal link written as an absolute URL — use the root-relative form`,
+            v
+          );
+        }
       }
     }
 
