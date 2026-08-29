@@ -216,3 +216,235 @@
   ]
 }
 </script>
+
+
+<!-- ==========================================================================
+     BLOCK B — PER PAGE. Goes in the per-page head field.
+
+     WebPage + BreadcrumbList (+ Service on the 13 /services/** routes).
+     Replace every {{TOKEN}}. Delete the nodes a page does not need.
+
+     Shape notes, all of them corrections to the export:
+       * @id is {{CANONICAL}}#webpage — DISTINCT from the page URL, so the node
+         and the document are not the same identifier.
+       * isPartOf points at #website, never at #organization.
+       * There is no mainEntityOfPage. The export's WebPage nodes set it to
+         their own URL, which is circular and says nothing.
+       * breadcrumb references the BreadcrumbList by @id rather than nesting it,
+         so one trail serves both nodes.
+       * provider is a PURE REFERENCE: {"@id": ".../#organization"} and nothing
+         else. Re-inlining name/url/telephone is what gave one @id four shapes.
+       * Every Service has its own @id, {{CANONICAL}}#service, so the two hub
+         pages' OfferCatalog entries can point at their children.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{CANONICAL}}#webpage",
+      "url": "{{CANONICAL}}",
+      "name": "{{PAGE_TITLE}}",
+      "description": "{{PAGE_DESCRIPTION}}",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "{{ORIGIN}}/#website" },
+      "breadcrumb": { "@id": "{{CANONICAL}}#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{CANONICAL}}#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",            "item": "{{ORIGIN}}/" },
+        { "@type": "ListItem", "position": 2, "name": "{{CRUMB_2_NAME}}", "item": "{{CRUMB_2_URL}}" },
+        { "@type": "ListItem", "position": 3, "name": "{{CRUMB_3_NAME}}", "item": "{{CRUMB_3_URL}}" },
+        { "@type": "ListItem", "position": 4, "name": "{{NAV_LABEL}}",    "item": "{{CANONICAL}}" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "{{CANONICAL}}#service",
+      "name": "{{NAV_LABEL}}",
+      "url": "{{CANONICAL}}",
+      "description": "{{PAGE_DESCRIPTION}}",
+      "provider": { "@id": "{{ORIGIN}}/#organization" },
+      "areaServed": [
+        { "@type": "Country", "name": "United States" },
+        { "@type": "AdministrativeArea", "name": "International" }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK B — WORKED EXAMPLE, fully resolved, nothing left to replace.
+     Route: /services/lab-solutions/gpo-purchasing/  (4 breadcrumb items, a leaf
+     Service). This is byte-for-byte what build/sync.mjs emits for that page.
+
+     Note what the trail does that the export's did not: it inserts the
+     /services/ tier at position 2. The export ships
+     Home > Laboratory Solutions > GPO Purchasing — 3 items for a 3-segment URL,
+     with the hub missing. The same omission affects all 10 leaves and both hubs.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#webpage",
+      "url": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/",
+      "name": "GPO Purchasing for Fertility Clinics | MedTech For Solutions",
+      "description": "Join MedTech's GPO free of charge and access 1,800+ vendor contracts for IVF lab supplies and equipment. Pool buying power with 300+ fertility practices.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://medtech4solutions.com/#website" },
+      "breadcrumb": { "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",           "item": "https://medtech4solutions.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services",       "item": "https://medtech4solutions.com/services/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab Solutions",  "item": "https://medtech4solutions.com/services/lab-solutions/" },
+        { "@type": "ListItem", "position": 4, "name": "GPO Purchasing", "item": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#service",
+      "name": "GPO Purchasing",
+      "url": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/",
+      "description": "Join MedTech's GPO free of charge and access 1,800+ vendor contracts for IVF lab supplies and equipment. Pool buying power with 300+ fertility practices.",
+      "provider": { "@id": "https://medtech4solutions.com/#organization" },
+      "areaServed": [
+        { "@type": "Country", "name": "United States" },
+        { "@type": "AdministrativeArea", "name": "International" }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK B — HUB VARIANT: the OfferCatalog fragment.
+
+     On /services/, /services/lab-solutions/ and /services/management-services/,
+     add hasOfferCatalog to the Service node so the hub references its children
+     by the @id each child now has. Shown for /services/lab-solutions/.
+     Splice it in beside "areaServed" — it is a property of the Service node,
+     not a node of its own.
+
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Lab Solutions",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/real-time-monitoring/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/regulatory-compliance/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/staffing-solutions/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/practice-development/#service" } }
+        ]
+      }
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     BLOCK C — FAQPage. ONLY on a page that renders the questions visibly.
+
+     Eligible today: / (six questions already visible and already marked up in
+     the export) and /contact/ (seven operational answers visible, no markup).
+     Nowhere else. All ten service pages currently answer nothing, and inventing
+     questions to carry markup is the mass-produced pattern to avoid.
+
+     REGRESSION TO CLOSE: the export's /index.html carries a real FAQPage with
+     six Question/Answer pairs. The current build/sync.mjs output does not carry
+     it forward — dist/index.html has two JSON-LD blocks where the export had
+     four. Until render.mjs re-emits it, paste this block on / by hand.
+
+     Every answer must be the text the visitor actually sees, plain, no HTML.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "{{CANONICAL}}#faq",
+      "isPartOf": { "@id": "{{CANONICAL}}#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "{{FAQ_1_QUESTION}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_1_ANSWER}}" }
+        },
+        {
+          "@type": "Question",
+          "name": "{{FAQ_2_QUESTION}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_2_ANSWER}}" }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK C — WORKED EXAMPLE, resolved. Two of the six questions the home page
+     already renders, quoted verbatim from the export's own FAQPage node so the
+     markup and the visible copy cannot disagree.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://medtech4solutions.com/#faq",
+      "isPartOf": { "@id": "https://medtech4solutions.com/#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is MedTech For Solutions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MedTech For Solutions is a healthcare consulting company founded in 2005, specializing exclusively in the assisted reproductive technology (ART) industry. Based in White Plains, NY, MedTech provides IVF laboratory management, practice development, temporary staffing, recruitment, regulatory compliance, and group purchasing services to fertility clinics and IVF laboratories across the United States and internationally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is MedTech For Solutions located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MedTech For Solutions is headquartered at 399 Knollwood Road, White Plains, NY 10603. They support fertility clinics nationwide and internationally. Contact: (866) 634-9144 or info@medtech4solutions.com."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     KNOWN DIVERGENCE — read before comparing this file to dist/
+
+     build/lib/render.mjs currently emits Service.areaServed with the key "type"
+     instead of "@type":
+
+         "areaServed": [ { "type": "Country", "name": "United States" }, … ]
+
+     site.config.mjs stores areaServed as {type, name}; artifacts.mjs maps it to
+     {"@type", name} for the Organization node, but render.mjs passes it through
+     unmapped for the Service node. A bare "type" is not a schema.org keyword, so
+     those two values are silently dropped from the 13 Service nodes.
+
+     THIS FILE IS CORRECT. dist/ is not, on that one property. Fix render.mjs,
+     rebuild, and the two will agree again.
+     ========================================================================== -->
+
+<!-- ============================ end 20-head-schema.html ===================== -->

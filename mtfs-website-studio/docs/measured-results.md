@@ -149,6 +149,47 @@ likewise excluded.
 They agreed before too, but by luck, from three independent generators; they now
 agree by construction, from one array.
 
+## `llms-full.txt` fidelity
+
+The content audit found the export's `llms-full.txt` was not an accurate mirror
+of the pages: its generator walked headings and paragraphs and dropped several
+element types wholesale, so it omitted precisely the facts an AI system would
+want to cite while faithfully reproducing the site's contradictions. It is
+regenerated now by `artifacts.mjs::htmlToMarkdown` from the same `<main>` content
+the page renders.
+
+Counted by grepping both files for the specific values the audit named:
+
+| Probe | Before | After |
+|---|---:|---:|
+| Inline Markdown links | **0** | **35** |
+| GPO tile `$0 Cost to Join` | 0 | 2 |
+| Marketing tile `+185%` | 0 | 1 |
+| Marketing tile `3.2x` | 0 | 1 |
+| `/about/` timeline year 2008 | 0 | 2 |
+| `/about/` timeline year 2012 | 0 | 2 |
+| `/about/` timeline year 2016 | 0 | 2 |
+| `/about/` timeline year 2020 | 1 | 3 |
+| `300+` practices | 3 | 6 |
+| `1,800+` contracts | 7 | 9 |
+| `10% - 50%` savings | 2 | 3 |
+| Testimonial attribution "Gerson" | 1 | 2 |
+| Testimonial attribution "Westchester County Medical Society" | 2 | 3 |
+
+No probe went down. 111,936 B → 140,184 B, which is the recovered content.
+
+The zero-links row is the important one. The old corpus encoded no internal link
+graph at all — every "Continue exploring" block degraded from real `<a href>`
+elements to plain bullets. The timeline rows matter for the same reason: a model
+reading the old file could not tell what year the GPO launched, because all six
+milestone years had been stripped.
+
+**This changes nothing for Google.** Google Search ignores `llms.txt` and
+`llms-full.txt`. The file is published for third-party AI crawlers and as a
+plain-text mirror for review, and its own header says exactly that. The reason to
+fix it is that a partial mirror is worse than none — a crawler treats its silence
+as absence.
+
 ## What a visitor actually downloads on first load
 
 Measured on `/`, first-party only.
