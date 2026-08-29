@@ -86,7 +86,6 @@ node content/regenerate.mjs --src DIR       # read pages from DIR instead of dis
 described below needs it and writing without it would silently delete five FAQ answers from
 `pages/index.md`. Pass `--allow-missing-export` only if that loss is intended.
 
-
 `--write` replaces **only** the block between the markers. The YAML front-matter and the
 `## Content review` section at the foot of each file are editorial and are preserved verbatim.
 
