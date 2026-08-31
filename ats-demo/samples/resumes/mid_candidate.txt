@@ -1,0 +1,29 @@
+Priya Natarajan
+Austin, TX | (512) 555-0192 | priya.n@example.com
+
+Summary
+SEO-focused marketer with 5 years of agency experience across home services
+and e-commerce clients.
+
+Work Experience
+
+SEO Team Lead
+Rankwell Agency, Austin, TX
+2022 - Present
+- Lead technical SEO audits, site architecture and Core Web Vitals work for 12 clients
+- Built keyword research and content marketing roadmaps; two clients doubled organic leads
+- Implemented structured data (schema.org) templates across client sites
+- Coordinate with paid search team on landing pages and CRO tests
+
+SEO Analyst
+Rankwell Agency, Austin, TX
+2020 - 2022
+- Ran Google Search Console monitoring and GA4 reporting for client portfolio
+- Managed local SEO and Google Business Profile cleanups for franchise clients
+
+Education
+Bachelor of Arts in Communications, University of Texas at Austin, 2019
+
+Skills
+Technical SEO, Keyword Research, Content Strategy, Schema.org, GA4,
+Google Search Console, Local SEO, WordPress, Screaming Frog

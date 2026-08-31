@@ -1,0 +1,40 @@
+Jordan Alvarez
+Chicago, IL | (312) 555-0148 | jordan.alvarez@example.com | linkedin.com/in/jordan-alvarez-demo
+
+Professional Summary
+Digital Marketing Manager with 8 years growing multi-location healthcare and
+consumer-services brands through SEO, Google Ads, and conversion rate
+optimization. Led teams of up to 5 and $1.2M annual paid media budgets.
+
+Professional Experience
+
+Digital Marketing Manager
+BrightSmile Dental Partners (42-location DSO), Chicago, IL
+Mar 2020 - Present
+- Own SEO, local SEO, and Google Business Profile strategy for 42 locations; organic
+  appointment requests up 61% in two years
+- Manage $1.2M/year Google Ads and Meta Ads budget; cut cost per booked patient 34%
+  through CRO and landing page testing
+- Built GA4 + Looker Studio executive dashboards with call and form attribution
+- Implemented schema.org structured data across location and service pages
+- Run review generation program: average rating 4.2 to 4.7 across locations
+- Lead a team of 3 specialists and 2 agencies; own the email marketing calendar
+  in HubSpot with HIPAA-conscious data handling
+
+Digital Marketing Specialist
+Lakeview Health System, Chicago, IL
+Jun 2016 - Mar 2020
+- Ran content marketing program for service lines; organic sessions +120%
+- Managed Google Ads search campaigns for 6 clinics ($400k/year)
+- Migrated 3 hospital microsites into one WordPress CMS without traffic loss
+
+Education
+B.S. in Marketing, University of Illinois Urbana-Champaign, 2016
+
+Skills
+SEO, Local SEO, Technical SEO, Google Ads, Meta Ads, GA4, Google Search Console,
+Looker Studio, CRO, A/B testing, Content Marketing, Email Marketing, HubSpot,
+WordPress, Schema.org, Reputation Management, Team Leadership, Budget Management
+
+Certifications
+Google Ads Search Certification (2025), Google Analytics Certification (2025)
