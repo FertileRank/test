@@ -1,0 +1,30 @@
+# Build output. `node build/sync.mjs` regenerates every byte of this directory
+# deterministically from site.config.mjs plus the source export, so committing it
+# adds no information and costs a great deal:
+#
+#  - 126 files per build, including binary .br and .gz siblings for every
+#    compressible artifact, which git cannot diff and which churn on every run;
+#  - it invites exactly the hand-edit the docs forbid — every generated file
+#    carries a "generated, do not edit by hand" header, and sync.mjs overwrites
+#    them all on the next build;
+#  - it buries the ~40 source files a reviewer actually needs to read.
+#
+# Deploy from a build step, not from a committed artifact.
+dist/
+
+# Local Lighthouse runs, scratch measurements, throwaway harnesses.
+*.report.json
+*.report.html
+.lighthouseci/
+
+# Editor and OS noise. The source export shipped a .DS_Store; do not add another.
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node. This project has zero dependencies by design — there is no lockfile and
+# no node_modules — but a stray `npm install` should not be committable.
+node_modules/
+npm-debug.log*

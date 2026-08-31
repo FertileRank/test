@@ -1,0 +1,34 @@
+# MedTech For Solutions
+Summary: End-to-end IVF laboratory management and ART practice solutions for fertility clinics — lab solutions (GPO purchasing, practice development, real-time monitoring, regulatory compliance, staffing) and management services — serving fertility clinics since 2005.
+
+## Main
+
+- [Home](https://medtech4solutions.com/)
+- [About](https://medtech4solutions.com/about/)
+- [Our Team](https://medtech4solutions.com/our-team/)
+- [Contact](https://medtech4solutions.com/contact/)
+- [Services](https://medtech4solutions.com/services/)
+
+## Lab Solutions
+
+- [Lab Solutions Overview](https://medtech4solutions.com/services/lab-solutions/)
+- [GPO Purchasing](https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/)
+- [Practice Development](https://medtech4solutions.com/services/lab-solutions/practice-development/)
+- [Real-Time Monitoring](https://medtech4solutions.com/services/lab-solutions/real-time-monitoring/)
+- [Regulatory Compliance](https://medtech4solutions.com/services/lab-solutions/regulatory-compliance/)
+- [Staffing Solutions](https://medtech4solutions.com/services/lab-solutions/staffing-solutions/)
+
+## Management Services
+
+- [Management Services Overview](https://medtech4solutions.com/services/management-services/)
+- [Accounting & Finance](https://medtech4solutions.com/services/management-services/accounting-finance/)
+- [Call Center](https://medtech4solutions.com/services/management-services/call-center/)
+- [Human Resources](https://medtech4solutions.com/services/management-services/human-resources/)
+- [Insurance & Risk Management](https://medtech4solutions.com/services/management-services/insurance-risk-management/)
+- [Marketing](https://medtech4solutions.com/services/management-services/marketing/)
+
+## Policies
+
+- [Sitemap](https://medtech4solutions.com/sitemap/)
+- [Privacy Policy](https://medtech4solutions.com/privacy-policy/)
+- [Terms of Service](https://medtech4solutions.com/terms-of-service/)

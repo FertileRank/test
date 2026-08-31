@@ -1,0 +1,19 @@
+SEO Manager
+
+About the role:
+B2C services brand seeks an SEO Manager to own organic growth end to end.
+
+Requirements:
+- 4+ years of SEO experience with demonstrable ranking and traffic wins
+- Technical SEO: crawls, site architecture, Core Web Vitals, migrations
+- Keyword research and search-intent-driven content strategy
+- Local SEO and Google Business Profile management at scale
+- Structured data / schema.org implementation
+- Google Analytics and Google Search Console fluency
+- Bachelor's degree or equivalent experience
+
+Preferred qualifications:
+- AI search / generative engine optimization (AIO/GEO) experience
+- Looker Studio reporting
+- Basic HTML and CMS experience (WordPress)
+- CRO collaboration experience

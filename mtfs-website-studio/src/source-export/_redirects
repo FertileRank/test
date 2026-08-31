@@ -1,0 +1,36 @@
+# Legacy path 301 redirects — medtech4solutions.com
+# Source paths match with or without trailing slash.
+# Query strings are preserved automatically by Netlify.
+
+/home           /                                                    301
+/home/          /                                                    301
+
+/who-we-are     /about                                              301
+/who-we-are/    /about                                              301
+
+/testimonials   /#testimonials                                      301
+/testimonials/  /#testimonials                                      301
+
+/gpo            /services/lab-solutions/gpo-purchasing              301
+/gpo/           /services/lab-solutions/gpo-purchasing              301
+
+/gpo-registration   /services/lab-solutions/gpo-purchasing          301
+/gpo-registration/  /services/lab-solutions/gpo-purchasing          301
+
+/recruitment    /services/lab-solutions/staffing-solutions          301
+/recruitment/   /services/lab-solutions/staffing-solutions          301
+
+/practice       /services/lab-solutions/practice-development/       301
+/practice/      /services/lab-solutions/practice-development/       301
+
+/laboratory-solutions   /services/lab-solutions/                    301
+/laboratory-solutions/  /services/lab-solutions/                    301
+
+/temp-staff     /services/lab-solutions/staffing-solutions/         301
+/temp-staff/    /services/lab-solutions/staffing-solutions/         301
+
+/policy         /privacy-policy/                                    301
+/policy/        /privacy-policy/                                    301
+
+/untitled       /404/                                                301
+/untitled/      /404/                                                301
