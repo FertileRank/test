@@ -1,0 +1,269 @@
+===============================================================================
+ 60-headers-and-redirects.txt
+ MedTech For Solutions — Search Atlas Website Studio reference
+
+ These two files are NOT paste blocks for a Studio embed region. They are
+ publish-time artifacts that sit at the ROOT of the deployed site, beside
+ index.html, and are read by the hosting platform (Netlify-style):
+
+     /_headers      response headers per path pattern
+     /_redirects    301/404 rules per path
+
+ Website Studio publishes them from the project's publish/deploy settings.
+ build/sync.mjs regenerates both from site.config.mjs -> headerRules[] and
+ redirects[] on every build, so if you are running the pipeline you do not paste
+ anything here — you copy dist/_headers and dist/_redirects and you are done.
+ The content below is exactly what it emits today.
+===============================================================================
+
+
+###############################################################################
+# READ THIS FIRST — _headers DOES NOTHING UNTIL THE META TAGS GO
+###############################################################################
+
+Every one of the 21 pages currently carries these three tags in <head>:
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+`no-store` tells the browser to keep no copy of the response at all. It applies
+to the DOCUMENT, and it overrides nothing less than the entire caching policy
+below for that document — a full re-download on every visit, every time, for
+every visitor. Publishing _headers while those tags are still in the page is
+work with no observable effect.
+
+DELETE ALL THREE before or with this deployment. They are listed in
+00-README.md §4 alongside the rest of the head cleanup. There is no version of
+this that works while they remain.
+
+Two related notes:
+  * `Pragma` is an HTTP/1.0 REQUEST header. As a <meta http-equiv> it has never
+    done anything in any browser. It is cargo.
+  * A meta http-equiv can only ever weaken a real response header, never
+    strengthen it. Cache policy belongs in _headers.
+
+
+###############################################################################
+# _headers — copy everything between the markers to /_headers
+###############################################################################
+
+WHAT CHANGED, AND WHY
+
+1. THE HTML RULE NOW MATCHES THE PAGES.
+   The export declares `/*.html` and `/`. The site publishes PRETTY URLs, so the
+   document for /about/ is served at a path ending in a slash — it does not end
+   in ".html". Nineteen of the twenty-one documents therefore matched NO rule at
+   all and fell back to browser heuristic caching, which is a guess based on
+   Last-Modified. Only `/` was covered. The catch-all `/*` at the FOOT of the
+   file fixes it: rules are evaluated in order and the more specific path wins
+   per header name, so /assets/* keeps its immutable caching while every
+   pretty-URL document gets must-revalidate.
+
+2. IMMUTABLE ONLY ON CONTENT-HASHED FILENAMES.
+   The export applies `max-age=31536000, immutable` via /*.css, /*.js and
+   /assets/* to five files that are NOT content-hashed:
+       /assets/mega-menu.css
+       /assets/mega-menu.min.js
+       /assets/mtfs-images.css
+       /assets/book-consultation-modal.min.js
+       /assets/css/fonts.css
+   A year of immutable caching on a mutable filename means a fix cannot reach
+   anyone who has already visited. The hand-rolled `?v=20260723` query string on
+   the fonts.css <link> is the symptom of exactly this problem — and query
+   strings are an unreliable cache key. Every file this build writes under
+   /assets/ carries its content hash in the name (site.2e0bf98e.css,
+   nav.ebcdfd8a.js, …), so the single /assets/* rule is now safe, and
+   build/sync.mjs asserts that invariant. The per-extension /*.css, /*.js,
+   /*.webp … rules are deleted: they would re-cover unhashed names.
+
+3. SECURITY HEADERS. The export has none of any kind.
+   X-Content-Type-Options: nosniff          — stops MIME sniffing
+   Referrer-Policy: strict-origin-when-cross-origin
+   Strict-Transport-Security                — HTTPS only; `preload` is a
+                                              deliberate, hard-to-reverse
+                                              commitment, remove it if you are
+                                              not ready for that
+   Permissions-Policy                       — denies every powerful feature the
+                                              site does not use
+   X-Frame-Options: SAMEORIGIN              — clickjacking
+   NOT included: Content-Security-Policy. A useful CSP here has to allow Google
+   Tag Manager, dashboard.fertilerank.com and the inline blocks in
+   50-body-deferred-scripts.html, and one written blind will break the site on
+   the first publish. Add it deliberately, in Report-Only first.
+
+4. TEXT COMPRESSION. The export pre-compresses nothing and sets no
+   Content-Encoding; Lighthouse measures an estimated 140 KiB of savings.
+   build/lib/compress.mjs writes .gz (gzip level 9) and .br (brotli quality 11)
+   beside every .html/.css/.js/.txt/.xml/.json, INCLUDING llms-full.txt
+   (112,391 B), which matched no rule in the old file at all. Most static hosts
+   serve a matching .br/.gz automatically when the client's Accept-Encoding
+   allows it; no header is needed for that. If yours does not, it is a platform
+   setting, not an _headers rule — do not hand-write Content-Encoding, because a
+   wrong one serves compressed bytes as plain text.
+
+5. ACCEPTED, DOCUMENTED RISK: _headers governs this origin only. The four woff2
+   font faces and every image live on media.cdn.builder.searchatlas.com and sit
+   outside this policy entirely. Self-hosting the fonts under /assets/fonts/
+   would bring them under the /assets/* immutable rule; that changes asset URLs,
+   so it is a follow-up, not part of this work. Do not describe the caching
+   policy as complete.
+
+------------------------------- BEGIN _headers --------------------------------
+# =============================================================================
+# _headers — generated by build/lib/artifacts.mjs from site.config.mjs.
+# Do not edit by hand: sync.mjs overwrites this file on every build.
+#
+# Rules apply in order; the more specific path wins per header name, so the
+# '/*' catch-all at the foot covers all 20 pretty-URL documents (/about/, not
+# /about.html) while /assets/* keeps its immutable caching.
+#
+# immutable is safe ONLY because every file the build writes under /assets/ is
+# content-hashed. sync.mjs asserts that invariant.
+#
+# Not governed here: media.cdn.builder.searchatlas.com (the four woff2 faces and
+# every image). _headers covers this origin only — accepted, documented risk.
+# =============================================================================
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Cache-Control: public, max-age=3600
+
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), usb=()
+  X-Frame-Options: SAMEORIGIN
+-------------------------------- END _headers ---------------------------------
+
+
+###############################################################################
+# _redirects — copy everything between the markers to /_redirects
+###############################################################################
+
+WHAT CHANGED, AND WHY
+
+1. EVERY TARGET NOW ENDS IN A SLASH.
+   The export mixes two conventions. Eight rules point at slash-less URLs:
+       /who-we-are  /who-we-are/         -> /about
+       /gpo  /gpo/                       -> /services/lab-solutions/gpo-purchasing
+       /gpo-registration  …/             -> /services/lab-solutions/gpo-purchasing
+       /recruitment  /recruitment/       -> /services/lab-solutions/staffing-solutions
+   while /practice, /laboratory-solutions, /temp-staff and /policy already use
+   the canonical trailing-slash form. So /gpo and /practice — two rules five
+   lines apart, pointing into the same subtree — disagree with each other. Since
+   every canonical route ends in a slash, each of those eight resolves as
+   301 -> 301, or 301 -> 404 on a host that does not normalise. They are the
+   highest-value legacy paths on the site.
+   Every target here is now a canonical route path ending in "/" (or a
+   "/#fragment" whose id exists on the target page — /#testimonials is valid,
+   that section is on the home page). build/lib/validate.mjs asserts it.
+
+2. /untitled IS NOW A 404, NOT A 301.
+   The export 301s /untitled to /404/, and /404/ is an ordinary exported
+   document that returns HTTP 200. Google therefore records /untitled as
+   permanently moved to a valid page: a soft 404 that reports success. Changing
+   the status code to 404 makes the platform serve the /404/ body with a 404
+   status, which is what both the crawler and the visitor should get. Deleting
+   the two rules entirely and letting default 404 handling take it is equally
+   correct.
+   Two related fixes that live outside this file: stop linking /404/ from the
+   HTML sitemap at /sitemap/ (its only inbound link), and drop its
+   self-referencing rel=canonical. /404/ stays correctly excluded from
+   sitemap.xml, llms.txt and llms-full.txt.
+
+3. BOTH SPELLINGS OF EVERY SOURCE PATH ARE LISTED — bare and trailing-slash —
+   so the rules work on a host that does not normalise incoming paths. Query
+   strings are preserved by the platform.
+
+4. NO ROUTE IS ADDED, REMOVED OR RENAMED. The inventory is fixed at 21 pages.
+   Redirects map legacy paths onto that inventory; they never extend it.
+
+------------------------------ BEGIN _redirects -------------------------------
+# =============================================================================
+# _redirects — generated by build/lib/artifacts.mjs from site.config.mjs.
+# Do not edit by hand: sync.mjs overwrites this file on every build.
+#
+# Both the bare and the trailing-slash form of every legacy source path are
+# listed, so the rules still work on a host that does not normalise.
+# Every target is a canonical route path ending in "/" (or a "/#fragment"),
+# which validate.mjs asserts — a slash-less target costs a second 301 hop.
+# Query strings are preserved by the host.
+# =============================================================================
+
+/home                   /                                              301
+/home/                  /                                              301
+/who-we-are             /about/                                        301
+/who-we-are/            /about/                                        301
+/testimonials           /#testimonials                                 301
+/testimonials/          /#testimonials                                 301
+/gpo                    /services/lab-solutions/gpo-purchasing/        301
+/gpo/                   /services/lab-solutions/gpo-purchasing/        301
+/gpo-registration       /services/lab-solutions/gpo-purchasing/        301
+/gpo-registration/      /services/lab-solutions/gpo-purchasing/        301
+/recruitment            /services/lab-solutions/staffing-solutions/    301
+/recruitment/           /services/lab-solutions/staffing-solutions/    301
+/practice               /services/lab-solutions/practice-development/  301
+/practice/              /services/lab-solutions/practice-development/  301
+/laboratory-solutions   /services/lab-solutions/                       301
+/laboratory-solutions/  /services/lab-solutions/                       301
+/temp-staff             /services/lab-solutions/staffing-solutions/    301
+/temp-staff/            /services/lab-solutions/staffing-solutions/    301
+/policy                 /privacy-policy/                               301
+/policy/                /privacy-policy/                               301
+/untitled               /404/                                          404
+/untitled/              /404/                                          404
+------------------------------- END _redirects --------------------------------
+
+
+###############################################################################
+# VERIFYING, AFTER PUBLISH
+###############################################################################
+
+Run these against the live host. A Studio preview does not apply _headers.
+
+  # 1. A pretty-URL document must be revalidated, not heuristically cached.
+  curl -sSI https://medtech4solutions.com/about/ | grep -i '^cache-control'
+  #    expect: cache-control: public, max-age=0, must-revalidate
+
+  # 2. A hashed asset must be immutable for a year.
+  curl -sSI https://medtech4solutions.com/assets/site.2e0bf98e.css | grep -i '^cache-control'
+  #    expect: cache-control: public, max-age=31536000, immutable
+
+  # 3. Security headers present on documents.
+  curl -sSI https://medtech4solutions.com/ | grep -iE '^(x-content-type-options|referrer-policy|permissions-policy|x-frame-options|strict-transport-security)'
+
+  # 4. Compression negotiated.
+  curl -sSI -H 'Accept-Encoding: br' https://medtech4solutions.com/ | grep -i '^content-encoding'
+  #    expect: content-encoding: br
+
+  # 5. A legacy path is ONE hop, not two. Watch for a single 301.
+  curl -sSI https://medtech4solutions.com/gpo | grep -iE '^(HTTP/|location)'
+  #    expect: 301 -> https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/
+
+  # 6. /untitled returns 404, not 301-then-200.
+  curl -sSI https://medtech4solutions.com/untitled | grep -i '^HTTP/'
+  #    expect: 404
+
+  # 7. The no-store meta tags are really gone.
+  curl -sS https://medtech4solutions.com/ | grep -ci 'http-equiv'
+  #    expect: 0
+
+If check 1 shows anything other than must-revalidate, the three <meta
+http-equiv> tags are still in the page. Go back to the top of this file.

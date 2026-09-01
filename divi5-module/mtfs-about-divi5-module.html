@@ -1,0 +1,572 @@
+<!-- ================================================================
+MODULE:   MedTech For Solutions - About Page (Divi 5 Custom Code Module)
+VERSION:  1.0.0
+CREATED:  2026-09-01
+SOURCE:   MedTechFullySanitizedWebsiteStudioProjectSyncEnabled.zip /about/
+PASTE:    Divi 5 > Code module (one per page). Use a fullwidth section or a
+          single-column row with 0 padding / no gutter for edge-to-edge look.
+ASSETS:   Upload the contents of wp-uploads/mtfs/ to /wp-content/uploads/mtfs/
+          (FTP or file manager - keep file names) before publishing.
+COMPATIBILITY FLAGS
+  1. No jQuery, no external JS libraries, no document.write, no sync XHR.
+     One namespaced global: window.MtfsAbout. All classes prefixed .mtfs-.
+  2. Consultation wizard is DORMANT until you set data-mtfs-endpoint on the
+     .mtfs-about wrapper to a real form-handler URL (needs server-side
+     config: WPForms/Gravity webhook, or custom REST route). While empty,
+     "Schedule a Consultation" simply navigates to /contact/.
+  3. Fonts load from fonts.googleapis.com / fonts.gstatic.com (preconnected,
+     deferred, CORS-safe). If DM Sans or Sora are already enabled in Divi
+     Theme Options, delete the 4 font <link> tags below the HTML to avoid a
+     duplicate request. Self-hosted option: wp-uploads/mtfs/mtfs-fonts.css.
+  4. The <footer> block duplicates a global Theme Builder footer - delete it
+     if your Divi template already outputs one.
+  5. Hero img is intentionally eager + fetchpriority=high (it is the LCP);
+     every other image is lazy. srcset omitted: the sanitized export ships
+     one resolution per image (add variants later if you regenerate them).
+  6. Internal links (/contact/, /services/...) assume matching WP permalinks.
+This comment block may be removed before pasting.
+================================================================= -->
+<link rel="preload" as="image" type="image/webp" href="/wp-content/uploads/mtfs/hero-lab-1536x864.webp" fetchpriority="high">
+<style id="mtfs-about-critical">
+.mtfs-about{--mtfs-teal:#1F6E75;--mtfs-teal-d:#175459;--mtfs-teal-l:#E4F0EE;--mtfs-lime:#CCDF33;--mtfs-w:#FDFAFA;--mtfs-ow:#F4F7F6;--mtfs-g50:#F4F7F6;--mtfs-g100:#E4EAE8;--mtfs-g600:#5C524B;--mtfs-g800:#2A2320;--mtfs-g900:#1A1210;--mtfs-r:16px;--mtfs-rl:22px;--mtfs-sans:'DM Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--mtfs-head:'Sora','DM Sans',system-ui,sans-serif;font-family:var(--mtfs-sans);font-size:clamp(1rem,1.05vw,1.125rem);line-height:1.65;color:var(--mtfs-g800);background:var(--mtfs-w);overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.mtfs-about *,.mtfs-about *::before,.mtfs-about *::after{box-sizing:border-box}
+.mtfs-about h1,.mtfs-about h2,.mtfs-about h3{font-family:var(--mtfs-head);line-height:1.2;color:var(--mtfs-g900);margin:0;overflow-wrap:break-word}
+.mtfs-about h2{font-size:clamp(1.75rem,3.5vw,2.625rem);font-weight:700}
+.mtfs-about p{margin:0 0 14px;max-width:70ch;overflow-wrap:break-word}
+.mtfs-about a{text-decoration:none;color:inherit;transition:color .3s}
+.mtfs-about img{max-width:100%;height:auto;display:block;border:0}
+.mtfs-about a:focus-visible,.mtfs-about button:focus-visible{outline:3px solid var(--mtfs-lime);outline-offset:3px;border-radius:4px}
+.mtfs-about figure{margin:0}
+.mtfs-ctr{max-width:1200px;margin:0 auto;padding:0 24px}
+.mtfs-hero{position:relative;overflow:hidden;text-align:center;padding:110px 0 90px;background:var(--mtfs-g900)}
+.mtfs-hero-image{position:absolute;inset:0;margin:0}
+.mtfs-hero-image img{width:100%;height:100%;object-fit:cover}
+.mtfs-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(26,18,16,.62),rgba(26,18,16,.78)),radial-gradient(ellipse 600px 400px at 15% 50%,rgba(31,110,117,.35) 0%,transparent 70%),radial-gradient(ellipse 500px 500px at 85% 30%,rgba(107,51,87,.28) 0%,transparent 70%)}
+.mtfs-hero .mtfs-ctr{position:relative;z-index:2}
+.mtfs-hero h1{font-size:clamp(2.125rem,5vw,3.2rem);font-weight:800;color:#F0F9FF;margin:0 0 18px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.mtfs-crumb{font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:18px}
+.mtfs-crumb a{color:var(--mtfs-lime)}
+.mtfs-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(204,223,51,.4);border-radius:100px;padding:6px 18px;font-size:.8rem;font-weight:600;color:var(--mtfs-lime);margin-bottom:24px}
+.mtfs-dot{width:8px;height:8px;border-radius:50%;background:var(--mtfs-lime)}
+.mtfs-sub{font-size:1.1rem;color:rgba(255,255,255,.65);max-width:680px;margin:0 auto}
+.mtfs-sec{padding:100px 0}
+.mtfs-ag{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mtfs-ag>*{min-width:0}
+.mtfs-copy h2{font-size:2rem;margin-bottom:16px}
+.mtfs-copy p{font-size:.98rem;color:var(--mtfs-g600);margin-bottom:14px}
+.mtfs-copy p strong{color:var(--mtfs-g800)}
+.mtfs-context-link{color:inherit;text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.16em;font-weight:600}
+.mtfs-context-link:hover{opacity:.78}
+.mtfs-stats{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap}
+.mtfs-n{font-size:2rem;font-weight:700;color:var(--mtfs-teal);font-family:var(--mtfs-head)}
+.mtfs-l{font-size:.8rem;color:var(--mtfs-g600);margin-top:2px}
+.mtfs-media-stack{display:grid;gap:16px}
+.mtfs-media img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--mtfs-rl)}
+.mtfs-tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mtfs-tiles>*{min-width:0}
+.mtfs-tile{background:var(--mtfs-g50);border-radius:var(--mtfs-r);padding:24px;border:1px solid var(--mtfs-g100)}
+.mtfs-tile h3{font-family:var(--mtfs-sans);font-size:.95rem;font-weight:700;margin-bottom:6px}
+.mtfs-tile p{font-size:.84rem;color:var(--mtfs-g600);margin:0}
+.mtfs-tile--hi{background:var(--mtfs-teal);border-color:var(--mtfs-teal)}
+.mtfs-tile--hi h3,.mtfs-tile--hi p{color:var(--mtfs-w)}
+@media(max-width:1024px){.mtfs-ag{grid-template-columns:1fr}.mtfs-tiles{max-width:500px;margin:0 auto}}
+@media(max-width:768px){.mtfs-hero{padding:84px 0 64px}.mtfs-hero h1{font-size:2.1rem}.mtfs-sec{padding:72px 0}.mtfs-stats{justify-content:center}}
+@media(max-width:320px){.mtfs-ctr{padding:0 16px}.mtfs-hero h1{font-size:1.9rem}}
+@media(prefers-reduced-motion:reduce){.mtfs-about *,.mtfs-about *::before,.mtfs-about *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<div class="mtfs-about" id="mtfs-about" data-mtfs-endpoint="">
+<section class="mtfs-hero" aria-labelledby="mtfs-hero-h1">
+<picture class="mtfs-hero-image"><img src="/wp-content/uploads/mtfs/hero-lab-1536x864.webp" width="1536" height="864" alt="" loading="eager" fetchpriority="high" decoding="async"></picture>
+<div class="mtfs-ctr">
+<nav class="mtfs-crumb" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; About</nav>
+<div class="mtfs-badge"><span class="mtfs-dot" aria-hidden="true"></span> Founded 2005 &middot; United States</div>
+<h1 id="mtfs-hero-h1">The ART Industry's Most Trusted Partner</h1>
+<p class="mtfs-sub">Healthcare consulting built exclusively for assisted reproductive technology &mdash; with hands-on laboratory, clinical, risk, and practice-management expertise that goes far beyond advice.</p>
+</div>
+</section>
+<section class="mtfs-sec" aria-label="About MedTech For Solutions">
+<div class="mtfs-ctr"><div class="mtfs-ag">
+<article class="mtfs-copy">
+<h2>The ART Industry's Most Trusted Partner</h2>
+<p><strong>MedTech For Solutions</strong> is a healthcare consulting company founded in 2005, specializing exclusively in the <strong>assisted reproductive technology (ART)</strong> industry. Headquartered in the United States, MedTech provides end-to-end solutions for fertility clinics, IVF laboratories, and reproductive medicine facilities across the United States and internationally.</p>
+<p><a class="mtfs-context-link" href="/our-team/">Our team of laboratory, clinical, risk management, practice development, and marketing experts</a> brings real-world healthcare and practice management experience. We don't just advise &mdash; we provide <strong>hands-on implementation and management support</strong> to achieve measurable results.</p>
+<p>Our mission is to assist in building your competitive market advantage, drive your ART laboratory success, and improve your bottom line through customized solutions for practices of all sizes.</p>
+<p>In addition, MedTech offers a comprehensive <strong><a class="mtfs-context-link" href="/services/lab-solutions/gpo-purchasing/">Group Purchasing Organization (GPO)</a></strong> program designed specifically for the fertility and reproductive healthcare industry. Through our established vendor relationships and national purchasing network, participating practices gain access to preferred pricing, volume discounts, and negotiated contracts on critical laboratory, clinical, pharmaceutical, medical supply, and operational products and services.</p>
+<p>Our GPO solutions help practices reduce operating expenses, improve purchasing efficiency, and strengthen financial performance without compromising quality or patient care. By leveraging the collective buying power of our network, MedTech enables practices of all sizes to achieve meaningful cost savings while maintaining access to leading technologies, equipment, and service providers within the ART industry.</p>
+<div class="mtfs-stats">
+<div class="mtfs-stat"><div class="mtfs-n">2005</div><div class="mtfs-l">Founded</div></div>
+<div class="mtfs-stat"><div class="mtfs-n">125+</div><div class="mtfs-l">Collective Years of Experience</div></div>
+<div class="mtfs-stat"><div class="mtfs-n">50</div><div class="mtfs-l">States Covered</div></div>
+<div class="mtfs-stat"><div class="mtfs-n">U.S.</div><div class="mtfs-l">Nationwide Coverage</div></div>
+</div>
+</article>
+<div class="mtfs-media-stack">
+<figure class="mtfs-media"><img src="/wp-content/uploads/mtfs/about-consult-1000x667.webp" width="1000" height="667" alt="Senior healthcare consultants reviewing plans beside a modern IVF laboratory" loading="lazy" decoding="async"></figure>
+<div class="mtfs-tiles">
+<div class="mtfs-tile"><h3>Laboratory Solutions</h3><p>Design, monitoring, optimization, and management of ART/IVF laboratories nationwide.</p></div>
+<div class="mtfs-tile mtfs-tile--hi"><h3>Staffing &amp; Recruitment</h3><p>TS (ABB) certified temporary ART laboratory professionals.</p></div>
+<div class="mtfs-tile mtfs-tile--hi"><h3>GPO Purchasing</h3><p>An established network of vendor partners. Free to join.</p></div>
+<div class="mtfs-tile"><h3>Practice Development</h3><p>New start-ups, lab design, growth strategy, and competitive positioning.</p></div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="mtfs-values" aria-labelledby="mtfs-values-h2">
+<div class="mtfs-ctr">
+<div class="mtfs-values-head">
+<h2 id="mtfs-values-h2">What Sets MedTech Apart</h2>
+<p>Three commitments shape every engagement with our team.</p>
+</div>
+<div class="mtfs-values-grid">
+<article class="mtfs-value-card">
+<div class="mtfs-vico" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+<h3>ART/IVF Specialists</h3>
+<p>Our entire team specializes in assisted reproductive technology, with deep expertise across embryology, laboratory design, and practice operations.</p>
+</article>
+<article class="mtfs-value-card">
+<div class="mtfs-vico" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg></div>
+<h3>Hands-On Implementation</h3>
+<p>We don't just advise. Hands-on management support &mdash; from laboratory design through operational optimization &mdash; delivers measurable results.</p>
+</article>
+<article class="mtfs-value-card">
+<div class="mtfs-vico" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+<h3>Proven Track Record</h3>
+<p>Supporting fertility practices nationwide, with laboratory and practice solutions built exclusively for the ART industry.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="mtfs-hist" aria-labelledby="mtfs-hist-h2">
+<div class="mtfs-ctr">
+<div class="mtfs-hist-head">
+<h2 id="mtfs-hist-h2">Nearly Two Decades of ART Excellence</h2>
+<p>From a single consulting engagement in 2005, MedTech For Solutions has grown by staying relentlessly focused on one industry: assisted reproductive technology.</p>
+</div>
+<ol class="mtfs-timeline">
+<li class="mtfs-titem"><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">2005</div><h3>Founded in United States</h3><p>MedTech For Solutions is established with a singular focus: delivering hands-on operational and laboratory expertise exclusively to ART and IVF practices.</p></div></div><div class="mtfs-tdot" aria-hidden="true">2005</div><div class="mtfs-tside"></div></li>
+<li class="mtfs-titem"><div class="mtfs-tside"></div><div class="mtfs-tdot" aria-hidden="true">2008</div><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">2008</div><h3>GPO Program Launched</h3><p>Recognizing the purchasing challenges facing independent fertility practices, MedTech launches its Group Purchasing Organization &mdash; free to join, with an established network of vendor partners.</p></div></div></li>
+<li class="mtfs-titem"><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">2012</div><h3>Regulatory Compliance Practice Expanded</h3><p>Dedicated FDA, CLIA, CAP, and AABB compliance advisory services added to the portfolio, responding to increasing regulatory complexity facing IVF laboratories.</p></div></div><div class="mtfs-tdot" aria-hidden="true">2012</div><div class="mtfs-tside"></div></li>
+<li class="mtfs-titem"><div class="mtfs-tside"></div><div class="mtfs-tdot" aria-hidden="true">2016</div><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">2016</div><h3>Staffing &amp; Recruitment Division</h3><p>TS (AABB)-certified temporary ART professional placement services launched, meeting urgent demand for qualified embryologists, andrologists, and lab directors across all 50 states.</p></div></div></li>
+<li class="mtfs-titem"><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">2020</div><h3>Management Services Suite</h3><p>Marketing, call center, accounting &amp; finance, HR, and insurance risk management services added &mdash; creating a truly end-to-end management solution for fertility practices.</p></div></div><div class="mtfs-tdot" aria-hidden="true">2020</div><div class="mtfs-tside"></div></li>
+<li class="mtfs-titem"><div class="mtfs-tside"></div><div class="mtfs-tdot" aria-hidden="true">Today</div><div class="mtfs-tside"><div class="mtfs-tcard"><div class="mtfs-yr">Today</div><h3>Fertility Practices Nationwide. All 50 States.</h3><p>MedTech For Solutions remains the only consulting firm built exclusively for the ART industry &mdash; with over 125 years of collective multidisciplinary experience and outcomes that consistently exceed national benchmarks.</p></div></div></li>
+</ol>
+</div>
+</section>
+<section class="mtfs-team" aria-labelledby="mtfs-team-h2">
+<div class="mtfs-ctr">
+<div class="mtfs-team-head">
+<h2 id="mtfs-team-h2">A Multidisciplinary Team Built for ART</h2>
+<p>Our consultants aren't generalists &mdash; every member of the MedTech team comes from within the fertility and reproductive medicine world, bringing clinical, operational, and regulatory depth that translates directly into results.</p>
+<div class="mtfs-expbar">
+<div class="mtfs-expstat"><div class="mtfs-n">2005</div><div class="mtfs-l">Founded</div></div>
+<div class="mtfs-expstat"><div class="mtfs-n">U.S.</div><div class="mtfs-l">Nationwide Service</div></div>
+<div class="mtfs-expstat"><div class="mtfs-n">ART</div><div class="mtfs-l">Industry Focus</div></div>
+<div class="mtfs-expstat"><div class="mtfs-n">50</div><div class="mtfs-l">States Covered</div></div>
+</div>
+</div>
+<div class="mtfs-tgrid">
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-lab.webp" width="1000" height="667" alt="IVF laboratory director and lead consultant" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>Laboratory Sciences Division</h3><span class="mtfs-role">IVF Laboratory Management &amp; Design</span><p>Certified embryologists and laboratory directors with 20+ years of hands-on IVF lab experience &mdash; covering <a class="mtfs-context-link" href="/services/lab-solutions/real-time-monitoring/">real-time environment monitoring</a>, QA protocols, equipment procurement, and new-lab design from the ground up.</p></div></article>
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-regulatory.webp" width="1000" height="667" alt="Regulatory compliance specialist in healthcare" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>Regulatory &amp; Compliance Team</h3><span class="mtfs-role">FDA &middot; CLIA &middot; CAP &middot; AABB Compliance</span><p>Former laboratory inspectors and compliance officers who have navigated <a class="mtfs-context-link" href="/services/lab-solutions/regulatory-compliance/">FDA oversight, CLIA certification, CAP accreditation, and AABB standards</a> &mdash; keeping your practice inspection-ready year-round.</p></div></article>
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-practice.webp" width="1000" height="667" alt="Practice management and operations consultant" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>Practice Management Division</h3><span class="mtfs-role">Operations &middot; Finance &middot; Human Resources</span><p>Healthcare administrators and practice managers with deep ART-industry backgrounds, driving operational efficiency, financial performance, HR compliance, and strategic growth across practices of all sizes.</p></div></article>
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-marketing.webp" width="1000" height="667" alt="Marketing and patient experience specialist" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>Marketing &amp; Patient Experience</h3><span class="mtfs-role">Fertility Marketing &middot; Call Center &middot; Brand Strategy</span><p>Specialists in fertility clinic marketing, patient journey optimization, and call center management &mdash; combining clinical empathy with data-driven strategies that convert inquiries into long-term patients.</p></div></article>
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-staffing.webp" width="1000" height="667" alt="Staffing and recruitment expert for ART professionals" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>Staffing &amp; Recruitment</h3><span class="mtfs-role">Temporary &amp; Permanent ART Placements</span><p>TS (AABB)-certified recruiters who maintain a national network of qualified embryologists, andrologists, and lab directors available for short- or long-term placements across all 50 states.</p></div></article>
+<article class="mtfs-bio"><img src="/wp-content/uploads/mtfs/team-gpo.webp" width="1000" height="667" alt="GPO purchasing and vendor relations advisor" loading="lazy" decoding="async"><div class="mtfs-bio-body"><h3>GPO &amp; Purchasing Division</h3><span class="mtfs-role">Group Purchasing &middot; Vendor Relations &middot; Cost Reduction</span><p>Procurement specialists who manage our established network of vendor partners, negotiating preferred pricing on lab consumables, equipment, pharmaceuticals, and operational supplies for fertility practices nationwide.</p></div></article>
+</div>
+<p class="mtfs-team-note">Our team combines <strong>clinical, operational, regulatory, and financial</strong> expertise &mdash; all of it focused exclusively on the ART/IVF industry.</p>
+</div>
+</section>
+<section class="mtfs-mission" aria-labelledby="mtfs-mission-h2">
+<div class="mtfs-ctr">
+<div class="mtfs-miss-grid">
+<div class="mtfs-miss-copy">
+<h2 id="mtfs-mission-h2">Our Mission &amp; Collaborative Approach</h2>
+<p>MedTech For Solutions exists to <strong>advance the success of fertility practices</strong> through hands-on, outcomes-driven partnerships. We don't deliver reports and move on &mdash; we stay engaged until measurable results are achieved.</p>
+<p>Every engagement begins with a deep diagnostic of your practice's unique needs, goals, and competitive environment. From there, we co-design a customized program and provide active, embedded support through implementation and beyond.</p>
+<p><strong>Our philosophy:</strong> your competitive advantage is built through the integration of excellent laboratory science, efficient operations, strong compliance, and a patient-first culture. We bring all four together under one roof.</p>
+<div class="mtfs-pillars">
+<div class="mtfs-pillar"><div class="mtfs-pi" aria-hidden="true">&#128300;</div><h3>Scientific Rigor</h3><p>Evidence-based protocols and real-time lab monitoring to maximize clinical outcomes.</p></div>
+<div class="mtfs-pillar"><div class="mtfs-pi" aria-hidden="true">&#129309;</div><h3>True Partnership</h3><p>Collaborative, embedded support &mdash; not arms-length advice. We work alongside your team.</p></div>
+<div class="mtfs-pillar"><div class="mtfs-pi" aria-hidden="true">&#128202;</div><h3>Outcomes Driven</h3><p>Every program is measured against defined KPIs. Results are reported, reviewed, and refined.</p></div>
+<div class="mtfs-pillar"><div class="mtfs-pi" aria-hidden="true">&#128737;&#65039;</div><h3>Compliance First</h3><p>Regulatory integrity is built into every solution &mdash; protecting your practice and your patients.</p></div>
+</div>
+</div>
+<figure class="mtfs-miss-img"><img src="/wp-content/uploads/mtfs/mission-team.webp" width="1000" height="667" alt="Multidisciplinary healthcare team collaborating in a clinical setting" loading="lazy" decoding="async"></figure>
+</div>
+</div>
+</section>
+<section class="mtfs-cta" aria-labelledby="mtfs-cta-h2">
+<div class="mtfs-ctr">
+<div class="mtfs-cta-inner">
+<h2 id="mtfs-cta-h2">Let's Build Your Competitive Advantage</h2>
+<p>Whether you're starting a new IVF practice or optimizing an established laboratory, our team will design a program around your goals.</p>
+<div class="mtfs-cta-btns">
+<a href="/contact/" class="mtfs-btn-p" data-open-consult>Schedule a Consultation <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="/contact/" class="mtfs-btn-o">Contact Us</a>
+</div>
+</div>
+</div>
+</section>
+<section class="mtfs-related" aria-labelledby="mtfs-related-h2">
+<div class="mtfs-related__inner">
+<p class="mtfs-related__eyebrow">Continue exploring</p>
+<h2 id="mtfs-related-h2">Continue Exploring MedTech</h2>
+<p class="mtfs-related__intro">Meet our specialists and explore the services that support fertility practices nationwide.</p>
+<ul class="mtfs-related__list">
+<li><a class="mtfs-related__link" href="/our-team/"><span class="mtfs-related__title">Meet Our ART Specialists</span><span class="mtfs-related__desc">Learn about the experienced team delivering laboratory and practice support.</span><span class="mtfs-related__arrow" aria-hidden="true">&rarr;</span></a></li>
+<li><a class="mtfs-related__link" href="/services/"><span class="mtfs-related__title">Explore All Services</span><span class="mtfs-related__desc">Review laboratory solutions and management services in one place.</span><span class="mtfs-related__arrow" aria-hidden="true">&rarr;</span></a></li>
+<li><a class="mtfs-related__link" href="/services/lab-solutions/gpo-purchasing/"><span class="mtfs-related__title">GPO Purchasing</span><span class="mtfs-related__desc">See how fertility practices can reduce purchasing costs through our GPO.</span><span class="mtfs-related__arrow" aria-hidden="true">&rarr;</span></a></li>
+</ul>
+</div>
+</section>
+<footer class="mtfs-ft">
+<div class="mtfs-ctr">
+<div class="mtfs-ftg">
+<div class="mtfs-ftb">
+<a href="/" aria-label="MedTech For Solutions Home"><img class="mtfs-ft-logo" src="/wp-content/uploads/mtfs/logo-icon-96.png" width="96" height="96" alt="MedTech For Solutions" loading="lazy" decoding="async"></a>
+<p>Comprehensive ART practice solutions for fertility clinics, IVF laboratories, and reproductive medicine facilities. Founded 2005.</p>
+<p class="mtfs-ft-contact"><a href="/contact/">Contact us via the website form</a></p>
+</div>
+<nav class="mtfs-ftc" aria-label="Lab Solutions">
+<p class="mtfs-ft-title">Lab Solutions</p>
+<ul>
+<li><a href="/services/lab-solutions/real-time-monitoring/">Real-Time Monitoring</a></li>
+<li><a href="/services/lab-solutions/regulatory-compliance/">Regulatory Compliance</a></li>
+<li><a href="/services/lab-solutions/staffing-solutions/">Staffing Solutions</a></li>
+<li><a href="/services/lab-solutions/gpo-purchasing/">GPO Purchasing</a></li>
+<li><a href="/services/lab-solutions/practice-development/">Practice Development</a></li>
+</ul>
+</nav>
+<nav class="mtfs-ftc" aria-label="Management Services">
+<p class="mtfs-ft-title">Mgmt Services</p>
+<ul>
+<li><a href="/services/management-services/marketing/">Marketing</a></li>
+<li><a href="/services/management-services/call-center/">Call Center</a></li>
+<li><a href="/services/management-services/accounting-finance/">Accounting &amp; Finance</a></li>
+<li><a href="/services/management-services/human-resources/">Human Resources</a></li>
+<li><a href="/services/management-services/insurance-risk-management/">Risk Management</a></li>
+</ul>
+</nav>
+<nav class="mtfs-ftc" aria-label="Company">
+<p class="mtfs-ft-title">Company</p>
+<ul>
+<li><a href="/services/">All Services</a></li>
+<li><a href="/about/">About Us</a></li>
+<li><a href="/our-team/">Our Team</a></li>
+<li><a href="/#testimonials">Testimonials</a></li>
+<li><a href="/contact/">Contact</a></li>
+</ul>
+</nav>
+</div>
+<div class="mtfs-fbot">
+<span>&copy; 2026 MedTech For Solutions Inc. All rights reserved.</span>
+<span><a href="/privacy-policy/">Privacy Policy</a> &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/sitemap/">Sitemap</a></span>
+</div>
+</div>
+</footer>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="mtfs-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap"></noscript>
+<style id="mtfs-about-deferred">
+.mtfs-about h3{font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:600}
+.mtfs-values{background:var(--mtfs-ow);padding:90px 0}
+.mtfs-values-head{text-align:center;max-width:680px;margin:0 auto 50px}
+.mtfs-values-head h2{font-size:2rem;margin-bottom:12px}
+.mtfs-values-head p{color:var(--mtfs-g600);margin:0 auto}
+.mtfs-values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mtfs-values-grid>*{min-width:0}
+.mtfs-value-card{background:var(--mtfs-w);border-radius:var(--mtfs-rl);padding:32px;border:1px solid var(--mtfs-g100);text-align:center}
+.mtfs-value-card h3{font-family:var(--mtfs-sans);font-size:1.05rem;font-weight:700;margin:14px 0 8px}
+.mtfs-value-card p{color:var(--mtfs-g600);font-size:.92rem;margin:0 auto}
+.mtfs-vico{width:56px;height:56px;border-radius:50%;background:rgba(31,110,117,.1);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.mtfs-vico svg{width:26px;height:26px;color:var(--mtfs-teal)}
+.mtfs-hist{padding:90px 0;background:var(--mtfs-w)}
+.mtfs-hist-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.mtfs-hist-head h2{font-size:2rem;margin-bottom:12px}
+.mtfs-hist-head p{color:var(--mtfs-g600);margin:0 auto}
+.mtfs-timeline{position:relative;max-width:860px;margin:0 auto;padding:0;list-style:none}
+.mtfs-timeline::before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:2px;background:var(--mtfs-g100)}
+.mtfs-titem{display:flex;align-items:flex-start;margin-bottom:48px;position:relative}
+.mtfs-titem:nth-child(odd){flex-direction:row}
+.mtfs-titem:nth-child(even){flex-direction:row-reverse}
+.mtfs-tside{width:calc(50% - 32px);min-width:0}
+.mtfs-titem:nth-child(odd) .mtfs-tside{text-align:right;padding-right:32px}
+.mtfs-titem:nth-child(even) .mtfs-tside{text-align:left;padding-left:32px}
+.mtfs-tdot{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--mtfs-teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;z-index:1;position:relative;margin-top:4px}
+.mtfs-tcard{background:var(--mtfs-g50);border:1px solid var(--mtfs-g100);border-radius:var(--mtfs-r);padding:20px 24px}
+.mtfs-yr{font-family:var(--mtfs-head);font-size:1.3rem;font-weight:700;color:var(--mtfs-teal);margin-bottom:4px}
+.mtfs-tcard h3{font-family:var(--mtfs-sans);font-size:1rem;font-weight:700;margin-bottom:6px}
+.mtfs-tcard p{font-size:.88rem;color:var(--mtfs-g600);margin:0}
+.mtfs-team{background:var(--mtfs-ow);padding:90px 0}
+.mtfs-team-head{text-align:center;max-width:720px;margin:0 auto 56px}
+.mtfs-team-head h2{font-size:2rem;margin-bottom:12px}
+.mtfs-team-head p{color:var(--mtfs-g600);margin:0 auto}
+.mtfs-expbar{display:flex;justify-content:center;gap:40px;margin:24px 0 8px;flex-wrap:wrap}
+.mtfs-expstat .mtfs-n{font-size:2.2rem}
+.mtfs-expstat .mtfs-l{text-align:center}
+.mtfs-tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.mtfs-tgrid>*{min-width:0}
+.mtfs-bio{background:var(--mtfs-w);border:1px solid var(--mtfs-g100);border-radius:var(--mtfs-rl);overflow:hidden;transition:box-shadow .3s}
+.mtfs-bio:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
+.mtfs-bio>img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.mtfs-bio-body{padding:22px 24px}
+.mtfs-bio-body h3{font-family:var(--mtfs-sans);font-size:1.05rem;font-weight:700;margin-bottom:2px}
+.mtfs-role{font-size:.82rem;font-weight:600;color:var(--mtfs-teal);margin-bottom:10px;display:block}
+.mtfs-bio-body p{font-size:.86rem;color:var(--mtfs-g600);margin:0}
+.mtfs-team-note{text-align:center;margin:36px auto 0;font-size:.9rem;color:var(--mtfs-g600)}
+.mtfs-team-note strong{color:var(--mtfs-g800)}
+.mtfs-mission{background:var(--mtfs-w);padding:90px 0}
+.mtfs-miss-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mtfs-miss-grid>*{min-width:0}
+.mtfs-miss-copy h2{font-size:2rem;margin-bottom:16px}
+.mtfs-miss-copy p{font-size:.97rem;color:var(--mtfs-g600);margin-bottom:14px}
+.mtfs-miss-copy p strong{color:var(--mtfs-g800)}
+.mtfs-pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.mtfs-pillars>*{min-width:0}
+.mtfs-pillar{background:var(--mtfs-g50);border:1px solid var(--mtfs-g100);border-radius:var(--mtfs-r);padding:18px 20px}
+.mtfs-pi{font-size:1.3rem;margin-bottom:8px}
+.mtfs-pillar h3{font-family:var(--mtfs-sans);font-size:.95rem;font-weight:700;margin-bottom:4px}
+.mtfs-pillar p{font-size:.84rem;color:var(--mtfs-g600);margin:0}
+.mtfs-miss-img{border-radius:var(--mtfs-rl);overflow:hidden}
+.mtfs-miss-img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.mtfs-cta{padding:100px 0}
+.mtfs-cta-inner{background:var(--mtfs-g900);border-radius:var(--mtfs-rl);padding:72px 60px;text-align:center;position:relative;overflow:hidden}
+.mtfs-cta-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(31,110,117,.2) 0%,transparent 50%)}
+.mtfs-cta-inner h2{font-size:2.2rem;color:var(--mtfs-w);margin-bottom:14px;position:relative;z-index:1}
+.mtfs-cta-inner p{font-size:1.02rem;color:rgba(255,255,255,.6);max-width:540px;margin:0 auto 30px;position:relative;z-index:1}
+.mtfs-cta-btns{display:flex;gap:16px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
+.mtfs-btn-p{background:var(--mtfs-teal);color:#fff;padding:14px 32px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border:2px solid var(--mtfs-teal);transition:background .3s,border-color .3s,transform .3s;cursor:pointer}
+.mtfs-btn-p:hover{background:var(--mtfs-teal-d);border-color:var(--mtfs-teal-d);color:#fff;transform:translateY(-2px)}
+.mtfs-btn-o{color:#fff;padding:14px 32px;border-radius:999px;font-weight:600;border:2px solid rgba(255,255,255,.75);background:transparent;transition:border-color .3s,background .3s;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.mtfs-btn-o:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.mtfs-btn-p svg,.mtfs-btn-o svg{width:1.05em;height:1.05em;flex:none}
+.mtfs-related{padding:64px 0;background:linear-gradient(135deg,#E4F0EE 0%,#FDFAFA 58%,#F5F0F8 100%);border-top:1px solid #C9D4D1;border-bottom:1px solid #C9D4D1;color:var(--mtfs-g800)}
+.mtfs-related__inner{width:min(100% - 48px,1200px);margin:0 auto}
+.mtfs-related__eyebrow{margin:0 0 8px;color:var(--mtfs-teal);font:700 .78rem/1.4 var(--mtfs-sans);letter-spacing:.1em;text-transform:uppercase}
+.mtfs-related h2{margin:0 0 10px;font-size:clamp(1.55rem,3vw,2.15rem)}
+.mtfs-related__intro{max-width:66ch;margin:0 0 28px;color:var(--mtfs-g600)}
+.mtfs-related__list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:0;padding:0;list-style:none}
+.mtfs-related__link{position:relative;display:block;height:100%;min-height:150px;padding:22px 52px 22px 22px;border:1px solid #B7C9C5;border-radius:16px;background:#fff;color:var(--mtfs-teal);box-shadow:0 2px 8px rgba(31,110,117,.06);transition:border-color .2s,box-shadow .2s,transform .2s}
+.mtfs-related__link:hover{border-color:var(--mtfs-teal);box-shadow:0 10px 28px rgba(31,110,117,.14);transform:translateY(-2px)}
+.mtfs-related__title{display:block;font:700 1.02rem/1.35 var(--mtfs-head)}
+.mtfs-related__desc{display:block;margin-top:9px;color:var(--mtfs-g600);font:400 .9rem/1.55 var(--mtfs-sans)}
+.mtfs-related__arrow{position:absolute;top:21px;right:22px;font:700 1.35rem/1 var(--mtfs-sans)}
+.mtfs-ft{background:#1E293B;color:rgba(255,255,255,.6);padding:72px 0 32px}
+.mtfs-ft a:hover{color:var(--mtfs-teal)}
+.mtfs-ftg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.mtfs-ftg>*{min-width:0}
+.mtfs-ft-logo{height:48px;width:auto;max-width:200px;display:block;margin-bottom:8px;background:#fff;padding:4px;border-radius:4px}
+.mtfs-ftb p{font-size:.88rem;line-height:1.7;margin:16px 0 0;max-width:300px}
+.mtfs-ftb .mtfs-ft-contact{margin-top:12px;font-size:.85rem}
+.mtfs-ft-contact a{color:#fff}
+.mtfs-ft-title{font-family:var(--mtfs-sans);font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff;margin:0 0 20px}
+.mtfs-ftc ul{list-style:none;margin:0;padding:0}
+.mtfs-ftc li{margin-bottom:12px}
+.mtfs-ftc a{font-size:.88rem}
+.mtfs-fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;flex-wrap:wrap;gap:12px}
+.mtfs-fbot a{color:rgba(255,255,255,.6)}
+@media(max-width:1024px){.mtfs-values-grid{grid-template-columns:1fr}.mtfs-tgrid{grid-template-columns:repeat(2,1fr)}.mtfs-ftg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.mtfs-timeline::before{left:24px}.mtfs-titem,.mtfs-titem:nth-child(even){flex-direction:column;padding-left:60px}.mtfs-tside,.mtfs-titem:nth-child(odd) .mtfs-tside,.mtfs-titem:nth-child(even) .mtfs-tside{width:100%;text-align:left;padding:0}.mtfs-tdot{position:absolute;left:0;top:0}.mtfs-tgrid{grid-template-columns:1fr}.mtfs-miss-grid{grid-template-columns:1fr}.mtfs-miss-img{display:none}.mtfs-pillars{grid-template-columns:1fr}.mtfs-expbar{gap:24px}.mtfs-values-grid{grid-template-columns:1fr}.mtfs-ftg{grid-template-columns:1fr}.mtfs-fbot{flex-direction:column;text-align:center}.mtfs-cta-inner{padding:48px 24px}.mtfs-cta-inner h2{font-size:1.6rem}}
+@media(max-width:560px){.mtfs-related{padding:48px 0}.mtfs-related__inner{width:min(100% - 32px,1200px)}.mtfs-related__list{grid-template-columns:1fr}.mtfs-related__link{min-height:0}}
+@media(prefers-reduced-motion:reduce){.mtfs-bio:hover,.mtfs-btn-p:hover,.mtfs-btn-o:hover,.mtfs-related__link:hover{transform:none}.mtfs-related__link{transition:none}}
+</style>
+<script id="mtfs-about-js">
+(function(){"use strict";
+if(window.MtfsAbout){return}
+var VERSION="1.0.0";
+/* Deferred-stylesheet fallback: browsers without rel=preload support never fire
+   the inline onload swap, so promote the fonts link once the DOM is ready. */
+function mtfsFonts(){var l=document.getElementById("mtfs-fonts");if(l&&l.rel!=="stylesheet"){l.rel="stylesheet"}}
+/* ---- Consultation wizard (lazy: zero DOM/CSS cost until first trigger click) ---- */
+var root=document.querySelector(".mtfs-about");
+var ENDPOINT=(root&&root.getAttribute("data-mtfs-endpoint")||"").replace(/\s+/g,"");
+var P="mtfscw";
+var OPTS=[["lab-management","Laboratory Management"],["reg-compliance","Regulatory Compliance"],["staffing","Staffing & Recruitment"],["gpo-purchasing","GPO Purchasing"],["practice-dev","Practice Development"],["realtime-mon","Real-Time Monitoring"],["mgmt-services","Management Services"],["not-sure","Not sure yet"]];
+var LBLS=["Service","Practice","Contact","Review"];
+var modal=null,dialog=null,opener=null,trapFn=null,state=null;
+var CSS="#"+P+"-root{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(42,35,32,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:16px;opacity:0;pointer-events:none;transition:opacity .25s ease;font-family:'DM Sans',system-ui,sans-serif}"
++"#"+P+"-root.on{opacity:1;pointer-events:auto}"
++"#"+P+"-root *{box-sizing:border-box;margin:0}"
++"#"+P+"-root [hidden]{display:none!important}"
++"."+P+"-dlg{position:relative;background:#FDFAFA;border-radius:20px;width:100%;max-width:600px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(42,35,32,.28);transform:translateY(10px) scale(.98);transition:transform .28s ease}"
++"#"+P+"-root.on ."+P+"-dlg{transform:none}"
++"."+P+"-strip{height:6px;background:linear-gradient(90deg,#1F6E75 25%,#CCDF33 25% 50%,#F8793F 50% 75%,#C013AE 75%);flex-shrink:0;order:99}"
++"."+P+"-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 24px 14px;border-bottom:1px solid #F1E3E4;flex-shrink:0}"
++"."+P+"-ttl{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#2A2320}"
++"."+P+"-x{width:34px;height:34px;border-radius:50%;border:1px solid #F1E3E4;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6F6259;padding:0}"
++"."+P+"-x:hover{background:#F4F7F6;color:#2A2320}"
++"."+P+"-x svg{width:16px;height:16px;pointer-events:none}"
++"."+P+"-bar{padding:14px 24px 12px;border-bottom:1px solid #F1E3E4;flex-shrink:0}"
++"."+P+"-lbl{font-size:.8rem;font-weight:600;color:#6F6259;margin-bottom:8px}"
++"."+P+"-lbl strong{color:#1F6E75}"
++"."+P+"-trk{height:5px;background:#F1E3E4;border-radius:99px;overflow:hidden}"
++"."+P+"-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#1F6E75,#C013AE);transition:width .35s ease}"
++"."+P+"-body{padding:28px 24px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}"
++"."+P+"-step{display:none}."+P+"-step.on{display:block}"
++"."+P+"-h2{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:700;color:#2A2320;margin-bottom:4px}"
++"."+P+"-sub{font-size:.88rem;color:#6F6259;margin-bottom:20px}"
++"."+P+"-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}"
++"@media(max-width:420px){."+P+"-grid{grid-template-columns:1fr}}"
++"."+P+"-opt{border:1.5px solid #F1E3E4;border-radius:12px;padding:13px 14px;cursor:pointer;background:#FDFAFA;display:flex;align-items:center;gap:10px;font:600 .875rem 'DM Sans',sans-serif;color:#2A2320;text-align:left;width:100%}"
++"."+P+"-opt:hover{border-color:#9AADA9;background:#F4F7F6}"
++"."+P+"-opt[aria-pressed=true]{border-color:#1F6E75;background:#E4F0EE;box-shadow:0 0 0 3px rgba(31,110,117,.15);color:#175459}"
++"."+P+"-svcerr{margin:10px 0 0;color:#B91C1C;font:700 13px/1.4 'DM Sans',sans-serif}"
++"."+P+"-fld{margin-bottom:18px}"
++"."+P+"-flbl{display:block;font-size:.82rem;font-weight:600;color:#2A2320;margin-bottom:5px}"
++"."+P+"-req{color:#B91C1C;margin-left:6px;font-weight:700}"
++"."+P+"-in,."+P+"-sel,."+P+"-ta{display:block;width:100%;font:400 .92rem 'DM Sans',sans-serif;color:#2A2320;background:#FDFAFA;border:1.5px solid #E4EAE8;border-radius:10px;padding:10px 14px;outline:none;appearance:none;-webkit-appearance:none}"
++"."+P+"-in:focus,."+P+"-sel:focus,."+P+"-ta:focus{border-color:#1F6E75;box-shadow:0 0 0 3px rgba(31,110,117,.15)}"
++"."+P+"-sel{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236F6259' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer}"
++"."+P+"-ta{resize:vertical;min-height:80px}"
++"."+P+"-err{display:none;font-size:.78rem;color:#B91C1C;margin-top:4px;font-weight:500}"
++"."+P+"-fld.bad ."+P+"-in{border-color:#B91C1C;box-shadow:0 0 0 3px rgba(185,28,28,.1)}"
++"."+P+"-fld.bad ."+P+"-err{display:block}"
++"."+P+"-rev{background:#FBEDEE;border-radius:14px;padding:20px 22px;margin-bottom:18px}"
++"."+P+"-row{display:flex;align-items:baseline;padding:7px 0;border-bottom:1px solid rgba(199,126,144,.18);font-size:.9rem}"
++"."+P+"-row:last-child{border-bottom:none}"
++"."+P+"-rl{color:#6F6259;font-weight:500;width:90px;flex-shrink:0}"
++"."+P+"-rv{color:#2A2320;font-weight:700;flex:1;word-break:break-word}"
++"."+P+"-priv{display:flex;gap:10px;align-items:flex-start;background:#F4F7F6;border-radius:10px;padding:14px 15px;font-size:.8rem;color:#5C524B;line-height:1.5}"
++"."+P+"-priv svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;color:#1F6E75}"
++"."+P+"-ok{text-align:center;padding:8px 0}"
++"."+P+"-okc{width:64px;height:64px;border-radius:50%;background:#E4F0EE;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}"
++"."+P+"-okc svg{width:32px;height:32px;color:#1F6E75}"
++"."+P+"-ok h2{font-family:'Sora',sans-serif;font-size:1.25rem;font-weight:700;color:#2A2320;margin-bottom:12px}"
++"."+P+"-ok p{font-size:.93rem;color:#5C524B;margin:0 auto 20px;line-height:1.6}"
++"."+P+"-ref{display:inline-flex;align-items:center;gap:8px;background:#FBEDEE;border-radius:99px;padding:7px 18px;font-size:.82rem;font-weight:700;color:#6B3357;letter-spacing:.4px}"
++"."+P+"-ftr{padding:16px 24px 22px;border-top:1px solid #F1E3E4;display:flex;gap:10px;justify-content:flex-end;flex-shrink:0}"
++"."+P+"-btn{font:600 .9rem 'DM Sans',sans-serif;min-height:44px;padding:11px 26px;border-radius:999px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:7px;flex-shrink:0}"
++"."+P+"-btn svg{width:15px;height:15px}"
++"."+P+"-b1{background:#1F6E75;color:#fff}"
++"."+P+"-b1:hover:not(:disabled){background:#175459}"
++"."+P+"-b1:disabled{opacity:.45;cursor:not-allowed}"
++"."+P+"-b2{background:transparent;color:#5C524B;border:1.5px solid #E4EAE8}"
++"."+P+"-b2:hover{background:#F4F7F6;color:#2A2320}"
++"."+P+"-suberr{margin:0;padding:10px 24px;color:#991B1B;background:#FEF2F2;border-top:1px solid #FECACA;font:600 .82rem/1.45 'DM Sans',sans-serif}"
++"#"+P+"-root :focus-visible{outline:3px solid rgba(31,110,117,.55);outline-offset:3px}"
++"@media(prefers-reduced-motion:reduce){#"+P+"-root,."+P+"-dlg,."+P+"-fill{transition:none!important}}";
+var IC={x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>',ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>',lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>'};
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function genRef(){var c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",r="MT-",i=0;for(;i<6;i++){r+=c[Math.floor(Math.random()*c.length)]}return r}
+function q(s){return modal.querySelector(s)}
+function qa(s){return Array.prototype.slice.call(modal.querySelectorAll(s))}
+function fld(id,lbl,req,type,ac,ph,err){return '<div class="'+P+'-fld" id="'+P+'-f-'+id+'"><label class="'+P+'-flbl" for="'+P+'-'+id+'">'+lbl+(req?' <span class="'+P+'-req">(Required)</span>':'')+'</label><input class="'+P+'-in" type="'+type+'" id="'+P+'-'+id+'" name="'+id+'"'+(req?' required aria-required="true" aria-describedby="'+P+'-e-'+id+'"':'')+' autocomplete="'+ac+'" placeholder="'+ph+'">'+(err?'<p class="'+P+'-err" id="'+P+'-e-'+id+'" role="alert">'+err+'</p>':'')+'</div>'}
+function build(){
+if(modal){return}
+var st=document.createElement("style");st.id=P+"-css";st.textContent=CSS;document.head.appendChild(st);
+var opts=OPTS.map(function(o){return '<button type="button" class="'+P+'-opt" aria-pressed="false" data-svc="'+o[0]+'">'+esc(o[1])+'</button>'}).join("");
+var host=document.createElement("div");
+host.innerHTML='<div id="'+P+'-root" role="dialog" aria-modal="true" aria-labelledby="'+P+'-ttl" hidden><div class="'+P+'-dlg">'
++'<div class="'+P+'-hd"><span class="'+P+'-ttl" id="'+P+'-ttl">Find the Right Solutions for Your Practice</span><button type="button" class="'+P+'-x" aria-label="Close dialog">'+IC.x+'</button></div>'
++'<div class="'+P+'-bar"><p class="'+P+'-lbl">Step <strong class="'+P+'-num">1</strong> of 4 &middot; <span class="'+P+'-nm">Service</span></p><div class="'+P+'-trk" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><div class="'+P+'-fill" style="width:25%"></div></div></div>'
++'<div class="'+P+'-body">'
++'<div class="'+P+'-step on" data-step="1" role="group"><h2 class="'+P+'-h2">Which service can we help with?</h2><p class="'+P+'-sub">Select the area closest to your need &mdash; we&rsquo;ll tailor the conversation.</p><div class="'+P+'-grid" role="group" aria-label="Services">'+opts+'</div><p class="'+P+'-svcerr" role="alert" tabindex="-1" hidden>Choose a service to continue</p></div>'
++'<div class="'+P+'-step" data-step="2" role="group"><h2 class="'+P+'-h2">Tell us about your practice</h2>'
++fld("name","Your full name",1,"text","name","e.g. Dr. Jane Smith","Please enter your full name.")
++fld("practice","Practice / clinic name",1,"text","organization","e.g. Sunrise Fertility Center","Please enter your practice or clinic name.")
++'<div class="'+P+'-fld"><label class="'+P+'-flbl" for="'+P+'-role">Your role</label><select class="'+P+'-sel" id="'+P+'-role"><option value="">Select a role&hellip;</option><option>Lab Director</option><option>Practice Manager</option><option>Physician / Owner</option><option>Operations / Finance</option><option>Other</option></select></div></div>'
++'<div class="'+P+'-step" data-step="3" role="group"><h2 class="'+P+'-h2">How can we reach you?</h2>'
++fld("email","Work email",1,"email","email","you@clinic.com","Please enter a valid email address.")
++fld("phone","Phone",0,"tel","tel","(555) 000-0000","")
++'<div class="'+P+'-fld"><label class="'+P+'-flbl" for="'+P+'-time">Preferred time</label><select class="'+P+'-sel" id="'+P+'-time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>'
++'<div class="'+P+'-fld"><label class="'+P+'-flbl" for="'+P+'-notes">Anything we should know?</label><textarea class="'+P+'-ta" id="'+P+'-notes" rows="3" placeholder="Share any context that would help us prepare for the conversation&hellip;"></textarea></div></div>'
++'<div class="'+P+'-step" data-step="4" role="group"><h2 class="'+P+'-h2">Review &amp; confirm</h2><div class="'+P+'-rev">'
++'<div class="'+P+'-row"><span class="'+P+'-rl">Service</span><span class="'+P+'-rv" data-rv="service">&mdash;</span></div>'
++'<div class="'+P+'-row"><span class="'+P+'-rl">Name</span><span class="'+P+'-rv" data-rv="name">&mdash;</span></div>'
++'<div class="'+P+'-row"><span class="'+P+'-rl">Practice</span><span class="'+P+'-rv" data-rv="practice">&mdash;</span></div>'
++'<div class="'+P+'-row"><span class="'+P+'-rl">Email</span><span class="'+P+'-rv" data-rv="email">&mdash;</span></div>'
++'<div class="'+P+'-row"><span class="'+P+'-rl">Phone</span><span class="'+P+'-rv" data-rv="phone">&mdash;</span></div></div>'
++'<div class="'+P+'-priv">'+IC.lock+'<p style="margin:0">Your information is kept strictly confidential and used only to schedule your consultation. Please don&rsquo;t include protected health information (PHI).</p></div></div>'
++'<div style="position:absolute;left:-5000px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true"><label for="'+P+'-hp">Leave this field empty</label><input type="text" id="'+P+'-hp" name="company_fax" value="" autocomplete="new-password" tabindex="-1"></div>'
++'<div class="'+P+'-step" data-step="ok" role="group"><div class="'+P+'-ok"><div class="'+P+'-okc" aria-hidden="true">'+IC.ok+'</div><h2>Consultation request received</h2><p class="'+P+'-okmsg">Thank you. A MedTech advisor will reach out within one business day to confirm your consultation.</p><div class="'+P+'-ref">Reference <span class="'+P+'-refc">MT-XXXXXX</span></div></div></div>'
++'</div>'
++'<div class="'+P+'-ftr"><button type="button" class="'+P+'-btn '+P+'-b2" data-act="back" hidden>Back</button><button type="button" class="'+P+'-btn '+P+'-b1" data-act="next">Continue</button><button type="button" class="'+P+'-btn '+P+'-b1" data-act="submit" hidden>Confirm request</button><button type="button" class="'+P+'-btn '+P+'-b1" data-act="done" hidden>Done</button></div>'
++'<div class="'+P+'-strip" aria-hidden="true"></div>'
++'</div></div>';
+modal=host.firstChild;document.body.appendChild(modal);dialog=q("."+P+"-dlg");
+state={step:1,service:"",name:"",practice:"",role:"",email:"",phone:"",time:"Any time",notes:""};
+q("."+P+"-x").addEventListener("click",close);
+modal.addEventListener("click",function(e){if(e.target===modal){close()}});
+qa("."+P+"-opt").forEach(function(b){b.addEventListener("click",function(){qa("."+P+"-opt").forEach(function(o){o.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");state.service=b.getAttribute("data-svc");q("."+P+"-svcerr").hidden=true})});
+["name","practice","email"].forEach(function(id){var el=q("#"+P+"-"+id);el.addEventListener("input",function(){q("#"+P+"-f-"+id).classList.remove("bad");el.removeAttribute("aria-invalid")})});
+q('[data-act=back]').addEventListener("click",function(){if(state.step>1){goTo(state.step-1)}});
+q('[data-act=next]').addEventListener("click",next);
+q('[data-act=submit]').addEventListener("click",submit);
+q('[data-act=done]').addEventListener("click",close);
+}
+function val(id){var el=q("#"+P+"-"+id);return el?el.value.trim():""}
+function mark(id,bad){q("#"+P+"-f-"+id).classList.toggle("bad",bad);var el=q("#"+P+"-"+id);if(bad){el.setAttribute("aria-invalid","true")}else{el.removeAttribute("aria-invalid")}}
+function next(){
+if(state.step===1){if(!state.service){var se=q("."+P+"-svcerr");se.hidden=false;se.focus();return}}
+if(state.step===2){state.name=val("name");state.practice=val("practice");state.role=q("#"+P+"-role").value;mark("name",!state.name);mark("practice",!state.practice);if(!state.name||!state.practice){var iv=q('[aria-invalid="true"]');if(iv){iv.focus()}return}}
+if(state.step===3){state.email=val("email");state.phone=val("phone");state.time=q("#"+P+"-time").value;state.notes=val("notes");var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);mark("email",!ok);if(!ok){q("#"+P+"-email").focus();return}
+var lbl="";OPTS.forEach(function(o){if(o[0]===state.service){lbl=o[1]}});
+qa("[data-rv]").forEach(function(el){var k=el.getAttribute("data-rv");el.textContent=(k==="service"?lbl:state[k])||"—"})}
+goTo(state.step+1)}
+function goTo(step){
+state.step=step;var okStep=(step==="ok");
+qa("."+P+"-step").forEach(function(el){el.classList.remove("on")});
+var t=q('.'+P+'-step[data-step="'+step+'"]');
+if(t){t.classList.add("on");var h=t.querySelector("."+P+"-h2, ."+P+"-ok h2");if(h){h.setAttribute("tabindex","-1");h.focus()}}
+q("."+P+"-bar").hidden=okStep;
+q('[data-act=back]').hidden=okStep||step===1;
+q('[data-act=next]').hidden=okStep||step===4;
+q('[data-act=submit]').hidden=okStep||step!==4;
+q('[data-act=done]').hidden=!okStep;
+if(okStep){var parts=(state.name||"").trim().split(/\s+/);var fn=(/^(dr|mr|mrs|ms|prof)\.?$/i.test(parts[0])?parts[1]:parts[0])||"";fn=fn.replace(/[.,]+$/,"");q("."+P+"-okmsg").textContent="Thank you"+(fn?", "+fn:"")+". A MedTech advisor will reach out within one business day to confirm your consultation.";q("."+P+"-refc").textContent=genRef();q('[data-act=done]').focus();return}
+q("."+P+"-fill").style.width=(step/4*100)+"%";
+q("."+P+"-trk").setAttribute("aria-valuenow",step);
+q("."+P+"-num").textContent=step;q("."+P+"-nm").textContent=LBLS[step-1];
+q("."+P+"-body").scrollTop=0}
+function submit(){
+if(q("#"+P+"-hp").value.trim()!==""){goTo("ok");return}
+var lbl="";OPTS.forEach(function(o){if(o[0]===state.service){lbl=o[1]}});
+var payload={data:{form_name:"getInTouchForm",service:lbl||state.service,name:state.name,practice:state.practice,role:state.role||"",email:state.email,phone:state.phone||"",preferred_time:state.time||"Any time",notes:state.notes||""}};
+var old=q("."+P+"-suberr");if(old){old.remove()}
+var b=q('[data-act=submit]'),bl=b.textContent;b.disabled=true;b.textContent="Sending…";
+fetch(ENDPOINT,{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(r){if(!r.ok){throw new Error("HTTP "+r.status)}goTo("ok")}).catch(function(err){
+b.disabled=false;b.textContent=bl;
+var m=document.createElement("p");m.className=P+"-suberr";m.setAttribute("role","alert");m.textContent="Request not sent. Please try again or use the Contact page.";
+var f=q("."+P+"-ftr");f.parentNode.insertBefore(m,f);
+try{if(window.console&&console.warn){console.warn("[mtfs-consult] submit failed:",err&&err.message||err)}}catch(e){}})}
+function reset(){
+if(!modal){return}
+state.step=1;state.service="";state.name="";state.practice="";state.role="";state.email="";state.phone="";state.time="Any time";state.notes="";
+["name","practice","email","phone","notes"].forEach(function(id){var el=q("#"+P+"-"+id);if(el){el.value=""}});
+q("#"+P+"-role").value="";q("#"+P+"-time").value="Any time";
+qa("."+P+"-opt").forEach(function(b){b.setAttribute("aria-pressed","false")});
+qa("."+P+"-fld.bad").forEach(function(f){f.classList.remove("bad")});
+qa("[aria-invalid=true]").forEach(function(f){f.removeAttribute("aria-invalid")});
+var old=q("."+P+"-suberr");if(old){old.remove()}
+goTo(1)}
+function open(btn){
+build();opener=btn||null;
+modal.removeAttribute("hidden");
+requestAnimationFrame(function(){requestAnimationFrame(function(){modal.classList.add("on");document.body.style.overflow="hidden";q("."+P+"-x").focus()})});
+trapFn=function(e){
+if(!modal.classList.contains("on")){return}
+if(e.key==="Escape"){e.preventDefault();close();return}
+if(e.key!=="Tab"){return}
+var f=qa("button:not([hidden]):not(:disabled),input:not([hidden]),select,textarea,[tabindex]:not([tabindex='-1'])").filter(function(el){return !el.closest("[hidden]")&&el.offsetParent!==null});
+if(!f.length){return}
+var first=f[0],last=f[f.length-1];
+if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}};
+document.addEventListener("keydown",trapFn)}
+function close(){
+if(!modal){return}
+modal.classList.remove("on");document.body.style.overflow="";
+window.setTimeout(function(){modal.setAttribute("hidden","");reset()},280);
+if(opener){try{opener.focus()}catch(e){}}
+if(trapFn){document.removeEventListener("keydown",trapFn);trapFn=null}}
+/* Delegated triggers: with no endpoint configured the links keep their native
+   /contact/ navigation, so the page works before any server-side setup. */
+document.addEventListener("click",function(e){
+var t=e.target&&e.target.closest?e.target.closest("[data-open-consult],.open-consult-modal"):null;
+if(!t||!ENDPOINT){return}
+e.preventDefault();open(t)});
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",mtfsFonts)}else{mtfsFonts()}
+window.MtfsAbout={version:VERSION,openConsult:function(btn){if(ENDPOINT){open(btn||null)}}};
+})();
+</script>

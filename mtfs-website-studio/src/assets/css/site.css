@@ -1,0 +1,774 @@
+/* =============================================================================
+   site.css — everything that is NOT needed to paint above the fold.
+
+   Emitted as one content-hashed, non-blocking sheet:
+       /assets/site.<hash>.css        (css.mjs::hashName)
+   loaded with a non-blocking <link> so the render-blocking request count goes 3 -> 0.
+   Content-hashing is what makes the `_headers` rule
+       /assets/*  Cache-Control: public, max-age=31536000, immutable
+   honest — the export applies that rule to five UNHASHED filenames, which is why the
+   fonts <link> carries a hand-rolled `?v=20260723` cache-buster.
+
+   ---------------------------------------------------------------------------------
+   POSITION IN THE CASCADE — this is the whole design, do not move the <link>
+   ---------------------------------------------------------------------------------
+       <style>  fonts @font-face + critical.css + this page's splitCritical() slice
+       <style>  this page's residual CSS
+       <link>   /assets/site.<hash>.css          <-- HERE
+   That is exactly where /assets/mega-menu.css and /assets/mtfs-images.css sit in the
+   export today, and the position is load-bearing: mega-menu.css's trailing "SITE-WIDE
+   DESIGN SYSTEM OVERRIDES" section (reproduced verbatim below) deliberately beats the
+   page blocks on equal specificity. `section.sec,.sec{padding-top:88px}` overriding the
+   home page's own `section.sec{padding:100px 0}` is what renders today; link this sheet
+   before the page's residual <style> and every section on the site gains 12px of padding.
+
+   Because this sheet wins ties against the page blocks, it may only ever contain:
+     (a) rules mega-menu.css / mtfs-images.css already had in this exact position
+         (transcribed verbatim, so behaviour is unchanged),
+     (b) rules for markup that render.mjs introduces and no page block styles
+         (.mtfs-footer__*, .mtfs-related*, .mtfs-context-link, .mm-col-title,
+          and the :hover/:focus-visible pairs that replace stripped on* handlers),
+     (c) the deferred half of mega-menu.css.
+   It must NOT contain a second opinion about a selector a page block already defines.
+   css.mjs::dedupe()'s `shared` output is appended at the TOP of this file by sync.mjs;
+   its guard already refuses to hoist any selector that has two definitions site-wide.
+
+   ---------------------------------------------------------------------------------
+   NOT HERE
+   ---------------------------------------------------------------------------------
+   - The search overlay (mega-menu.css:812-1152, measured 8,135 B = 27.0% of that file).
+     It ships with the lazily-loaded search.js and is injected on first open. That block
+     plus the mega panels below is the bulk of Lighthouse's measured 15,335 B (51%) of
+     "unused" mega-menu.css on the home page — unused at load, needed on interaction.
+   - mega-menu.css:1155-1158, the four `.mm-injected nav.nav / header[role="banner"] /
+     #hdr / #nav.nav {display:none!important}` selectors. They hid "legacy" navs; there
+     are 0 <nav> elements in 20 of 21 exported pages, so they hide nothing. Deleted along
+     with the classList.add('mm-injected') calls.
+   ============================================================================= */
+
+/* =============================================================================
+   1. HEADER — the interaction-only half
+   mega-menu.css:128-149, 224-265, 321-488, 517-535, 812-854 (button hover only)
+   ============================================================================= */
+
+/* Hover states lifted out of critical.css. Hover cannot fire before a pointer is over
+   the element, and none of these changes layout — colour, transform and box-shadow only. */
+.mm-logo:hover { transform: translateY(-1px); }
+.mm-phone:hover { color: var(--mm-teal); }
+.mm-cta:hover {
+  background: var(--mm-teal-d);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,139,139,.32);
+}
+.mm-search-btn:hover,
+.mm-search-btn:focus-visible {
+  border-color: var(--mm-teal);
+  background: var(--mm-teal-l);
+  color: var(--mm-teal-d);
+}
+
+/* Text wordmark fallback — render.mjs only emits it when site.logo is unset. */
+.mm-logo-text {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--mm-g900);
+  white-space: nowrap;
+}
+
+/* Inert in the export (`.mm-nav a::after` has no base rule, so no pseudo-element is
+   generated) but kept so the reduced-motion block below still matches what it targeted. */
+.mm-nav a:hover::after,
+.mm-nav a.mm-active::after,
+.mm-nav button:hover::after,
+.mm-nav button.mm-active::after,
+.mm-nav button[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+
+/* ── Mega panel, open state and contents ──────────────────────────────────── */
+.mm-panel.mm-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition: opacity .22s var(--mm-easing),
+              transform .26s var(--mm-easing),
+              visibility 0s linear 0s;
+}
+.mm-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+}
+
+/* `.mm-col-title` mirrors `.mm-col h4`. render.mjs emits the panel title as a
+   <p class="mm-col-title" id> referenced by aria-labelledby instead of an <h4>: the
+   export's first heading in the DOM was that h4, inside a <header>, which is one of the
+   three root causes of the measured heading-order failure. */
+.mm-col h4,
+.mm-col-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--mm-g400);
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--mm-g100);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: none;
+}
+.mm-col h4 .mm-pill,
+.mm-col-title .mm-pill {
+  background: var(--mm-teal-l);
+  color: var(--mm-teal-d);
+  font-size: .65rem;
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: .5px;
+}
+.mm-col-mgmt h4 .mm-pill,
+.mm-col-mgmt .mm-col-title .mm-pill { background: rgba(197,216,45,.2); color: #5A6510; }
+
+.mm-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mm-panel-lab .mm-items,
+.mm-panel-mgmt .mm-items { grid-template-columns: 1fr 1fr; }
+
+.mm-panel-feature {
+  background: linear-gradient(135deg,var(--mm-g900),#172233);
+  border-radius: var(--mm-radius-l);
+  padding: 22px;
+  color: var(--mm-w);
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  overflow: hidden;
+  position: relative;
+}
+.mm-panel-feature::before {
+  content: "";
+  position: absolute;
+  inset: auto -24px -36px auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(197,216,45,.14);
+}
+.mm-panel-feature strong,
+.mm-panel-feature span,
+.mm-panel-feature a {
+  position: relative;
+  z-index: 1;
+}
+.mm-panel-feature strong {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.28rem;
+  line-height: 1.15;
+}
+.mm-panel-feature span {
+  display: block;
+  color: rgba(255,255,255,.68);
+  font-size: .86rem;
+  line-height: 1.55;
+}
+.mm-panel-feature a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  color: var(--mm-lime);
+  font-size: .84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.mm-panel-feature svg { width: 14px; height: 14px; }
+
+.mm-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--mm-radius);
+  text-decoration: none;
+  color: var(--mm-g800);
+  transition: background .2s var(--mm-easing), transform .2s var(--mm-easing);
+}
+.mm-item:hover,
+.mm-item:focus-visible {
+  background: var(--mm-g50);
+  transform: translateX(2px);
+}
+/* The one deliberate ADDITION in this file. render.mjs emits `mm-active` on the current
+   page's .mm-item (build-time aria-current, replacing the runtime data-mm-match RegExp
+   loop), and mega-menu.css only ever styled `.mm-nav a.mm-active` / `button.mm-active` —
+   the panel item had no rule, so the class would render nothing. It reuses the panel's
+   own existing hover background rather than introducing a new colour. */
+.mm-item.mm-active { background: var(--mm-g50); }
+.mm-item-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--mm-teal-l);
+  color: var(--mm-teal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .2s var(--mm-easing), color .2s var(--mm-easing);
+}
+.mm-item-ico svg { width: 18px; height: 18px; }
+.mm-item:hover .mm-item-ico { background: var(--mm-teal); color: var(--mm-w); }
+.mm-col-mgmt .mm-item-ico { background: rgba(197,216,45,.18); color: var(--mm-teal-d); }
+.mm-col-mgmt .mm-item:hover .mm-item-ico { background: var(--mm-lime); color: var(--mm-g900); }
+.mm-item-body strong {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--mm-g900);
+  margin-bottom: 2px;
+}
+.mm-item-body span {
+  font-size: .78rem;
+  color: var(--mm-g600);
+  line-height: 1.4;
+  display: block;
+}
+
+.mm-panel-foot {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--mm-g100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: .82rem;
+  color: var(--mm-g600);
+}
+.mm-panel-foot a {
+  color: var(--mm-teal);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s var(--mm-easing);
+}
+.mm-panel-foot a:hover { gap: 10px; }
+.mm-panel-foot svg { width: 14px; height: 14px; }
+
+/* ── Back to top, visible state ───────────────────────────────────────────── */
+.mm-back-to-top:hover {
+  background: var(--mm-teal-d);
+  transform: translateY(-2px);
+}
+.mm-back-to-top.mm-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .25s var(--mm-easing),
+              transform .25s var(--mm-easing),
+              visibility 0s linear 0s,
+              background .2s var(--mm-easing);
+}
+.mm-back-to-top:hover.mm-visible { transform: translateY(-2px); }
+.mm-back-to-top:focus-visible {
+  outline: 3px solid rgba(0,139,139,.4);
+  outline-offset: 3px;
+}
+
+/* ── Responsive: the panel/drawer rules that only matter once something is open ── */
+@media (max-width: 1024px) {
+  .mm-panel-grid { grid-template-columns: 1fr; }
+  .mm-panel-feature { min-height: 170px; }
+}
+
+@media (max-width: 1180px) {
+  .mm-panel.mm-open { display: block; transform: none; opacity: 1; }
+  .mm-panel-grid { display: block; }
+  .mm-panel-lab .mm-items,
+  .mm-panel-mgmt .mm-items { grid-template-columns: 1fr; }
+  .mm-panel-feature { display: none; }
+  .mm-panel-foot { align-items: flex-start; flex-direction: column; }
+  .mm-panel .mm-item {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px;
+    gap: 12px;
+    min-height: 0;
+    line-height: 1.35;
+    text-align: left;
+  }
+  .mm-panel .mm-item-ico {
+    width: 44px;
+    height: 44px;
+    justify-self: start;
+    align-self: center;
+  }
+  .mm-panel .mm-item-ico svg {
+    width: 20px;
+    height: 20px;
+  }
+  .mm-item-body {
+    min-width: 0;
+    text-align: left;
+  }
+  .mm-item-body strong,
+  .mm-item-body span {
+    text-align: left;
+  }
+  .mm-item-body strong {
+    font-size: .96rem;
+    line-height: 1.25;
+  }
+  .mm-item-body span {
+    font-size: .84rem;
+    line-height: 1.35;
+  }
+}
+
+/* The drawer's own size at the narrower breakpoints. The drawer is closed
+   (visibility:hidden, translated 100% off-screen) at first paint, so a stale width or
+   `top` on it is not observable until the burger is pressed. */
+@media (max-width: 900px) {
+  .mm-nav {
+    top: 64px;
+    width: min(390px, 100vw);
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    padding: 18px 14px 22px;
+  }
+  .mm-header.mm-mobile-open .mm-nav,
+  .mm-header.mm-mobile-open.mm-scrolled .mm-nav {
+    top: 64px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+  }
+}
+
+@media (max-width: 640px) {
+  .mm-nav {
+    width: min(360px, calc(100vw - 18px));
+    padding: 16px 12px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mm-nav {
+    width: 100vw;
+    border-left: 0;
+    padding: 14px 12px 18px;
+  }
+  .mm-panel .mm-item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  .mm-panel .mm-item-ico {
+    width: 40px;
+    height: 40px;
+  }
+  .mm-panel .mm-item-ico svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-nav a::after,
+  .mm-nav button::after,
+  .mm-item { transition: none !important; }
+}
+
+/* =============================================================================
+   2. SSR CHROME — markup render.mjs introduces that no page block styles
+
+   The export styles the footer and the skip link through builder-generated `il*` classes
+   whose meaning changes from page to page (il13, il15, il23, il25, il30 and il33 each
+   map to two different rules depending on the file), so they can never appear in a
+   shared stylesheet. render.mjs emits stable semantic classes; the declarations below are
+   the export's own, carried over one-for-one. The mapping is documented in render.mjs.
+   ============================================================================= */
+
+/* ── Footer ──────────────────────────────────────────────────────────────────
+   .mtfs-footer <- .il21 / footer[role="contentinfo"]   (role dropped: it is implicit)
+   .mtfs-footer__grid <- .il22 / .ftg      .mtfs-footer__logo img <- .il23
+   .mtfs-footer__blurb <- .il24 / .ftb p   .mtfs-footer__contact <- .il25
+   .mtfs-footer__contact a <- .il26        .mtfs-footer__title <- .il27 / .ftc h4
+   .mtfs-footer__list <- .il28 / .ftc ul   .mtfs-footer__list li <- .il29 / .ftc li
+   .mtfs-footer__list a <- .il30 / .ftc a  .mtfs-footer__bottom <- .il31 / .fbot
+   .mtfs-footer__bottom a <- .il32                                                    */
+.mtfs-footer {
+  background: #1e293b;
+  color: rgba(255,255,255,.6);
+  padding: 72px 0 32px;
+}
+.mtfs-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.mtfs-footer__logo img {
+  height: 48px;
+  width: auto;
+  max-width: 200px;
+  display: block;
+  margin-bottom: 8px;
+  background: #fff;
+  padding: 4px;
+  border-radius: 4px;
+}
+.mtfs-footer__blurb {
+  font-size: .88rem;
+  line-height: 1.7;
+  margin-top: 16px;
+  max-width: 300px;
+}
+.mtfs-footer__contact {
+  margin-top: 12px;
+  font-size: .85rem;
+}
+.mtfs-footer__contact a { color: #ffffff; }
+
+/* The column titles are <h2> now, not <h4>: 63 of them across the 21 pages followed an
+   <h2> as <h4 class="il27">, which is the node Lighthouse cites for the heading-order
+   failure (div.ctr > div.ftg > div.ftc > h4.il27, "LAB SOLUTIONS"). Promoting the tag
+   fixes the outline; these declarations stop the promotion from changing a single pixel,
+   so the global `h2{font-size:clamp(1.75rem,3.5vw,2.625rem)}` must not reach them.
+   The export's home page spelled the family `sans-serif`; the other 15 pages spell it
+   `'DM Sans',sans-serif` via `.ftc h4`. DM Sans is the canonical one and falls back to
+   sans-serif, so it is used here. */
+.mtfs-footer__title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--w);
+  margin-bottom: 20px;
+}
+.mtfs-footer__list { list-style: none; }
+.mtfs-footer__list li { margin-bottom: 12px; }
+.mtfs-footer__list a { font-size: .88rem; transition: color .3s; }
+.mtfs-footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .82rem;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.mtfs-footer__bottom a { color: rgba(255,255,255,.6); }
+
+@media (max-width: 1024px) {
+  .mtfs-footer__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .mtfs-footer__grid { grid-template-columns: 1fr; }
+  .mtfs-footer__bottom { flex-direction: column; text-align: center; }
+}
+
+/* =============================================================================
+   3. THE REPLACEMENT FOR THE INLINE on* HANDLERS
+
+   The export carries 812 inline on* attributes across 406 elements (onmouseover 403,
+   onmouseout 403, onfocus 3, onblur 3 — 38 to 48 per page). There are only four distinct
+   behaviours, and every affected element already has a class. They gave mouse users a
+   hover state and keyboard users nothing: the export's ONLY focus styling is the
+   `outline:3px solid var(--lime)` ring, never the colour change.
+
+   Each rule below pairs :hover with :focus-visible, so the keyboard gets the same
+   affordance. None is keyed on an `il*` class: those collide across pages.
+
+     onmouseover="this.style.color='#1F6E75'"                x380  footer + nav links
+     onmouseout="this.style.color=''"                        x315
+     onmouseout="this.style.color='rgba(255,255,255,.6)'"    x84   footer bottom links
+     onmouseover="this.style.color='var(--teal)'"            x19
+     onmouseover="this.style.background='var(--td)'; this.style.borderColor='var(--td)'"
+                                                             /our-team/ .btn-primary
+     onmouseover="this.style.borderColor='#fff'; this.style.background='rgba(255,255,255,.08)'"
+                                                             /our-team/ .btn-link
+   ============================================================================= */
+.mtfs-footer a:hover,
+.mtfs-footer a:focus-visible { color: var(--teal); }
+
+.contact-cta a:hover,
+.contact-cta a:focus-visible { color: var(--w); }
+
+.btn-primary:hover,
+.btn-primary:focus-visible { background: var(--td); border-color: var(--td); }
+
+.btn-link:hover,
+.btn-link:focus-visible { border-color: #fff; background: rgba(255,255,255,.08); }
+
+/* =============================================================================
+   4. RELATED LINKS + CONTEXT LINKS
+
+   These two rule sets shipped as separate inline <style id="mtfs-context-links"> (250 B)
+   and <style id="mtfs-visible-related-links"> (1,720 B) elements on 19 of the 21 pages —
+   18 redundant copies of each, 18 * (250 + 1720) = 35,460 B of never-cached CSS re-sent
+   on every page view. index.html carries a 20th and 21st copy that spell the identical
+   colours with var() instead of hex, which is why css.mjs::dedupe() (correctly) refuses
+   to hoist them: one selector, two definitions. They are removed by construction instead
+   — render.mjs::renderRelated() emits the markup and this sheet owns the rules, so the
+   ssr-chrome pass deletes both <style> elements from all 21 pages.
+   Transcribed from the 19-page variant, which is the one that renders today.
+   ============================================================================= */
+.mtfs-context-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: .08em;
+  text-underline-offset: .16em;
+  font-weight: 600;
+}
+.mtfs-context-link:hover { opacity: .78; }
+.mtfs-context-link:focus-visible { outline: 3px solid #ccdf33; outline-offset: 2px; }
+
+.mtfs-related {
+  padding: 64px 0;
+  background: linear-gradient(135deg,#e4f0ee 0%,#fdfafa 58%,#f5f0f8 100%);
+  border-top: 1px solid #c9d4d1;
+  border-bottom: 1px solid #c9d4d1;
+  color: #2a2320;
+}
+.mtfs-related__inner { width: min(100% - 48px,1200px); margin: 0 auto; }
+.mtfs-related__eyebrow {
+  margin: 0 0 8px;
+  color: #1f6e75;
+  font: 700 .78rem/1.4 "DM Sans",sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.mtfs-related h2 {
+  margin: 0 0 10px;
+  color: #1a1210;
+  font: 700 clamp(1.55rem,3vw,2.15rem)/1.2 "Sora",sans-serif;
+}
+.mtfs-related__intro { max-width: 66ch; margin: 0 0 28px; color: #5c524b; }
+.mtfs-related__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mtfs-related__link {
+  position: relative;
+  display: block;
+  height: 100%;
+  min-height: 150px;
+  padding: 22px 52px 22px 22px;
+  border: 1px solid #b7c9c5;
+  border-radius: 16px;
+  background: #fff;
+  color: #1f6e75;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(31,110,117,.06);
+  transition: border-color .2s,box-shadow .2s,transform .2s;
+}
+.mtfs-related__link:hover {
+  border-color: #1f6e75;
+  box-shadow: 0 10px 28px rgba(31,110,117,.14);
+  transform: translateY(-2px);
+}
+.mtfs-related__title { display: block; font: 700 1.02rem/1.35 "Sora",sans-serif; }
+.mtfs-related__desc {
+  display: block;
+  margin-top: 9px;
+  color: #5c524b;
+  font: 400 .9rem/1.55 "DM Sans",sans-serif;
+}
+.mtfs-related__arrow {
+  position: absolute;
+  top: 21px;
+  right: 22px;
+  font: 700 1.35rem/1 "DM Sans",sans-serif;
+}
+.mtfs-related__link:focus-visible { outline: 3px solid #ccdf33; outline-offset: 3px; }
+@media (max-width: 560px) {
+  .mtfs-related { padding: 48px 0; }
+  .mtfs-related__inner { width: min(100% - 32px,1200px); }
+  .mtfs-related__list { grid-template-columns: 1fr; }
+  .mtfs-related__link { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mtfs-related__link { transition: none; }
+}
+
+/* =============================================================================
+   5. IMAGE LAYOUT — mtfs-images.css:38-200, minus the CLS-critical subset that
+   critical.css carries (.mtfs-media, .mtfs-media img, the five aspect ratios, plus
+   .mtfs-hero-split and the .mtfs-about-hero image box). What is left is below-fold grid
+   layout and paint-only decoration: 302 ms of render-blocking removed.
+   ============================================================================= */
+.mtfs-home-partner-visual {
+  width: 100%;
+  max-width: 520px;
+  margin: 0;
+  justify-self: end;
+}
+.mtfs-home-partner-visual .mtfs-media img { object-position: center center; }
+.mtfs-media-stack { display: grid; gap: 18px; }
+
+.mtfs-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+.mtfs-intro-grid .sh { max-width: none; margin: 0; text-align: left; }
+.mtfs-hero-copy .sub { max-width: 720px; }
+
+.mtfs-about-hero .mtfs-hero-image img { object-position: center 64%; }
+.mtfs-about-hero::before {
+  z-index: 1;
+  background: linear-gradient(
+      90deg,
+      rgba(17, 24, 39, 0.96) 0%,
+      rgba(17, 24, 39, 0.82) 48%,
+      rgba(17, 24, 39, 0.7) 100%
+    ),
+    radial-gradient(
+      ellipse 680px 420px at 15% 50%,
+      rgba(0, 139, 139, 0.26) 0%,
+      transparent 72%
+    );
+}
+.mtfs-about-hero .ctr { position: relative; z-index: 2; }
+
+.mtfs-photo-band { padding: 72px 0; background: #f8f9fa; }
+.mtfs-photo-band .mtfs-media { max-height: 640px; }
+
+.mtfs-location-photo { align-self: stretch; margin: 0; }
+.mtfs-location-photo .mtfs-media { height: 100%; min-height: 430px; }
+.mtfs-location-photo figcaption {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .mtfs-intro-grid,
+  .mtfs-hero-split { grid-template-columns: 1fr; }
+  .mtfs-intro-grid .sh { max-width: 720px; margin: 0 auto; text-align: center; }
+  .mtfs-hero-split .mtfs-media { max-width: 760px; margin: 0 auto; }
+  .mtfs-home-partner-visual { max-width: 620px; margin: 0 auto; justify-self: center; }
+  .mtfs-location-photo .mtfs-media { min-height: 0; aspect-ratio: 3 / 2; }
+}
+
+@media (max-width: 768px) {
+  .mtfs-intro-grid { gap: 28px; margin-bottom: 40px; }
+  .mtfs-hero-split { gap: 34px; }
+  .mtfs-photo-band { padding: 48px 0; }
+  .mtfs-media,
+  .mtfs-about-hero .mtfs-hero-image { border-radius: 14px; }
+  .mtfs-media--panoramic { aspect-ratio: 16 / 9; }
+  .mtfs-about-hero .mtfs-hero-image { border-radius: 0; }
+}
+
+/* =============================================================================
+   6. SITE-WIDE DESIGN SYSTEM OVERRIDES — mega-menu.css:1173-1248, VERBATIM.
+
+   These rules must stay LAST and this sheet must stay after the page's residual <style>.
+   They are the export's deliberate global overrides of the per-page blocks:
+     - `section.sec,.sec{padding-top:88px}` beats the home page's `section.sec{padding:100px 0}`
+     - the card borders unify on #3a4d6b
+     - `.ctr` re-states the container width
+   Move this block earlier, or link this sheet earlier, and every section on the site
+   silently gains 12px of vertical padding.
+   ============================================================================= */
+
+/* Warm off-white body */
+body {
+  background-color: #FDFAFA;
+}
+
+/* Max content width container */
+.ctr {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Section spacing — generous whitespace desktop / comfortable mobile */
+section.sec,
+.sec {
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+.values,
+.hist,
+.team,
+.mission,
+.cta {
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+@media (max-width: 768px) {
+  section.sec,
+  .sec,
+  .values,
+  .hist,
+  .team,
+  .mission,
+  .cta {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/* Card components — unified #3a4d6b borders + soft shadow */
+.sc,
+.dc,
+.wc,
+.abx,
+.tcard,
+.tcard-bio,
+.vc,
+.pillar,
+.fi {
+  border-color: #3a4d6b;
+  box-shadow: 0 2px 12px rgba(58,77,107,.07), 0 1px 3px rgba(0,0,0,.04);
+}
+.sc:hover,
+.wc:hover,
+.tcard-bio:hover {
+  box-shadow: 0 10px 36px rgba(58,77,107,.13), 0 2px 8px rgba(0,0,0,.06);
+  border-color: #3a4d6b;
+}
+
+/* Restrained gradients — only radial tints; no dramatic overlay on plain sections */
+section.sec:not(.dk):not(.hero)::before,
+.sec:not(.dk):not(.hero)::before {
+  content: none;
+}

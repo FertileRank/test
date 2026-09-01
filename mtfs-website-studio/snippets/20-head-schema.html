@@ -1,0 +1,465 @@
+<!-- ==========================================================================
+     20-head-schema.html
+     MedTech For Solutions — Search Atlas Website Studio paste block
+
+     WHERE      Block A -> Global head embed, immediately after 10-head-critical.html.
+                Block B -> Per-page head field, one per page.
+                Block C -> Per-page head field, on the two pages with a visible FAQ.
+     REPLACES   every JSON-LD block currently in the project, and the
+                itemscope/itemtype microdata on <html>.
+
+     WHAT WAS WRONG (measured across all 21 exported pages)
+     -----------------------------------------------------
+     * No WebSite node exists anywhere, so all 8 WebPage nodes set
+       isPartOf -> #organization. WebPage.isPartOf expects a WebSite or
+       CreativeWork; pointing it at an Organization is a mistyped dangling edge.
+     * 13 pages have no WebPage node at all. /404/ has no JSON-LD of any kind.
+     * The single shared @id #organization is declared on 18 pages with FOUR
+       conflicting @type shapes: ["Organization","ProfessionalService"] on / and
+       /sitemap/, ["Organization","LocalBusiness"] on /our-team/, bare
+       "LocalBusiness" on /contact/, and bare "Organization" with a 3-property
+       subset on all 13 Service pages. One @id must have one shape.
+     * Organization carries no logo, no image and no sameAs.
+     * All 13 Service pages re-inline the provider's name/url/telephone instead
+       of referencing the global @id — which is what produces the type conflict.
+       No Service has an @id of its own, so hub OfferCatalog entries cannot
+       reference their children.
+     * 12 of 21 BreadcrumbList trails omit the /services/ tier. / ships a useless
+       1-item stub. /our-team/ is named "Staff" against a nav label of "Our Team";
+       /terms-of-service/ is named "Terms of Service" against an h1 of
+       "Terms of Use".
+     * Four pages carry itemscope itemtype="https://schema.org/WebPage" on <html>
+       while 17 do not — a second vocabulary applied at random. Standardise on
+       JSON-LD and delete the microdata.
+
+     RULES
+     -----
+     1. Block A is byte-identical on all 21 pages. That is the point: one @id,
+        one shape. Never edit a copy of it on a single page.
+     2. Never publish a block that still contains {{ }} tokens. It is valid JSON
+        and invalid data — Google will ingest the literal braces.
+     3. Emit a BreadcrumbList on every page EXCEPT / and /404/. A one-item
+        "Home" trail asserts nothing.
+     4. Emit Block C ONLY where the page renders a visible FAQ. Today that is /
+        (six questions, already visible) and /contact/ (seven answers visible,
+        markup missing). FAQPage for questions the visitor cannot see is a
+        markup-content mismatch. Treat it as machine-readability, not a
+        rich-result play: Google restricts FAQ rich results to authoritative
+        government and health sites.
+     5. Do NOT add Review or AggregateRating to MedTech's own testimonials.
+        Self-serving review markup for the hosting entity is disallowed and
+        ineligible for rich results. Render testimonials as <blockquote> with a
+        <cite> carrying name, title and organisation.
+     6. Do NOT add Person nodes for the six unbioed "specialists" on /our-team/.
+        A named individual carrying a claimed clinical credential (HCLD/ELD)
+        needs a verified bio, headshot and credential check first.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     TOKEN LEGEND — for Block B and Block C
+     ==========================================================================
+
+     TOKEN                  SOURCE (site.config.mjs)      EXAMPLE
+     ---------------------  ----------------------------  ---------------------------------------------
+     {{ORIGIN}}             site.origin                   https://medtech4solutions.com
+     {{CANONICAL}}          origin + route.path           https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/
+                            Absolute. ALWAYS ends in "/". Must equal the page's
+                            rel=canonical exactly. All 21 canonicals in the
+                            export are already self-referencing and correct;
+                            keep that property.
+     {{PAGE_TITLE}}         routes[].title                GPO Purchasing for Fertility Clinics | MedTech For Solutions
+                            30-60 characters. One title in the export exceeds it
+                            (/about/ at 71).
+     {{PAGE_DESCRIPTION}}   routes[].description          Join MedTech's GPO free of charge and access 1,800+ vendor contracts…
+                            70-160 characters. 15 of 21 exceed 160 today.
+     {{NAV_LABEL}}          routes[].navLabel             GPO Purchasing
+                            Also the last breadcrumb name and the Service name.
+                            This is why /our-team/ can never read "Staff" again.
+     {{CRUMB_n_NAME}}       navLabel of the nth ancestor  Services  /  Lab Solutions
+     {{CRUMB_n_URL}}        origin + ancestor path        https://medtech4solutions.com/services/
+                            Walk routes[].parent from the root. Do not hand-write
+                            a trail: that is how 12 pages lost the /services/ tier.
+     {{FAQ_n_QUESTION}}     the visible <h3>/button text  What is MedTech For Solutions?
+     {{FAQ_n_ANSWER}}       the visible answer, plain     MedTech For Solutions is a healthcare consulting company founded in 2005…
+                            text, no HTML tags. Must match what the page shows.
+
+     BREADCRUMB DEPTH — one row per route family
+     -------------------------------------------
+       /                                        no BreadcrumbList (omit Block B's breadcrumb node)
+       /about/  /our-team/  /contact/           2 items   Home > Self
+       /services/  /sitemap/  /privacy-policy/  2 items   Home > Self
+       /terms-of-service/                       2 items   Home > Terms of Use
+       /services/lab-solutions/                 3 items   Home > Services > Lab Solutions
+       /services/management-services/           3 items   Home > Services > Management Services
+       the 10 leaf service pages                4 items   Home > Services > <hub> > <leaf>
+       /404/                                    no BreadcrumbList, and noindex
+
+     The visible <nav aria-label="Breadcrumb"><ol> that 30-body-header.html's
+     sibling markup renders inside <main> must carry the SAME trail. Markup and
+     visible content diverging is the defect this replaces: 20 pages assert a
+     trail today and only /sitemap/ shows one.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     BLOCK A — GLOBAL. Paste verbatim. Identical bytes on all 21 pages.
+     No tokens. Goes in the GLOBAL head embed.
+
+     Organization + ProfessionalService, and the WebSite that every WebPage's
+     isPartOf points at. The full contact set — telephone, fax, email, postal
+     address, geo coordinates and opening hours — lives here, on every page.
+     In the export it existed only on /contact/.
+
+     sameAs IS DELIBERATELY ABSENT. The SEO audit calls it the single most
+     important entity-reconciliation property, and it is missing from all 21
+     pages. It stays missing until the client supplies verified URLs, because
+     the only external social link in the entire export is
+     https://www.linkedin.com/in/kevinryanofficial/ — the web designer's
+     PERSONAL profile, repeated in 21 footers. That is not the brand's social
+     signal, and inventing a company LinkedIn or Google Business Profile URL
+     would be fabricating a third-party reference. An empty "sameAs": [] is
+     also wrong: it is a positive claim of "no profiles".
+     TO DO (client): company LinkedIn page, Google Business Profile, trade or
+     association listings. Add them to site.config.mjs -> site.sameAs and
+     re-copy this block.
+
+     >> VERIFY (client): the logo ImageObject carries NO width/height, on purpose.
+     The only dimensional statement anywhere in the export is a CSS box in
+     assets/mega-menu.js:
+         style="height:44px;width:auto;max-width:220px;object-fit:contain"
+     `width:auto` with a `max-width` cap is a ceiling, not a width, so publishing
+     "220 x 44" would assert a 5:1 aspect ratio nobody has measured. The CDN
+     returns 403 through the build proxy, so the true intrinsics could not be
+     read. schema.org treats width/height as assertions about the file itself, so
+     omitting them is correct until someone fetches the asset and measures it.
+
+     Do NOT "fix" this by deleting width/height from the <img> tags in
+     30-body-header.html and 40-body-footer.html. Those two uses are different
+     and both are right as they stand: on an <img>, width/height reserve the
+     layout box and prevent the CDN's latency from shifting the header, and with
+     object-fit:contain a 220x44 box letterboxes the real asset without
+     distorting it. In schema.org they would be a claim about the file.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://medtech4solutions.com/#organization",
+      "name": "MedTech For Solutions",
+      "url": "https://medtech4solutions.com/",
+      "legalName": "MedTech For Solutions Inc.",
+      "description": "MedTech For Solutions is a comprehensive laboratory management and practice development company specializing exclusively in the assisted reproductive technology (ART) industry. Founded in 2005 and based in White Plains, NY, MedTech supports fertility clinics, IVF laboratories, and reproductive medicine facilities nationwide.",
+      "foundingDate": "2005",
+      "telephone": "+1-866-634-9144",
+      "faxNumber": "+1-866-482-5058",
+      "email": "info@medtech4solutions.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "399 Knollwood Road",
+        "addressLocality": "White Plains",
+        "addressRegion": "NY",
+        "postalCode": "10603",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.0534,
+        "longitude": -73.7629
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "International"
+        }
+      ],
+      "knowsAbout": [
+        "Assisted Reproductive Technology",
+        "IVF Laboratory Management",
+        "Embryology Laboratory Design",
+        "Fertility Clinic Consulting",
+        "ART Regulatory Compliance",
+        "IVF Temporary Staffing",
+        "Healthcare Group Purchasing"
+      ],
+  "logo": {
+        "@type": "ImageObject",
+        "url": "https://media.cdn.builder.searchatlas.com/user-uploads/8938b9ec-89dc-47c4-aa9d-aabb527787a9_medtech-for-solutions-website-logo.webp"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://media.cdn.builder.searchatlas.com/site-assets/e311c34b-e043-4493-8bbe-3b526ea53fd2/e1146f7d6594fbe56c52c12aabd092e4.jpg",
+        "width": 1600,
+        "height": 686,
+        "caption": "Modern IVF laboratory with incubators and cryostorage equipment"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://medtech4solutions.com/#website",
+      "url": "https://medtech4solutions.com/",
+      "name": "MedTech For Solutions",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://medtech4solutions.com/#organization"
+      },
+      "description": "MedTech For Solutions is a comprehensive laboratory management and practice development company specializing exclusively in the assisted reproductive technology (ART) industry. Founded in 2005 and based in White Plains, NY, MedTech supports fertility clinics, IVF laboratories, and reproductive medicine facilities nationwide."
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK B — PER PAGE. Goes in the per-page head field.
+
+     WebPage + BreadcrumbList (+ Service on the 13 /services/** routes).
+     Replace every {{TOKEN}}. Delete the nodes a page does not need.
+
+     Shape notes, all of them corrections to the export:
+       * @id is {{CANONICAL}}#webpage — DISTINCT from the page URL, so the node
+         and the document are not the same identifier.
+       * isPartOf points at #website, never at #organization.
+       * There is no mainEntityOfPage. The export's WebPage nodes set it to
+         their own URL, which is circular and says nothing.
+       * breadcrumb references the BreadcrumbList by @id rather than nesting it,
+         so one trail serves both nodes.
+       * provider is a PURE REFERENCE: {"@id": ".../#organization"} and nothing
+         else. Re-inlining name/url/telephone is what gave one @id four shapes.
+       * Every Service has its own @id, {{CANONICAL}}#service, so the two hub
+         pages' OfferCatalog entries can point at their children.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{CANONICAL}}#webpage",
+      "url": "{{CANONICAL}}",
+      "name": "{{PAGE_TITLE}}",
+      "description": "{{PAGE_DESCRIPTION}}",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "{{ORIGIN}}/#website" },
+      "breadcrumb": { "@id": "{{CANONICAL}}#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{CANONICAL}}#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",            "item": "{{ORIGIN}}/" },
+        { "@type": "ListItem", "position": 2, "name": "{{CRUMB_2_NAME}}", "item": "{{CRUMB_2_URL}}" },
+        { "@type": "ListItem", "position": 3, "name": "{{CRUMB_3_NAME}}", "item": "{{CRUMB_3_URL}}" },
+        { "@type": "ListItem", "position": 4, "name": "{{NAV_LABEL}}",    "item": "{{CANONICAL}}" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "{{CANONICAL}}#service",
+      "name": "{{NAV_LABEL}}",
+      "url": "{{CANONICAL}}",
+      "description": "{{PAGE_DESCRIPTION}}",
+      "provider": { "@id": "{{ORIGIN}}/#organization" },
+      "areaServed": [
+        { "@type": "Country", "name": "United States" },
+        { "@type": "AdministrativeArea", "name": "International" }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK B — WORKED EXAMPLE, fully resolved, nothing left to replace.
+     Route: /services/lab-solutions/gpo-purchasing/  (4 breadcrumb items, a leaf
+     Service). This is byte-for-byte what build/sync.mjs emits for that page.
+
+     Note what the trail does that the export's did not: it inserts the
+     /services/ tier at position 2. The export ships
+     Home > Laboratory Solutions > GPO Purchasing — 3 items for a 3-segment URL,
+     with the hub missing. The same omission affects all 10 leaves and both hubs.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#webpage",
+      "url": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/",
+      "name": "GPO Purchasing for Fertility Clinics | MedTech For Solutions",
+      "description": "Join MedTech's GPO free of charge and access 1,800+ vendor contracts for IVF lab supplies and equipment. Pool buying power with 300+ fertility practices.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://medtech4solutions.com/#website" },
+      "breadcrumb": { "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home",           "item": "https://medtech4solutions.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services",       "item": "https://medtech4solutions.com/services/" },
+        { "@type": "ListItem", "position": 3, "name": "Lab Solutions",  "item": "https://medtech4solutions.com/services/lab-solutions/" },
+        { "@type": "ListItem", "position": 4, "name": "GPO Purchasing", "item": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#service",
+      "name": "GPO Purchasing",
+      "url": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/",
+      "description": "Join MedTech's GPO free of charge and access 1,800+ vendor contracts for IVF lab supplies and equipment. Pool buying power with 300+ fertility practices.",
+      "provider": { "@id": "https://medtech4solutions.com/#organization" },
+      "areaServed": [
+        { "@type": "Country", "name": "United States" },
+        { "@type": "AdministrativeArea", "name": "International" }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK B — HUB VARIANT: the OfferCatalog fragment.
+
+     On /services/, /services/lab-solutions/ and /services/management-services/,
+     add hasOfferCatalog to the Service node so the hub references its children
+     by the @id each child now has. Shown for /services/lab-solutions/.
+     Splice it in beside "areaServed" — it is a property of the Service node,
+     not a node of its own.
+
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Lab Solutions",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/real-time-monitoring/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/regulatory-compliance/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/staffing-solutions/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/gpo-purchasing/#service" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://medtech4solutions.com/services/lab-solutions/practice-development/#service" } }
+        ]
+      }
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     BLOCK C — FAQPage. ONLY on a page that renders the questions visibly.
+
+     Eligible today: / (six questions already visible and already marked up in
+     the export) and /contact/ (seven operational answers visible, no markup).
+     Nowhere else. All ten service pages currently answer nothing, and inventing
+     questions to carry markup is the mass-produced pattern to avoid.
+
+     REGRESSION TO CLOSE: the export's /index.html carries a real FAQPage with
+     six Question/Answer pairs. The current build/sync.mjs output does not carry
+     it forward — dist/index.html has two JSON-LD blocks where the export had
+     four. Until render.mjs re-emits it, paste this block on / by hand.
+
+     Every answer must be the text the visitor actually sees, plain, no HTML.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "{{CANONICAL}}#faq",
+      "isPartOf": { "@id": "{{CANONICAL}}#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "{{FAQ_1_QUESTION}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_1_ANSWER}}" }
+        },
+        {
+          "@type": "Question",
+          "name": "{{FAQ_2_QUESTION}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{FAQ_2_ANSWER}}" }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     BLOCK C — WORKED EXAMPLE, resolved. Two of the six questions the home page
+     already renders, quoted verbatim from the export's own FAQPage node so the
+     markup and the visible copy cannot disagree.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://medtech4solutions.com/#faq",
+      "isPartOf": { "@id": "https://medtech4solutions.com/#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is MedTech For Solutions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MedTech For Solutions is a healthcare consulting company founded in 2005, specializing exclusively in the assisted reproductive technology (ART) industry. Based in White Plains, NY, MedTech provides IVF laboratory management, practice development, temporary staffing, recruitment, regulatory compliance, and group purchasing services to fertility clinics and IVF laboratories across the United States and internationally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is MedTech For Solutions located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MedTech For Solutions is headquartered at 399 Knollwood Road, White Plains, NY 10603. They support fertility clinics nationwide and internationally. Contact: (866) 634-9144 or info@medtech4solutions.com."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+<!-- ==========================================================================
+     KNOWN DIVERGENCE — read before comparing this file to dist/
+
+     build/lib/render.mjs currently emits Service.areaServed with the key "type"
+     instead of "@type":
+
+         "areaServed": [ { "type": "Country", "name": "United States" }, … ]
+
+     site.config.mjs stores areaServed as {type, name}; artifacts.mjs maps it to
+     {"@type", name} for the Organization node, but render.mjs passes it through
+     unmapped for the Service node. A bare "type" is not a schema.org keyword, so
+     those two values are silently dropped from the 13 Service nodes.
+
+     THIS FILE IS CORRECT. dist/ is not, on that one property. Fix render.mjs,
+     rebuild, and the two will agree again.
+     ========================================================================== -->
+
+<!-- ============================ end 20-head-schema.html ===================== -->

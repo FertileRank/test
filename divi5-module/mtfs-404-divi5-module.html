@@ -1,0 +1,64 @@
+<!-- ================================================================
+MODULE:   MedTech For Solutions - 404 Page (Divi 5 Custom Code Module)
+VERSION:  1.0.0
+CREATED:  2026-09-01
+SOURCE:   MedTechFullySanitizedWebsiteStudioProjectSyncEnabled.zip /404/
+PASTE:    Divi 5 > Theme Builder > 404 template > Code module.
+NOTES:    Self-contained: no images, no JS libraries, no globals. Header and
+          footer come from your Divi Theme Builder template. Fonts are shared
+          with the About module (same Google Fonts URL, cached once).
+This comment block may be removed before pasting.
+================================================================= -->
+<style id="mtfs-nf-critical">
+.mtfs-404{--mtfs-teal:#1F6E75;--mtfs-teal-l:#E4F0EE;--mtfs-lime:#CCDF33;--mtfs-w:#FDFAFA;--mtfs-g600:#5C524B;--mtfs-g800:#2A2320;--mtfs-g900:#1A1210;--mtfs-sans:'DM Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-family:var(--mtfs-sans);font-size:clamp(1rem,1.05vw,1.125rem);line-height:1.65;color:var(--mtfs-g800);overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.mtfs-404 *,.mtfs-404 *::before,.mtfs-404 *::after{box-sizing:border-box}
+.mtfs-404 a{text-decoration:none;color:inherit;transition:color .3s}
+.mtfs-404 a:focus-visible{outline:3px solid var(--mtfs-lime);outline-offset:3px;border-radius:4px}
+.mtfs-nf{background:linear-gradient(135deg,var(--mtfs-teal-l),var(--mtfs-w) 50%,#F5F0F8);text-align:center;min-height:620px;padding:140px 0 120px;position:relative;overflow:hidden}
+.mtfs-nf-ctr{max-width:1200px;margin:0 auto;padding:0 24px}
+.mtfs-nf-code{color:var(--mtfs-teal);letter-spacing:-2px;margin:0 0 8px;font-family:'Sora',var(--mtfs-sans);font-size:clamp(4rem,14vw,8rem);font-weight:800;line-height:1}
+.mtfs-nf h1{margin:0 0 16px;font-family:'Sora',var(--mtfs-sans);font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;line-height:1.2;color:var(--mtfs-g900);overflow-wrap:break-word}
+.mtfs-nf p{color:var(--mtfs-g600);max-width:560px;margin:0 auto 36px;font-size:1.02rem;overflow-wrap:break-word}
+.mtfs-nf-btns{flex-wrap:wrap;justify-content:center;gap:14px;display:flex}
+.mtfs-nf-bp,.mtfs-nf-bs{cursor:pointer;border:2px solid;border-radius:999px;align-items:center;gap:8px;min-height:52px;padding:13px 30px;font-size:.92rem;font-weight:700;display:inline-flex}
+.mtfs-nf-bp{background:var(--mtfs-teal);color:#fff;border-color:var(--mtfs-teal);transition:background .3s,border-color .3s}
+.mtfs-nf-bp:hover{background:#175459;border-color:#175459;color:#fff}
+.mtfs-nf-bs{color:var(--mtfs-teal);background:#fff;border-color:#F1B8BE;transition:border-color .3s}
+.mtfs-nf-bs:hover{border-color:var(--mtfs-teal)}
+.mtfs-nf-bp svg{flex:none;width:14px;height:14px}
+.mtfs-nf-links{flex-wrap:wrap;justify-content:center;gap:28px;margin-top:56px;display:flex}
+.mtfs-nf-links a{color:var(--mtfs-g600);font-size:.9rem;font-weight:600}
+.mtfs-nf-links a:hover{color:var(--mtfs-teal)}
+@media(max-width:900px){.mtfs-nf{min-height:0;padding:110px 0 90px}}
+@media(max-width:320px){.mtfs-nf-ctr{padding:0 16px}}
+@media(prefers-reduced-motion:reduce){.mtfs-404 *,.mtfs-404 *::before,.mtfs-404 *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<div class="mtfs-404">
+<section class="mtfs-nf" aria-labelledby="mtfs-nf-h1">
+<div class="mtfs-nf-ctr">
+<p class="mtfs-nf-code" aria-hidden="true">404</p>
+<h1 id="mtfs-nf-h1">We Can't Find That Page</h1>
+<p>The page you're looking for may have been moved, renamed, or no longer exists. Let's get you back on track to explore our ART and IVF laboratory solutions.</p>
+<div class="mtfs-nf-btns">
+<a href="/" class="mtfs-nf-bp">Back to Home <svg fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+<a href="/contact/" class="mtfs-nf-bs">Contact Us</a>
+</div>
+<nav class="mtfs-nf-links" aria-label="Helpful links">
+<a href="/services/">Explore Services</a>
+<a href="/about/">About Us</a>
+<a href="/our-team/">Our Team</a>
+<a href="/sitemap/">Sitemap</a>
+</nav>
+</div>
+</section>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="mtfs-fonts-nf" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap"></noscript>
+<script id="mtfs-nf-js">
+(function(){"use strict";
+function swap(){var l=document.getElementById("mtfs-fonts-nf");if(l&&l.rel!=="stylesheet"){l.rel="stylesheet"}}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",swap)}else{swap()}
+})();
+</script>

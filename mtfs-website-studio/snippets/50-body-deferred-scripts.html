@@ -1,0 +1,306 @@
+<!-- ==========================================================================
+     50-body-deferred-scripts.html
+     MedTech For Solutions — Search Atlas Website Studio paste block
+
+     WHERE      Global body embed — the region the export wraps in the marker
+                comments  ws:footer-embeddings start / end  — LAST block on the
+                page, after </footer>.
+     REPLACES   the inline LPS visitor tracker (7,090 B/page, un-cacheable), the
+                eager /assets/mega-menu.min.js and
+                /assets/book-consultation-modal.min.js tags, the synchronous
+                head GTM container, the eager dynamic_optimization tag, the
+                per-element .aos observer script, and the ws:page-observer block.
+
+     LOADING STRATEGY, IN ONE PARAGRAPH
+     ----------------------------------
+     Nothing here blocks parsing or painting. The four first-party modules are
+     `defer`: the browser fetches them in parallel with the parse and runs them,
+     in document order, after the DOM is complete. Together they are the entire
+     pre-interaction JavaScript budget — the export shipped 87,803 B of deferred
+     JS on every page, of which 58,472 B was a consultation wizard that only
+     ever opens on a click. The two third-party tags — Google Tag Manager and
+     the Search Atlas dynamic-optimization script — are neither deleted nor
+     deferred by attribute; they are injected by the idle loader at the bottom
+     of this file, on the first real interaction or when the main thread goes
+     idle, whichever comes first. Everything else is pulled in on intent:
+     search.js and its index when the visitor opens search, the consultation
+     bundle when the visitor asks for a consultation.
+
+     BUDGETS the payload audit set, and the artifacts that meet them
+     ---------------------------------------------------------------
+       nav.js                    <= 3,000 B minified / 1,300 B brotli
+       search.js  (lazy)         <= 5,000 B raw     / 1,800 B brotli
+       search-index.json (lazy)  <= 7,500 B raw     / 2,000 B brotli
+       analytics.js              <= 2,400 B minified / 1,000 B brotli
+       consultation bundle       <= 26,000 B raw    / 7,000 B brotli
+     The files in dist/ carry their full comment headers, so their on-disk sizes
+     are larger than the budgeted minified figures; the build reports the
+     minified numbers the budget is actually measured against, and fails rather
+     than raising a ceiling. If nav.js ever exceeds 3,000 B minified it means
+     data or markup has leaked back into the script — that is the whole failure
+     mode this split exists to prevent.
+
+     >> UPDATE THE FIVE HASHED FILENAMES after every publish. Current values are
+     >> listed in 00-README.md §6. A stale hash here is a 404 and a dead header.
+
+     INTEGRITY AND CROSSORIGIN — the short version: do not add either.
+     -----------------------------------------------------------------
+     * The five first-party files are SAME-ORIGIN and their filenames ARE their
+       content hashes (nav.ebcdfd8a.js and so on). Subresource Integrity would
+       add a second hash that has to be regenerated on every publish, and a
+       stale one fails CLOSED — the header silently stops working. The
+       filename-hash already gives you the cache-busting SRI would be protecting.
+     * `crossorigin` on a same-origin script element does nothing except switch
+       it to CORS mode, which changes error reporting and can break a
+       misconfigured host. Leave it off. It IS required on the two font preloads in
+       10-head-critical.html, where the request is genuinely cross-origin.
+     * SRI is IMPOSSIBLE on GTM and on dynamic_optimization: both serve mutable
+       content by design, so any integrity value breaks on the next container
+       publish. This is the accepted trade for using a tag manager at all. The
+       mitigation is scope, not hashing — keep the container's permissions
+       tight and audit what it injects.
+     * If a future policy mandates SRI on the first-party files, generate it as
+           openssl dgst -sha384 -binary dist/assets/nav.<hash>.js | openssl base64 -A
+       and add BOTH integrity="sha384-…" and crossorigin="anonymous" — integrity
+       without crossorigin is ignored on a cross-origin fetch and inconsistent
+       on same-origin.
+     ========================================================================== -->
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     1. ANALYTICS  —  the LPS visitor tracker, rewritten
+
+     PAYLOADS ARE PRESERVED BYTE-FOR-BYTE. Same three endpoints, same fields:
+         POST /api/track/   base()
+         POST /api/event/   base() + event_type: CTA | TEL | FORM_SUBMIT | scroll
+                                                | interaction
+         base() = { project_id, tracking_secret, visitor_id, session_id,
+                    page_url, referrer }
+         visitor_id  localStorage   "_lps_vid"
+         session_id  sessionStorage "_lps_sid"
+     The two ids are read from the data-* attributes below, so the same file
+     serves any Studio project.
+
+     WHAT WAS REMOVED, and why each is safe:
+       * setInterval(sendSE, 5000) — a heartbeat waking the main thread 12x per
+         minute. The existing visibilitychange->hidden and pagehide flushes,
+         both using sendBeacon, already deliver the same data.
+       * The IntersectionObserver that threw away its own `entries` and called
+         recomputeSE(), which called getBoundingClientRect() on every tracked
+         section. It now consumes the entries it is handed — isIntersecting,
+         intersectionRatio and boundingClientRect are all in there, computed
+         off the main thread.
+       * `var dh = h.scrollHeight || 1` executing OUTSIDE its requestAnimationFrame
+         — the one genuine forced synchronous layout on the scroll path. It, and
+         the pageYOffset and innerHeight reads, are now inside the rAF.
+       * Two scroll listeners merged into one; three capture-phase click
+         listeners merged into one dispatcher; history.pushState wrapped once
+         instead of twice.
+       * topSecs()'s O(n^2) `q.filter(e => !q.some(o => o !== e && o.contains(e)))`
+         containment scan, which ran six times per page load, replaced by
+         querySelectorAll('[data-section-id]').
+
+     THE SECTION-ENGAGEMENT SUBSYSTEM STAYS A NO-OP, deliberately. It is gated
+     behind `if (document.querySelector('[data-section-id]'))`. No element in any
+     of the 21 pages carries data-section-id — verified by stripping the script
+     and style blocks and re-counting: 4 occurrences of the string per page, all four
+     inside the tracker's own source — so /api/section-engagement/ has never
+     fired. That is 63.7% of the old inline tracker's 7,090 B doing nothing.
+     >> If you ever add data-section-id to a section, you TURN ON an endpoint
+     >> that has never received a request. That is an analytics ADDITION, not a
+     >> preservation. Decide it deliberately and record it.
+
+     POSITION: build/sync.mjs puts this tag in <head> with defer, so the browser
+     discovers it sooner. A `defer` script executes at the same point either way
+     (after parsing, before DOMContentLoaded), so if the Studio only offers a
+     body embed, here is correct — you lose a little discovery time, nothing else.
+     ────────────────────────────────────────────────────────────────────────── -->
+<script src="/assets/analytics.d45398e1.js" defer
+        data-project-id="e311c34b-e043-4493-8bbe-3b526ea53fd2"
+        data-tracking-secret="5bb69e05-f4f3-4cae-af52-9b4cef9a3c91"></script>
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     2. NAV — behaviour only, for the header 30-body-header.html already served
+
+     It bails out immediately if there is no #mm-header, so it costs nothing on
+     a page that has not been migrated yet.
+
+     What it does: element refs and setMobileOpen; two IntersectionObserver
+     sentinels replacing the old scroll handler (.mm-scrolled past y>50,
+     .mm-back-to-top past y>500); panel disclosure with 60 ms hover-open and
+     140 ms close intent; the burger; Escape returning focus to its trigger;
+     outside-click close; and the intent loader for search.js and the
+     consultation bundle. That is all it may ever contain.
+
+     What it must NEVER contain again: SEARCH_INDEX (8,685 B), ICONS (4,391 B),
+     HEADER_HTML (4,426 B) or the service data (1,416 B). Those four were 64% of
+     mega-menu.min.js. The icons are now in the served markup; the header is
+     server-rendered; the search corpus is a build artifact generated from
+     routes[] and fetched only when search first opens.
+
+     Two real keyboard bugs are fixed here relative to the shipped code:
+       * The old keydown handler called preventDefault() on Enter and Space as
+         well as ArrowDown, which suppressed the synthesized click — so the
+         click handler's toggle never ran and a keyboard user could OPEN a panel
+         but never CLOSE it. This handles ONLY ArrowDown and lets Enter/Space
+         reach native <button> activation.
+       * There was no focusout handler, so tabbing past the last panel item left
+         the panel open with aria-expanded="true" while focus was elsewhere.
+
+     data-search-index is read by nav.js and republished on window for search.js,
+     so the hashed filename is stamped in exactly one place.
+     ────────────────────────────────────────────────────────────────────────── -->
+<script src="/assets/nav.ebcdfd8a.js" defer
+        data-modal-src="/assets/book-consultation-modal.259343cd.js"
+        data-search-src="/assets/search.8563ac9d.js"
+        data-search-index="/assets/search-index.f66a04ab.json"></script>
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     3. CONSULTATION MODAL — loader only. The wizard itself is fetched on intent.
+
+     The bundle was `defer`-loaded on all 20 non-404 pages. On / its popup
+     instance was provably UNREACHABLE: because #hero-form-card exists there,
+     every trigger took the heroSlot.scrollIntoView branch, so a second complete
+     copy of the four-step wizard — roughly 98 static tags plus 8 option cards —
+     was built and could never be opened.
+
+     Worse, the closed modal was not actually closed. Its root was built with the
+     `hidden` attribute, but its own injected stylesheet declared
+         #mtfs-modal-root { display: flex; … opacity: 0; pointer-events: none }
+     and author-origin display:flex beats the UA rule [hidden]{display:none}. The
+     author patched only descendants. So a closed dialog with about 15 focusable
+     controls sat in the accessibility tree and the tab order of every page —
+     Lighthouse records a non-zero boundingRect (top 163) for the "hidden"
+     progressbar. opacity:0 and pointer-events:none remove neither.
+
+     TRIGGER SET — exactly the three selectors the shipped bundle bound, in ONE
+     capture-phase delegated listener, plus one deliberate addition:
+         [data-open-consult]     line 837 of book-consultation-modal.js
+         .mm-cta                 line 852  (also carries data-open-consult, so
+                                 the first loop always claimed it)
+         .open-consult-modal     line 861  (dead site-wide; kept for compat)
+         #contactForm / #consult NEW, on load and on hashchange. The header CTA
+                                 is served as href="/contact/#contactForm" so a
+                                 no-JS visitor reaches the real form.
+     requestIdleCallback warms the bundle ONLY when the page has a trigger AND
+     lacks #hero-form-card — so / never warms a popup it cannot open.
+
+     DELETED with the eager tag: the MutationObserver on document.body (it
+     existed only to race the JS-injected header, which no longer exists),
+     window.MtfsModal (it resolved `open` to window.open — a broken public API),
+     and the stray buildPopupShell() '<span></span>' appended to every body.
+
+     STILL TO FIX INSIDE THE BUNDLE — lazy loading does not fix these, because
+     the eager inline hero card on / instantiates the same wizard:
+       * The 8 service buttons are built as
+             <button class="mtfs-option" role="option" aria-pressed="false">
+         aria-pressed is NOT allowed on role="option" (which takes
+         aria-selected). Rebuild step 1 as a real
+         <fieldset><legend>…</legend> radio group over the 8 ids —
+         lab-management, reg-compliance, staffing, gpo-purchasing, practice-dev,
+         realtime-mon, mgmt-services, not-sure — which needs no ARIA at all and
+         gives arrow-key navigation for free.
+       * <div class="mtfs-progress-track" role="progressbar"> has no accessible
+         name. Point aria-labelledby at the visible "Step N of 4" paragraph, or
+         drop role="progressbar", mark the track aria-hidden="true" and make the
+         paragraph an aria-live="polite" region.
+       * A 512x512 base64 PNG on line 530 is 32,626 characters — 45.2% of the
+         source and 55.8% of the shipped minified file — painted into a 28x28
+         box. Replace it with a real image under /assets/img/ referenced by URL.
+         Measured: 58,472 B raw / 29,964 B brotli becomes 25,875 B / 6,637 B, a
+         77.8% brotli cut with zero functional change. Do this BEFORE anything
+         else in the modal, so the lazily loaded module is already the small one.
+     ────────────────────────────────────────────────────────────────────────── -->
+<script src="/assets/consult-modal.f64fcb9e.js" defer
+        data-modal-src="/assets/book-consultation-modal.259343cd.js"></script>
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     4. SCROLL REVEAL AND FAQ DISCLOSURE — inline, tiny, no request
+
+     Two reasons this stays inline rather than becoming a sixth file: it is
+     under 1 KB, and it must run at parse time on a page that may have .aos
+     elements above the fold.
+
+     The shipped version was
+         document.querySelectorAll('.aos').forEach(el => {
+           new IntersectionObserver(...).observe(el)
+         });
+     — one observer PER ELEMENT, never disconnected: 25 of them on /, 18 on
+     /services/, 11 on /contact/. This uses ONE observer and calls unobserve()
+     after the first intersection, and skips the work entirely when the page has
+     no .aos elements (which is 5 of the 21 pages: /about/, /our-team/,
+     /privacy-policy/, /terms-of-service/, /404/). Without IntersectionObserver
+     it reveals everything immediately rather than hiding content.
+
+     The FAQ half toggles the `hidden` attribute and reads the SERVER-RENDERED
+     aria-expanded rather than assuming a starting state. The export animated
+         .fa { max-height: 0; overflow: hidden }
+     which does NOT remove content from the accessibility tree — all six answers
+     were announced whatever their visual state, and links inside a "collapsed"
+     answer stayed focusable. The 400px cap also silently truncated the
+     three-paragraph GPO answer. Each .fq must carry aria-controls pointing at
+     its .fa's id, and each question button should sit inside an <h3> so the FAQ
+     is navigable by heading.
+     ────────────────────────────────────────────────────────────────────────── -->
+<script>
+(function(){var a=document.querySelectorAll('.aos');if(a.length&&'IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('v');io.unobserve(x.target)}})},{threshold:.1});a.forEach(function(el){io.observe(el)})}else{a.forEach(function(el){el.classList.add('v')})}document.querySelectorAll('.fq').forEach(function(b){b.addEventListener('click',function(){var open=b.getAttribute('aria-expanded')==='true';document.querySelectorAll('.fq').forEach(function(x){x.setAttribute('aria-expanded','false');var p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.hidden=true;var it=x.closest('.fi');if(it)it.classList.remove('op')});if(!open){b.setAttribute('aria-expanded','true');var pa=document.getElementById(b.getAttribute('aria-controls'));if(pa)pa.hidden=false;var i2=b.closest('.fi');if(i2)i2.classList.add('op')}})});})();
+</script>
+
+
+<!-- ──────────────────────────────────────────────────────────────────────────
+     5. THIRD PARTIES — Google Tag Manager + Search Atlas dynamic optimization
+
+     Both are KEPT, with the same container ID and the same data-uuid. Neither is
+     deleted; both are moved off the critical path.
+
+     In the export the GTM container is the FIRST element inside <head>, ahead of
+     <meta charset>, and synchronous. dynamic_optimization.js is `defer` but
+     still parser-discovered early. Between them they are the largest thing on
+     the page that the visitor did not ask for.
+
+     THE LOADER BOOTS ON WHICHEVER COMES FIRST:
+       * the first pointerdown, keydown, touchstart or scroll — all registered
+         capture-phase, passive and once, so they cost nothing and unregister
+         themselves; or
+       * requestIdleCallback with a 4,000 ms timeout, falling back to
+         setTimeout(2500) where requestIdleCallback is unavailable.
+     `ran` guarantees exactly one boot however many of those fire.
+
+     WHAT THIS COSTS YOU, stated plainly: a visitor who leaves without
+     interacting, on a browser without requestIdleCallback, is not counted until
+     2.5 s. Analytics above is NOT affected — it is first-party, deferred, and
+     fires its pageview independently of this block.
+
+     The matching GTM <noscript> iframe is at the TOP of 30-body-header.html,
+     with title="Google Tag Manager". Delete the copy currently sitting in the
+     footer embeddings; a frame without a title is an unlabelled landmark for
+     anyone browsing with JavaScript off.
+     ────────────────────────────────────────────────────────────────────────── -->
+<script>
+(function(){var d=document,ran=0;function boot(){if(ran)return;ran=1;window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var g=d.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtm.js?id=GTM-MKTJCBZG';d.head.appendChild(g);var o=d.createElement('script');o.id='sa-dynamic-optimization';o.setAttribute('data-uuid','f2087532-0394-429e-ad53-c821afc623e5');o.async=true;o.src='https://dashboard.fertilerank.com/scripts/dynamic_optimization.js';d.head.appendChild(o);}var EV=['pointerdown','keydown','touchstart','scroll'];function once(){EV.forEach(function(e){removeEventListener(e,once,{capture:true})});boot()}EV.forEach(function(e){addEventListener(e,once,{capture:true,passive:true,once:true})});if('requestIdleCallback'in window)requestIdleCallback(boot,{timeout:4000});else setTimeout(boot,2500);})();
+</script>
+
+
+<!-- ==========================================================================
+     KEEP, DO NOT DELETE: the platform form shim
+
+     Everything between  ws:form-submit-shim start  and  ws:form-submit-shim end
+     stays exactly where the Studio puts it. It binds
+     form[action*="/api/forms/"] and it is the only thing that actually submits
+     the contact form. build/sync.mjs moves it to a deferred hashed file loaded
+     only on pages that contain such a form; in the Studio, leave it alone.
+
+     DELETE, in the same region: everything between  ws:page-observer start  and
+     ws:page-observer end. It is an editor-preview feature — it postMessages
+     PAGE_CHANGED to window.parent, runs a MutationObserver with
+     attributeFilter ["class","style"] over every [id^='page-'] element, and
+     fetches /pages.manifest.json, which 404s. 3,411 B per page for nothing.
+     Together with the two [data-lps-tap] module scripts in the head, it is
+     responsible for all four 404s per page and the failing errors-in-console
+     audit.
+     ========================================================================== -->
+
+<!-- ==================== end 50-body-deferred-scripts.html =================== -->
